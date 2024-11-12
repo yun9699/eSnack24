@@ -6,6 +6,7 @@ const kakaoLink: string = getKakaoLoginLink();
 const googleLink: string = getGoogleLoginLink();
 
 const handleClick = (link: string) => {
+  // 외부 링크는 window.location.href로 리디렉션합니다.
   window.location.href = link;
 };
 </script>
