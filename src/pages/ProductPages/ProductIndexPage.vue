@@ -3,5 +3,9 @@
 </script>
 
 <template>
-  <div class="text-7xl underline">Hello World</div>
+  <div>Product</div>
 </template>
+
+<style scoped>
+
+</style>
