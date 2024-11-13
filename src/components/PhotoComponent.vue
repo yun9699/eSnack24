@@ -54,28 +54,113 @@ export default defineComponent({
 <style scoped>
 h1 {
   text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 video,
 canvas {
   display: block;
   margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%; /* 부모 요소의 전체 너비 사용 */
+  position: absolute; /* 화면에 대해 절대 위치 */
+  top: 50%; /* 화면의 세로 중앙 */
+  left: 50%; /* 화면의 가로 중앙 */
+  transform: translate(-50%, -50%); /* 부모 요소를 정확히 중앙으로 */
 }
 
 button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #00408b;
+}
+
+button:disabled {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 30px;
+  color: #444;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+li {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+img {
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
 }
 
 textarea {
   width: 100%;
-  margin: 10px 0;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  resize: vertical;
 }
 
 a {
   display: none;
 }
 </style>
+
+
+
