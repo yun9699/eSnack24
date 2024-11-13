@@ -7,6 +7,7 @@ import ProductRouter from "./ProductRouter.ts";
 import ReviewRouter from "./ReviewRouter.ts";
 import UserRegisterRouter from "./UserRegisterRouter.ts";
 import UserRouter from "./UserRouter.ts";
+import photoRouter from "./photoRouter.ts";
 
 
 const MainPage = () => import('../pages/MainPage.vue')
@@ -44,7 +45,8 @@ const routes = [
     ProductRouter,
     ReviewRouter,
     UserRegisterRouter,
-    UserRouter
+    UserRouter,
+    photoRouter
 
 ]
 
