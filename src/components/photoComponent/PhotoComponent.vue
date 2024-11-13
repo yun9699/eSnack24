@@ -1,54 +1,64 @@
+<template>
+  <div>
+    <h1>카메라</h1>
+    <video ref="videoElement" width="640" height="480" autoplay></video>
+    <canvas ref="canvasElement" width="640" height="480"></canvas>
+    <button @click="toggle">{{ isToggled ? '카메라 끄기' : '카메라 켜기' }}</button>
+    <button @click="switchCamera">카메라 전환</button>
+    <button @click="takePhotoAndShowResult" v-if="isToggled">사진 찍기</button>
+  </div>
+
+  <modal :visible="isModalVisible" @update:visible="isModalVisible = $event">
+      <h2>유사 상품 검색 결과</h2>
+      <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
+      <ul v-if="Object.keys(similarImages).length > 0">
+        <li v-for="(imagesArray, filename) in similarImages" :key="filename">
+          <ul>
+            <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
+              <ul>
+                <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
+                  <img :src="`http://127.0.0.1:9000/static/${image}`" :alt="image" width="200"/>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+  </modal>
+</template>
+
 <script lang="ts">
-import { defineComponent } from "vue";
-import { useCamera } from "../hooks/useCamera.ts"
-import { useImageProcessor } from "../hooks/useImageProcessor.ts";
+import { defineComponent, ref } from "vue";
+import { useCamera } from "../../hooks/useCamera.ts";
+import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
+import Modal from "../modalComponent/Modal.vue";
 
 export default defineComponent({
+  components: {
+    Modal
+  },
   setup() {
     const { isToggled, toggle, switchCamera } = useCamera();
-    const { base64Image, similarImages, photosend } = useImageProcessor();
+    const { similarImages, photosend } = useImageProcessor();
+
+    const isModalVisible = ref(false);
+
+    const takePhotoAndShowResult = async () => {
+      await photosend();
+      isModalVisible.value = true;
+    };
 
     return {
       isToggled,
-      base64Image,
-      similarImages,
       toggle,
       switchCamera,
-      photosend,
+      similarImages,
+      takePhotoAndShowResult,
+      isModalVisible
     };
   },
 });
 </script>
-
-<template>
-  <div>
-    <h1>Camera Feed on Canvas</h1>
-    <video ref="videoElement" width="640" height="480" autoplay></video>
-    <canvas ref="canvasElement" width="640" height="480"></canvas>
-    <button @click="toggle">{{ isToggled ? 'Stop Camera' : 'Start Camera' }}</button>
-    <button @click="switchCamera">Switch Camera</button>
-    <button @click="photosend" v-if="isToggled">Photo And Send</button>
-  </div>
-  <div>
-    <h2>유사 상품 검색 결과</h2>
-    <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
-    <ul v-if="Object.keys(similarImages).length > 0">
-      <li v-for="(imagesArray, filename) in similarImages" :key="filename">
-        <h3>{{ filename }}의 유사 상품</h3>
-        <ul>
-          <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
-            <ul>
-              <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
-                <img :src="`http://127.0.0.1:9000/static/${image}`" :alt="image" width="200"/>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</template>
-
 
 
 <style scoped>
@@ -161,6 +171,4 @@ a {
   display: none;
 }
 </style>
-
-
 
