@@ -28,17 +28,13 @@ export default defineComponent({
     <button @click="toggle">{{ isToggled ? 'Stop Camera' : 'Start Camera' }}</button>
     <button @click="switchCamera">Switch Camera</button>
     <button @click="photosend" v-if="isToggled">Photo And Send</button>
-    <div v-if="base64Image">
-      <h3>Base64 Encoded Image:</h3>
-      <textarea v-model="base64Image" rows="6" cols="80" readonly></textarea>
-    </div>
   </div>
   <div>
-    <h2>유사 이미지 검색 결과</h2>
+    <h2>유사 상품 검색 결과</h2>
     <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
     <ul v-if="Object.keys(similarImages).length > 0">
       <li v-for="(imagesArray, filename) in similarImages" :key="filename">
-        <h3>{{ filename }}의 유사 이미지</h3>
+        <h3>{{ filename }}의 유사 상품</h3>
         <ul>
           <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
             <ul>
