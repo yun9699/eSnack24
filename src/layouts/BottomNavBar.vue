@@ -23,9 +23,9 @@
       </router-link>
 
       <router-link
-          to="/camera"
+          to="/photo"
           class="flex flex-col items-center relative"
-          :class="{ 'text-yellow-400': currentPath === '/camera' }"
+          :class="{ 'text-yellow-400': currentPath === '/photo' }"
       >
         <Icon icon="material-symbols:photo-camera-outline" class="text-2xl" />
         <span class="text-xs mt-1">카메라</span>
