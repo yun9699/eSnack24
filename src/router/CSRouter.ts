@@ -1,5 +1,5 @@
 
-const CSIndexPage = () => import('../pages/CSPages/CSIndexPage.vue')
+const CSIndexPage = () => import('../pages/cspages/CSIndexPage.vue')
 
 const CSRouter = {
     path: '/cs', component: CSIndexPage,

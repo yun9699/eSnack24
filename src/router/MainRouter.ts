@@ -13,7 +13,6 @@ import photoRouter from "./photoRouter.ts";
 const MainPage = () => import('../pages/MainPage.vue')
 
 const routes = [
-    {path: '/', component: MainPage},
     CSRouter,
     LoginRouter,
     PaymentRouter,

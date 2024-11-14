@@ -1,5 +1,5 @@
 
-const PaymentIndexPage = () => import('../pages/PaymentPages/PaymentIndexPage.vue')
+const PaymentIndexPage = () => import('../pages/paymentpages/PaymentIndexPage.vue')
 
 const PaymentRouter = {
     path: '/payment', component: PaymentIndexPage,

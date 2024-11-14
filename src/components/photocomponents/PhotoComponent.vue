@@ -31,7 +31,7 @@
 import { defineComponent, ref } from "vue";
 import { useCamera } from "../../hooks/useCamera.ts";
 import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
-import Modal from "../modalComponent/Modal.vue";
+import Modal from "../modalcomponents/Modal.vue";
 
 export default defineComponent({
   components: {

@@ -39,7 +39,6 @@ export const getGoogleAccessToken = async (authCode: string) => {
     });
 
     const res = await axios.post(access_token_url, params, header);
-    const accessToken = res.data.access_token;
 
-    return accessToken;
+    return res.data.access_token;
 };

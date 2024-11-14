@@ -1,5 +1,5 @@
 
-const Photo = () => import("../pages/photoPages/PhotoPage.vue")
+const Photo = () => import("../pages/photopages/PhotoPage.vue")
 
 const photoRouter = {
     path: '/photo', component: Photo,

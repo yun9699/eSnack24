@@ -5,7 +5,6 @@ import LoginComponent from "../../components/LoginComponents/LoginComponent.vue"
 
 <template>
   <LoginComponent/>
-  <RouterView/>
 </template>
 
 <style scoped>
