@@ -22,3 +22,10 @@ export const registerPersonalAllergy = async (anos: number[]) => {
     const res = await axios.post(`${host}/user/setallergies/${uno}`, personalAllergy);
     return res.data;
 };
+
+export const readAgreementDoc = async () => {
+
+    const res = await axios.get('/Agreement_Doc.JSON');
+
+    return res.data;
+}

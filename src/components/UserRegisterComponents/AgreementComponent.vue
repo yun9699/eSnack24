@@ -1,35 +1,38 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { readAgreementDoc } from "../../api/UserAPI/userRegisterAPI.ts";
 
-const terms = ref<any>([]);  // terms 초기값을 빈 배열로 설정
+const terms = ref(null);
 
 onMounted(async () => {
-  const response = await fetch('/Agreement_Doc.JSON');
-  terms.value = await response.json();  // JSON 데이터를 terms.value에 저장
-
-  console.log(terms.value);  // 콘솔로 확인
+  terms.value = await readAgreementDoc();
 });
 </script>
 
 <template>
-  <!-- terms.value가 빈 배열일 때는 0, 아니라면 terms.length를 출력 -->
-  <div v-if="terms.value && terms.value.length > 0" class="p-4"> <!-- terms가 비어있지 않은 경우에만 렌더링 -->
-    <div v-for="(term, index) in terms.value" :key="index" class="mb-6">
-      <div class="text-xl font-bold mb-2">{{ term.description_Section1 }}</div>
-      <div class="ml-4">
-        <!-- details가 배열일 경우, <ul>과 <li>로 처리 -->
-        <div v-if="Array.isArray(term.details)">
-          <ul class="list-inside list-disc text-gray-700">
-            <li v-for="(detail, idx) in term.details" :key="idx" class="mb-2">
-              {{ detail }}
-            </li>
-          </ul>
-        </div>
-        <!-- details가 문자열일 경우 그대로 출력 -->
-        <div v-else>
-          <p class="text-gray-700">{{ term.details }}</p>
+  <div v-if="terms" class="p-6">
+    <div class="max-h-[400px] overflow-y-auto">
+      <div v-for="(section, index) in terms.terms" :key="index" class="mb-6">
+        <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">{{ section.description_Section1 }}</h2>
+          <p class="text-gray-700">{{ section.details }}</p>
+          <div v-if="Array.isArray(section.details)" class="mt-4">
+            <ul class="list-disc pl-5 space-y-2">
+              <li v-for="(detail, idx) in section.details" :key="idx" class="text-gray-700">
+                {{ detail }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div v-else class="flex justify-center items-center h-screen">
+    <p class="text-lg font-medium text-gray-600">로딩 중...</p>
+  </div>
 </template>
+
+<style scoped>
+/* Optionally, add some custom styles */
+</style>
