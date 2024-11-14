@@ -64,9 +64,7 @@ const loadProductList = async(page) => {
 
   const data = await getList(page)
 
-  result.value = data
-
-  console.log(result.value)
+  console.log(data);
 }
 
 onMounted(() => {
