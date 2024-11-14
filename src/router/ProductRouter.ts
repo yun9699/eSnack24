@@ -4,6 +4,9 @@ const ProductIndexPage = () => import('../pages/productpages/ProductIndexPage.vu
 const ProductRouter = {
     path: '/product', component: ProductIndexPage,
     children: [
+        {
+            path: "/",  redirect: '/product'
+        }
 
     ]
 }
