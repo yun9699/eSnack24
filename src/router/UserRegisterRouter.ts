@@ -1,5 +1,5 @@
 
-const UserRegisterIndexPage = () => import('../pages/UserRegisterPages/UserRegisterIndexPage.vue')
+const UserRegisterIndexPage = () => import('../pages/userregisterpages/UserRegisterIndexPage.vue')
 
 const UserRegisterRouter = {
     path: '/user', component: UserRegisterIndexPage,

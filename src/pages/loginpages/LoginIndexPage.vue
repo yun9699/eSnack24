@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import LoginComponent from "../../components/LoginComponents/LoginComponent.vue";
+import LoginComponent from "../../components/logincomponents/LoginComponent.vue";
 </script>
 
 <template>

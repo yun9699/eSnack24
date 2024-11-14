@@ -1,5 +1,5 @@
 
-const ReviewIndexPage = () => import('../pages/ReviewPages/ReviewIndexPage.vue');
+const ReviewIndexPage = () => import('../pages/reviewpages/ReviewIndexPage.vue');
 
 const ReviewRouter = {
     path: '/review', component: ReviewIndexPage,
