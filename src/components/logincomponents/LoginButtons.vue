@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { getKakaoLoginLink } from "../../api/LoginAPI/kakaoAPI.ts";
-import { getGoogleLoginLink } from "../../api/LoginAPI/googleAPI.ts";
+import { getKakaoLoginLink } from "../../api/loginapi/kakaoAPI.ts";
+import { getGoogleLoginLink } from "../../api/loginapi/googleAPI.ts";
 
 const kakaoLink: string = getKakaoLoginLink();
 const googleLink: string = getGoogleLoginLink();
