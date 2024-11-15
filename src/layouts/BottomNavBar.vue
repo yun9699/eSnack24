@@ -3,7 +3,7 @@
   <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
     <div class="flex justify-between items-center px-4 py-2">
       <router-link
-          to="/search"
+          to=""
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/search' }"
       >
@@ -13,7 +13,7 @@
       </router-link>
 
       <router-link
-          to="/cart"
+          to=""
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/cart' }"
       >
@@ -33,7 +33,7 @@
       </router-link>
 
       <router-link
-          to="/contact"
+          to=""
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/contact' }"
       >
@@ -43,7 +43,7 @@
       </router-link>
 
       <router-link
-          to="/profile"
+          to=""
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/profile' }"
       >
