@@ -1,6 +1,6 @@
-import { ref } from "vue";
-import axios from "axios";
-import type { Ref } from "vue";
+import {ref} from "vue";
+import type {Ref} from "vue";
+import {photoAPI} from "../api/photoAPI/photoAPI.ts";
 
 export function useImageProcessor() {
     const base64Image: Ref<string> = ref("");
@@ -19,13 +19,11 @@ export function useImageProcessor() {
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/saveState", {
-                image: base64Image.value,
-            });
-            console.log("Response from server:", response.data);
+            const response = await photoAPI(base64Image.value);
+            console.log("Response from server:", response);
 
-            if (response.data.similarImages) {
-                similarImages.value = response.data.similarImages || {};
+            if (response.similarImages) {
+                similarImages.value = response.similarImages || {};
             }
         } catch (err) {
             console.error("Server request failed:", err);
