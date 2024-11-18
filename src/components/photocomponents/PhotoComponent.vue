@@ -2,7 +2,7 @@
   <div>
     <h1>카메라</h1>
     <video ref="videoElement" width="640" height="480" autoplay></video>
-    <canvas ref="canvasElement" width="640" height="480"></canvas>
+    <canvas ref="canvasElement" width="640" height="480" class="hidden"></canvas>
     <button @click="toggle">{{ isToggled ? '카메라 끄기' : '카메라 켜기' }}</button>
     <button @click="switchCamera">카메라 전환</button>
     <button @click="takePhotoAndShowResult" v-if="isToggled">사진 찍기</button>
@@ -62,6 +62,10 @@ export default defineComponent({
 
 
 <style scoped>
+.hidden {
+  display: none;
+}
+
 h1 {
   text-align: center;
   font-size: 2rem;
