@@ -7,7 +7,7 @@ const isMenuOpen = ref(false)
 
 <template>
   <header class="py-4">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center bg-orange-300">
       <!-- 왼쪽에 뒤로가기 버튼 -->
       <button @click="window.history.back()" class="text-xl text-gray-600 hover:text-black">
         ←
@@ -15,10 +15,10 @@ const isMenuOpen = ref(false)
 
       <!-- 로고를 가운데로 배치 -->
       <div class="flex-1 text-center">
-        <button>
+        <RouterLink to="/">
           <!-- 반응형 로고 크기 설정 -->
           <img src="/eSnack24_logo_plain.png" class="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-32 mx-auto" />
-        </button>
+        </RouterLink>
       </div>
 
       <!-- 오른쪽 공간, 필요 없다면 빈 div로 두기 -->
