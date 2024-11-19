@@ -4,4 +4,16 @@ import vue from '@vitejs/plugin-vue'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  envDir: "../",
+  envPrefix: "PAYPAL",
+  server: {
+    port: 5173,
+    proxy: {
+      "/api/v1/paypal": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

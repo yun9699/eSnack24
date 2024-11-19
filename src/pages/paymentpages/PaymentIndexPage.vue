@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <div>Payment</div>
+
+  <RouterView/>
 </template>
 
 <style scoped>
