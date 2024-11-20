@@ -9,43 +9,88 @@
   </div>
 
   <modal :visible="isModalVisible" @update:visible="isModalVisible = $event">
-      <h2>유사 상품 검색 결과</h2>
-      <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
-      <ul v-if="Object.keys(similarImages).length > 0">
-        <li v-for="(imagesArray, filename) in similarImages" :key="filename">
-          <ul>
-            <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
-              <ul>
-                                <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
-                  <img :src="`https://3743-58-235-119-39.ngrok-free.app/static/${image}`" :alt="image" width="200"/>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <h2>유사 상품 검색 결과</h2>
+    <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
+    <ul v-if="Object.keys(similarImages).length > 0">
+      <li v-for="(imagesArray, filename) in similarImages" :key="filename">
+        <ul>
+          <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
+            <ul>
+              <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
+                <img
+                    :src="`http://127.0.0.1:9000/static/${image}`"
+                    :alt="image"
+                    width="200"
+                    @load="loadAllergyInfo(image)"
+                />
+                <!-- 클릭 시 모달로 알러지 정보 표시 -->
+                <p
+                    @click="showAllergyModal(allergyInfo[image])"
+                    style="cursor: pointer; color: blue; text-decoration: underline;"
+                >
+                  {{ allergyInfo[image] ? '알러지 정보 보기' : '알러지 정보 없음' }}
+                </p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </modal>
+  <!-- 알러지 상세 정보 모달 -->
+  <modal :visible="isAllergyModalVisible" @update:visible="isAllergyModalVisible = $event">
+    <h2>알러지 상세 정보</h2>
+    <p v-if="currentAllergyInfo && typeof currentAllergyInfo === 'string'">
+  <span v-for="(info, index) in currentAllergyInfo.split(',')" :key="index">
+    {{ info }}<br>
+  </span>
+    </p>
+    <p v-else>정보 없음</p>
   </modal>
 </template>
 
+
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { useCamera } from "../../hooks/useCamera.ts";
-import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
+import {defineComponent, ref} from "vue";
+import {useCamera} from "../../hooks/useCamera.ts";
+import {useImageProcessor} from "../../hooks/useImageProcessor.ts";
 import Modal from "../modalcomponents/Modal.vue";
+import {fetchAllergyInfo} from "../../api/product/productCameraAllegyAPI.ts";
 
 export default defineComponent({
   components: {
-    Modal
+    Modal,
   },
   setup() {
-    const { isToggled, toggle, switchCamera } = useCamera();
-    const { similarImages, photosend } = useImageProcessor();
+    const {isToggled, toggle, switchCamera} = useCamera();
+    const {similarImages, photosend} = useImageProcessor();
 
+    const allergyInfo = ref<Record<string, string>>({});
     const isModalVisible = ref(false);
+    const isAllergyModalVisible = ref(false);
+    const currentAllergyInfo = ref<string>("");
+
 
     const takePhotoAndShowResult = async () => {
       await photosend();
       isModalVisible.value = true;
+    };
+
+    const loadAllergyInfo = async (filename: string) => {
+      if (allergyInfo.value[filename]) return;
+      try {
+        const allergyTitles = await fetchAllergyInfo(filename);
+        console.log(allergyTitles);  // 알러지 정보 로그
+        allergyInfo.value[filename] = allergyTitles.join(", ");  // 문자열로 변환
+      } catch (error) {
+        console.error(`알러지 정보 로드 실패: ${filename}`, error);
+      }
+    };
+
+
+    const showAllergyModal = (info: string) => {
+      currentAllergyInfo.value = info || "알러지 정보 없음";
+      isAllergyModalVisible.value = true;
     };
 
     return {
@@ -54,7 +99,12 @@ export default defineComponent({
       switchCamera,
       similarImages,
       takePhotoAndShowResult,
-      isModalVisible
+      isModalVisible,
+      allergyInfo,
+      loadAllergyInfo,
+      isAllergyModalVisible,
+      currentAllergyInfo,
+      showAllergyModal,
     };
   },
 });
@@ -155,10 +205,13 @@ img:hover {
 }
 
 p {
+  word-wrap: break-word;
+  white-space: normal; /* 줄 바꿈 허용 */
   text-align: center;
   font-size: 1.2rem;
   color: #888;
 }
+
 
 textarea {
   width: 100%;
