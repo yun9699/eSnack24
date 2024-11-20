@@ -73,7 +73,7 @@ const closeModal = () => {
 
   isCheckModalOpen.value = false;
 
-  router.push('/');
+  router.push('/product/list');
 }
 
 onMounted(async () => {
