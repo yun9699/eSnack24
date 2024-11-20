@@ -2,6 +2,7 @@
 import {ref, defineAsyncComponent, provide, onMounted} from 'vue';
 import {getAllergyListKo} from "../../api/AllergyAPI/allergyAPI.ts";
 import {registerAddress, registerPersonalAllergy, registerUser} from "../../api/UserAPI/userRegisterAPI.ts";
+import {useRouter} from "vue-router";
 
 // Lazy load each component
 const AgreementComponent = defineAsyncComponent(() => import('../../components/UserRegisterComponents/AgreementComponent.vue'));
@@ -9,6 +10,8 @@ const UserInfoComponent = defineAsyncComponent(() => import('../../components/Us
 const UserAllergySetComponent = defineAsyncComponent(() => import('../../components/UserRegisterComponents/UserAllergySetComponent.vue'));
 const CommonCheckModalComponent = defineAsyncComponent(() => import('../../common/components/CommonCheckModalComponent.vue'));
 const RegisterAddressComponent = defineAsyncComponent(() => import('../../components/UserRegisterComponents/RegisterAddressComponent.vue'));
+
+const router = useRouter();
 
 // 현재 컴포넌트 인덱스를 상태로 관리
 const currentStep = ref(0);
@@ -69,6 +72,8 @@ const completeRegister = () => {
 const closeModal = () => {
 
   isCheckModalOpen.value = false;
+
+  router.push('/');
 }
 
 onMounted(async () => {
