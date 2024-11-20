@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import {useRoute, useRouter} from 'vue-router';
-import { getGoogleAccessToken, getGoogleMemberWithAccessToken } from "../../api/LoginAPI/googleAPI.ts";
+import { getGoogleAccessToken, getGoogleMemberWithAccessToken } from "../../api/loginapi/googleAPI.ts";
 import useUser from "../../stores/useUser.ts";
 
 const route = useRoute();
