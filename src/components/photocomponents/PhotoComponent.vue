@@ -16,8 +16,8 @@
           <ul>
             <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
               <ul>
-                <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
-                  <img :src="`http://127.0.0.1:9000/static/${image}`" :alt="image" width="200"/>
+                                <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
+                  <img :src="`https://3743-58-235-119-39.ngrok-free.app/static/${image}`" :alt="image" width="200"/>
                 </li>
               </ul>
             </li>

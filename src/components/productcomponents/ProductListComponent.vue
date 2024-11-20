@@ -1,10 +1,75 @@
 <script setup lang="ts">
 
-import {inject, onMounted} from "vue";
+import {computed, onMounted, ref} from "vue";
+import {getList} from "../../api/product/ProductAPI.ts";
+import {onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 
-onMounted(() => {
+interface Product {
+  pno: number
+  ptitle_ko: string
+  price: number
+  pfilename: string
+}
+
+const serverData = ref({
+  ProductList: [],
+  number: 0,
+  size: 0,
+  totalPages: 0
+});
+
+const router = useRouter();
+const route = useRoute();
+
+
+const handleClickPage = (pageNum) => {
+  const currentQueryPage = parseInt(route.query.page || 1);
+  if (currentQueryPage === pageNum) {
+    getList(pageNum).then(res => serverData.value = res);
+  } else {
+    router.push({ path: '/product/list', query: { page: pageNum } });
+  }
+};
+
+const pageNums = computed(() => {
+  const current = serverData.value.number + 1;
+  let lastPageNum = Math.ceil(current / 10.0) * 10;
+  const startPageNum = lastPageNum - 9;
+  const prev = startPageNum !== 1;
+  let next = true;
+
+  if (serverData.value.totalPages <= lastPageNum) {
+    lastPageNum = serverData.value.totalPages;
+    next = false;
+  }
+
+  const arr = [];
+  if (prev) {
+    arr.push({ page: startPageNum - 1, label: "Prev" });
+  }
+  for (let i = startPageNum; i <= lastPageNum; i++) {
+    arr.push({ page: i, label: i });
+  }
+  if (next) {
+    arr.push({ page: lastPageNum + 1, label: "Next" });
+  }
+  return arr;
+});
+
+
+onMounted(async () => {
+  const page = route.query.page || 1;
+  const result = await getList(page);
+  serverData.value.ProductList = result.list;
+  console.log("--------------------------------")
+  console.log(serverData.value)
 })
 
+onBeforeRouteUpdate(async (to, from, next) => {
+  const result = await getList(to.query.page);
+  serverData.value = result;
+  next();
+});
 
 
 
@@ -13,7 +78,6 @@ onMounted(() => {
 <template>
     <!-- Header Section -->
     <header class="bg-yellow-500 p-4 flex justify-between items-center">
-
       <div class="flex space-x-4">
         <button class="px-4 py-2 bg-yellow-600 text-white rounded">행사상품</button>
         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">차별화 상품</button>
@@ -55,28 +119,45 @@ onMounted(() => {
     </section>
 
     <!-- Product List Section -->
+
+
     <section class="p-4 grid grid-cols-2 gap-4">
       <!-- Example Product Card -->
+      <div
+          v-for="item in serverData.ProductList"
+          :key="item.pno">
+
       <div class="border rounded p-4 text-center">
         <div class="flex justify-between">
           <span class="text-gray-500">NEW</span>
           <span class="bg-yellow-500 text-white text-sm px-2 rounded">1+1</span>
         </div>
 
-        <p class="mt-2 text-gray-700">민생)4종날면도기세트(면도기+면도날4입)</p>
-        <p class="mt-2 text-orange-500 font-semibold">9,900 원</p>
+        <img
+            :src="`http://10.10.10.128/product/s_${item.pfilename}`"
+            :alt="item.ptitle_ko"
+            class="w-full h-32 object-contain"
+        />
+
+        <p class="mt-2 text-gray-700">{{item.ptitle_ko}}</p>
+        <p class="mt-2 text-orange-500 font-semibold">{{item.price}}원</p>
       </div>
-      <div class="border rounded p-4 text-center">
-        <div class="flex justify-between">
-          <span class="text-gray-500">NEW</span>
-          <span class="bg-yellow-500 text-white text-sm px-2 rounded">1+1</span>
-        </div>
 
-        <p class="mt-2 text-gray-700">민생)4종면도날8입</p>
-        <p class="mt-2 text-orange-500 font-semibold">9,900 원</p>
       </div>
       <!-- Add more product cards as needed -->
     </section>
+
+
+  <div class="d-flex justify-content-center align-items-center mt-4">
+    <ul class="pagination">
+      <li v-for="{ page, label } in pageNums" :key="page" :class="`page-item ${ page == serverData.number + 1 ? 'active' : ''}`">
+        <a class="page-link" @click="() => handleClickPage(page)">{{ label }}</a>
+      </li>
+    </ul>
+  </div>
+
+
+
 </template>
 
 <style scoped>

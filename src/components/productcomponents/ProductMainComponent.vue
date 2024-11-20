@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref, computed, provide, inject} from 'vue'
-import { getList } from "../../api/product/ProductAPI.ts"
+import { getmainList} from "../../api/product/ProductAPI.ts"
 import { useRouter } from "vue-router"
 
 // 상품 데이터 타입 정의
@@ -16,7 +16,7 @@ interface Product {
 const router = useRouter()
 
 // 상품 리스트 및 페이지 인덱스 관리
-const ProductList = ref<Product[]>([])
+const ProductPopularList = ref<Product[]>([])
 
 
 // 한 페이지에 보여줄 상품 개수
@@ -27,8 +27,9 @@ const currentIndex = ref(0)
 
 // 상품 데이터를 불러오는 함수
 const loadProductList = async (page) => {
-  const data = await getList(page)
-  ProductList.value = data.list
+  const data = await getmainList(page)
+  ProductPopularList.value = data.list
+  console.log(ProductPopularList.value)
 }
 
 // 페이지 버튼 클릭 시 페이지 이동
@@ -39,12 +40,12 @@ const goToPage = (index: number) => {
 // 상품 리스트 페이지별로 분할
 const paginatedProducts = computed(() => {
   const start = currentIndex.value * itemsPerPage
-  return ProductList.value.slice(start, start + itemsPerPage)
+  return ProductPopularList.value.slice(start, start + itemsPerPage)
 })
 
 // 동그라미 버튼 생성 (총 페이지 수 계산)
 const totalPages = computed(() => {
-  return Math.ceil(ProductList.value.length / itemsPerPage)
+  return Math.ceil(ProductPopularList.value.length / itemsPerPage)
 })
 
 onMounted(() => {
@@ -84,12 +85,12 @@ const handleClikeMove = () => {
           >
 
             <img
-                :src="'http://10.10.10.128/product/' + product.pfilename"
+                :src="`http://10.10.10.128/product/s_${product.pfilename}`"
                 :alt="product.ptitle_ko"
                 class="w-full h-32 object-contain"
             />
             <div class="p-4">
-              <h3 class="font-semibold text-lg">{{ product.ptitle_ko }}</h3>
+              <h3 class="font-semibold text-sm">{{ product.ptitle_ko }}</h3>
               <p class="text-red-500 font-bold">{{ product.price }}원</p>
             </div>
           </div>
