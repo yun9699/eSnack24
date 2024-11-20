@@ -13,6 +13,9 @@ export const registerUser = async (userInfo: any) => {
 
     const res = await axios.put(`${host}/login/reg/${uno}`, userInfo);
 
+    console.log("userInfo")
+    console.log(userInfo);
+
     return res.data;
 }
 
@@ -26,6 +29,13 @@ export const registerPersonalAllergy = async (anos: number[]) => {
 export const readAgreementDoc = async () => {
 
     const res = await axios.get('/Agreement_Doc.JSON');
+
+    return res.data;
+}
+
+export const registerAddress = async (address: any) => {
+
+    const res = await axios.post(`${host}/address/reg/${uno}`, address);
 
     return res.data;
 }

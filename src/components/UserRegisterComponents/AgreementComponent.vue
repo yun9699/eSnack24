@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import {inject, onMounted, Ref, ref} from 'vue';
 import { readAgreementDoc } from "../../api/UserAPI/userRegisterAPI.ts";
+
+const isAgree = inject<Ref<boolean>>("isAgree");
+
 
 const terms = ref(null);
 
@@ -30,6 +33,19 @@ onMounted(async () => {
 
   <div v-else class="flex justify-center items-center h-screen">
     <p class="text-lg font-medium text-gray-600">로딩 중...</p>
+  </div>
+
+  <!-- 체크박스 -->
+  <div class="mt-4 flex items-center justify-end">
+    <label for="agreement-checkbox" class="text-gray-700">
+      모든 내용을 확인하였으며, 동의합니다.
+    </label>
+    <input
+        id="agreement-checkbox"
+        type="checkbox"
+        v-model="isAgree"
+        class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 mr-2"
+    />
   </div>
 </template>
 

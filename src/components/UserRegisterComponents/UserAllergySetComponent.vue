@@ -38,12 +38,6 @@ const toggleSelection = (ano: number) => {
         </button>
       </li>
     </ul>
-
-    <!-- 선택된 항목들 표시 -->
-    <div class="mt-4 text-lg">
-      <span class="font-bold">선택된 항목 (ano):</span>
-      <span>{{ selectedAnos.join(', ') }}</span>
-    </div>
   </div>
 </template>
 
