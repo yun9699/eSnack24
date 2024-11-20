@@ -4,7 +4,12 @@
 
   const userInfo: any = inject("userInfo")
 
-  console.log(userInfo);
+  // 숫자만 입력되도록 처리
+  const handlePhoneInput = (event: Event) => {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/\D/g, ""); // 숫자만 남김
+    userInfo.ucallnumber = input.value; // userInfo와 동기화
+  };
 
 </script>
 
@@ -33,7 +38,8 @@
             id="phone"
             placeholder="Enter your phone number"
             class="w-full sm:w-2/3 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            v-model="userInfo.callnumber"
+            :value="userInfo.ucallnumber"
+            @input="handlePhoneInput"
         />
       </div>
 
@@ -50,18 +56,6 @@
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
-      </div>
-
-      <!-- 주소 입력 -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
-        <label for="address" class="w-full sm:w-1/3 text-lg font-medium">Address</label>
-        <input
-            type="text"
-            id="address"
-            placeholder="Enter your address"
-            class="w-full sm:w-2/3 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            v-model="userInfo.address"
-        />
       </div>
 
       <!-- 생일 입력 -->
