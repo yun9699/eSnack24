@@ -8,7 +8,7 @@ export function useImageProcessor() {
 
     const takePhoto = (): void => {
         const canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
-        const imageUrl = canvasElement.toDataURL("image/webp");
+        const imageUrl = canvasElement.toDataURL("image/jpg");
         base64Image.value = imageUrl.split(",")[1];
     };
 
