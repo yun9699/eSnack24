@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
 import Basiclayout from "../../layouts/Basiclayout.vue";
-import ProductMainComponent from "../../components/productcomponents/ProductMainComponent.vue";
+import ProductDetailComponent from "../../components/productcomponents/ProductDetailComponent.vue";
 import BottomNavBar from "../../layouts/BottomNavBar.vue";
 </script>
 
 <template>
   <Basiclayout/>
-  <ProductMainComponent/>
+  <ProductDetailComponent/>
   <BottomNavBar/>
 </template>
 
