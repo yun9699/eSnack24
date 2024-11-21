@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
 import { inject } from "vue";
+import {IAddress} from "../../types/userRegisterTypes.ts";
 
-const address: any = inject("address");
+const address: IAddress = inject("address");
 
 // 숫자만 입력되도록 처리
 const handlePhoneInput = (event: Event) => {

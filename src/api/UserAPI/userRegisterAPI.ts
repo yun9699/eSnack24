@@ -1,5 +1,6 @@
 import axios from "axios";
 import useUser from "../../stores/useUser.ts";
+import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts";
 
 const user = useUser();
 
@@ -7,7 +8,7 @@ const uno = user.getUno;
 
 const host = 'http://localhost:8080/api/v1';
 
-export const registerUser = async (userInfo: any) => {
+export const registerUser = async (userInfo: IUserInfo) => {
 
     const res = await axios.put(`${host}/login/reg/${uno}`, userInfo);
 
@@ -31,7 +32,7 @@ export const readAgreementDoc = async () => {
     return res.data;
 }
 
-export const registerAddress = async (address: any) => {
+export const registerAddress = async (address: IAddress) => {
 
     const res = await axios.post(`${host}/address/reg/${uno}`, address);
 
