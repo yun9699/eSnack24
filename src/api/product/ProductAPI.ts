@@ -24,12 +24,9 @@ export const getList = async ( page:number = 1, size:number = 10) => {
 
 }
 
-export const getDetail = async () => {
+export const getDetail = async (pno: number) => {
 
     const res = await axios.get(`${host}/detail/${pno}`)
-
-    console.log(res.data);
-
 
     return res.data
 

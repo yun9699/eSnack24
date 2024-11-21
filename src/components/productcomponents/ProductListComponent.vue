@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { getList } from "../../api/product/ProductAPI.ts";
-import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import {IProduct} from "../../types/productTypes.ts";
 
-interface Product {
-  pno: number;
-  ptitle_ko: string;
-  price: number;
-  pfilename: string;
-}
 
-const serverData = ref({
+const serverData = ref<{ ProductList: IProduct[]; }>({
   ProductList: [],
 });
 
