@@ -1,0 +1,14 @@
+{
+  "bottom_nav": {
+    "search": "Search",
+    "cart": "Cart",
+    "camera": "Camera",
+    "contact": "Contact",
+    "profile": "Profile"
+  },
+
+  "pMain": {
+    "popular": "Popular products this month",
+    "moreinfo": "More info"
+  }
+}

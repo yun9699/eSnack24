@@ -1,0 +1,14 @@
+{
+  "bottom_nav": {
+    "search": "検索",
+    "cart": "カート",
+    "camera": "カメラ",
+    "contact": "連絡先",
+    "profile": "プロフィール"
+  },
+
+  "pMain": {
+    "popular": "今月の人気商品",
+    "moreinfo": "もっと見る"
+  }
+}
