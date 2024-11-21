@@ -3,6 +3,7 @@ import {ref, defineAsyncComponent, provide, onMounted} from 'vue';
 import {getAllergyListKo} from "../../api/AllergyAPI/allergyAPI.ts";
 import {registerAddress, registerPersonalAllergy, registerUser} from "../../api/UserAPI/userRegisterAPI.ts";
 import {useRouter} from "vue-router";
+import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts";
 
 // Lazy load each component
 const AgreementComponent = defineAsyncComponent(() => import('../../components/UserRegisterComponents/AgreementComponent.vue'));
@@ -14,13 +15,14 @@ const RegisterAddressComponent = defineAsyncComponent(() => import('../../compon
 const router = useRouter();
 
 // 현재 컴포넌트 인덱스를 상태로 관리
-const currentStep = ref(0);
-const allergyList = ref([]);
+const currentStep = ref<number>(0);
+const allergyList = ref<string[]>([]);
 const selectedAnos = ref<number[]>([]);
-const isCheckModalOpen = ref(false);
-const isAgree = ref(false);
+const isCheckModalOpen = ref<boolean>(false);
+const isAgree = ref<boolean>(false);
 
-const address = ref({
+const initAddress: IAddress = {
+
   country: '',
   address_line1: '',
   address_line2: '',
@@ -30,21 +32,31 @@ const address = ref({
   state: '',
   city: '',
   phonenumber: ''
-});
+}
 
-const userInfo = ref({
+const initUserInfo: IUserInfo = {
+
   username: '',
   ucallnumber: '',
   gender: '',
-  address: '',
   birth: ''
+}
+
+const address = ref<{addressData: IAddress}>({
+
+  addressData: initAddress
 });
+
+const userInfo = ref<{userInfoData: IUserInfo}>({
+
+  userInfoData: initUserInfo,
+})
 
 const registerFn = () => {
 
-  registerUser(userInfo.value);
+  registerUser(userInfo.value.userInfoData);
   registerPersonalAllergy(selectedAnos.value);
-  registerAddress(address.value);
+  registerAddress(address.value.addressData);
 }
 
 // 다음 컴포넌트로 이동하는 함수
@@ -81,10 +93,10 @@ onMounted(async () => {
   allergyList.value = await getAllergyListKo();
 });
 
-provide("userInfo", userInfo);
+provide("userInfo", userInfo.value.userInfoData);
 provide("allergyList", allergyList);
 provide("selectedAnos", selectedAnos);
-provide("address", address);
+provide("address", address.value.addressData);
 provide("isAgree", isAgree);
 </script>
 
