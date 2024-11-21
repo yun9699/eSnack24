@@ -1,6 +1,6 @@
 import {ref} from "vue";
 import type {Ref} from "vue";
-import {photoAPI} from "../api/photoAPI/photoAPI.ts";
+import {photoAPI} from "../../api/photoAPI/photoAPI.ts";
 
 export function useImageProcessor() {
     const base64Image: Ref<string> = ref("");

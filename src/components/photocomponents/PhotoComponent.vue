@@ -55,12 +55,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { useCamera } from "../../hooks/useCamera.ts";
-import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
-import useUser  from "../../stores/useUser.ts";
+import { useCamera } from "../../hooks/camerahooks/useCamera.ts";
+import { useImageProcessor } from "../../hooks/camerahooks/useImageProcessor.ts";
+import { useAllergyWarning } from "../../hooks/camerahooks/useAllergyWarning.ts";
 import Modal from "../modalcomponents/Modal.vue";
-import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
-import { compareUserAllergies } from "../../api/UserAPI/userAllergyAPI.ts";
+import useUser from "../../stores/useUser";
 
 export default defineComponent({
   components: {
@@ -72,48 +71,23 @@ export default defineComponent({
 
     const userStore = useUser();
     const uno = userStore.getUno;
-    console.log(uno)
 
-    const allergyInfo = ref<Record<string, string>>({});
-    const imageWarnings = ref<Record<string, string>>({});
+    const {
+      allergyInfo,
+      imageWarnings,
+      isAllergyModalVisible,
+      currentAllergyInfo,
+      currentWarning,
+      loadAllergyInfo,
+      checkAllergyWarnings,
+      showAllergyModal,
+    } = useAllergyWarning(uno);
+
     const isModalVisible = ref(false);
-    const isAllergyModalVisible = ref(false);
-    const currentAllergyInfo = ref<string>("");
-    const currentWarning = ref<string>("");
 
     const takePhotoAndShowResult = async () => {
       await photosend();
       isModalVisible.value = true;
-    };
-
-    const loadAllergyInfo = async (filename: string) => {
-      if (allergyInfo.value[filename]) return;
-      try {
-        const allergyTitles = await fetchAllergyInfo(filename);
-        allergyInfo.value[filename] = allergyTitles.join(", ");
-        await checkAllergyWarnings(filename);
-      } catch (error) {
-        console.error(`알러지 정보 로드 실패: ${filename}`, error);
-      }
-    };
-
-    const showAllergyModal = (filename: string) => {
-      currentAllergyInfo.value = allergyInfo.value[filename] || "알러지 정보 없음";
-      currentWarning.value = imageWarnings.value[filename] || "";
-      isAllergyModalVisible.value = true;
-    };
-
-    const checkAllergyWarnings = async (filename: string) => {
-      try {
-        const imageAllergies = await fetchAllergyInfo(filename);
-        const matchingAllergies = await compareUserAllergies(uno, imageAllergies);
-        if (matchingAllergies.length > 0) {
-          const warningMessage = `경고: ${matchingAllergies.join(", ")} 알러지 성분이 포함되어 있습니다.`;
-          imageWarnings.value[filename] = warningMessage;
-        }
-      } catch (error) {
-        console.error("알러지 비교 실패", error);
-      }
     };
 
     return {
@@ -124,17 +98,18 @@ export default defineComponent({
       takePhotoAndShowResult,
       isModalVisible,
       allergyInfo,
-      loadAllergyInfo,
+      imageWarnings,
       isAllergyModalVisible,
       currentAllergyInfo,
       currentWarning,
-      showAllergyModal,
+      loadAllergyInfo,
       checkAllergyWarnings,
-      imageWarnings,
+      showAllergyModal,
     };
   },
 });
 </script>
+
 
 
 
