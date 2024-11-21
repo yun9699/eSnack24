@@ -1,9 +1,9 @@
+// userStore.ts
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 const useUser = defineStore('userStore', () => {
-
-    const user = ref({uno: 0});
+    const user = ref<{ uno?: number }>({});
     const personalAllergies = ref<{ anos: number[] }>({ anos: [] });
 
     const setUno = (uno: number) => user.value.uno = uno;
@@ -16,7 +16,7 @@ const useUser = defineStore('userStore', () => {
 
     return { user, setUno, getUno, personalAllergies, setPersonalAllergies, getPersonalAllergies };
 }, {
-    persist: true, // 로컬 스토리지에 상태 저장
+    persist: true
 });
 
 export default useUser;
