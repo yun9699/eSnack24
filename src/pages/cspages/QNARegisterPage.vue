@@ -7,7 +7,6 @@ import QNARegisterComponent from "../../components/csComponents/QNARegisterCompo
 
 <template>
   <HeaderBar />
-  <div> QNA Register Page </div>
   <QNARegisterComponent />
   <BottomNavBar />
 </template>
