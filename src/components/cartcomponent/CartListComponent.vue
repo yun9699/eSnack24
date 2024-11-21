@@ -1,18 +1,15 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import {getCartList} from "../../api/cartapi/cartapi.ts";
+import useUser from "../../stores/useUser.js";
 
-const cartData = ref({
-  list: [],
-  endPage: 0,
-  next: false,
-  pageRequest: [],
-  total: 0,
-  startPage: 0,
-  prev: false
-})
 
-const cartList = ref([]);
+const initCartList = {
+
+
+}
+
+const cartList = ref();
 
 onMounted(() => {
 
