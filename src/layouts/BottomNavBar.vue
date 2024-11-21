@@ -47,7 +47,7 @@ const user = useUser();
       </router-link>
 
       <router-link
-          to=""
+          to="/cs/faq"
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/contact' }"
       >
