@@ -23,10 +23,10 @@
                     width="200"
                     @load="loadAllergyInfo(image)"
                 />
-                <!-- 클릭 시 모달로 알러지 정보 표시 -->
+                <!-- 클릭 시 알러지 정보 모달로 전환 -->
                 <p
-                    @click="showAllergyModal(allergyInfo[image])"
-                    style="cursor: pointer; color: blue; text-decoration: underline;"
+                    @click="showAllergyModal(image)"
+                    style="cursor: pointer; color: yellowgreen;"
                 >
                   {{ allergyInfo[image] ? '알러지 정보 보기' : '알러지 정보 없음' }}
                 </p>
@@ -37,39 +37,49 @@
       </li>
     </ul>
   </modal>
+
   <!-- 알러지 상세 정보 모달 -->
   <modal :visible="isAllergyModalVisible" @update:visible="isAllergyModalVisible = $event">
     <h2>알러지 상세 정보</h2>
-    <p v-if="currentAllergyInfo && typeof currentAllergyInfo === 'string'">
-  <span v-for="(info, index) in currentAllergyInfo.split(',')" :key="index">
-    {{ info }}<br>
-  </span>
+    <p v-if="currentAllergyInfo">
+      <span v-for="(info, index) in currentAllergyInfo.split(',')" :key="index">
+        {{ info }}<br>
+      </span>
     </p>
-    <p v-else>정보 없음</p>
+    <p v-if="currentWarning" style="color: red; font-weight: bold;">
+      {{ currentWarning }}
+    </p>
+    <p v-else></p>
   </modal>
 </template>
 
-
 <script lang="ts">
-import {defineComponent, ref} from "vue";
-import {useCamera} from "../../hooks/useCamera.ts";
-import {useImageProcessor} from "../../hooks/useImageProcessor.ts";
+import { defineComponent, ref } from "vue";
+import { useCamera } from "../../hooks/useCamera.ts";
+import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
+import useUser  from "../../stores/useUser.ts";
 import Modal from "../modalcomponents/Modal.vue";
-import {fetchAllergyInfo} from "../../api/product/productCameraAllegyAPI.ts";
+import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
+import { compareUserAllergies } from "../../api/UserAPI/userAllergyAPI.ts";
 
 export default defineComponent({
   components: {
     Modal,
   },
   setup() {
-    const {isToggled, toggle, switchCamera} = useCamera();
-    const {similarImages, photosend} = useImageProcessor();
+    const { isToggled, toggle, switchCamera } = useCamera();
+    const { similarImages, photosend } = useImageProcessor();
+
+    const userStore = useUser();
+    const uno = userStore.getUno;
+    console.log(uno)
 
     const allergyInfo = ref<Record<string, string>>({});
+    const imageWarnings = ref<Record<string, string>>({});
     const isModalVisible = ref(false);
     const isAllergyModalVisible = ref(false);
     const currentAllergyInfo = ref<string>("");
-
+    const currentWarning = ref<string>("");
 
     const takePhotoAndShowResult = async () => {
       await photosend();
@@ -80,17 +90,30 @@ export default defineComponent({
       if (allergyInfo.value[filename]) return;
       try {
         const allergyTitles = await fetchAllergyInfo(filename);
-        console.log(allergyTitles);  // 알러지 정보 로그
-        allergyInfo.value[filename] = allergyTitles.join(", ");  // 문자열로 변환
+        allergyInfo.value[filename] = allergyTitles.join(", ");
+        await checkAllergyWarnings(filename);
       } catch (error) {
         console.error(`알러지 정보 로드 실패: ${filename}`, error);
       }
     };
 
-
-    const showAllergyModal = (info: string) => {
-      currentAllergyInfo.value = info || "알러지 정보 없음";
+    const showAllergyModal = (filename: string) => {
+      currentAllergyInfo.value = allergyInfo.value[filename] || "알러지 정보 없음";
+      currentWarning.value = imageWarnings.value[filename] || "";
       isAllergyModalVisible.value = true;
+    };
+
+    const checkAllergyWarnings = async (filename: string) => {
+      try {
+        const imageAllergies = await fetchAllergyInfo(filename);
+        const matchingAllergies = await compareUserAllergies(uno, imageAllergies);
+        if (matchingAllergies.length > 0) {
+          const warningMessage = `경고: ${matchingAllergies.join(", ")} 알러지 성분이 포함되어 있습니다.`;
+          imageWarnings.value[filename] = warningMessage;
+        }
+      } catch (error) {
+        console.error("알러지 비교 실패", error);
+      }
     };
 
     return {
@@ -104,11 +127,15 @@ export default defineComponent({
       loadAllergyInfo,
       isAllergyModalVisible,
       currentAllergyInfo,
+      currentWarning,
       showAllergyModal,
+      checkAllergyWarnings,
+      imageWarnings,
     };
   },
 });
 </script>
+
 
 
 <style scoped>
