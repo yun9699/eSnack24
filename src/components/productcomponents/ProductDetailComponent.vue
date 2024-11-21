@@ -9,7 +9,7 @@ const product = ref({
 });
 
 onMounted(async () => {
-  const data = await
+
 })
 </script>
 
