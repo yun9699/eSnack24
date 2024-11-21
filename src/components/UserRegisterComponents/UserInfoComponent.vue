@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
   import {inject} from "vue";
+  import {IUserInfo} from "../../types/userRegisterTypes.ts";
 
-  const userInfo: any = inject("userInfo")
+  const userInfo: IUserInfo = inject("userInfo")
 
   // 숫자만 입력되도록 처리
   const handlePhoneInput = (event: Event) => {

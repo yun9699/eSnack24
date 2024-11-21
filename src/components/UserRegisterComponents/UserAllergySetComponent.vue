@@ -2,14 +2,15 @@
 
 import {inject} from "vue";
 
-const allergyList: any = inject("allergyList");
-const selectedAnos: any = inject("selectedAnos");
+const allergyList: string[] = inject("allergyList");
+const selectedAnos: number[] = inject("selectedAnos");
 
 
 // 항목 선택/해제 함수
 const toggleSelection = (ano: number) => {
+
   if (selectedAnos.value.includes(ano)) {
-    selectedAnos.value = selectedAnos.value.filter(id => id !== ano);
+    selectedAnos.value.filter((id: number) => id !== ano);
   } else {
     selectedAnos.value.push(ano);
   }
