@@ -13,7 +13,7 @@
       </router-link>
 
       <router-link
-          to=""
+          :to="`/cart/${user.getUno}`"
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/cart' }"
       >
@@ -43,7 +43,7 @@
       </router-link>
 
       <router-link
-          to=""
+          :to="`/my/${user.getUno}`"
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/profile' }"
       >
@@ -59,7 +59,10 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
+import useUser from "../stores/useUser.ts";
 
 const route = useRoute()
 const currentPath = computed(() => route.path)
+
+const user = useUser();
 </script>

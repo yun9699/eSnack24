@@ -1,23 +1,22 @@
-import {defineStore} from "pinia";
-import {computed, ref} from "vue";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
 
 const useUser = defineStore('userStore', () => {
 
     const user = ref({uno: 0});
-
     const personalAllergies = ref<{ anos: number[] }>({ anos: [] });
 
     const setUno = (uno: number) => user.value.uno = uno;
-
     const setPersonalAllergies = (anos: number[]) => {
         personalAllergies.value.anos = anos;
     };
 
-    const getUno =  computed(() => user.value.uno);
-
+    const getUno = computed(() => user.value.uno);
     const getPersonalAllergies = computed(() => personalAllergies.value.anos);
 
-    return {user, setUno, getUno, personalAllergies, setPersonalAllergies, getPersonalAllergies};
+    return { user, setUno, getUno, personalAllergies, setPersonalAllergies, getPersonalAllergies };
+}, {
+    persist: true, // 로컬 스토리지에 상태 저장
 });
 
-export default useUser
+export default useUser;
