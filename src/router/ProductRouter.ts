@@ -1,8 +1,8 @@
-import ProductListComponent from "../components/productcomponents/ProductListComponent.vue";
-import ProductMainPage from "../pages/productpages/ProductMainPage.vue";
-import ProductListPage from "../pages/productpages/ProductListPage.vue";
 
 const ProductIndexPage = () => import('../pages/productpages/ProductIndexPage.vue')
+const ProductMainPage = () => import('../pages/productpages/ProductMainPage.vue')
+const ProductListPage = () => import('../pages/productpages/ProductListPage.vue')
+const ProductDetailPage = () => import('../pages/productpages/ProductDetailPage.vue')
 
 const ProductRouter = {
     path: '/product', component: ProductIndexPage,
@@ -15,8 +15,10 @@ const ProductRouter = {
         },
         {
             path: "list", component: ProductListPage
+        },
+        {
+            path: "list/:pno", component: ProductDetailPage
         }
-
     ]
 }
 
