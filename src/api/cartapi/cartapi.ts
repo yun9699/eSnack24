@@ -10,9 +10,7 @@ export const getCartList = async () => {
     console.log("uno");
     console.log(user.getUno);
 
-    const res = await axios.get(`${host}/list/13?page=1&size=10`)
-
-    console.log(res.data.list);
+    const res = await axios.get(`${host}/list/${user.getUno}?page=1&size=10`)
 
     return res.data.list;
 }
