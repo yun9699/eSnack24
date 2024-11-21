@@ -7,7 +7,7 @@ import useUser from "../../stores/useUser.ts";
 const route = useRoute();
 const router = useRouter();
 
-const setUno = useUser();
+const user = useUser();
 
 const authCode = route.query.code as string | null;
 
@@ -21,7 +21,7 @@ onMounted(() => {
         .then((result) => {
           console.log("Google Member Data:", result);
 
-          setUno.setUno(result.uno);
+          user.setUno(result.uno);
 
           if(result.new == true) router.push('/user/reg');
           if(result.new == false) router.push('/');

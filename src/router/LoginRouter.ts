@@ -1,9 +1,9 @@
 
-const LoginIndexPage = () => import('../pages/LoginPages/LoginIndexPage.vue')
+const LoginIndexPage = () => import('../pages/loginpages/LoginIndexPage.vue')
 
-const KakaoRedirectPage = () => import('../pages/LoginPages/KakaoRedirectPage.vue')
-const GoogleRedirectPage = () => import('../pages/LoginPages/GoogleRedirectPage.vue')
-const LoginMainPage = () => import('../pages/LoginPages/LoginMainPage.vue')
+const KakaoRedirectPage = () => import('../pages/loginpages/KakaoRedirectPage.vue')
+const GoogleRedirectPage = () => import('../pages/loginpages/GoogleRedirectPage.vue')
+const LoginMainPage = () => import('../pages/loginpages/LoginMainPage.vue')
 
 const LoginRouter = {
     path: '/login', component: LoginIndexPage,

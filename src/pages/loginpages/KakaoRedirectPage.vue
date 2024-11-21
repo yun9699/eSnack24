@@ -8,7 +8,7 @@ import useUser from "../../stores/useUser.ts";
 const route = useRoute()
 const router = useRouter()
 
-const setUno = useUser();
+const user = useUser();
 
 // "code" 파라미터 가져오기
 const authCode = route.query.code as string | null
@@ -22,7 +22,7 @@ onMounted(() => {
         console.log("=========================")
         console.log(result)
 
-        setUno.setUno(result.uno);
+        user.setUno(result.uno);
 
         if(result.new == true) router.push('/user/reg');
         if(result.new == false) router.push('/');
