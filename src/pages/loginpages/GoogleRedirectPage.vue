@@ -2,12 +2,12 @@
 import { onMounted } from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import { getGoogleAccessToken, getGoogleMemberWithAccessToken } from "../../api/loginapi/googleAPI.ts";
-import useUser from "../../stores/useUser.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const route = useRoute();
 const router = useRouter();
 
-const user = useUser();
+const user = useUserStore();
 
 const authCode = route.query.code as string | null;
 

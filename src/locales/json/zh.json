@@ -10,5 +10,9 @@
   "pMain": {
     "popular": "本月热门商品",
     "moreinfo": "查看更多"
+  },
+
+  "login": {
+    "sns_login": "使用社交账号快速登录/注册"
   }
 }

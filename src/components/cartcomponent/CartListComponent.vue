@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import {getCartList} from "../../api/cartapi/cartapi.ts";
-import useUser from "../../stores/useUser.js";
+import useUserStore from "../../stores/useUserStore.ts";
 
 
 const initCartList = {

@@ -10,5 +10,9 @@
   "pMain": {
     "popular": "이번 달 인기 상품",
     "moreinfo": "더보기"
+  },
+
+  "login": {
+    "sns_login": "SNS계정으로 간편하게 로그인/회원가입"
   }
 }

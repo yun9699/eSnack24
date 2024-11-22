@@ -10,5 +10,9 @@
   "pMain": {
     "popular": "今月の人気商品",
     "moreinfo": "もっと見る"
+  },
+
+  "login": {
+    "sns_login": "SNSアカウントで簡単にログイン/会員登録"
   }
 }

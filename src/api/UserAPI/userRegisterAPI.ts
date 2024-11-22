@@ -1,8 +1,8 @@
 import axios from "axios";
-import useUser from "../../stores/useUser.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts";
 
-const user = useUser();
+const user = useUserStore();
 
 const uno = user.getUno;
 
