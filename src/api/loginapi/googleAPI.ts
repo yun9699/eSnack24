@@ -20,6 +20,8 @@ export const getGoogleLoginLink = () => {
 
 export const getGoogleMemberWithAccessToken = async (accessToken: string) => {
     const res = await axios.get(`${host}?accessToken=${accessToken}`);
+
+    console.log(res.data)
     return res.data;
 };
 
@@ -39,6 +41,8 @@ export const getGoogleAccessToken = async (authCode: string) => {
     });
 
     const res = await axios.post(access_token_url, params, header);
+
+    console.log(res.data)
 
     return res.data.access_token;
 };

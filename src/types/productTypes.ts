@@ -10,5 +10,5 @@ export interface IProduct {
 export interface IProductDetail {
 
     product: IProduct;
-    allergyInfo: string
+    atitle_ko: string[]
 }
