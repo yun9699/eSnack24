@@ -1,0 +1,14 @@
+{
+  "bottom_nav": {
+    "search": "搜索",
+    "cart": "购物车",
+    "camera": "相机",
+    "contact": "帮助中心",
+    "profile": "个人资料"
+  },
+
+  "pMain": {
+    "popular": "本月热门商品",
+    "moreinfo": "查看更多"
+  }
+}

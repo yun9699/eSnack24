@@ -1,0 +1,14 @@
+{
+  "bottom_nav": {
+    "search": "검색",
+    "cart": "장바구니",
+    "camera": "카메라",
+    "contact": "헬프센터",
+    "profile": "프로필"
+  },
+
+  "pMain": {
+    "popular": "이번 달 인기 상품",
+    "moreinfo": "더보기"
+  }
+}

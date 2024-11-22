@@ -22,6 +22,7 @@ onMounted(() => {
           console.log("Google Member Data:", result);
 
           user.setUno(result.uno);
+          user.setPersonalAllergies(result.anos);
 
           if(result.new == true) router.push('/user/reg');
           if(result.new == false) router.push('/');

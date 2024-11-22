@@ -7,7 +7,6 @@ import QNAListComponent from "../../components/csComponents/QNAListComponent.vue
 
 <template>
   <HeaderBar />
-  <div> QNA Index Page </div>
   <QNAListComponent />
   <BottomNavBar />
 </template>
