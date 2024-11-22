@@ -25,14 +25,18 @@
 <script setup lang="ts">
 import LoginButtons from "./LoginButtons.vue"
 import { useI18n } from 'vue-i18n'
+import { loadLocalMessages } from '../../i18n'
 import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
+import { useLocaleStore } from '../../stores/useLocaleStore'
+import { storeToRefs } from 'pinia'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const localeStore = useLocaleStore()
+const { currentLang } = storeToRefs(localeStore)
 
 // 언어 선택 드롭다운 상태
 const isLangMenuOpen = ref(false)
-const currentLang = ref('ko')
 
 // 사용 가능한 언어 목록
 const languages = {
@@ -43,8 +47,12 @@ const languages = {
 }
 
 // 언어 변경 함수
-const changeLang = (lang: string) => {
-  currentLang.value = lang
+const changeLang = async (lang: string) => {
+  if (lang !== locale.value) {
+    await loadLocalMessages(lang)
+    locale.value = lang
+    localeStore.setLanguage(lang)
+  }
   isLangMenuOpen.value = false
 }
 </script>
