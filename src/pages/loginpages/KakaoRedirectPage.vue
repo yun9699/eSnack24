@@ -2,7 +2,7 @@
 
 import { onMounted } from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-import { getKakaoAccessToken, getKakaoMemberWithAccessToken } from '../../api/LoginAPI/kakaoAPI.ts'
+import { getKakaoAccessToken, getKakaoMemberWithAccessToken } from '../../api/loginapi/kakaoAPI.ts'
 import useUser from "../../stores/useUser.ts";
 
 const route = useRoute()
