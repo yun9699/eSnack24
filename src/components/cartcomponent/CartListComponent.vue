@@ -1,15 +1,35 @@
-<script setup>
+<script setup lang="ts">
 import {onMounted, ref} from 'vue';
 import {getCartList} from "../../api/cartapi/cartapi.ts";
-import useUser from "../../stores/useUser.js";
+import {IPageRequest, IPageResponse} from "../../types/commonTypes.ts";
+import {ICartItem} from "../../types/cartTypes.ts";
 
 
-const initCartList = {
+const initPageRequest: IPageRequest = {
 
-
+  page: 0,
+  size: 0,
+  type: '',
+  keyword: '',
+  arr: [],
+  skip: 0
 }
 
-const cartList = ref();
+const initPageResponse: IPageResponse<ICartItem> = {
+
+  list: <ICartItem>[],
+  total: 0,
+  startPage: 0,
+  endPage: 0,
+  prev: false,
+  next: false,
+  pageRequest: initPageRequest
+}
+
+const cartList = ref<{ cartListData: ICartItem[] }>({
+
+  cartListData: initPageResponse.list,
+});
 
 onMounted(() => {
 
@@ -31,11 +51,29 @@ onMounted(() => {
       >
         <!-- 상품 이름 -->
         <span class="font-medium text-gray-800">{{ item.ptitle_ko }}</span>
-        <!-- 상품 수량 -->
-        <span class="text-gray-600">수량: {{ item.cqty }}</span>
+        <!-- 상품 수량 및 조정 -->
+        <div class="flex items-center space-x-2">
+          <!-- 감소 버튼 -->
+          <button
+              @click="decreaseQuantity(item.id)"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 px-2 rounded"
+          >
+            -
+          </button>
+          <!-- 상품 수량 -->
+          <span class="text-gray-800 font-medium">{{ item.cqty }}</span>
+          <!-- 증가 버튼 -->
+          <button
+              @click="increaseQuantity(item.id)"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 px-2 rounded"
+          >
+            +
+          </button>
+        </div>
       </li>
     </ul>
   </div>
+
 </template>
 
 <style>
