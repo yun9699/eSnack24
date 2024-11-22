@@ -10,5 +10,9 @@
   "pMain": {
     "popular": "Popular products this month",
     "moreinfo": "More info"
+  },
+
+  "login": {
+    "sns_login": "Sign in/Sign up easily with SNS account"
   }
 }

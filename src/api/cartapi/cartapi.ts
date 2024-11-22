@@ -1,9 +1,9 @@
-import useUser from "../../stores/useUser.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 import axios from "axios";
 
 const host = 'http://localhost:8080/api/v1/cart';
 
-const user = useUser();
+const user = useUserStore();
 
 export const getCartList = async () => {
 

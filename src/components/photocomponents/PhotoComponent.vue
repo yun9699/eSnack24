@@ -57,7 +57,7 @@
 import { defineComponent, ref } from "vue";
 import { useCamera } from "../../hooks/useCamera.ts";
 import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
-import useUser  from "../../stores/useUser.ts";
+import useUserStore  from "../../stores/useUserStore.ts";
 import Modal from "../modalcomponents/Modal.vue";
 import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
 import { compareUserAllergies } from "../../api/UserAPI/userAllergyAPI.ts";
@@ -70,7 +70,7 @@ export default defineComponent({
     const { isToggled, toggle, switchCamera } = useCamera();
     const { similarImages, photosend } = useImageProcessor();
 
-    const userStore = useUser();
+    const userStore = useUserStore();
     const uno = userStore.getUno;
     console.log(uno)
 

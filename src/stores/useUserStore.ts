@@ -1,8 +1,7 @@
-// userStore.ts
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
-const useUser = defineStore('userStore', () => {
+const useUserStore = defineStore('userStore', () => {
     const user = ref<{ uno?: number }>({});
     const personalAllergies = ref<{ anos: number[] }>({ anos: [] });
 
@@ -19,4 +18,4 @@ const useUser = defineStore('userStore', () => {
     persist: true
 });
 
-export default useUser;
+export default useUserStore;
