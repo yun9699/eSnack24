@@ -8,34 +8,42 @@ export function useAllergyWarning(uno: number) {
     const isAllergyModalVisible = ref(false);
     const currentAllergyInfo = ref<string>("");
     const currentWarning = ref<string>("");
+    const pnoInfo = ref<{ [key: string]: string }>({});
+    const imageNames = ref<{ [key: string]: string }>({});
 
-    const loadAllergyInfo = async (filename: string): Promise<void> => {
+    const loadAllergyInfo = async (filename: string) => {
         if (allergyInfo.value[filename]) return;
         try {
-            const allergyTitles = await fetchAllergyInfo(filename);
+            const { allergyTitles, pno , ptitle_ko} = await fetchAllergyInfo(filename);
             allergyInfo.value[filename] = allergyTitles.join(", ");
+            pnoInfo.value[filename] = pno;
+            imageNames.value[filename] = ptitle_ko;
             await checkAllergyWarnings(filename);
         } catch (error) {
             console.error(`알러지 정보 로드 실패: ${filename}`, error);
         }
     };
 
-    const checkAllergyWarnings = async (filename: string): Promise<void> => {
+
+    const showAllergyModal = (filename: string) => {
+        currentAllergyInfo.value = allergyInfo.value[filename] || "알러지 정보 없음";
+        currentWarning.value = imageWarnings.value[filename] || "";
+        isAllergyModalVisible.value = true;
+    };
+
+    const checkAllergyWarnings = async (filename: string) => {
         try {
-            const imageAllergies = await fetchAllergyInfo(filename);
-            const matchingAllergies = await compareUserAllergies(uno, imageAllergies);
+            const { allergyTitles, pno,ptitle_ko } = await fetchAllergyInfo(filename);
+
+            const matchingAllergies = await compareUserAllergies(uno, allergyTitles);
+
             if (matchingAllergies.length > 0) {
-                imageWarnings.value[filename] = `경고: ${matchingAllergies.join(", ")} 알러지 성분이 포함되어 있습니다.`;
+                const warningMessage = `경고: ${matchingAllergies.join(", ")} 알러지 성분이 포함되어 있습니다.`;
+                imageWarnings.value[filename] = warningMessage;
             }
         } catch (error) {
             console.error("알러지 비교 실패", error);
         }
-    };
-
-    const showAllergyModal = (filename: string): void => {
-        currentAllergyInfo.value = allergyInfo.value[filename] || "알러지 정보 없음";
-        currentWarning.value = imageWarnings.value[filename] || "";
-        isAllergyModalVisible.value = true;
     };
 
     return {
@@ -47,5 +55,8 @@ export function useAllergyWarning(uno: number) {
         loadAllergyInfo,
         checkAllergyWarnings,
         showAllergyModal,
+        pnoInfo,
+        imageNames,
+
     };
 }
