@@ -8,13 +8,13 @@ export function useAllergyWarning(uno: number) {
     const isAllergyModalVisible = ref(false);
     const currentAllergyInfo = ref<string>("");
     const currentWarning = ref<string>("");
-    const pnoInfo = ref<{ [key: string]: string }>({});
-    const imageNames = ref<{ [key: string]: string }>({});
+    const pnoInfo = ref<Record<string, string>>({});
+    const imageNames = ref<Record<string, string>>({});
 
     const loadAllergyInfo = async (filename: string) => {
         if (allergyInfo.value[filename]) return;
         try {
-            const { allergyTitles, pno , ptitle_ko} = await fetchAllergyInfo(filename);
+            const { allergyTitles, pno, ptitle_ko } = await fetchAllergyInfo(filename);
             allergyInfo.value[filename] = allergyTitles.join(", ");
             pnoInfo.value[filename] = pno;
             imageNames.value[filename] = ptitle_ko;
@@ -24,7 +24,6 @@ export function useAllergyWarning(uno: number) {
         }
     };
 
-
     const showAllergyModal = (filename: string) => {
         currentAllergyInfo.value = allergyInfo.value[filename] || "알러지 정보 없음";
         currentWarning.value = imageWarnings.value[filename] || "";
@@ -33,13 +32,11 @@ export function useAllergyWarning(uno: number) {
 
     const checkAllergyWarnings = async (filename: string) => {
         try {
-            const { allergyTitles, pno,ptitle_ko } = await fetchAllergyInfo(filename);
-
+            const { allergyTitles } = await fetchAllergyInfo(filename);
             const matchingAllergies = await compareUserAllergies(uno, allergyTitles);
 
             if (matchingAllergies.length > 0) {
-                const warningMessage = `경고: ${matchingAllergies.join(", ")} 알러지 성분이 포함되어 있습니다.`;
-                imageWarnings.value[filename] = warningMessage;
+                imageWarnings.value[filename] = `경고: ${matchingAllergies.join(", ")} 알러지 성분이 포함되어 있습니다.`;
             }
         } catch (error) {
             console.error("알러지 비교 실패", error);
@@ -57,6 +54,5 @@ export function useAllergyWarning(uno: number) {
         showAllergyModal,
         pnoInfo,
         imageNames,
-
     };
 }

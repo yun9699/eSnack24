@@ -1,18 +1,20 @@
-import {ref} from "vue";
-import type {Ref} from "vue";
-import {photoAPI} from "../../api/photoAPI/photoAPI.ts";
+import { ref } from "vue";
+import { photoAPI } from "../../api/photoAPI/photoAPI.ts";
 
 export function useImageProcessor() {
-    const base64Image: Ref<string> = ref("");
-    const similarImages: Ref<Record<string, any>> = ref({});
+    const base64Image = ref<string>("");
+    const similarImages = ref<Record<string, any>>({});
 
-    const takePhoto = (): void => {
-        const canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
-        const imageUrl = canvasElement.toDataURL("image/jpg");
-        base64Image.value = imageUrl.split(",")[1];
+    const getCanvasElement = (): HTMLCanvasElement => {
+        return document.querySelector("canvas") as HTMLCanvasElement;
     };
 
-    const sendServer = async (): Promise<void> => {
+    const takePhoto = () => {
+        const canvasElement = getCanvasElement();
+        base64Image.value = canvasElement.toDataURL("image/jpg").split(",")[1];
+    };
+
+    const sendServer = async () => {
         if (!base64Image.value) {
             console.error("No image to send.");
             return;
@@ -20,17 +22,15 @@ export function useImageProcessor() {
 
         try {
             const response = await photoAPI(base64Image.value);
-            console.log("Response from server:", response);
-
             if (response.similarImages) {
-                similarImages.value = response.similarImages || {};
+                similarImages.value = response.similarImages;
             }
         } catch (err) {
             console.error("Server request failed:", err);
         }
     };
 
-    const photosend = async (): Promise<void> => {
+    const photosend = async () => {
         takePhoto();
         await sendServer();
     };
