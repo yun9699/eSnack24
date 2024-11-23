@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { RouterLink } from "vue-router";
-  import useUser from "../../stores/useUser.ts";
+  import useUserStore from "../../stores/useUserStore.ts";
   import {onMounted} from "vue";
 
-  const user = useUser();
+  const user = useUserStore();
 
   const result = user.getPersonalAllergies;
 

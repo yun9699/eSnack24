@@ -6,5 +6,8 @@ export interface ICartItem {
     ptitle_zh: string
     ptitle_ja: string
 
-    cqty: number
+    ciqty: number
+    pno: number
+    price: number
+    pfilename: string
 }

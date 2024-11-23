@@ -7,9 +7,10 @@ export interface IProduct {
     ptitle_zh: string | null
     price: number
     pfilename: string
+    ano: number
 }
 
 export interface IProductDetail {
     product: IProduct
-    allergyInfo: string
+    atitle_ko: string
 }

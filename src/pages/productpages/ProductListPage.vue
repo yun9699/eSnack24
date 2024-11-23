@@ -7,6 +7,7 @@ import BottomNavBar from "../../layouts/BottomNavBar.vue";
 
 <template>
   <Basiclayout/>
+  <router-view/>
   <ProductListComponent/>
   <BottomNavBar/>
 </template>

@@ -1,8 +1,8 @@
 import axios from "axios";
-import useUser from "../../stores/useUser.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts";
 
-const user = useUser();
+const user = useUserStore();
 
 const uno = user.getUno;
 
@@ -25,12 +25,12 @@ export const registerPersonalAllergy = async (anos: number[]) => {
     return res.data;
 };
 
-export const readAgreementDoc = async () => {
-
-    const res = await axios.get('/Agreement_Doc.JSON');
-
-    return res.data;
-}
+// export const readAgreementDoc = async () => {
+//
+//     const res = await axios.get('/Agreement_Doc.JSON');
+//
+//     return res.data;
+// }
 
 export const registerAddress = async (address: IAddress) => {
 

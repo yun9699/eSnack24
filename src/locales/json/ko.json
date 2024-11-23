@@ -1,4 +1,41 @@
 {
+  "common": {
+    "loading": "로딩 중...",
+    "prev": "이전",
+    "next": "다음",
+    "register": "가입",
+    "date_format": "연도-월-일"
+  },
+
+  "login": {
+    "register_title": "회원가입",
+    "sns_login": "SNS계정으로 간편하게 로그인/회원가입"
+  },
+
+  "userInfo": {
+    "title": "사용자 정보",
+    "name": {
+      "label": "이름",
+      "placeholder": "이름을 입력하세요"
+    },
+    "phone": {
+      "label": "전화번호",
+      "placeholder": "전화번호를 입력하세요"
+    },
+    "gender": {
+      "label": "성별",
+      "placeholder": "성별을 선택하세요",
+      "options": {
+        "male": "남성",
+        "female": "여성",
+        "other": "기타"
+      }
+    },
+    "birthday": {
+      "label": "생년월일"
+    }
+  },
+
   "bottom_nav": {
     "search": "검색",
     "cart": "장바구니",
