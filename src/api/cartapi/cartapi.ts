@@ -4,6 +4,7 @@ import axios from "axios";
 const host = 'http://localhost:8080/api/v1/cart';
 
 const user = useUserStore();
+const ciqty = 1;
 
 export const getCartList = async () => {
 
@@ -15,12 +16,15 @@ export const getCartList = async () => {
     return res.data.list;
 }
 
-export const addCart = async () => {
+export const addCartProduct = async (pno,ciqty) => {
 
     console.log("addCart");
+    console.log(user.getUno);
 
-    const res = await axios.post(`${host}/add/${user.getUno}`)
+    const res = await axios.post(`${host}/add/${user.getUno}`,{pno,ciqty})
+    console.log(res.data);
 
     return res.data
 
 }
+//http://localhost:8080/api/v1/cart/add/2

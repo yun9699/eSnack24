@@ -4,6 +4,8 @@ import { IProduct, IProductDetail } from "../../types/productTypes.ts";
 import { useRoute } from "vue-router";
 import { getDetail } from "../../api/product/productAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
+import {addCartProduct} from "../../api/cartapi/cartapi.ts";
+import CommonCartAddModalComponent from "../../common/components/CommonCartAddModalComponent.vue";
 
 const route = useRoute();
 const pno: number = Number(route.params.pno);
@@ -11,6 +13,18 @@ const user = useUserStore();
 
 const uno = user.getUno;
 const userano = user.personalAllergies.anos
+
+const isModalStatus = ref(false);  // 모달 상태 관리
+
+const modalClose = () => {
+  console.log("modal close")
+  isModalStatus.value = false;
+};
+
+const modalOpen = () => {
+  console.log("modal open")
+  isModalStatus.value = true;
+};
 
 
 
@@ -61,8 +75,17 @@ const mappedProducts = computed(() => {
   }).filter(Boolean);
 });
 
+const handleClickAddCart = async () => {
+
+  console.log("addCart");
+  console.log(pno)
+
+  const res = await addCartProduct(pno,1)
+
+  modalOpen()
 
 
+}
 
 
 
@@ -70,6 +93,7 @@ const mappedProducts = computed(() => {
 onMounted(() => {
   console.log(uno)
   console.log(userano)
+  console.log("pno",pno)
 
 
   getDetail(pno).then((data) => {
@@ -142,16 +166,21 @@ onMounted(() => {
     <div class="w-full max-w-lg flex justify-center gap-4 mt-4">
       <button
           class="w-full bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
-          @click="buttonAllergy"
       >
         Buy Now
       </button>
       <button
           class="w-full bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
+          @click="handleClickAddCart"
       >
         Add to Cart
       </button>
     </div>
+    <CommonCartAddModalComponent
+        v-if="isModalStatus"
+        :isModalStatus="isModalStatus"
+        :modalClose="modalClose"
+    />
   </div>
 </template>
 
