@@ -4,15 +4,17 @@ import { Icon } from '@iconify/vue'
 import router from "../router/MainRouter.ts"
 import { useI18n } from 'vue-i18n'
 import { loadLocalMessages } from '../i18n'
+import { useLocaleStore } from '../stores/useLocaleStore'
+import { storeToRefs } from 'pinia'
+
+const { locale } = useI18n()
+const localeStore = useLocaleStore()
+const { currentLang } = storeToRefs(localeStore)
 
 // 메뉴가 열려 있는지 여부를 나타내는 상태
 const isMenuOpen = ref(false)
 // 언어 선택 드롭다운 상태
 const isLangMenuOpen = ref(false)
-
-// i18n 설정
-const { locale } = useI18n()
-const currentLang = ref(locale.value)
 
 // 사용 가능한 언어 목록
 const languages = {
@@ -27,7 +29,7 @@ const changeLang = async (lang: string) => {
   if (lang !== locale.value) {
     await loadLocalMessages(lang)
     locale.value = lang
-    currentLang.value = lang
+    localeStore.setLanguage(lang)
   }
   isLangMenuOpen.value = false
 }
