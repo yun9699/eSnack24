@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
+import {onBeforeUnmount, onMounted, ref} from 'vue';
 import { getCartList } from "../../api/cartapi/cartapi.ts";
 import { ICartItem } from "../../types/cartTypes.ts";
 import { InitPageResponse } from "../../init/CommonInit.ts";
@@ -16,16 +16,16 @@ const initCartItem: ICartItem = {
   ciqty: 0
 };
 
+let pageNum: number = 1;
+
+let endPageNum: number = 1;
+
 const initPage = InitPageResponse<ICartItem>();
 
 const data = ref<{ pageData: IPageResponse<ICartItem> }>({
 
   pageData: initPage
 });
-
-let pageNum: number = 1;
-
-let endPageNum: number = 1;
 
 const tmpData = ref<ICartItem[]>([
   {...initCartItem}
