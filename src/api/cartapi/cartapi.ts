@@ -16,3 +16,13 @@ export const getCartList = async (page: number) => {
 
     return res.data;
 }
+
+export const addCartProduct = async (pno,ciqty) => {
+
+    console.log(user.getUno);
+
+    const res = await axios.post(`${host}/add/${user.getUno}`,{pno,ciqty})
+    console.log(res.data);
+
+    return res.data
+}
