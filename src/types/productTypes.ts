@@ -7,6 +7,7 @@ export interface IProduct {
     ptitle_zh: string | null
     price: number
     pfilename: string
+    ano: number
 }
 
 export interface IProductDetail {
