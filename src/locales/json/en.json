@@ -1,18 +1,51 @@
 {
+  "common": {
+    "loading": "Loading...",
+    "prev": "Previous",
+    "next": "Next",
+    "register": "Register",
+    "date_format": "Year-Month-Day"
+  },
+
+  "login": {
+    "register_title": "Sign Up",
+    "sns_login": "Log in or sign up easily with SNS account"
+  },
+
+  "userInfo": {
+    "title": "User Information",
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter your name"
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Enter your phone number"
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Select gender",
+      "options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      }
+    },
+    "birthday": {
+      "label": "Birthday"
+    }
+  },
+
   "bottom_nav": {
     "search": "Search",
     "cart": "Cart",
     "camera": "Camera",
-    "contact": "HelpCenter",
+    "contact": "Help Center",
     "profile": "Profile"
   },
 
   "pMain": {
-    "popular": "Popular products this month",
-    "moreinfo": "More info"
-  },
-
-  "login": {
-    "sns_login": "Sign in/Sign up easily with SNS account"
+    "popular": "Popular Products This Month",
+    "moreinfo": "More Info"
   }
 }

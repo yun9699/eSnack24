@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { inject, onMounted, Ref, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useLocaleStore } from '../../stores/useLocaleStore'
-import { storeToRefs } from 'pinia'
-import { Icon } from '@iconify/vue'
 
 const isAgree = inject<Ref<boolean>>("isAgree")
 const terms = ref(null)
-
 const { locale } = useI18n()
-const localeStore = useLocaleStore()
-const { currentLang } = storeToRefs(localeStore)
 
 const readAgreementDoc = async (locale: string) => {
   try {
@@ -24,23 +18,9 @@ const readAgreementDoc = async (locale: string) => {
   }
 }
 
-// 드롭다운 상태 관리
-const isLangMenuOpen = ref(false)
-
-// 언어 목록
-const languages = {
-  ko: '한국어',
-  en: 'English',
-  ja: '日本語',
-  zh: '简体中文'
-}
-
-// 언어 변경 함수 수정
-const changeLang = async (code: string) => {
-  await readAgreementDoc(code)
-  await localeStore.setLanguage(code)
-  isLangMenuOpen.value = false
-}
+watch(() => locale.value, async (newLocale) => {
+  await readAgreementDoc(newLocale)
+})
 
 onMounted(async () => {
   await readAgreementDoc(locale.value)
@@ -48,40 +28,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex justify-end mb-4">
-    <div class="relative">
-      <button
-          @click="isLangMenuOpen = !isLangMenuOpen"
-          class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg shadow-sm"
-      >
-        <Icon icon="fluent-mdl2:locale-language" />
-        <span>{{ languages[locale] }}</span>
-      </button>
-
-      <div
-          v-if="isLangMenuOpen"
-          class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20"
-      >
-        <div class="py-1">
-          <button
-              v-for="(name, code) in languages"
-              :key="code"
-              @click="changeLang(code)"
-              class="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center gap-2"
-          >
-            <Icon
-                v-if="locale === code"
-                icon="mdi:check"
-                class="text-green-500"
-            />
-            <span v-else class="w-6"></span>
-            {{ name }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div v-if="terms" class="p-6">
     <div class="max-h-[400px] overflow-y-auto">
       <div v-for="(section, index) in terms.terms" :key="index" class="mb-6">
