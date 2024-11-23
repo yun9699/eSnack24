@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref} from 'vue';
+import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
 import { getCartList } from "../../api/cartapi/cartapi.ts";
 import { ICartItem } from "../../types/cartTypes.ts";
 import { InitPageResponse } from "../../init/CommonInit.ts";
@@ -22,6 +22,10 @@ const data = ref<{ pageData: IPageResponse<ICartItem> }>({
 
   pageData: initPage
 });
+
+let pageNum: number = 1;
+
+let endPageNum: number = 1;
 
 const tmpData = ref<ICartItem[]>([
   {...initCartItem}
@@ -50,15 +54,27 @@ const decreaseQty = (pno: number) => {
   }
 }
 
+const moreInfo = () => {
+
+  pageNum++;
+
+  getCartList(pageNum).then((res) => {
+
+    tmpData.value = [...tmpData.value, ...res.list];
+  })
+}
+
 onMounted(() => {
   console.log(data.value.pageData.list);
 
-  getCartList().then((res) => {
+  getCartList(pageNum).then((res) => {
 
     console.log(res);
 
     data.value.pageData.list = res;
     tmpData.value = res.list;
+
+    endPageNum = res.endPage;
   })
 });
 
@@ -115,7 +131,19 @@ onBeforeUnmount(() => {
         </div>
       </li>
     </ul>
+
+    <div class="mt-8 text-center">
+      <button
+          @click="moreInfo()"
+          v-if="pageNum < endPageNum"
+          class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300"
+      >
+        더보기
+      </button>
+    </div>
   </div>
+
+
 </template>
 
 <style>
