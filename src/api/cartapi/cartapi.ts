@@ -4,7 +4,6 @@ import axios from "axios";
 const host = 'http://localhost:8080/api/v1/cart';
 
 const user = useUserStore();
-const ciqty = 1;
 
 export const getCartList = async () => {
 
@@ -13,7 +12,7 @@ export const getCartList = async () => {
 
     const res = await axios.get(`${host}/list/${user.getUno}?page=1&size=10`)
 
-    return res.data.list;
+    return res.data;
 }
 
 export const addCartProduct = async (pno,ciqty) => {
