@@ -24,7 +24,7 @@ const filteredQnas = computed(() => {
 // TODO: uno는 실제 로그인한 사용자의 ID로 변경해야 함 (임시적으로 구현)
 const fetchQNAs = async () => {
   try {
-    const response = await getQNAList(27, currentPage.value, pageSize.value)
+    const response = await getQNAList(5, currentPage.value, pageSize.value)
     qnas.value = response.list
   } catch (error) {
     console.error('QNA 목록 조회 실패:', error)

@@ -7,7 +7,6 @@ import FAQListComponent from "../../components/csComponents/FAQListComponent.vue
 
 <template>
   <HeaderBar />
-  <div> FAQ Index Page </div>
   <FAQListComponent />
   <BottomNavBar />
 </template>
