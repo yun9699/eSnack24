@@ -3,6 +3,7 @@ const ProductIndexPage = () => import('../pages/productpages/ProductIndexPage.vu
 const ProductMainPage = () => import('../pages/productpages/ProductMainPage.vue')
 const ProductListPage = () => import('../pages/productpages/ProductListPage.vue')
 const ProductDetailPage = () => import('../pages/productpages/ProductDetailPage.vue')
+const AddModal = () => import("../common/components/CommonCartAddModalComponent.vue")
 
 const ProductRouter = {
     path: '/product', component: ProductIndexPage,
@@ -17,7 +18,12 @@ const ProductRouter = {
             path: "list", component: ProductListPage
         },
         {
-            path: "list/:pno", component: ProductDetailPage
+            path: "list/:pno", component: ProductDetailPage,
+            children: [
+                {
+                    path: "modal", component: AddModal
+                }
+            ]
         }
     ]
 }
