@@ -1,39 +1,68 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import { IProduct, IProductDetail } from "../../types/productTypes.ts";
 import { useRoute } from "vue-router";
 import { getDetail } from "../../api/product/ProductAPI.ts";
-import useUser from "../../stores/useUser.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const route = useRoute();
 const pno: number = Number(route.params.pno);
-const user = useUser();
+const user = useUserStore();
 
 const uno = user.getUno;
+const userano = user.personalAllergies.anos
+
+
 
 const initProduct: IProduct = {
   pfilename: 'sample fileName',
   ptitle_ko: 'Sample Product',
   price: 4000, // 기본 가격
+  ano: 'no allergy'
 };
 
 const initProductDetail: IProductDetail = {
   product: initProduct,
   atitle_ko: [], // 알러지 정보 기본 값
+  ano: []
 };
+
+const result = ref([]); // 포함된 알레르기
 
 const productRef = ref<{ productDetail: IProductDetail }>({
   productDetail: initProductDetail,
 });
 
+const hasAllergy = computed(() => {
+  const productAllergies = productRef.value.productDetail.product.ano;
+  result.value = userano.filter((userAllergy) => productAllergies.includes(userAllergy))
+  return userano.some((userAllergy) => productAllergies.includes(userAllergy));
+});
+
+const hasAllergyresult = computed(() => {
+  const productAllergies = productRef.value.productDetail.product.ano;
+  return result.value = userano.filter((userAllergy) => productAllergies.includes(userAllergy))
+});
+
+
+
+
+
 onMounted(() => {
+  console.log(uno)
+  console.log(userano)
+  console.log(hasAllergyresult.value)
   getDetail(pno).then((data) => {
-    console.log(data);
+
 
     productRef.value.productDetail.product.price = data.price;
     productRef.value.productDetail.atitle_ko = data.atitle_ko || [];
     productRef.value.productDetail.product.ptitle_ko = data.ptitle_ko;
     productRef.value.productDetail.product.pfilename = data.pfilename;
+    productRef.value.productDetail.product.ano = [...data.ano];
+
+    console.log("----------------------data")
+    console.log(data);
   });
 });
 </script>
@@ -70,6 +99,12 @@ onMounted(() => {
           {{ productRef.productDetail.atitle_ko.length > 0 ? productRef.productDetail.atitle_ko.join(', ') : '없음' }}
         </span>
       </p>
+
+      <!-- 사용자 알러지 경고 -->
+      <div v-if="hasAllergy" class="mt-4 bg-red-100 text-red-600 p-4 rounded-lg shadow-lg">
+        <p>⚠️ 주의: 이 제품은 사용자의 알러지 항목에 포함된 성분이 있습니다.</p>
+      </div>
+
 
       <!-- 버튼 -->
       <div class="mt-6 flex justify-center gap-4">
