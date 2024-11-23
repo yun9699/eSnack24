@@ -2,7 +2,7 @@
 import {computed, onMounted, ref} from 'vue';
 import { IProduct, IProductDetail } from "../../types/productTypes.ts";
 import { useRoute } from "vue-router";
-import { getDetail } from "../../api/product/ProductAPI.ts";
+import { getDetail } from "../../api/product/productAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 
 const route = useRoute();

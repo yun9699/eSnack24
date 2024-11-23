@@ -14,3 +14,13 @@ export const getCartList = async () => {
 
     return res.data.list;
 }
+
+export const addCart = async () => {
+
+    console.log("addCart");
+
+    const res = await axios.post(`${host}/add/${user.getUno}`)
+
+    return res.data
+
+}
