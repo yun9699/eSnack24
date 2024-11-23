@@ -22,11 +22,13 @@
                     :alt="image"
                     width="200"
                     @load="loadAllergyInfo(image)"
+                    @click="handleImageClick(image)"
                 />
-                <!-- 클릭 시 알러지 정보 모달로 전환 -->
+                <p>{{ imageNames[image] }}</p>
                 <p
                     @click="showAllergyModal(image)"
                     style="cursor: pointer; color: yellowgreen;"
+                    :style="{ color: allergyInfo[image] ? 'red' : 'yellowgreen' }"
                 >
                   {{ allergyInfo[image] ? '알러지 정보 보기' : '알러지 정보 없음' }}
                 </p>
@@ -37,7 +39,6 @@
       </li>
     </ul>
   </modal>
-
   <!-- 알러지 상세 정보 모달 -->
   <modal :visible="isAllergyModalVisible" @update:visible="isAllergyModalVisible = $event">
     <h2>알러지 상세 정보</h2>
@@ -55,11 +56,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useCamera } from "../../hooks/camerahooks/useCamera.ts";
 import { useImageProcessor } from "../../hooks/camerahooks/useImageProcessor.ts";
 import { useAllergyWarning } from "../../hooks/camerahooks/useAllergyWarning.ts";
 import Modal from "../modalcomponents/Modal.vue";
 import useUser from "../../stores/useUser";
+import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
 
 export default defineComponent({
   components: {
@@ -69,8 +72,11 @@ export default defineComponent({
     const { isToggled, toggle, switchCamera } = useCamera();
     const { similarImages, photosend } = useImageProcessor();
 
+
     const userStore = useUser();
     const uno = userStore.getUno;
+
+    const router = useRouter();
 
     const {
       allergyInfo,
@@ -81,6 +87,7 @@ export default defineComponent({
       loadAllergyInfo,
       checkAllergyWarnings,
       showAllergyModal,
+      imageNames
     } = useAllergyWarning(uno);
 
     const isModalVisible = ref(false);
@@ -88,6 +95,13 @@ export default defineComponent({
     const takePhotoAndShowResult = async () => {
       await photosend();
       isModalVisible.value = true;
+    };
+
+    const handleImageClick = async (image: string) => {
+      const { pno } = await fetchAllergyInfo(image);
+      if (pno) {
+        await router.push({path: `/product/list/${pno}`});
+      }
     };
 
     return {
@@ -105,11 +119,12 @@ export default defineComponent({
       loadAllergyInfo,
       checkAllergyWarnings,
       showAllergyModal,
+      handleImageClick,
+      imageNames,
     };
   },
 });
 </script>
-
 
 
 
@@ -214,7 +229,6 @@ p {
   color: #888;
 }
 
-
 textarea {
   width: 100%;
   margin-top: 20px;
@@ -230,4 +244,3 @@ a {
   display: none;
 }
 </style>
-
