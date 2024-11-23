@@ -1,4 +1,41 @@
 {
+  "common": {
+    "loading": "加载中...",
+    "prev": "上一步",
+    "next": "下一步",
+    "register": "注册",
+    "date_format": "年-月-日"
+  },
+
+  "login": {
+    "register_title": "注册会员",
+    "sns_login": "通过SNS账号轻松登录/注册"
+  },
+
+  "userInfo": {
+    "title": "用户信息",
+    "name": {
+      "label": "姓名",
+      "placeholder": "请输入姓名"
+    },
+    "phone": {
+      "label": "电话号码",
+      "placeholder": "请输入电话号码"
+    },
+    "gender": {
+      "label": "性别",
+      "placeholder": "请选择性别",
+      "options": {
+        "male": "男",
+        "female": "女",
+        "other": "其他"
+      }
+    },
+    "birthday": {
+      "label": "出生日期"
+    }
+  },
+
   "bottom_nav": {
     "search": "搜索",
     "cart": "购物车",
@@ -9,10 +46,6 @@
 
   "pMain": {
     "popular": "本月热门商品",
-    "moreinfo": "查看更多"
-  },
-
-  "login": {
-    "sns_login": "使用社交账号快速登录/注册"
+    "moreinfo": "更多信息"
   }
 }
