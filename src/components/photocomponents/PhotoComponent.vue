@@ -1,59 +1,3 @@
-<template>
-  <div>
-    <h1>카메라</h1>
-    <video ref="videoElement" width="640" height="480" autoplay></video>
-    <canvas ref="canvasElement" width="640" height="480" class="hidden"></canvas>
-    <button @click="toggle">{{ isToggled ? '카메라 끄기' : '카메라 켜기' }}</button>
-    <button @click="switchCamera">카메라 전환</button>
-    <button @click="takePhotoAndShowResult" v-if="isToggled">사진 찍기</button>
-  </div>
-
-  <modal :visible="isModalVisible" @update:visible="isModalVisible = $event">
-    <h2>유사 상품 검색 결과</h2>
-    <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
-    <ul v-if="Object.keys(similarImages).length > 0">
-      <li v-for="(imagesArray, filename) in similarImages" :key="filename">
-        <ul>
-          <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
-            <ul>
-              <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
-                <img
-                    :src="`http://127.0.0.1:9000/static/${image}`"
-                    :alt="image"
-                    width="200"
-                    @load="loadAllergyInfo(image)"
-                    @click="handleImageClick(image)"
-                />
-                <p>{{ imageNames[image] }}</p>
-                <p
-                    @click="showAllergyModal(image)"
-                    style="cursor: pointer; color: yellowgreen;"
-                    :style="{ color: allergyInfo[image] ? 'red' : 'yellowgreen' }"
-                >
-                  {{ allergyInfo[image] ? '알러지 정보 보기' : '알러지 정보 없음' }}
-                </p>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </modal>
-  <!-- 알러지 상세 정보 모달 -->
-  <modal :visible="isAllergyModalVisible" @update:visible="isAllergyModalVisible = $event">
-    <h2>알러지 상세 정보</h2>
-    <p v-if="currentAllergyInfo">
-      <span v-for="(info, index) in currentAllergyInfo.split(',')" :key="index">
-        {{ info }}<br>
-      </span>
-    </p>
-    <p v-if="currentWarning" style="color: red; font-weight: bold;">
-      {{ currentWarning }}
-    </p>
-    <p v-else></p>
-  </modal>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -125,6 +69,64 @@ export default defineComponent({
   },
 });
 </script>
+
+<template>
+  <div>
+    <h1>카메라</h1>
+    <video ref="videoElement" width="640" height="480" autoplay></video>
+    <canvas ref="canvasElement" width="640" height="480" class="hidden"></canvas>
+    <button @click="toggle">{{ isToggled ? '카메라 끄기' : '카메라 켜기' }}</button>
+    <button @click="switchCamera">카메라 전환</button>
+    <button @click="takePhotoAndShowResult" v-if="isToggled">사진 찍기</button>
+  </div>
+
+  <modal :visible="isModalVisible" @update:visible="isModalVisible = $event">
+    <h2>유사 상품 검색 결과</h2>
+    <p v-if="Object.keys(similarImages).length === 0">검색 결과가 없습니다.</p>
+    <ul v-if="Object.keys(similarImages).length > 0">
+      <li v-for="(imagesArray, filename) in similarImages" :key="filename">
+        <ul>
+          <li v-for="(imageGroup, groupIndex) in imagesArray" :key="groupIndex">
+            <ul>
+              <li v-for="(image, imageIndex) in imageGroup" :key="imageIndex">
+                <img
+                    :src="`http://127.0.0.1:9000/static/${image}`"
+                    :alt="image"
+                    width="200"
+                    @load="loadAllergyInfo(image)"
+                    @click="handleImageClick(image)"
+                />
+                <p>{{ imageNames[image] }}</p>
+                <p
+                    @click="showAllergyModal(image)"
+                    style="cursor: pointer; color: yellowgreen;"
+                    :style="{ color: allergyInfo[image] ? 'red' : 'yellowgreen' }"
+                >
+                  {{ allergyInfo[image] ? '알러지 정보 보기' : '알러지 정보 없음' }}
+                </p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </modal>
+  <!-- 알러지 상세 정보 모달 -->
+  <modal :visible="isAllergyModalVisible" @update:visible="isAllergyModalVisible = $event">
+    <h2>알러지 상세 정보</h2>
+    <p v-if="currentAllergyInfo">
+      <span v-for="(info, index) in currentAllergyInfo.split(',')" :key="index">
+        {{ info }}<br>
+      </span>
+    </p>
+    <p v-if="currentWarning" style="color: red; font-weight: bold;">
+      {{ currentWarning }}
+    </p>
+    <p v-else></p>
+  </modal>
+</template>
+
+
 
 
 
