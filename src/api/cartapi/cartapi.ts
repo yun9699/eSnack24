@@ -26,3 +26,24 @@ export const addCartProduct = async (pno,ciqty) => {
 
     return res.data
 }
+
+export const deleteCartItem = async (cino: number) => {
+
+    const res = await axios.delete(`${host}/deleteItem/${cino}`)
+
+    return res.data
+}
+
+export const incCartItem = async (cino: number) => {
+
+    const res = await axios.put(`${host}/incqty/${cino}`)
+
+    return res.data
+}
+
+export const decCartItem = async (cino: number) => {
+
+    const res = await axios.put(`${host}/decqty/${cino}`)
+
+    return res.data
+}

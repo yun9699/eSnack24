@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref} from 'vue';
-import { getCartList } from "../../api/cartapi/cartapi.ts";
+import {onMounted, ref} from 'vue';
+import {decCartItem, deleteCartItem, getCartList, incCartItem} from "../../api/cartapi/cartapi.ts";
 import { ICartItem } from "../../types/cartTypes.ts";
-import { InitPageResponse } from "../../init/CommonInit.ts";
-import { IPageResponse } from '../../types/commonTypes';
 
 const initCartItem: ICartItem = {
+  cino: 0,
   price: 0,
   pno: 0,
   ptitle_ko: '',
@@ -20,37 +19,41 @@ let pageNum: number = 1;
 
 let endPageNum: number = 1;
 
-const initPage = InitPageResponse<ICartItem>();
 
-const data = ref<{ pageData: IPageResponse<ICartItem> }>({
-
-  pageData: initPage
-});
-
-const tmpData = ref<ICartItem[]>([
+const data = ref<ICartItem[]>([
   {...initCartItem}
 ])
 
-const deleteItem = (pno: number) => {
+const deleteItem = (cino: number) => {
 
-  tmpData.value = tmpData.value.filter((item) => item.pno !== pno);
-}
-
-const increaseQty = (pno: number) => {
-
-  const item = tmpData.value.find((item) => item.pno === pno)
+  const item = data.value.find((item) => item.cino === cino)
 
   if (item) {
-    item.ciqty++;
+
+    deleteCartItem(cino).then(() => {
+
+      data.value = data.value.filter((item) => item.cino !== cino);
+    })
   }
 }
 
-const decreaseQty = (pno: number) => {
+const increaseQty = (cino: number) => {
 
-  const item = tmpData.value.find((item) => item.pno === pno)
+  const item = data.value.find((item) => item.cino === cino)
+
+  if (item) {
+
+    incCartItem(cino).then(() => item.ciqty++)
+  }
+}
+
+const decreaseQty = (cino: number) => {
+
+  const item = data.value.find((item) => item.cino === cino)
 
   if (item && item.ciqty > 1) {
-    item.ciqty--;
+
+    decCartItem(cino).then(() => item.ciqty--)
   }
 }
 
@@ -60,31 +63,21 @@ const moreInfo = () => {
 
   getCartList(pageNum).then((res) => {
 
-    tmpData.value = [...tmpData.value, ...res.list];
+    data.value = [...data.value, ...res.list];
   })
 }
 
 onMounted(() => {
-  console.log(data.value.pageData.list);
 
   getCartList(pageNum).then((res) => {
 
     console.log(res);
 
-    data.value.pageData.list = res;
-    tmpData.value = res.list;
+    data.value = res.list;
 
     endPageNum = res.endPage;
   })
 });
-
-onBeforeUnmount(() => {
-
-  if(data.value.pageData.list != tmpData.value) {
-
-    console.log("aaaaaaaa");
-  }
-})
 
 </script>
 
@@ -93,7 +86,7 @@ onBeforeUnmount(() => {
     <h1 class="text-2xl font-bold mb-4">장바구니</h1>
     <ul class="bg-white rounded-lg shadow-lg divide-y divide-gray-200">
       <li
-          v-for="item in tmpData"
+          v-for="item in data"
           :key="item.pno"
           class="flex items-center justify-between p-4 hover:bg-gray-50"
       >
@@ -104,7 +97,7 @@ onBeforeUnmount(() => {
 
           <!-- 감소 버튼 -->
           <button
-              @click="decreaseQty(item.pno)"
+              @click="decreaseQty(item.cino)"
               class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 px-2 rounded"
           >
             -
@@ -115,7 +108,7 @@ onBeforeUnmount(() => {
 
           <!-- 증가 버튼 -->
           <button
-              @click="increaseQty(item.pno)"
+              @click="increaseQty(item.cino)"
               class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-1 px-2 rounded"
           >
             +
@@ -123,7 +116,7 @@ onBeforeUnmount(() => {
 
           <!-- 삭제 버튼 -->
           <button
-              @click="deleteItem(item.pno)"
+              @click="deleteItem(item.cino)"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
           >
             삭제
