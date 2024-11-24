@@ -5,21 +5,18 @@ import { useCamera } from "../../hooks/camerahooks/useCamera.ts";
 import { useImageProcessor } from "../../hooks/camerahooks/useImageProcessor.ts";
 import { useAllergyWarning } from "../../hooks/camerahooks/useAllergyWarning.ts";
 import Modal from "../modalcomponents/Modal.vue";
-import useUser from "../../stores/useUser";
+import useUserStore from "../../stores/useUserStore.ts";
 import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
 
-// 카메라 및 사진 처리 관련 Hooks
+
 const { isToggled, toggle, switchCamera } = useCamera();
 const { similarImages, photosend } = useImageProcessor();
 
-// 사용자 정보
-const userStore = useUser();
+const userStore = useUserStore();
 const uno = userStore.getUno;
 
-// 라우터
 const router = useRouter();
 
-// 알러지 경고 관련 Hooks
 const {
   allergyInfo,
   imageWarnings,
@@ -32,16 +29,16 @@ const {
   imageNames,
 } = useAllergyWarning(uno);
 
-// 모달 상태
+
 const isModalVisible = ref(false);
 
-// 사진 촬영 후 결과 표시
+
 const takePhotoAndShowResult = async () => {
   await photosend();
   isModalVisible.value = true;
 };
 
-// 이미지 클릭 시 동작
+
 const handleImageClick = async (image: string) => {
   const { pno } = await fetchAllergyInfo(image);
   if (pno) {
