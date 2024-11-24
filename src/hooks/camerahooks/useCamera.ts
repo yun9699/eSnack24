@@ -1,33 +1,38 @@
-import {ref, onBeforeUnmount} from "vue";
-import type {Ref} from "vue";
+import { ref, onBeforeUnmount } from "vue";
 
 export function useCamera() {
-    const videoStream: Ref<MediaStream | null> = ref(null);
+    const videoStream = ref<MediaStream | null>(null);
     const isToggled = ref(false);
     const currentDevice = ref<"environment" | "user">("environment");
 
-    const startCamera = async (): Promise<void> => {
+    const getVideoElement = (): HTMLVideoElement => {
+        return document.querySelector("video") as HTMLVideoElement;
+    };
+
+    const getCanvasElement = (): HTMLCanvasElement => {
+        return document.querySelector("canvas") as HTMLCanvasElement;
+    };
+
+    const startCamera = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: currentDevice.value },
         });
         videoStream.value = stream;
-        const videoElement = document.querySelector("video") as HTMLVideoElement;
+        const videoElement = getVideoElement();
         videoElement.srcObject = stream;
         videoElement.onplaying = drawToCanvas;
     };
 
-    const stopCamera = (): void => {
+    const stopCamera = () => {
         if (videoStream.value) {
-            const tracks = videoStream.value.getTracks();
-            tracks.forEach((track) => track.stop());
-            const videoElement = document.querySelector("video") as HTMLVideoElement;
-            videoElement.srcObject = null;
+            videoStream.value.getTracks().forEach((track) => track.stop());
+            getVideoElement().srcObject = null;
         }
     };
 
-    const drawToCanvas = (): void => {
-        const videoElement = document.querySelector("video") as HTMLVideoElement;
-        const canvasElement = document.querySelector("canvas") as HTMLCanvasElement;
+    const drawToCanvas = () => {
+        const videoElement = getVideoElement();
+        const canvasElement = getCanvasElement();
         const ctx = canvasElement.getContext("2d") as CanvasRenderingContext2D;
 
         const render = () => {
@@ -38,7 +43,7 @@ export function useCamera() {
         render();
     };
 
-    const switchCamera = (): void => {
+    const switchCamera = () => {
         currentDevice.value = currentDevice.value === "environment" ? "user" : "environment";
         if (isToggled.value) {
             stopCamera();
@@ -46,7 +51,7 @@ export function useCamera() {
         }
     };
 
-    const toggle = (): void => {
+    const toggle = () => {
         if (isToggled.value) {
             stopCamera();
         } else {
@@ -56,10 +61,7 @@ export function useCamera() {
     };
 
     onBeforeUnmount(() => {
-        if (videoStream.value) {
-            const tracks = videoStream.value.getTracks();
-            tracks.forEach((track) => track.stop());
-        }
+        stopCamera();
     });
 
     return {

@@ -10,7 +10,7 @@ const ReviewRouter = {
             path: '', component: ReviewRegisterPage
         },
         {
-            path: 'list', component: ReviewListPage,
+            path: 'list/:pno', component: ReviewListPage,
         },
     ]
 }
