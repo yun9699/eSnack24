@@ -1,3 +1,79 @@
+
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { getReviewList } from "../../api/reviewAPI/reviewAPI.ts";
+
+interface Review {
+  rno: number;
+  pno: number;
+  uno: number;
+  rcontent: string;
+  rdelete: boolean;
+  rstar: number;
+  rimage: string | null;
+  rregDate: string;
+  rmodDate: string;
+}
+
+const reviews = ref<Review[]>([]);
+const page = ref(1);
+const size = ref(10);
+const loading = ref(false);
+const hasMore = ref(true);
+
+const route = useRoute();
+const pno = ref<number>(null);
+
+
+
+const fetchReviews = async () => {
+  console.log(pno.value)
+  if (!pno.value) {
+    console.error("pno 값이 없습니다.");
+    return;
+  }
+
+  loading.value = true;
+  try {
+    const data = await getReviewList(page.value, size.value, pno.value);
+
+    reviews.value.push(...data.list);
+
+    if (data.list.length < size.value) {
+      hasMore.value = false;
+    }
+
+    console.log("현재 리뷰 개수:", reviews.value.length);
+    console.log("hasMore 상태:", hasMore.value);
+
+  } catch (error) {
+    console.error("리뷰를 가져오는 중 오류 발생:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const loadMore = async () => {
+  const currentScrollY = window.scrollY; // 현재 스크롤 위치 저장
+  page.value += 1; // 다음 페이지 요청
+  await fetchReviews(); // 데이터를 가져옴
+  window.scrollTo(0, currentScrollY); // 스크롤 위치 복원
+};
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleString();
+};
+
+
+onMounted(() => {
+  pno.value = Number(route.params.pno);
+  fetchReviews();
+});
+
+</script>
+
 <template>
   <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
     <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">리뷰 리스트</h1>
@@ -43,68 +119,3 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { getReviewList } from "../../api/reviewAPI/reviewAPI.ts";
-
-interface Review {
-  rno: number;
-  pno: number;
-  uno: number;
-  rcontent: string;
-  rdelete: boolean;
-  rstar: number;
-  rimage: string | null;
-  rregDate: string;
-  rmodDate: string;
-}
-
-const reviews = ref<Review[]>([]);
-const page = ref(1);
-const size = ref(10);
-const total = ref(0);
-const loading = ref(false);
-const hasMore = ref(true);
-
-const fetchReviews = async () => {
-  loading.value = true;
-  try {
-    const data = await getReviewList(page.value, size.value);
-    reviews.value.push(...data.list);
-    total.value = data.total;
-
-    console.log("현재 리뷰 개수:", reviews.value.length);
-    console.log("총 리뷰 개수:", total.value);
-    console.log("hasMore 상태:", hasMore.value);
-
-
-    if (reviews.value.length >= total.value) {
-      hasMore.value = false;
-    }
-
-  } catch (error) {
-    console.error("리뷰를 가져오는 중 오류 발생:", error);
-  } finally {
-    loading.value = false;
-  }
-};
-
-const loadMore = async () => {
-  const currentScrollY = window.scrollY; // 현재 스크롤 위치 저장
-  page.value += 1; // 다음 페이지 요청
-  await fetchReviews(); // 데이터를 가져옴
-  window.scrollTo(0, currentScrollY); // 스크롤 위치 복원
-};
-
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleString();
-};
-
-
-
-onMounted(() => {
-  fetchReviews();
-});
-</script>
