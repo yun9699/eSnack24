@@ -23,7 +23,7 @@ const fetchProductTitle = async () => {
   try {
     productTitle.value = await fetchProductTitleAPI(pno.value);
   } catch (error) {
-    alert(error.message);
+    console.log(error.message);
   }
 };
 
@@ -40,7 +40,6 @@ const handleImageChange = (event: Event) => {
 // 리뷰 등록
 const submitReview = async () => {
   if (rating.value <= 0 || !reviewText.value.trim()) {
-    alert("별점을 선택하고 리뷰 내용을 입력해주세요.");
     return;
   }
 
@@ -49,7 +48,7 @@ const submitReview = async () => {
     try {
       imageUrl = await uploadImageAPI(selectedImageFile.value);
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
       return;
     }
   }
@@ -72,18 +71,14 @@ const submitReview = async () => {
     selectedImageFile.value = null;
     selectedImageBlob.value = null;
 
-    alert("리뷰가 성공적으로 등록되었습니다.");
     await router.push(`/review/list/${pno.value}`);
   } catch (error) {
-    alert(error.message);
+    console.log(error.message);
   } finally {
     submitting.value = false;
   }
 };
 
-const goBack = () => {
-  router.back();
-};
 
 onMounted(() => {
   uno.value = Number(route.params.uno);
@@ -96,9 +91,6 @@ onMounted(() => {
 <template>
   <div class="p-4 border rounded-lg">
     <div class="flex items-center mb-4">
-      <button class="p-2 border rounded-lg mr-2" @click="goBack">
-        &lt;
-      </button>
       <h2 class="text-lg font-semibold">후기 작성</h2>
     </div>
 
@@ -122,7 +114,7 @@ onMounted(() => {
             v-for="star in 5"
             :key="star"
             @click="rating = star"
-            class="cursor-pointer text-2xl"
+            class="text-yellow-500 cursor-pointer text-2xl"
         >
           {{ star <= rating ? '★' : '☆' }}
         </span>

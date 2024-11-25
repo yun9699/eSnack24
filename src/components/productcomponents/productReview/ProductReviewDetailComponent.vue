@@ -2,13 +2,17 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ReviewDetail } from "../../../types/reviewTypes";
-import {fetchReviewDetailAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
+import { fetchReviewDetailAPI } from "../../../api/reviewAPI/productReviewAPI";
+import useUserStore from "../../../stores/useUserStore.ts";
 
 const route = useRoute();
 const router = useRouter();
 const rno = ref<number | null>(null);
 const review = ref<ReviewDetail | null>(null);
 const loading = ref(false);
+
+const userStore = useUserStore();
+const uno = userStore.getUno;
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString: string) => {
@@ -27,14 +31,17 @@ const fetchReviewDetail = async () => {
   try {
     review.value = await fetchReviewDetailAPI(rno.value);
   } catch (error: any) {
-    alert(error.message);
+    console.log(error.message);
   } finally {
     loading.value = false;
   }
 };
 
-const goBack = () => {
-  router.back();
+// 리뷰 수정 페이지로 이동
+const goToEditPage = () => {
+  if (rno.value) {
+    router.push(`/review/edit/${rno.value}`);
+  }
 };
 
 onMounted(() => {
@@ -44,13 +51,12 @@ onMounted(() => {
 </script>
 
 
+
+
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
     <div class="flex items-center justify-between mb-4">
       <h1 class="text-2xl font-bold text-gray-800">리뷰 상세 정보</h1>
-      <button @click="goBack" class="px-4 py-2 text-sm text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
-        뒤로가기
-      </button>
     </div>
 
     <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
@@ -92,5 +98,16 @@ onMounted(() => {
 
       <div v-else class="text-center text-gray-400 py-6">리뷰 상세 정보를 불러올 수 없습니다.</div>
     </div>
+
+    <!-- 수정 버튼 -->
+    <div v-if="review && uno === review.uno" class="flex gap-4 mt-4">
+      <button
+          @click="goToEditPage"
+          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+      >
+        수정
+      </button>
+    </div>
   </div>
 </template>
+

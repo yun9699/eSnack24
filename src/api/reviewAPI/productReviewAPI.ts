@@ -51,3 +51,24 @@ export const fetchReviewDetailAPI = async (rno: number): Promise<ReviewDetail> =
         throw new Error("리뷰 상세 정보를 가져오는 중 문제가 발생했습니다.");
     }
 };
+
+// 리뷰 수정
+export const editReviewAPI = async (rno: number, editData: Partial<ReviewDetail>): Promise<ReviewDetail> => {
+    try {
+        const response = await axios.post(`${host}/edit/${rno}`, editData);
+        return response.data;
+    } catch (error) {
+        console.error("리뷰 수정 실패:", error);
+        throw new Error("리뷰 수정 중 오류가 발생했습니다.");
+    }
+};
+
+// 리뷰 삭제
+export const deleteReviewAPI = async (rno: number): Promise<void> => {
+    try {
+        await axios.post(`${host}/delete/${rno}`);
+    } catch (error) {
+        console.error("리뷰 삭제 실패:", error);
+        throw new Error("리뷰 삭제 중 오류가 발생했습니다.");
+    }
+};
