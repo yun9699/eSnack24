@@ -1,24 +1,48 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { getList } from "../../api/productAPI/productAPI.ts";
-import { useRoute, useRouter } from "vue-router";
 import {IProduct} from "../../types/productTypes.ts";
-
 
 const serverData = ref<{ ProductList: IProduct[]; }>({
   ProductList: [],
 });
 
 
-const router = useRouter();
-const route = useRoute();
+let pageNum: number = 1;
+
+let endPageNum: number = 1;
+
+const moreInfo = () => {
+
+  pageNum++;
+
+  getList(pageNum).then((result) => {
+
+    serverData.value.ProductList = [...serverData.value.ProductList, ...result.list];
+  })
+}
 
 
 // 페이지 데이터를 불러오는 함수
-onMounted(async () => {
-  const data = await getList()
-  serverData.value.ProductList = data.list;
+// onMounted(async () => {
+//   const data = await getList()
+//   serverData.value.ProductList = data.list;
+//   endPageNum = data.pageNum;
+// });
+//
+
+onMounted(() => {
+
+  getList(pageNum).then((res) => {
+
+    serverData.value.ProductList = res.list;
+
+    endPageNum = res.endPage;
+
+  })
 });
+
+
 
 
 
@@ -84,12 +108,15 @@ onMounted(async () => {
     </div>
   </section>
 
-  <!-- Pagination Section -->
-  <div class="flex justify-center items-center mt-6">
-    <div class="overflow-x-auto">
-      <ul class="flex space-x-2">
-
-      </ul>
-    </div>
+  <div class="mt-10 m-10 text-center">
+    <button
+        @click="moreInfo()"
+        v-if="pageNum < endPageNum"
+        class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+    >
+      더보기
+    </button>
   </div>
+
+
 </template>
