@@ -24,6 +24,7 @@ onMounted(() => {
 
         user.setUno(result.uno);
         user.setPersonalAllergies(result.anos);
+        user.setUserEmail(result.email);
 
         if(result.new == true) router.push('/user/reg');
         if(result.new == false) router.push('/');

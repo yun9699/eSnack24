@@ -4,7 +4,8 @@ import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts";
 
 const user = useUserStore();
 
-const uno = user.getUno;
+const uno: number = user.getUno;
+const userEmail: string = user.getUserEmail;
 
 const host = 'http://localhost:8080/api/v1';
 
@@ -35,6 +36,13 @@ export const registerPersonalAllergy = async (anos: number[]) => {
 export const registerAddress = async (address: IAddress) => {
 
     const res = await axios.post(`${host}/address/reg/${uno}`, address);
+
+    return res.data;
+}
+
+export const logoutUser = async () => {
+
+    const res = await axios.post(`${host}/login/deleteToken`, userEmail);
 
     return res.data;
 }

@@ -59,13 +59,24 @@ const user = useUserStore();
       </router-link>
 
       <router-link
+          v-if="user.getUno !== 0 && user.getUno !== undefined"
           :to="`/my/${user.getUno}`"
           class="flex flex-col items-center relative"
-          :class="{ 'text-yellow-400': currentPath === '/profile' }"
+          :class="{ 'text-yellow-400': currentPath === `/my/${user.getUno}` }"
       >
         <Icon icon="material-symbols:person-outline" class="text-2xl" />
         <span class="text-xs mt-1">{{ t('bottom_nav.profile') }}</span>
-        <div v-if="currentPath === '/profile'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 mt-1"></div>
+        <div v-if="currentPath === `/my/${user.getUno}`" class="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 mt-1"></div>
+      </router-link>
+
+      <router-link
+          v-else
+          to="/login"
+          class="flex flex-col items-center relative text-gray-600 hover:text-yellow-400 transition-colors"
+      >
+        <Icon icon="majesticons:login-line" class="text-2xl" />
+        <span class="text-xs mt-1">{{ t('bottom_nav.login') }}</span>
+        <div v-if="currentPath === '/login'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 mt-1"></div>
       </router-link>
     </div>
   </nav>
