@@ -147,7 +147,7 @@ onMounted(() => {
         </div>
 
         <!-- 리뷰 확인 버튼 (오른쪽에 붙임) -->
-        <router-link :to="`/review/${pno}`">
+        <router-link :to="`/review/list/${pno}`">
           <button class="bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition">
             리뷰확인
           </button>
