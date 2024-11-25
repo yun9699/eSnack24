@@ -36,6 +36,44 @@
     }
   },
 
+  "userAddress": {
+    "title": "输入地址",
+    "country": {
+      "label": "国家",
+      "placeholder": "请输入国家"
+    },
+    "state": {
+      "label": "州",
+      "placeholder": "请输入州"
+    },
+    "city": {
+      "label": "城市",
+      "placeholder": "请输入城市"
+    },
+    "address_line1": {
+      "label": "地址",
+      "placeholder": "请输入地址"
+    },
+    "address_line2": {
+      "label": "详细地址",
+      "placeholder": "请输入详细地址"
+    },
+    "zipcode": {
+      "label": "邮政编码",
+      "placeholder": "请输入邮政编码"
+    },
+    "phone": {
+      "label": "电话号码",
+      "placeholder": "请输入电话号码"
+    },
+    "check_primary": "设为默认地址"
+  },
+
+  "userAllergy": {
+    "selectTitle": "请选择所有您有过敏反应的食物。",
+    "selectInfo": "如果没有过敏，请直接点击注册。"
+  },
+
   "bottom_nav": {
     "search": "搜索",
     "cart": "购物车",
