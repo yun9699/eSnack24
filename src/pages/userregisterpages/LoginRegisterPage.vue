@@ -5,7 +5,7 @@ import { useLocaleStore } from '../../stores/useLocaleStore'
 import { storeToRefs } from 'pinia'
 import { Icon } from '@iconify/vue'
 import {getAllergyListKo} from "../../api/AllergyAPI/allergyAPI.ts"
-import {registerAddress, registerPersonalAllergy, registerUser} from "../../api/UserAPI/userRegisterAPI.ts"
+import {registerAddress, registerPersonalAllergy, registerUser} from "../../api/UserAPI/userAPI.ts"
 import {useRouter} from "vue-router"
 import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts"
 

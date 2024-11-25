@@ -1,22 +1,39 @@
 <script setup lang="ts">
   import { RouterLink } from "vue-router";
   import useUserStore from "../../stores/useUserStore.ts";
-  import {onMounted} from "vue";
 
   const user = useUserStore();
 
-  const result = user.getPersonalAllergies;
+  const email: string = user.getUserEmail
 
-  onMounted(() => {
+  const ClickLogout = () => {
 
-    console.log(result);
-  })
+    user.setUserEmail('');
+    user.setUno(0);
+    user.setPersonalAllergies([]);
+  }
 
 </script>
 
 <template>
   <div class="max-w-3xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-center mb-8 text-gray-800">마이 프로필</h1>
+    <!-- 상단 인사말과 로그아웃 버튼 -->
+    <div class="flex justify-between items-center mb-8">
+      <!-- 사용자 인사말 -->
+      <h2 class="text-lg font-medium text-gray-800">
+        안녕하세요, {{ email }}님!
+      </h2>
+
+      <!-- 로그아웃 버튼 -->
+      <button
+          class="py-2 px-4 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition duration-200"
+          @click=""
+      >
+        로그아웃
+      </button>
+    </div>
+
+    <!-- 본문 내용 -->
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 
       <!-- 내 정보 수정 버튼 -->

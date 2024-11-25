@@ -17,7 +17,7 @@ export const getCartList = async (page: number) => {
     return res.data;
 }
 
-export const addCartProduct = async (pno,ciqty) => {
+export const addCartProduct = async (pno: number,ciqty: number) => {
 
     console.log(user.getUno);
 
