@@ -19,3 +19,11 @@ export interface IUserInfo {
     gender: string
     birth: string
 }
+
+export interface IUserAllergy {
+    ano: number
+    atitle_ko: string
+    atitle_en: string
+    atitle_ja: string
+    atitle_zh: string
+}
