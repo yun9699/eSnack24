@@ -134,13 +134,25 @@ onMounted(() => {
         {{ productRef.productDetail.product.ptitle_ko }}
       </h1>
 
-      <!-- 가격 표시 -->
-      <p class="text-xl font-semibold text-gray-700">
-        가격:
-        <span class="text-green-600">
-          {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}원
-        </span>
-      </p>
+      <!-- 가격과 리뷰확인 버튼을 같은 선상에 배치 -->
+      <div class="flex justify-between w-full mt-2">
+        <!-- 가격을 완전 중앙에 배치 -->
+        <div class="flex-1 text-center">
+          <div class="text-xl font-semibold text-gray-700">
+            가격:
+            <span class="text-green-600">
+              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}원
+            </span>
+          </div>
+        </div>
+
+        <!-- 리뷰 확인 버튼 (오른쪽에 붙임) -->
+        <router-link :to="`/review/${pno}`">
+          <button class="bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition">
+            리뷰확인
+          </button>
+        </router-link>
+      </div>
 
       <!-- 알러지 정보 -->
       <div>
@@ -168,14 +180,14 @@ onMounted(() => {
     </div>
 
     <!-- 버튼 -->
-    <div class="w-full max-w-lg flex justify-center gap-4 mt-4">
+    <div class="w-full max-w-lg flex justify-between gap-4 mt-4">
       <button
-          class="w-full bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
+          class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
       >
         Buy Now
       </button>
       <button
-          class="w-full bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
+          class="w-full lg:w-auto bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
           @click="handleClickAddCart"
       >
         Add to Cart
