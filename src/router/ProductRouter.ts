@@ -6,13 +6,13 @@ const ProductDetailPage = () => import('../pages/productpages/ProductDetailPage.
 const AddModal = () => import("../common/components/CommonCartAddModalComponent.vue")
 
 const ProductRouter = {
-    path: '/product', component: ProductIndexPage,
+    path: '/productAPI', component: ProductIndexPage,
     children: [
         {
             path: "main",  component: ProductMainPage
         },
         {
-            path: "/", redirect: "/product/main"
+            path: "/", redirect: "/productAPI/main"
         },
         {
             path: "list", component: ProductListPage

@@ -28,16 +28,16 @@ export const localeProduct = () => {
     }
 
     // 내용 번역
-    // const localePcontent = (product: IProduct) => {
+    // const localePcontent = (productAPI: IProduct) => {
     //     switch (locale.value) {
     //         case 'en':
-    //             return product.pcontent_en
+    //             return productAPI.pcontent_en
     //         case 'ja':
-    //             return product.pcontent_ja
+    //             return productAPI.pcontent_ja
     //         case 'zh':
-    //             return product.pcontent_zh
+    //             return productAPI.pcontent_zh
     //         default:
-    //             return product.pcontent_ko
+    //             return productAPI.pcontent_ko
     //     }
     // }
 
