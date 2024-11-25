@@ -4,6 +4,7 @@ const ReviewListPage = () => import('../pages/reviewpages/ReviewListPage.vue');
 const ReviewRegisterPage = () => import('../pages/reviewpages/ReviewRegisterPage.vue');
 const UserReviewListPage = () => import('../pages/reviewpages/UserReviewListPage.vue');
 const ReviewDetailPage = () => import('../pages/reviewpages/ReviewDetailPage.vue');
+const ReviewEditPage = () => import('../pages/reviewpages/ReviewEditPage.vue');
 
 const ReviewRouter = {
     path: '/review', component: ReviewIndexPage,
@@ -19,6 +20,9 @@ const ReviewRouter = {
         },
         {
             path: 'detail/:rno', component: ReviewDetailPage
+        },
+        {
+            path: 'edit/:rno', component: ReviewEditPage
         }
     ]
 }
