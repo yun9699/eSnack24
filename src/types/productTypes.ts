@@ -7,10 +7,11 @@ export interface IProduct {
     ptitle_zh: string | null
     price: number
     pfilename: string
-    ano?: number
+    ano?: number[]
 }
 
 export interface IProductDetail {
     product: IProduct
-    atitle_ko: string
+    atitle_ko: string[]
+    ano?: number[]
 }

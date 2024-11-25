@@ -37,10 +37,12 @@ const handleSearch = async () => {
     <div v-if="searchProductList.length > 0" class="space-y-4">
       <ul>
         <li v-for="item in searchProductList" :key="item.pno" class="flex items-center justify-between bg-white p-4 rounded-lg shadow-lg mb-4 hover:shadow-xl transition">
+          <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
           <div class="flex flex-col">
             <div class="text-gray-700 font-semibold">{{ item.ptitle_ko }}</div>
             <div class="text-gray-500">{{ item.price }} 원</div>
           </div>
+          </RouterLink>
         </li>
       </ul>
     </div>
