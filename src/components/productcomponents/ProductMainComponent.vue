@@ -48,7 +48,7 @@ onMounted(() => {
 })
 
 const handleClikeMove = () => {
-  router.push('/productAPI/list')
+  router.push('/product/list')
 }
 
 </script>
@@ -81,7 +81,7 @@ const handleClikeMove = () => {
           >
 
             <img
-                :src="`http://10.10.10.128/product/s_${product.pfilename}`"
+                :src="`http://10.10.10.166/product/s_${product.pfilename}`"
                 :alt="product.ptitle_ko"
                 class="w-full h-32 object-contain"
             />

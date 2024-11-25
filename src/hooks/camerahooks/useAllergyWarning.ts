@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
+import { fetchAllergyInfo } from "../../api/productAPI/productCameraAllegyAPI.ts";
 import { compareUserAllergies } from "../../api/UserAPI/userAllergyAPI.ts";
 
 export function useAllergyWarning(uno: number) {

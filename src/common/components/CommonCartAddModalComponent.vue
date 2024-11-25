@@ -36,7 +36,7 @@ const moveToCart = () => {
       </button>
 
       <!-- 모달 내용 -->
-      <p class="text-center text-gray-800 text-lg font-semibold mb-4">장바구니로 이동하시겠습니까?</p>
+      <p class="text-center text-gray-800 text-lg font-semibold mb-4">장바구니에 담았습니다.</p>
 
       <!-- 장바구니로 이동 버튼 -->
       <div class="flex justify-center mt-6">

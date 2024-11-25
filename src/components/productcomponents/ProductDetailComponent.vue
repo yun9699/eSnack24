@@ -32,7 +32,7 @@ const initProduct: IProduct = {
   pfilename: 'sample fileName',
   ptitle_ko: 'Sample Product',
   price: 4000, // 기본 가격
-  ano: 'no allergy'
+  ano: []
 };
 
 const initProductDetail: IProductDetail = {
@@ -41,15 +41,20 @@ const initProductDetail: IProductDetail = {
   ano: []
 };
 
-const result = ref([]); // 포함된 알레르기
+const result = ref<number[]>([]); // 포함된 알레르기
 
 const productRef = ref<{ productDetail: IProductDetail }>({
   productDetail: initProductDetail,
 });
 
 const hasAllergy = computed(() => {
-  const productAllergies = productRef.value.productDetail.product.ano;
-  result.value = userano.filter((userAllergy) => productAllergies.includes(userAllergy))
+  // productAllergies를 number[] 타입으로 선언하고, 배열인지 확인 후 처리
+  const productAllergies: number[] = Array.isArray(productRef.value.productDetail.product.ano)
+      ? productRef.value.productDetail.product.ano
+      : [];
+
+  // userano가 배열이라 가정하고, 필터링 및 some 메서드를 사용
+  result.value = userano.filter((userAllergy) => productAllergies.includes(userAllergy));
 
   return userano.some((userAllergy) => productAllergies.includes(userAllergy));
 });
@@ -116,7 +121,7 @@ onMounted(() => {
     <!-- 제품 이미지 -->
     <div class="flex justify-center items-center w-full max-w-md mx-auto">
       <img
-          :src="`http://10.10.10.128/product/${productRef.productDetail.product.pfilename}`"
+          :src="`http://10.10.10.166/product/${productRef.productDetail.product.pfilename}`"
           alt="Product Image"
           class="w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80 object-cover rounded-lg border-2 border-gray-200 shadow-md"
       />
@@ -129,13 +134,25 @@ onMounted(() => {
         {{ productRef.productDetail.product.ptitle_ko }}
       </h1>
 
-      <!-- 가격 표시 -->
-      <p class="text-xl font-semibold text-gray-700">
-        가격:
-        <span class="text-green-600">
-          {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}원
-        </span>
-      </p>
+      <!-- 가격과 리뷰확인 버튼을 같은 선상에 배치 -->
+      <div class="flex justify-between w-full mt-2">
+        <!-- 가격을 완전 중앙에 배치 -->
+        <div class="flex-1 text-center">
+          <div class="text-xl font-semibold text-gray-700">
+            가격:
+            <span class="text-green-600">
+              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}원
+            </span>
+          </div>
+        </div>
+
+        <!-- 리뷰 확인 버튼 (오른쪽에 붙임) -->
+        <router-link :to="`/review/list/${pno}`">
+          <button class="bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition">
+            리뷰확인
+          </button>
+        </router-link>
+      </div>
 
       <!-- 알러지 정보 -->
       <div>
@@ -163,14 +180,14 @@ onMounted(() => {
     </div>
 
     <!-- 버튼 -->
-    <div class="w-full max-w-lg flex justify-center gap-4 mt-4">
+    <div class="w-full max-w-lg flex justify-between gap-4 mt-4">
       <button
-          class="w-full bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
+          class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
       >
         Buy Now
       </button>
       <button
-          class="w-full bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
+          class="w-full lg:w-auto bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
           @click="handleClickAddCart"
       >
         Add to Cart
