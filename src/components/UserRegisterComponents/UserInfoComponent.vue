@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref } from "vue"
+import { inject } from "vue"
 import { useI18n } from 'vue-i18n'
 import { IUserInfo } from "../../types/userRegisterTypes.ts"
 

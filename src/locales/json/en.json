@@ -36,6 +36,39 @@
     }
   },
 
+  "userAddress": {
+    "title": "Address Information",
+    "country": {
+      "label": "Country",
+      "placeholder": "Enter your country"
+    },
+    "state": {
+      "label": "State",
+      "placeholder": "Enter your state"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "address_line1": {
+      "label": "Address",
+      "placeholder": "Enter your address"
+    },
+    "address_line2": {
+      "label": "Detailed Address",
+      "placeholder": "Enter your detailed address"
+    },
+    "zipcode": {
+      "label": "Zip Code",
+      "placeholder": "Enter your zip code"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number"
+    },
+    "check_primary": "Set as primary address"
+  },
+
   "bottom_nav": {
     "search": "Search",
     "cart": "Cart",

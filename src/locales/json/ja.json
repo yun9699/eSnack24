@@ -36,6 +36,40 @@
     }
   },
 
+  "userAddress": {
+    "title": "住所入力",
+    "country": {
+      "label": "国",
+      "placeholder": "国を入力してください"
+    },
+    "state": {
+      "label": "州",
+      "placeholder": "州を入力してください"
+    },
+    "city": {
+      "label": "市",
+      "placeholder": "市を入力してください"
+    },
+    "address_line1": {
+      "label": "住所",
+      "placeholder": "住所を入力してください"
+    },
+    "address_line2": {
+      "label": "詳細住所",
+      "placeholder": "詳細住所を入力してください"
+    },
+    "zipcode": {
+      "label": "郵便番号",
+      "placeholder": "郵便番号を入力してください"
+    },
+    "phone": {
+      "label": "電話番号",
+      "placeholder": "電話番号を入力してください"
+    },
+    "check_primary": "基本住所に設定"
+  },
+
+
   "bottom_nav": {
     "search": "検索",
     "cart": "カート",

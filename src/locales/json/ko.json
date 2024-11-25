@@ -36,6 +36,40 @@
     }
   },
 
+  "userAddress": {
+    "title": "주소 입력",
+    "country": {
+      "label": "국가",
+      "placeholder": "국가를 입력하세요"
+    },
+    "state": {
+      "label": "주",
+      "placeholder": "주를 입력하세요"
+    },
+    "city": {
+      "label": "도시",
+      "placeholder": "도시를 입력하세요"
+    },
+    "address_line1": {
+      "label": "주소",
+      "placeholder": "주소를 입력하세요"
+    },
+    "address_line2": {
+      "label": "상세 주소",
+      "placeholder": "상세 주소를 입력하세요"
+    },
+    "zipcode": {
+      "label": "우편번호",
+      "placeholder": "우편번호를 입력하세요"
+    },
+    "phone": {
+      "label": "전화번호",
+      "placeholder": "전화번호를 입력하세요"
+    },
+    "check_primary": "기본 주소로 설정"
+  },
+
+
   "bottom_nav": {
     "search": "검색",
     "cart": "장바구니",
