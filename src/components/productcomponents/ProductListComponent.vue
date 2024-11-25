@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getList } from "../../api/product/productAPI.ts";
+import { getList } from "../../api/productAPI/productAPI.ts";
 import { useRoute, useRouter } from "vue-router";
 import {IProduct} from "../../types/productTypes.ts";
 
