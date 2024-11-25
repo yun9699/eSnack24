@@ -9,6 +9,7 @@ import UserRegisterRouter from "./UserRegisterRouter.ts";
 import UserRouter from "./UserRouter.ts";
 import photoRouter from "./photoRouter.ts";
 import cartRouter from "./CartRouter.ts";
+import searchRouter from "./SearchRouter.ts";
 
 const routes = [
     CSRouter,
@@ -19,7 +20,8 @@ const routes = [
     UserRegisterRouter,
     UserRouter,
     photoRouter,
-    cartRouter
+    cartRouter,
+    searchRouter
 
 ]
 

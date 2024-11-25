@@ -97,7 +97,7 @@ const completeRegister = () => {
 
 const closeModal = () => {
   isCheckModalOpen.value = false
-  router.push('/product/list')
+  router.push('/productAPI/list')
 }
 
 onMounted(async () => {

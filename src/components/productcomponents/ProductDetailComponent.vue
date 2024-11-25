@@ -2,7 +2,7 @@
 import {computed, onMounted, ref} from 'vue';
 import { IProduct, IProductDetail } from "../../types/productTypes.ts";
 import { useRoute } from "vue-router";
-import { getDetail } from "../../api/product/productAPI.ts";
+import { getDetail } from "../../api/productAPI/productAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {addCartProduct} from "../../api/cartapi/cartapi.ts";
 import CommonCartAddModalComponent from "../../common/components/CommonCartAddModalComponent.vue";
@@ -62,7 +62,7 @@ const mappedProducts = computed(() => {
   return result.value.map((ano) => {
     const product = productRef.value.productDetail;
 
-    // product.ano와 result.value의 ano 값이 일치하면 매핑
+    // productAPI.ano와 result.value의 ano 값이 일치하면 매핑
     const index = product.product.ano.indexOf(ano);  // ano 값이 있는 인덱스 찾기
 
     if (index !== -1) {

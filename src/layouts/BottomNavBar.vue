@@ -16,8 +16,10 @@ const user = useUserStore();
 <template>
   <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
     <div class="flex justify-between items-center px-4 py-2">
+
+
       <router-link
-          to=""
+          to="/search"
           class="flex flex-col items-center relative"
           :class="{ 'text-yellow-400': currentPath === '/search' }"
       >
