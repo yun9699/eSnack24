@@ -6,7 +6,7 @@ import { useImageProcessor } from "../../hooks/camerahooks/useImageProcessor.ts"
 import { useAllergyWarning } from "../../hooks/camerahooks/useAllergyWarning.ts";
 import Modal from "../modalcomponents/Modal.vue";
 import useUserStore from "../../stores/useUserStore.ts";
-import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
+import { fetchAllergyInfo } from "../../api/productAPI/productCameraAllegyAPI.ts";
 
 
 const { isToggled, toggle, switchCamera } = useCamera();
