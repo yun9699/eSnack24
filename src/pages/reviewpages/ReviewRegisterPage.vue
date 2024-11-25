@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 
-import ProductReviewRegisterComponent from "../../components/productcomponents/ProductReviewRegisterComponent.vue";
+import ProductReviewRegisterComponent from "../../components/productcomponents/productReview/ProductReviewRegisterComponent.vue";
 </script>
 
 <template>

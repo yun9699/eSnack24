@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import ProductReviewListComponent from "../../components/productcomponents/ProductReviewListComponent.vue";
+import ProductReviewListComponent from "../../components/productcomponents/productReview/ProductReviewListComponent.vue";
 </script>
 
 <template>
