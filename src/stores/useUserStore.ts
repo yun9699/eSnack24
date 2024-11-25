@@ -2,33 +2,55 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 const useUserStore = defineStore('userStore', () => {
-    const user = ref<{ uno: number }>({uno: 0});
-    const personalAllergies = ref<{ anos: number[] }>({ anos: [] });
-    const userEmail = ref<{ email: string }>({email: ''});
+    const user = ref< {
+        uno: number, anos: number[], email: string, accessToken: string, refreshToken: string } >(
+            {
+                uno: 0,
+                anos: [],
+                email: '',
+                accessToken: '',
+                refreshToken: ''
+            });
 
     const setUno = (uno: number) => user.value.uno = uno;
 
     const setPersonalAllergies = (anos: number[]) => {
 
-        personalAllergies.value.anos = anos;
+        user.value.anos = anos;
     };
 
     const setUserEmail = (email: string) => {
 
-        userEmail.value.email = email;
+        user.value.email = email;
+    }
+
+    const setAccessToken = (accessToken: string) => {
+
+        user.value.accessToken = accessToken;
+    }
+
+    const setRefreshToken = (refreshToken: string) => {
+
+        user.value.refreshToken = refreshToken;
     }
 
 
     const getUno = computed(() => user.value.uno);
 
-    const getPersonalAllergies = computed(() => personalAllergies.value.anos);
+    const getPersonalAllergies = computed(() => user.value.anos);
 
-    const getUserEmail = computed(() => userEmail.value.email);
+    const getUserEmail = computed(() => user.value.email);
+
+    const getAccessToken = computed(() => user.value.accessToken);
+
+    const getRefreshToken = computed(() => user.value.refreshToken);
 
     return {
         user, setUno, getUno,
-        personalAllergies, setPersonalAllergies, getPersonalAllergies,
-        userEmail, getUserEmail, setUserEmail
+        setPersonalAllergies, getPersonalAllergies,
+        setUserEmail, getUserEmail,
+        setAccessToken, getAccessToken,
+        setRefreshToken, getRefreshToken,
     };
 }, {
     persist: true
