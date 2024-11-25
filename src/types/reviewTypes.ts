@@ -17,3 +17,14 @@ export interface ReviewRegister {
     rcontent: string
     rimage?: string
 }
+export interface ReviewDetail {
+    rno: number;
+    pno: number;
+    uno: number;
+    rcontent: string;
+    rdelete: boolean;
+    rstar: number;
+    rimage: string | null;
+    rregDate: string;
+    rmodDate: string;
+}

@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {Review} from "../../../types/reviewTypes.ts";
 import {getUserReviewList} from "../../../api/reviewAPI/userReviewAPI.ts";
 
@@ -12,6 +12,7 @@ const size = ref(10);
 const loading = ref(false);
 const hasMore = ref(true);
 
+const router = useRouter()
 const route = useRoute();
 const uno = ref<number>(null);
 
@@ -56,6 +57,11 @@ const formatDate = (dateString: string) => {
   return date.toLocaleString();
 };
 
+const goToDetail = (rno) => {
+  router.push(`/review/detail/${rno}`);
+};
+
+
 
 onMounted(() => {
   uno.value = Number(route.params.uno);
@@ -66,7 +72,7 @@ onMounted(() => {
 
 <template>
   <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">리뷰 리스트</h1>
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">사용자 리뷰 리스트</h1>
     <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
     <div v-else>
       <div v-if="reviews.length === 0" class="text-center text-gray-400 py-6">리뷰가 없습니다.</div>
@@ -74,6 +80,7 @@ onMounted(() => {
         <li
             v-for="review in reviews"
             :key="review.rno"
+            @click="goToDetail(review.rno)"
             class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
         >
           <div class="mt-2">

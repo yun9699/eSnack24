@@ -1,26 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
+import { ReviewDetail } from "../../../types/reviewTypes";
+import {fetchReviewDetailAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
 
-// ReviewDetail 타입 정의
-interface ReviewDetail {
-  rno: number;
-  pno: number;
-  uno: number;
-  rcontent: string;
-  rdelete: boolean;
-  rstar: number;
-  rimage: string | null;
-  rregDate: string;
-  rmodDate: string;
-}
-
-const route = useRoute(); // 현재 라우트 정보를 가져옴
-const router = useRouter(); // 라우터 인스턴스
-const rno = ref<number | null>(null); // 리뷰 번호
-const review = ref<ReviewDetail | null>(null); // 리뷰 상세 정보
-const loading = ref(false); // 로딩 상태
+const route = useRoute();
+const router = useRouter();
+const rno = ref<number | null>(null);
+const review = ref<ReviewDetail | null>(null);
+const loading = ref(false);
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString: string) => {
@@ -37,27 +25,24 @@ const fetchReviewDetail = async () => {
 
   loading.value = true;
   try {
-    const response = await axios.get(`http://localhost:8080/api/v1/review/detail/${rno.value}`);
-    review.value = response.data; // API에서 가져온 데이터 설정
-  } catch (error) {
-    console.error("리뷰 상세 정보를 가져오는 중 오류 발생:", error);
-    alert("리뷰 상세 정보를 가져오는 중 문제가 발생했습니다.");
+    review.value = await fetchReviewDetailAPI(rno.value);
+  } catch (error: any) {
+    alert(error.message);
   } finally {
     loading.value = false;
   }
 };
 
-// 뒤로가기
 const goBack = () => {
   router.back();
 };
 
-// 컴포넌트가 로드될 때 리뷰 번호 설정 및 데이터 가져오기
 onMounted(() => {
-  rno.value = Number(route.params.rno); // URL에서 리뷰 번호 추출
+  rno.value = Number(route.params.rno);
   fetchReviewDetail();
 });
 </script>
+
 
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">

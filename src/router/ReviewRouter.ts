@@ -9,7 +9,7 @@ const ReviewRouter = {
     path: '/review', component: ReviewIndexPage,
     children: [
         {
-            path: ':pno', component: ReviewRegisterPage
+            path: ':uno/:pno', component: ReviewRegisterPage
         },
         {
             path: 'list/:pno', component: ReviewListPage,

@@ -32,4 +32,15 @@ export const getDetail = async (pno: number) => {
 
 }
 
+//상품 리뷰 등록에서 상품명 불러오기
+export const fetchProductTitleAPI = async (pno: number): Promise<string> => {
+    try {
+        const response = await axios.get(`${host}/detail/${pno}`);
+        return response.data.ptitle_ko;
+    } catch (error) {
+        console.error("상품명 불러오기 실패:", error);
+        throw new Error("상품 정보를 불러오는 중 오류가 발생했습니다.");
+    }
+}
+
 

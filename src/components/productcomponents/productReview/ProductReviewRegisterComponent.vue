@@ -1,67 +1,57 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import router from "../../../router/MainRouter.ts";
-import {ReviewRegister} from "../../../types/reviewTypes.ts";
-
-const uno = ref(1)
-const pno = ref(2)
-const productTitle = ref('')
-const rating = ref(0)
-const reviewText = ref('')
-const selectedImageFile = ref<File | null>(null)
-const selectedImageBlob = ref<string | null>(null) // Blob URL로 이미지 미리보기
-const submitting = ref(false)
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { ReviewRegister } from "../../../types/reviewTypes.ts";
+import { uploadImageAPI, submitReviewAPI } from "../../../api/reviewAPI/productReviewAPI.ts";
+import {fetchProductTitleAPI} from "../../../api/productAPI/productAPI.ts";
 
 
+const uno = ref<number | null>(null);
+const pno = ref<number | null>(null);
+const productTitle = ref("");
+const rating = ref(0);
+const reviewText = ref("");
+const selectedImageFile = ref<File | null>(null);
+const selectedImageBlob = ref<string | null>(null); // Blob URL로 이미지 미리보기
+const submitting = ref(false);
+const router = useRouter();
+const route = useRoute();
+
+// 상품명 가져오기
 const fetchProductTitle = async () => {
+  if (!pno.value) return;
   try {
-    const response = await axios.get(`http://localhost:8080/api/v1/product/detail/${pno.value}`)
-    productTitle.value = response.data.ptitle_ko
+    productTitle.value = await fetchProductTitleAPI(pno.value);
   } catch (error) {
-    console.error('상품명 불러오기 실패:', error)
-    alert('상품 정보를 불러오는 중 오류가 발생했습니다.')
+    alert(error.message);
   }
-}
+};
 
-
+// 이미지 파일 선택 처리
 const handleImageChange = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0];
   if (file) {
-    selectedImageFile.value = file
-    selectedImageBlob.value = URL.createObjectURL(file) // Blob URL 생성
+    selectedImageFile.value = file;
+    selectedImageBlob.value = URL.createObjectURL(file); // Blob URL 생성
   }
-}
+};
 
-
-const uploadImage = async () => {
-  if (!selectedImageFile.value) return null
-  const formData = new FormData()
-  formData.append('file', selectedImageFile.value)
-
-  try {
-    const response = await axios.post('http://localhost:8080/api/v1/review/upload-image', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    return response.data.url
-  } catch (error) {
-    console.error('이미지 업로드 실패:', error)
-    alert('이미지 업로드 중 오류가 발생했습니다.')
-    return null
-  }
-}
-
+// 리뷰 등록
 const submitReview = async () => {
   if (rating.value <= 0 || !reviewText.value.trim()) {
-    alert('별점을 선택하고 리뷰 내용을 입력해주세요.');
+    alert("별점을 선택하고 리뷰 내용을 입력해주세요.");
     return;
   }
 
   let imageUrl = null;
   if (selectedImageFile.value) {
-    imageUrl = await uploadImage();
-    console.log('업로드된 이미지 URL:', imageUrl);
+    try {
+      imageUrl = await uploadImageAPI(selectedImageFile.value);
+    } catch (error) {
+      alert(error.message);
+      return;
+    }
   }
 
   const newReview: ReviewRegister = {
@@ -69,39 +59,39 @@ const submitReview = async () => {
     pno: pno.value,
     rstar: rating.value,
     rcontent: reviewText.value.trim(),
-    rimage: imageUrl || null
+    rimage: imageUrl || null,
   };
-
 
   try {
     submitting.value = true;
-    const response = await axios.post('http://localhost:8080/api/v1/review/add', newReview);
-    console.log('리뷰 등록 성공:', response.data);
+    await submitReviewAPI(newReview);
 
     // 폼 초기화
     rating.value = 0;
-    reviewText.value = '';
+    reviewText.value = "";
     selectedImageFile.value = null;
     selectedImageBlob.value = null;
 
-    alert('리뷰가 성공적으로 등록되었습니다.');
-    router.back(`/review/list/${pno}`);
+    alert("리뷰가 성공적으로 등록되었습니다.");
+    await router.push(`/review/list/${pno.value}`);
   } catch (error) {
-    console.error('리뷰 등록 실패:', error);
-    alert('리뷰 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+    alert(error.message);
   } finally {
     submitting.value = false;
   }
 };
 
 const goBack = () => {
-  router.back()
-}
+  router.back();
+};
 
 onMounted(() => {
-  fetchProductTitle()
-})
+  uno.value = Number(route.params.uno);
+  pno.value = Number(route.params.pno);
+  fetchProductTitle();
+});
 </script>
+
 
 <template>
   <div class="p-4 border rounded-lg">
