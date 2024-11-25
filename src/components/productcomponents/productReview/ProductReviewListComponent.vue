@@ -2,19 +2,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { getReviewList } from "../../api/reviewAPI/reviewAPI.ts";
+import { getReviewList } from "../../../api/reviewAPI/productReviewAPI.ts";
+import {Review} from "../../../types/reviewTypes.ts";
 
-interface Review {
-  rno: number;
-  pno: number;
-  uno: number;
-  rcontent: string;
-  rdelete: boolean;
-  rstar: number;
-  rimage: string | null;
-  rregDate: string;
-  rmodDate: string;
-}
 
 const reviews = ref<Review[]>([]);
 const page = ref(1);

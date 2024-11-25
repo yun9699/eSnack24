@@ -1,26 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import router from "../../router/MainRouter.ts";
+import router from "../../../router/MainRouter.ts";
+import {ReviewRegister} from "../../../types/reviewTypes.ts";
 
-interface Review {
-  uno: number
-  pno: number
-  rstar: number
-  rcontent: string
-  rimage?: string // 리뷰 이미지 (선택 사항)
-}
-
-const uno = ref(1) // 현재 사용자 ID (임시 값)
-const pno = ref(2) // 현재 상품 번호 (임시 값)
-const productTitle = ref('') // 상품명
-const rating = ref(0) // 별점
-const reviewText = ref('') // 리뷰 내용
-const selectedImageFile = ref<File | null>(null) // 선택된 이미지 파일
+const uno = ref(1)
+const pno = ref(2)
+const productTitle = ref('')
+const rating = ref(0)
+const reviewText = ref('')
+const selectedImageFile = ref<File | null>(null)
 const selectedImageBlob = ref<string | null>(null) // Blob URL로 이미지 미리보기
-const submitting = ref(false) // 리뷰 등록 상태 표시
+const submitting = ref(false)
 
-// 상품명 가져오기
+
 const fetchProductTitle = async () => {
   try {
     const response = await axios.get(`http://localhost:8080/api/v1/product/detail/${pno.value}`)
@@ -31,7 +24,7 @@ const fetchProductTitle = async () => {
   }
 }
 
-// 이미지 파일 선택 처리
+
 const handleImageChange = (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
@@ -41,7 +34,7 @@ const handleImageChange = (event: Event) => {
   }
 }
 
-// 이미지 업로드 처리
+
 const uploadImage = async () => {
   if (!selectedImageFile.value) return null
   const formData = new FormData()
@@ -51,7 +44,7 @@ const uploadImage = async () => {
     const response = await axios.post('http://localhost:8080/api/v1/review/upload-image', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-    return response.data.url // 업로드된 이미지 URL 반환
+    return response.data.url
   } catch (error) {
     console.error('이미지 업로드 실패:', error)
     alert('이미지 업로드 중 오류가 발생했습니다.')
@@ -59,7 +52,6 @@ const uploadImage = async () => {
   }
 }
 
-// 리뷰 제출
 const submitReview = async () => {
   if (rating.value <= 0 || !reviewText.value.trim()) {
     alert('별점을 선택하고 리뷰 내용을 입력해주세요.');
@@ -68,19 +60,18 @@ const submitReview = async () => {
 
   let imageUrl = null;
   if (selectedImageFile.value) {
-    imageUrl = await uploadImage(); // 이미지 업로드 후 URL 가져오기
-    console.log('업로드된 이미지 URL:', imageUrl); // URL 확인
+    imageUrl = await uploadImage();
+    console.log('업로드된 이미지 URL:', imageUrl);
   }
 
-  const newReview: Review = {
+  const newReview: ReviewRegister = {
     uno: uno.value,
     pno: pno.value,
     rstar: rating.value,
     rcontent: reviewText.value.trim(),
-    rimage: imageUrl || null, // 업로드된 이미지 URL 전달
+    rimage: imageUrl || null
   };
 
-  console.log('전송할 리뷰 데이터:', newReview); // 요청 데이터 확인
 
   try {
     submitting.value = true;
@@ -94,7 +85,7 @@ const submitReview = async () => {
     selectedImageBlob.value = null;
 
     alert('리뷰가 성공적으로 등록되었습니다.');
-    router.back(); // 뒤로가기
+    router.back(`/review/list/${pno}`);
   } catch (error) {
     console.error('리뷰 등록 실패:', error);
     alert('리뷰 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
@@ -103,13 +94,10 @@ const submitReview = async () => {
   }
 };
 
-
-// 뒤로가기
 const goBack = () => {
   router.back()
 }
 
-// 컴포넌트가 로드될 때 상품명 가져오기
 onMounted(() => {
   fetchProductTitle()
 })
