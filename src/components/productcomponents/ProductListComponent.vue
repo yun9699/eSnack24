@@ -73,7 +73,7 @@ onMounted(async () => {
 
         <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
         <img
-            :src="`http://10.10.10.128/product/s_${item.pfilename}`"
+            :src="`http://10.10.10.166/product/s_${item.pfilename}`"
             :alt="item.ptitle_ko"
             class="w-full h-32 object-contain"
         />
