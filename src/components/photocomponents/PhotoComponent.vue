@@ -59,7 +59,7 @@ import { useCamera } from "../../hooks/useCamera.ts";
 import { useImageProcessor } from "../../hooks/useImageProcessor.ts";
 import useUserStore  from "../../stores/useUserStore.ts";
 import Modal from "../modalcomponents/Modal.vue";
-import { fetchAllergyInfo } from "../../api/product/productCameraAllegyAPI.ts";
+import { fetchAllergyInfo } from "../../api/productAPI/productCameraAllegyAPI.ts";
 import { compareUserAllergies } from "../../api/UserAPI/userAllergyAPI.ts";
 
 export default defineComponent({

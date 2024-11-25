@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
-import { getmainList } from "../../api/product/productAPI.ts"
+import { getmainList } from "../../api/productAPI/productAPI.ts"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n";
 import { IProduct, localeProduct } from "../../locales/localeProduct"
@@ -48,7 +48,7 @@ onMounted(() => {
 })
 
 const handleClikeMove = () => {
-  router.push('/product/list')
+  router.push('/productAPI/list')
 }
 
 </script>
