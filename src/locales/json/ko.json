@@ -69,6 +69,10 @@
     "check_primary": "기본 주소로 설정"
   },
 
+  "userAllergy": {
+    "selectTitle": "본인의 알레르기가 있는 식품을 모두 선택해주세요.",
+    "selectInfo":  "알레르기가 없다면 바로 가입을 눌러주세요."
+  },
 
   "bottom_nav": {
     "search": "검색",

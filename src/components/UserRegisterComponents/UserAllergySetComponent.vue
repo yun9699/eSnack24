@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {inject, Ref} from "vue"
+import { useI18n } from 'vue-i18n'
 import { useLocaleStore } from '../../stores/useLocaleStore'
 import { storeToRefs } from 'pinia'
 import { IUserAllergy } from "../../types/userRegisterTypes.ts"
+
+const { t } = useI18n()
 
 // 알레르기 목록과 선택된 알레르기 번호 배열 주입
 const allergyList = inject<Ref<IUserAllergy[]>>("allergyList")
@@ -34,7 +37,8 @@ const toggleSelection = (ano: number) => {
 <template>
   <div class="p-4">
     <!-- 컴포넌트 제목 -->
-    <h2 class="text-2xl font-semibold mb-4">알레르기 선택</h2>
+    <h2 class="text-2xl font-bold text-left mb-2">{{ t('userAllergy.selectTitle') }}</h2>
+    <h3 class="text-s text-gray-600 text-left mb-8">{{ t('userAllergy.selectInfo') }}</h3>
 
     <!-- 알레르기 목록 그리드 -->
     <ul class="grid grid-cols-2 gap-4">
@@ -45,14 +49,13 @@ const toggleSelection = (ano: number) => {
       >
         <!-- 알레르기 선택 버튼 -->
         <button
-            class="px-4 py-2 rounded-full transition-colors duration-200"
+            class="w-32 px-4 py-2 rounded-full transition-colors duration-200"
             :class="{
-              'bg-green-500 text-white': selectedAnos.includes(item.ano),
-              'bg-gray-200 text-gray-800': !selectedAnos.includes(item.ano)
+              'bg-gradient-to-r from-red-400 to-pink-500 text-white': selectedAnos.includes(item.ano),
+              'bg-gray-100 text-gray-700': !selectedAnos.includes(item.ano)
             }"
             @click="toggleSelection(item.ano)"
         >
-          <!-- 현재 언어에 따라 알레르기 이름 표시 -->
           {{ currentLang === 'ko' ? item.atitle_ko :
             currentLang === 'en' ? item.atitle_en :
                 currentLang === 'ja' ? item.atitle_ja :

@@ -69,6 +69,11 @@
     "check_primary": "设为默认地址"
   },
 
+  "userAllergy": {
+    "selectTitle": "请选择所有您有过敏反应的食物。",
+    "selectInfo": "如果没有过敏，请直接点击注册。"
+  },
+
   "bottom_nav": {
     "search": "搜索",
     "cart": "购物车",

@@ -69,6 +69,11 @@
     "check_primary": "Set as primary address"
   },
 
+  "userAllergy": {
+    "selectTitle": "Please select all the foods you are allergic to.",
+    "selectInfo": "If you have no allergies, please click sign up."
+  },
+
   "bottom_nav": {
     "search": "Search",
     "cart": "Cart",

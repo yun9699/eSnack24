@@ -69,6 +69,10 @@
     "check_primary": "基本住所に設定"
   },
 
+  "userAllergy": {
+    "selectTitle": "ご自身のアレルギーがある食品をすべて選んでください。",
+    "selectInfo": "アレルギーがない場合は、すぐに登録ボタンを押してください。"
+  },
 
   "bottom_nav": {
     "search": "検索",
