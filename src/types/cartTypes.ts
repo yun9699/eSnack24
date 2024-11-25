@@ -10,4 +10,5 @@ export interface ICartItem {
     pno: number
     price: number
     pfilename: string
+    cino: number
 }
