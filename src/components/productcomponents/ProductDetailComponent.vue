@@ -12,7 +12,7 @@ const pno: number = Number(route.params.pno);
 const user = useUserStore();
 
 const uno = user.getUno;
-const userano = user.personalAllergies.anos
+const userano = user.getPersonalAllergies;
 
 const isModalStatus = ref(false);  // 모달 상태 관리
 
@@ -121,7 +121,7 @@ onMounted(() => {
     <!-- 제품 이미지 -->
     <div class="flex justify-center items-center w-full max-w-md mx-auto">
       <img
-          :src="`http://10.10.10.166/product/${productRef.productDetail.product.pfilename}`"
+          :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/${productRef.productDetail.product.pfilename}`"
           alt="Product Image"
           class="w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80 object-cover rounded-lg border-2 border-gray-200 shadow-md"
       />
