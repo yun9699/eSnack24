@@ -97,7 +97,7 @@ onMounted(() => {
 
         <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
         <img
-            :src="`http://10.10.10.166/product/s_${item.pfilename}`"
+            :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
             :alt="item.ptitle_ko"
             class="w-full h-32 object-contain"
         />
