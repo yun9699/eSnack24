@@ -9,7 +9,7 @@ const auth_code_path = `https://kauth.kakao.com/oauth/authorize`
 
 const access_token_url = 'https://kauth.kakao.com/oauth/token'
 
-const host = `https://3.34.191.185:8080/api/v1/login/kakao`
+const host = `https://esnack24.store:8080/api/v1/login/kakao`
 
 export const getKakaoMemberWithAccessToken = async (accessToken:string)  => {
 

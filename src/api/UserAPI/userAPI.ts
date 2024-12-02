@@ -7,7 +7,7 @@ const user = useUserStore();
 const uno: number = user.getUno;
 const userEmail: string = user.getUserEmail;
 
-const host = 'https://3.34.191.185:8080/api/v1';
+const host = 'https://esnack24.store:8080/api/v1';
 
 export const registerUser = async (userInfo: IUserInfo) => {
 

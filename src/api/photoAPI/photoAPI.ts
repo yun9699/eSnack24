@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "https://3.34.191.185:8080/api/v1"
+const host = "https://esnack24.store:8080/api/v1"
 
 export async function photoAPI(base64Image: string): Promise<any> {
     try {
