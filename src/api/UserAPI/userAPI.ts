@@ -7,7 +7,7 @@ const user = useUserStore();
 const uno: number = user.getUno;
 const userEmail: string = user.getUserEmail;
 
-const host = 'http://3.34.191.185:8080/api/v1';
+const host = 'https://3.34.191.185:8080/api/v1';
 
 export const registerUser = async (userInfo: IUserInfo) => {
 

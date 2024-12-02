@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `http://3.34.191.185:8080/api/v1/faq`;
+const host = `https://3.34.191.185:8080/api/v1/faq`;
 
 // FAQ 목록 조회
 export const getFAQList = async (page: number = 1, size: number = 10, fcategory?: string) => {
