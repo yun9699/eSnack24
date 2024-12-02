@@ -1,0 +1,89 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "prev": "上一步",
+    "next": "下一步",
+    "register": "注册",
+    "date_format": "年-月-日"
+  },
+
+  "login": {
+    "register_title": "注册会员",
+    "sns_login": "通过SNS账号轻松登录/注册"
+  },
+
+  "userInfo": {
+    "title": "用户信息",
+    "name": {
+      "label": "姓名",
+      "placeholder": "请输入姓名"
+    },
+    "phone": {
+      "label": "电话号码",
+      "placeholder": "请输入电话号码"
+    },
+    "gender": {
+      "label": "性别",
+      "placeholder": "请选择性别",
+      "options": {
+        "male": "男",
+        "female": "女",
+        "other": "其他"
+      }
+    },
+    "birthday": {
+      "label": "出生日期"
+    }
+  },
+
+  "userAddress": {
+    "title": "输入地址",
+    "country": {
+      "label": "国家",
+      "placeholder": "请输入国家"
+    },
+    "state": {
+      "label": "州",
+      "placeholder": "请输入州"
+    },
+    "city": {
+      "label": "城市",
+      "placeholder": "请输入城市"
+    },
+    "address_line1": {
+      "label": "地址",
+      "placeholder": "请输入地址"
+    },
+    "address_line2": {
+      "label": "详细地址",
+      "placeholder": "请输入详细地址"
+    },
+    "zipcode": {
+      "label": "邮政编码",
+      "placeholder": "请输入邮政编码"
+    },
+    "phone": {
+      "label": "电话号码",
+      "placeholder": "请输入电话号码"
+    },
+    "check_primary": "设为默认地址"
+  },
+
+  "userAllergy": {
+    "selectTitle": "请选择所有您有过敏反应的食物。",
+    "selectInfo": "如果没有过敏，请直接点击注册。"
+  },
+
+  "bottom_nav": {
+    "search": "搜索",
+    "cart": "购物车",
+    "camera": "相机",
+    "contact": "帮助中心",
+    "profile": "个人资料"
+  },
+
+  "pMain": {
+    "popular": "本月热门商品",
+    "moreinfo": "更多信息"
+  }
+}

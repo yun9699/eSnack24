@@ -1,0 +1,89 @@
+{
+  "common": {
+    "loading": "로딩 중...",
+    "prev": "이전",
+    "next": "다음",
+    "register": "가입",
+    "date_format": "연도-월-일"
+  },
+
+  "login": {
+    "register_title": "회원가입",
+    "sns_login": "SNS계정으로 간편하게 로그인/회원가입"
+  },
+
+  "userInfo": {
+    "title": "사용자 정보",
+    "name": {
+      "label": "이름",
+      "placeholder": "이름을 입력하세요"
+    },
+    "phone": {
+      "label": "전화번호",
+      "placeholder": "전화번호를 입력하세요"
+    },
+    "gender": {
+      "label": "성별",
+      "placeholder": "성별을 선택하세요",
+      "options": {
+        "male": "남성",
+        "female": "여성",
+        "other": "기타"
+      }
+    },
+    "birthday": {
+      "label": "생년월일"
+    }
+  },
+
+  "userAddress": {
+    "title": "주소 입력",
+    "country": {
+      "label": "국가",
+      "placeholder": "국가를 입력하세요"
+    },
+    "state": {
+      "label": "주",
+      "placeholder": "주를 입력하세요"
+    },
+    "city": {
+      "label": "도시",
+      "placeholder": "도시를 입력하세요"
+    },
+    "address_line1": {
+      "label": "주소",
+      "placeholder": "주소를 입력하세요"
+    },
+    "address_line2": {
+      "label": "상세 주소",
+      "placeholder": "상세 주소를 입력하세요"
+    },
+    "zipcode": {
+      "label": "우편번호",
+      "placeholder": "우편번호를 입력하세요"
+    },
+    "phone": {
+      "label": "전화번호",
+      "placeholder": "전화번호를 입력하세요"
+    },
+    "check_primary": "기본 주소로 설정"
+  },
+
+  "userAllergy": {
+    "selectTitle": "본인의 알레르기가 있는 식품을 모두 선택해주세요.",
+    "selectInfo":  "알레르기가 없다면 바로 가입을 눌러주세요."
+  },
+
+  "bottom_nav": {
+    "search": "검색",
+    "cart": "장바구니",
+    "camera": "카메라",
+    "contact": "헬프센터",
+    "profile": "프로필"
+  },
+
+  "pMain": {
+    "popular": "이번 달 인기 상품",
+    "moreinfo": "더보기"
+  }
+}

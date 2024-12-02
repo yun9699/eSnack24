@@ -1,9 +1,12 @@
 <script setup lang="ts">
 
+import Basiclayout from "../../layouts/Basiclayout.vue";
 </script>
 
 <template>
-  <div>User</div>
+
+  <Basiclayout/>
+  <router-view/>
 </template>
 
 <style scoped>

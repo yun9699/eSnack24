@@ -1,0 +1,89 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "prev": "Previous",
+    "next": "Next",
+    "register": "Register",
+    "date_format": "Year-Month-Day"
+  },
+
+  "login": {
+    "register_title": "Sign Up",
+    "sns_login": "Log in or sign up easily with SNS account"
+  },
+
+  "userInfo": {
+    "title": "User Information",
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter your name"
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Enter your phone number"
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Select gender",
+      "options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      }
+    },
+    "birthday": {
+      "label": "Birthday"
+    }
+  },
+
+  "userAddress": {
+    "title": "Address Information",
+    "country": {
+      "label": "Country",
+      "placeholder": "Enter your country"
+    },
+    "state": {
+      "label": "State",
+      "placeholder": "Enter your state"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "address_line1": {
+      "label": "Address",
+      "placeholder": "Enter your address"
+    },
+    "address_line2": {
+      "label": "Detailed Address",
+      "placeholder": "Enter your detailed address"
+    },
+    "zipcode": {
+      "label": "Zip Code",
+      "placeholder": "Enter your zip code"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number"
+    },
+    "check_primary": "Set as primary address"
+  },
+
+  "userAllergy": {
+    "selectTitle": "Please select all the foods you are allergic to.",
+    "selectInfo": "If you have no allergies, please click sign up."
+  },
+
+  "bottom_nav": {
+    "search": "Search",
+    "cart": "Cart",
+    "camera": "Camera",
+    "contact": "Help Center",
+    "profile": "Profile"
+  },
+
+  "pMain": {
+    "popular": "Popular Products This Month",
+    "moreinfo": "More Info"
+  }
+}

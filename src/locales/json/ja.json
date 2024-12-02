@@ -1,0 +1,89 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "prev": "前へ",
+    "next": "次へ",
+    "register": "登録",
+    "date_format": "年-月-日"
+  },
+
+  "login": {
+    "register_title": "会員登録",
+    "sns_login": "SNSアカウントで簡単にログイン/会員登録"
+  },
+
+  "userInfo": {
+    "title": "ユーザー情報",
+    "name": {
+      "label": "名前",
+      "placeholder": "名前を入力してください"
+    },
+    "phone": {
+      "label": "電話番号",
+      "placeholder": "電話番号を入力してください"
+    },
+    "gender": {
+      "label": "性別",
+      "placeholder": "性別を選択してください",
+      "options": {
+        "male": "男性",
+        "female": "女性",
+        "other": "その他"
+      }
+    },
+    "birthday": {
+      "label": "生年月日"
+    }
+  },
+
+  "userAddress": {
+    "title": "住所入力",
+    "country": {
+      "label": "国",
+      "placeholder": "国を入力してください"
+    },
+    "state": {
+      "label": "州",
+      "placeholder": "州を入力してください"
+    },
+    "city": {
+      "label": "市",
+      "placeholder": "市を入力してください"
+    },
+    "address_line1": {
+      "label": "住所",
+      "placeholder": "住所を入力してください"
+    },
+    "address_line2": {
+      "label": "詳細住所",
+      "placeholder": "詳細住所を入力してください"
+    },
+    "zipcode": {
+      "label": "郵便番号",
+      "placeholder": "郵便番号を入力してください"
+    },
+    "phone": {
+      "label": "電話番号",
+      "placeholder": "電話番号を入力してください"
+    },
+    "check_primary": "基本住所に設定"
+  },
+
+  "userAllergy": {
+    "selectTitle": "ご自身のアレルギーがある食品をすべて選んでください。",
+    "selectInfo": "アレルギーがない場合は、すぐに登録ボタンを押してください。"
+  },
+
+  "bottom_nav": {
+    "search": "検索",
+    "cart": "カート",
+    "camera": "カメラ",
+    "contact": "ヘルプセンター",
+    "profile": "プロフィール"
+  },
+
+  "pMain": {
+    "popular": "今月の人気商品",
+    "moreinfo": "もっと見る"
+  }
+}

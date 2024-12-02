@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import {useRoute, useRouter} from 'vue-router';
-import { getGoogleAccessToken, getGoogleMemberWithAccessToken } from "../../api/LoginAPI/googleAPI.ts";
-import useUser from "../../stores/useUser.ts";
+import { getGoogleAccessToken, getGoogleMemberWithAccessToken } from "../../api/loginapi/googleAPI.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const route = useRoute();
 const router = useRouter();
 
-const setUno = useUser();
+const user = useUserStore();
 
 const authCode = route.query.code as string | null;
 
@@ -21,7 +21,11 @@ onMounted(() => {
         .then((result) => {
           console.log("Google Member Data:", result);
 
-          setUno.setUno(result.uno);
+          user.setUno(result.uno);
+          user.setPersonalAllergies(result.anos);
+          user.setUserEmail(result.email);
+          user.setAccessToken(result.accessToken);
+          user.setRefreshToken(result.refreshToken);
 
           if(result.new == true) router.push('/user/reg');
           if(result.new == false) router.push('/');

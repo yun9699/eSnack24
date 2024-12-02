@@ -1,0 +1,121 @@
+{
+  "ui": {
+    "common": {
+      "loading": "Loading..."
+    },
+    "agreement": {
+      "confirm_message": "I have reviewed everything and agree."
+    }
+  },
+  "terms": [
+    {
+      "description_Section1": "(Purpose)",
+      "details": "These terms and conditions define the rights, obligations, responsibilities, and usage conditions between eSnack24 (hereinafter referred to as 'the Shopping Mall') and users when using the internet services (hereinafter referred to as 'the Service') provided by the Shopping Mall."
+    },
+    {
+      "description_Section2": "(Definitions)",
+      "details": [
+        "1. `Shopping Mall` refers to a virtual business platform set up by eSnack24 using computers and other information and communication equipment to provide Korean snacks, instant noodles, and other goods and services to foreign users.",
+        "2. `User` refers to members and non-members who use the services provided by the Shopping Mall under these terms and conditions.",
+        "3. `Member` refers to a user who has registered with the Shopping Mall through social login (Kakao, Google) and can continuously receive information and use the Shopping Mall's services.",
+        "4. `Non-member` refers to a user who uses the Shopping Mall's services without registering as a member."
+      ]
+    },
+    {
+      "description_Section3": "(Notification and Amendment of Terms)",
+      "details": [
+        "1. The Shopping Mall posts these terms and conditions on the initial service screen to ensure users can easily access them.",
+        "2. The Shopping Mall may revise these terms, with the revised terms specifying the effective date and reasons for the amendment. These will be announced on the initial service screen.",
+        "3. The revised terms take effect on the specified date, and users who do not agree to the revised terms may request membership withdrawal."
+      ]
+    },
+    {
+      "description_Section4": "(Provision and Modification of Services)",
+      "details": [
+        "1. The Shopping Mall provides the following services:",
+        "   1) Information and contract conclusion for Korean snack products.",
+        "   2) Delivery of purchased goods.",
+        "   3) Allergy information and product purchase links through product photos.",
+        "   4) Other services defined by the Shopping Mall.",
+        "2. The Shopping Mall may modify the content of goods to be provided due to reasons such as sold-out items or technical specification changes."
+      ]
+    },
+    {
+      "description_Section5": "(Service Suspension)",
+      "details": [
+        "1. The Shopping Mall may temporarily suspend the provision of services for reasons such as maintenance, replacement, breakdown, or communication interruption.",
+        "2. In such cases, the Shopping Mall will notify users of the suspension."
+      ]
+    },
+    {
+      "description_Section6": "(Membership Registration)",
+      "details": [
+        "1. Users can register for membership using social login via Kakao or Google.",
+        "2. The Shopping Mall accepts registration unless:",
+        "   1) There is false, omitted, or incorrect information in the application.",
+        "   2) Registering as a member may cause technical issues.",
+        "3. Membership is established when the Shopping Mall's acceptance is delivered to the user."
+      ]
+    },
+    {
+      "description_Section7": "(Membership Withdrawal and Disqualification)",
+      "details": [
+        "1. Members may withdraw at any time, and the Shopping Mall will process the withdrawal promptly.",
+        "2. Membership may be restricted or suspended if:",
+        "   1) False information was provided during registration.",
+        "   2) The member does not fulfill payment obligations related to the Shopping Mall's use.",
+        "   3) The member hinders other users or disrupts e-commerce order by stealing information."
+      ]
+    },
+    {
+      "description_Section8": "(Member Notifications)",
+      "details": [
+        "1. Notifications to members are made via the email address provided by the member.",
+        "2. For mass notifications, the Shopping Mall may substitute individual notices by posting on the website bulletin board for at least one week."
+      ]
+    },
+    {
+      "description_Section9": "(Purchase Applications and Agreement to Provide Personal Information)",
+      "details": [
+        "1. Users may apply for purchases using the following or similar methods, and the Shopping Mall must clearly present the following information:",
+        "   1) Search and selection of goods.",
+        "   2) Input of name, address, and phone number.",
+        "   3) Confirmation of terms and costs such as shipping fees.",
+        "   4) Purchase application and confirmation by the Shopping Mall.",
+        "   5) Selection of payment methods (PayPal, Google Pay)."
+      ]
+    },
+    {
+      "description_Section10": "(Contract Establishment)",
+      "details": [
+        "1. The Shopping Mall may reject purchase applications if:",
+        "   1) The application contains false, omitted, or incorrect information.",
+        "   2) Acceptance of the application causes technical issues.",
+        "2. The contract is established upon the delivery of the Shopping Mall's acceptance to the user."
+      ]
+    },
+    {
+      "description_Section11": "(Payment Methods)",
+      "details": "Payments for goods or services purchased on the Shopping Mall can be made via PayPal or Google Pay."
+    },
+    {
+      "description_Section12": "(Privacy Policy)",
+      "details": [
+        "1. The Shopping Mall collects only the minimum personal information necessary to provide services.",
+        "2. The purpose of collecting and using personal information is notified to users, and consent is obtained.",
+        "3. Personal information is not used beyond its stated purpose or provided to third parties without consent."
+      ]
+    },
+    {
+      "description_Section13": "(Liability Exemptions)",
+      "details": [
+        "1. The Shopping Mall is exempt from liability for service interruptions due to force majeure such as natural disasters.",
+        "2. The Shopping Mall is not liable for service disruptions caused by user negligence."
+      ]
+    },
+    {
+      "description_Section14": "(Governing Law and Jurisdiction)",
+      "details": "Disputes related to these terms are subject to the exclusive jurisdiction of the court in the location of the Shopping Mall's headquarters."
+    }
+  ]
+}

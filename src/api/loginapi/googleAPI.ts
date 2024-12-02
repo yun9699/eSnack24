@@ -8,7 +8,7 @@ const redirect_uri = 'http://localhost:5173/login/googlere';
 
 const access_token_url = 'https://oauth2.googleapis.com/token';
 
-const host = 'http://localhost:8080/api/v1/login/google';
+const host = 'http://3.34.191.185:8080/api/v1/login/google';
 
 
 export const getGoogleLoginLink = () => {
@@ -20,6 +20,8 @@ export const getGoogleLoginLink = () => {
 
 export const getGoogleMemberWithAccessToken = async (accessToken: string) => {
     const res = await axios.get(`${host}?accessToken=${accessToken}`);
+
+    console.log(res.data)
     return res.data;
 };
 
@@ -39,6 +41,8 @@ export const getGoogleAccessToken = async (authCode: string) => {
     });
 
     const res = await axios.post(access_token_url, params, header);
+
+    console.log(res.data)
 
     return res.data.access_token;
 };

@@ -3,12 +3,12 @@
 import { onMounted } from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import { getKakaoAccessToken, getKakaoMemberWithAccessToken } from '../../api/loginapi/kakaoAPI.ts'
-import useUser from "../../stores/useUser.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const route = useRoute()
 const router = useRouter()
 
-const setUno = useUser();
+const user = useUserStore();
 
 // "code" 파라미터 가져오기
 const authCode = route.query.code as string | null
@@ -22,7 +22,11 @@ onMounted(() => {
         console.log("=========================")
         console.log(result)
 
-        setUno.setUno(result.uno);
+        user.setUno(result.uno);
+        user.setPersonalAllergies(result.anos);
+        user.setUserEmail(result.email);
+        user.setAccessToken(result.accessToken);
+        user.setRefreshToken(result.refreshToken);
 
         if(result.new == true) router.push('/user/reg');
         if(result.new == false) router.push('/');

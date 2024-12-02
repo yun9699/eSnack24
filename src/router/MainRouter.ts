@@ -8,9 +8,8 @@ import ReviewRouter from "./ReviewRouter.ts";
 import UserRegisterRouter from "./UserRegisterRouter.ts";
 import UserRouter from "./UserRouter.ts";
 import photoRouter from "./photoRouter.ts";
-
-
-const MainPage = () => import('../pages/MainPage.vue')
+import cartRouter from "./CartRouter.ts";
+import searchRouter from "./SearchRouter.ts";
 
 const routes = [
     CSRouter,
@@ -20,7 +19,9 @@ const routes = [
     ReviewRouter,
     UserRegisterRouter,
     UserRouter,
-    photoRouter
+    photoRouter,
+    cartRouter,
+    searchRouter
 
 ]
 
