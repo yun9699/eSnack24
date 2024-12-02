@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const host = `https://esnack24.store:8080/api/v1/search`
+const host = `https://esnack24.store/api/v1/search`
 
 
 
