@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "https://esnack24.store:8080/api/v1/user"
+const host = "https://esnack24.store/api/v1/user"
 
 export const compareUserAllergies = async (uno: number, imageAllergies: string[]) => {
 

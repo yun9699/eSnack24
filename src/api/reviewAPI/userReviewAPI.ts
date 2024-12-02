@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const host = 'https://esnack24.store:8080/api/v1/review'
+const host = 'https://esnack24.store/api/v1/review'
 
 export const getUserReviewList = async (page: number = 1, size: number = 10, uno?: number) => {
     try {
