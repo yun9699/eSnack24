@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const host = 'https://3.34.191.185:8080/api/v1/review'
+const host = 'http://3.34.191.185:8080/api/v1/review'
 
 export const getUserReviewList = async (page: number = 1, size: number = 10, uno?: number) => {
     try {
