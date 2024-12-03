@@ -21,3 +21,10 @@ export const viewOrder = async (ono: number) => {
 
     return res.data;
 }
+
+export const detailOrder = async (ono: number) => {
+
+    const res = await axios.get(`${host}/detail/${ono}`);
+
+    return res.data;
+}
