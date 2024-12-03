@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import { useRouter } from 'vue-router'
 import { registerQNA } from "../../api/csAPI/qnaAPI.ts"
 import { getToken } from "../../api/fcmAPI/fcmAPI.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const router = useRouter()
 
 // 폼 데이터
 const formData = ref({
-  uno: 1,  // 현재 로그인한 사용자 ID (나중에 store에서 가져올 예정)
+  uno: '',  // 현재 로그인한 사용자 ID (나중에 store에서 가져올 예정)
   pno: '',  // 선택적 상품 번호
   qtitle: '',
   qcontent: '',
@@ -18,6 +19,10 @@ const formData = ref({
 const fcmData = ref({
   token: []
 })
+
+const user = useUserStore();
+
+const uno = ref<number>(user.getUno);
 
 // 파일 업로드 처리
 const handleFileUpload = (event: any) => {
@@ -46,7 +51,9 @@ const handleSubmit = async () => {
       return;  // 토큰이 없으면 종료
     }
 
-    // FCM 메시지 전송
+  router.push('/cs/qna');
+
+  // FCM 메시지 전송
     const response = await fetch("http://10.10.10.173:8080/api/fcm/send", {
       method: "POST",
       headers: {
@@ -65,8 +72,11 @@ const handleSubmit = async () => {
     console.log('FCM 메시지 전송 성공');
 
     // QNA 등록 후 화면 이동
-    router.push('/cs/qna');
   }
+
+onMounted(() => {
+  formData.value.uno = uno.value;
+})
 
 </script>
 <template>
@@ -83,17 +93,6 @@ const handleSubmit = async () => {
     </div>
 
     <!-- 등록 폼 -->
-    <form @submit.prevent="handleSubmit" class="space-y-6">
-      <!-- 상품 검색 (선택사항) -->
-      <div>
-        <label class="block mb-2">상품 선택 (선택사항)</label>
-        <input
-            type="text"
-            placeholder="상품명을 검색하세요"
-            v-model="formData.pno"
-        class="w-full p-3 border rounded-lg"
-        >
-      </div>
 
       <!-- 제목 -->
       <div>
@@ -137,12 +136,12 @@ const handleSubmit = async () => {
           취소
         </button>
         <button
+            @click="handleSubmit"
             type="submit"
             class="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600"
         >
           등록
         </button>
       </div>
-    </form>
   </div>
 </template>
