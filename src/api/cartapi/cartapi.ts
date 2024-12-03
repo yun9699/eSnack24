@@ -47,3 +47,10 @@ export const decCartItem = async (cino: number) => {
 
     return res.data
 }
+
+export const clearCart = async () => {
+
+    const res = await axios.delete(`${host}/clearItem/${user.getUno}`);
+
+    return res.data
+}

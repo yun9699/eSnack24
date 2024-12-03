@@ -81,7 +81,7 @@ const handleClikeMove = () => {
           >
 
             <img
-                :src="`http://10.10.10.166/product/s_${product.pfilename}`"
+                :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${product.pfilename}`"
                 :alt="product.ptitle_ko"
                 class="w-full h-32 object-contain"
             />

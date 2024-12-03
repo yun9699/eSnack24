@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from 'vue';
 import { IProduct, IProductDetail } from "../../types/productTypes.ts";
-import { useRoute } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import { getDetail } from "../../api/productAPI/productAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {addCartProduct} from "../../api/cartapi/cartapi.ts";
 import CommonCartAddModalComponent from "../../common/components/CommonCartAddModalComponent.vue";
+import {createOrder, viewOrder} from "../../api/orderapi/OrderAPI.ts";
 
 const route = useRoute();
+const router = useRouter();
 const pno: number = Number(route.params.pno);
 const user = useUserStore();
 
@@ -88,11 +90,22 @@ const handleClickAddCart = async () => {
   const res = await addCartProduct(pno,1)
 
   modalOpen()
-
-
 }
 
+const orderClick = () => {
 
+  const pnos: number[] = [];
+  const ciqtys: number[] = [];
+
+  pnos.push(pno);
+  ciqtys.push(1);
+
+  createOrder(pnos, ciqtys, "USD").then((ono) => {
+
+    console.log(ono);
+    router.push(`/order/create/${ono}`);
+  })
+}
 
 
 onMounted(() => {
@@ -121,7 +134,7 @@ onMounted(() => {
     <!-- 제품 이미지 -->
     <div class="flex justify-center items-center w-full max-w-md mx-auto">
       <img
-          :src="`http://10.10.10.166/product/${productRef.productDetail.product.pfilename}`"
+          :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/${productRef.productDetail.product.pfilename}`"
           alt="Product Image"
           class="w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80 object-cover rounded-lg border-2 border-gray-200 shadow-md"
       />
@@ -183,6 +196,7 @@ onMounted(() => {
     <div class="w-full max-w-lg flex justify-between gap-4 mt-4">
       <button
           class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
+          @click="orderClick"
       >
         Buy Now
       </button>
