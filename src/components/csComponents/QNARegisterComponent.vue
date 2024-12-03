@@ -54,7 +54,7 @@ const handleSubmit = async () => {
   router.push('/cs/qna');
 
   // FCM 메시지 전송
-    const response = await fetch("http://10.10.10.173:8080/api/fcm/send", {
+    const response = await fetch("http://10.10.10.145:8080/api/fcm/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
