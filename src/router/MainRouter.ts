@@ -10,6 +10,8 @@ import UserRouter from "./UserRouter.ts";
 import photoRouter from "./photoRouter.ts";
 import cartRouter from "./CartRouter.ts";
 import searchRouter from "./SearchRouter.ts";
+import RequestAllergyRouter from "./RequestAllergyRouter.ts";
+import RequestProductRouter from "./RequestProductRouter.ts";
 
 const routes = [
     CSRouter,
@@ -21,7 +23,9 @@ const routes = [
     UserRouter,
     photoRouter,
     cartRouter,
-    searchRouter
+    searchRouter,
+    RequestAllergyRouter,
+    RequestProductRouter
 
 ]
 
