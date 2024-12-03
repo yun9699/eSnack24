@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router";
 
 import LoginRouter from "./LoginRouter.ts";
 import CSRouter from "./CSRouter.ts";
+import PaymentRouter from "./PaymentRouter.ts";
 import ProductRouter from "./ProductRouter.ts";
 import ReviewRouter from "./ReviewRouter.ts";
 import UserRegisterRouter from "./UserRegisterRouter.ts";
@@ -10,10 +11,13 @@ import photoRouter from "./photoRouter.ts";
 import cartRouter from "./CartRouter.ts";
 import searchRouter from "./SearchRouter.ts";
 import orderRouter from "./OrderRouter.ts";
+import RequestAllergyRouter from "./RequestAllergyRouter.ts";
+import RequestProductRouter from "./RequestProductRouter.ts";
 
 const routes = [
     CSRouter,
     LoginRouter,
+    PaymentRouter,
     ProductRouter,
     ReviewRouter,
     UserRegisterRouter,
@@ -21,7 +25,11 @@ const routes = [
     photoRouter,
     cartRouter,
     searchRouter,
-    orderRouter
+    orderRouter,
+    searchRouter,
+    RequestAllergyRouter,
+    RequestProductRouter
+
 ]
 
 
