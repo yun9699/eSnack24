@@ -32,6 +32,6 @@ export const updateQNA = async (qno: number, qnaData: any) => {
 
 // QNA 삭제
 export const deleteQNA = async (qno: number) => {
-    const res = await axios.delete(`${host}/delete/${qno}`);
+    const res = await axios.put(`${host}/delete/${qno}`);
     return res.data;
 };
