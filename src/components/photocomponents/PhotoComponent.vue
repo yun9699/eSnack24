@@ -129,7 +129,7 @@ const handleImageClick = async (image: string) => {
                       @click="showAllergyModal(image)"
                       class="cursor-pointer text-lg"
                       :class="{
-                      'text-red-600 font-bold': allergyInfo[image],
+                      'text-red-600 font-bold': imageWarnings[image],
                       'text-green-500': !allergyInfo[image],
                     }"
                   >
@@ -150,20 +150,27 @@ const handleImageClick = async (image: string) => {
     >
       <h2 class="text-xl font-bold text-gray-800 mb-4">알러지 상세 정보</h2>
       <p v-if="currentAllergyInfo" class="text-gray-600">
-        <span
-            v-for="(info, index) in currentAllergyInfo.split(',')"
-            :key="index"
-            class="block"
-        >
-          {{ info }}
-        </span>
+  <span
+      v-for="(info, index) in currentAllergyInfo.split(',')"
+      :key="index"
+      :class="{
+      'text-red-600 font-bold': currentWarning.includes(info.trim()),
+      'text-gray-800': !currentWarning.includes(info.trim()),
+    }"
+      class="block"
+  >
+    {{ info }}
+  </span>
       </p>
+
       <p
           v-if="currentWarning"
-          class="text-red-600 font-bold mt-4 text-center"
+          class="flex items-center gap-3 p-4 text-white bg-red-500 border border-red-700 rounded-lg shadow-md text-lg font-semibold animate-fadeIn"
       >
-        {{ currentWarning }}
+        <span class="text-2xl">⚠️</span>
+        <span>{{ currentWarning }}</span>
       </p>
+
     </modal>
   </div>
 </template>
