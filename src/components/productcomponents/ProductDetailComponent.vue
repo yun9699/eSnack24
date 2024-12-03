@@ -12,7 +12,7 @@ const pno: number = Number(route.params.pno);
 const user = useUserStore();
 
 const uno = user.getUno;
-const userano = user.personalAllergies.anos
+const userano = user.getPersonalAllergies;
 
 const isModalStatus = ref(false);  // 모달 상태 관리
 
