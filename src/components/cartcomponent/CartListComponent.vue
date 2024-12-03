@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
-import {decCartItem, deleteCartItem, getCartList, incCartItem} from "../../api/cartapi/cartapi.ts";
+import {clearCart, decCartItem, deleteCartItem, getCartList, incCartItem} from "../../api/cartapi/cartapi.ts";
 import { ICartItem } from "../../types/cartTypes.ts";
+import {createOrder} from "../../api/orderapi/OrderAPI.ts";
+import {useRouter} from "vue-router";
 
 const initCartItem: ICartItem = {
   cino: 0,
@@ -14,6 +16,8 @@ const initCartItem: ICartItem = {
   pfilename: '',
   ciqty: 0
 };
+
+const router = useRouter();
 
 let pageNum: number = 1;
 
@@ -67,6 +71,25 @@ const moreInfo = () => {
   getCartList(pageNum).then((res) => {
 
     data.value = [...data.value, ...res.list];
+  })
+}
+
+const handleClickPay = () => {
+
+  const pnos: number[] = [];
+  const ciqtys: number[] = [];
+
+  data.value.forEach((item) => {
+
+    pnos.push(item.pno);
+    ciqtys.push(item.ciqty);
+  })
+
+  createOrder(pnos, ciqtys, "USD").then((ono) => {
+
+    console.log(ono);
+
+    router.push(`/order/create/${ono}`);
   })
 }
 
@@ -156,6 +179,18 @@ onMounted(() => {
       >
         더보기
       </button>
+    </div>
+
+    <!-- 결제하기 버튼 (맨 아래) -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white py-4 shadow-lg">
+      <div class="container mx-auto text-center">
+        <button
+            @click="handleClickPay"
+            class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300"
+        >
+          결제하기
+        </button>
+      </div>
     </div>
   </div>
 </template>

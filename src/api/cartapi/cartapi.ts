@@ -1,7 +1,7 @@
 import useUserStore from "../../stores/useUserStore.ts";
 import axios from "axios";
 
-const host = 'https://esnack24.store/api/v1/cart';
+const host = 'http://localhost:8080/api/v1/cart';
 
 const user = useUserStore();
 
@@ -44,6 +44,13 @@ export const incCartItem = async (cino: number) => {
 export const decCartItem = async (cino: number) => {
 
     const res = await axios.put(`${host}/decqty/${cino}`)
+
+    return res.data
+}
+
+export const clearCart = async () => {
+
+    const res = await axios.delete(`${host}/clearItem/${user.getUno}`);
 
     return res.data
 }

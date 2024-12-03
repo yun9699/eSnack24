@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "https://esnack24.store/api/v1/allergy"
+const host = "http://localhost:8080/api/v1/allergy"
 
 export const fetchAllergyInfo = async (filename: string): Promise<{ allergyTitles: string[], pno: number, ptitle_ko: string }> => {
     try {
@@ -17,7 +17,7 @@ export const fetchAllergyInfo = async (filename: string): Promise<{ allergyTitle
         };
     } catch (error) {
         console.error(`Failed to fetch allergy info for ${filename}:`, error);
-        return { allergyTitles: ["정보 없음"], pno: "" , ptitle_ko: ""};
+        return { allergyTitles: ["정보 없음"], pno: 0 , ptitle_ko: ""};
     }
 };
 
