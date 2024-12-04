@@ -28,3 +28,12 @@ export const detailOrder = async (ono: number) => {
 
     return res.data;
 }
+
+export const userOrder = async (uno: number) => {
+
+    const res = await axios.get(`${host}/userorder/${uno}`);
+
+    console.log(res.data);
+
+    return res.data;
+}
