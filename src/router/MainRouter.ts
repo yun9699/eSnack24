@@ -2,7 +2,6 @@ import {createRouter, createWebHistory} from "vue-router";
 
 import LoginRouter from "./LoginRouter.ts";
 import CSRouter from "./CSRouter.ts";
-import PaymentRouter from "./PaymentRouter.ts";
 import ProductRouter from "./ProductRouter.ts";
 import ReviewRouter from "./ReviewRouter.ts";
 import UserRegisterRouter from "./UserRegisterRouter.ts";
@@ -17,7 +16,6 @@ import RequestProductRouter from "./RequestProductRouter.ts";
 const routes = [
     CSRouter,
     LoginRouter,
-    PaymentRouter,
     ProductRouter,
     ReviewRouter,
     UserRegisterRouter,
