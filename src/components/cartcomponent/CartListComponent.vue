@@ -109,8 +109,16 @@ onMounted(() => {
 
 <template>
   <div class="container mx-auto p-6 bg-gray-50 min-h-screen">
-    <!-- 타이틀 -->
-    <h1 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">장바구니</h1>
+    <!-- 타이틀 및 장바구니 비우기 버튼 -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-extrabold text-gray-800">장바구니</h1>
+      <button
+          v-if="totalItems != 0"
+          class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-200"
+      >
+        장바구니 비우기
+      </button>
+    </div>
 
     <!-- 장바구니 비었을 때 메시지 -->
     <div v-if="totalItems === 0" class="text-center mt-10">

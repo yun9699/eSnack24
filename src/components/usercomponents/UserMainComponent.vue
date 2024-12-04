@@ -1,8 +1,10 @@
 <script setup lang="ts">
-  import { RouterLink } from "vue-router";
+import {RouterLink, useRouter} from "vue-router";
   import useUserStore from "../../stores/useUserStore.ts";
 
   const user = useUserStore();
+
+  const router = useRouter();
 
   const email: string = user.getUserEmail
 
@@ -11,6 +13,7 @@
     user.setUserEmail('');
     user.setUno(0);
     user.setPersonalAllergies([]);
+    router.push('/');
   }
 
 </script>
@@ -27,7 +30,7 @@
       <!-- 로그아웃 버튼 -->
       <button
           class="py-2 px-4 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition duration-200"
-          @click=""
+          @click="ClickLogout"
       >
         로그아웃
       </button>

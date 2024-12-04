@@ -1,10 +1,11 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useRoute } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 export default defineComponent({
   setup() {
     const route = useRoute();
+    const router = useRouter();
 
     const errorMessage = computed(() => {
       return route.query.message as string || "없음";
@@ -14,9 +15,15 @@ export default defineComponent({
       return route.query.code as string || "없음";
     });
 
+    const handleClickHome = () => {
+
+      router.push('/');
+    }
+
     return {
       errorMessage,
       errorCode,
+      handleClickHome,
     };
   },
 });
@@ -43,20 +50,12 @@ export default defineComponent({
       </div>
 
       <div class="mt-6 flex justify-center gap-4">
-        <a
-            href="https://docs.tosspayments.com/guides/v2/payment-widget/integration"
-            target="_blank"
-            class="button p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        <button
+            @click="handleClickHome"
+            class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md"
         >
-          연동 문서
-        </a>
-        <a
-            href="https://discord.gg/A4fRFXQhRu"
-            target="_blank"
-            class="button p-4 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200"
-        >
-          실시간 문의
-        </a>
+          홈으로 돌아가기
+        </button>
       </div>
     </div>
   </div>
