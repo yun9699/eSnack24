@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
 import { Icon } from '@iconify/vue'
-import { getQNAList, getQNAOne } from "../../api/csAPI/qnaAPI.ts"
+import {deleteQNA, getQNAList, getQNAOne} from "../../api/csAPI/qnaAPI.ts"
+import useUserStore from "../../stores/useUserStore.ts";
 
 // 상태 관리
 const openQna = ref<number | null>(null)
@@ -10,6 +11,10 @@ const qnaDetail = ref<any>(null)
 const currentPage = ref(1)
 const pageSize = ref(10)
 const searchKeyword = ref('')
+
+const user = useUserStore();
+
+const uno: number = user.getUno;
 
 // 검색어로 필터링된 QNA 목록
 const filteredQnas = computed(() => {
@@ -20,11 +25,9 @@ const filteredQnas = computed(() => {
   })
 })
 
-// QNA 목록 조회
-// TODO: uno는 실제 로그인한 사용자의 ID로 변경해야 함 (임시적으로 구현)
 const fetchQNAs = async () => {
   try {
-    const response = await getQNAList(5, currentPage.value, pageSize.value)
+    const response = await getQNAList(uno, currentPage.value, pageSize.value)
     qnas.value = response.list
   } catch (error) {
     console.error('QNA 목록 조회 실패:', error)
@@ -33,17 +36,29 @@ const fetchQNAs = async () => {
 
 // QNA 상세 조회
 const toggleQna = async (qno: number) => {
-  try {
-    if (openQna.value === qno) {
-      openQna.value = null
-      qnaDetail.value = null
-    } else {
+  if (openQna.value === qno) {
+    // 동일한 QNA를 클릭한 경우 닫기
+    openQna.value = null
+    qnaDetail.value = null
+  } else {
+    // 다른 QNA를 클릭한 경우 열기
+    try {
       const response = await getQNAOne(qno)
       qnaDetail.value = response
       openQna.value = qno
+    } catch (error) {
+      console.error('QNA 상세 조회 실패:', error)
     }
+  }
+}
+
+const handleRemove = async (qno: number) => {
+  try {
+    await deleteQNA(qno)
+    qnas.value = qnas.value.filter(qna => qna.qno !== qno) // 목록에서 삭제된 QNA 제거
+    console.log('삭제 성공')
   } catch (error) {
-    console.error('QNA 상세 조회 실패:', error)
+    console.error('QNA 삭제 실패:', error)
   }
 }
 
@@ -137,7 +152,10 @@ onMounted(() => {
               <button class="px-4 py-1 text-sm border border-red-500 text-red-500 rounded-full hover:bg-red-50">
                 수정
               </button>
-              <button class="px-4 py-1 text-sm border border-gray-300 text-gray-600 rounded-full hover:bg-gray-50">
+              <button
+                  @click="handleRemove(qna.qno)"
+                  class="px-4 py-1 text-sm border border-gray-300 text-gray-600 rounded-full hover:bg-gray-50"
+              >
                 삭제
               </button>
             </div>
