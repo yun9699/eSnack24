@@ -10,7 +10,6 @@
   const paypalButtonContainer = ref(null); // 여기서 ref로 DOM 요소를 참조
   const router = useRouter();
 
-  const currency = inject("currency");
   const ono = inject("ono")
 
   onMounted(async () => {
@@ -18,7 +17,7 @@
     const paypal = await loadScript({
       "client-id": clientId,
       "enable-funding": "paypal",
-      currency: currency,
+      currency: "USD",
       components: "buttons",
     });
 
@@ -27,7 +26,7 @@
         createOrder: async () => {
           try {
             const orderData = await createOrder(
-              {ono: ono, currency: currency}
+              {ono: ono, currency: "USD"}
             );
             console.log("Order data");
             console.log(orderData);

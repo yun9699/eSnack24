@@ -85,7 +85,7 @@ const handleClickPay = () => {
     ciqtys.push(item.ciqty);
   })
 
-  createOrder(pnos, ciqtys, "USD").then((ono) => {
+  createOrder(pnos, ciqtys).then((ono) => {
 
     console.log(ono);
 

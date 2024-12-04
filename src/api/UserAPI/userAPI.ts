@@ -46,3 +46,10 @@ export const logoutUser = async () => {
 
     return res.data;
 }
+
+export const getTossUser = async () => {
+
+    const res = await axios.get(`${host}/login/getTossUser/${uno}`);
+
+    return res.data;
+}
