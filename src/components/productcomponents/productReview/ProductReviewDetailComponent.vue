@@ -40,12 +40,16 @@ const fetchReviewDetail = async () => {
 // 리뷰 수정 페이지로 이동
 const goToEditPage = () => {
   if (rno.value) {
-    router.push(`/review/edit/${rno.value}`);
+    const unoParam = route.query.uno;
+    router.push(`/review/edit/${rno.value}?uno=${unoParam}`);
   }
 };
 
 const goToListPage = () => {
-  if (review.value?.pno) {
+  const unoParam = route.query.uno;
+  if (unoParam) {
+    router.push(`/review/user/${unoParam}`);
+  } else if (review.value?.pno) {
     router.push(`/review/list/${review.value.pno}`);
   } else {
     router.push(`/review/list`);
@@ -108,8 +112,8 @@ onMounted(() => {
       <div v-else class="text-center text-gray-400 py-6">리뷰 상세 정보를 불러올 수 없습니다.</div>
     </div>
 
-    <div v-if="review" class="flex gap-4 mt-4">
-      <button
+    <div  class="flex gap-4 mt-4">
+      <button v-if="review && uno === review.uno"
           @click="goToEditPage"
           class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
       >

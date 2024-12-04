@@ -86,7 +86,13 @@ const editReview = async () => {
       rstar: rstar.value,
       rimage: imageUrl || null,
     });
-    await router.push(`/review/detail/${rno.value}`);
+
+    const unoParam = route.query.uno;
+    if (unoParam && unoParam !== "undefined") {
+      await router.push({ path: `/review/user/${unoParam}` });
+    } else {
+      await router.push(`/review/detail/${rno.value}`);
+    }
   } catch (error) {
     console.error("리뷰 수정 중 오류가 발생했습니다.");
   } finally {
@@ -104,8 +110,16 @@ const deleteReview = async () => {
     submitting.value = true;
     await deleteReviewAPI(rno.value);
 
-    await router.push(`/review/list/${pno.value}`);
-  } catch (error: any) {
+    const unoParam = route.query.uno;
+    if (unoParam && unoParam !== "undefined") {
+      await router.push({ path: `/review/user/${unoParam}` });
+    } else if (pno.value) {
+      await router.push(`/review/list/${pno.value}`);
+    } else {
+      // 기본 리스트로 이동
+      await router.push(`/review/list`);
+    }
+  } catch (error) {
     console.error("리뷰 삭제 중 오류가 발생했습니다.");
   } finally {
     submitting.value = false;

@@ -57,11 +57,9 @@ const formatDate = (dateString: string) => {
   return date.toLocaleString();
 };
 
-const goToDetail = (rno) => {
-  router.push(`/review/detail/${rno}`);
+const goToDetail = (rno: number) => {
+  router.push(`/review/detail/${rno}?uno=${uno.value}`);
 };
-
-
 
 onMounted(() => {
   uno.value = Number(route.params.uno);
@@ -86,7 +84,7 @@ onMounted(() => {
           <div class="mt-2">
             <img
                 v-if="review.rimage"
-                :src="review.rimage"
+                :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${review.rimage}`"
                 alt="리뷰 이미지"
                 class="w-24 h-auto mt-2 border rounded"
             />
