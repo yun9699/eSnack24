@@ -41,7 +41,7 @@ import {RouterLink, useRouter} from "vue-router";
 
       <!-- 내 정보 수정 버튼 -->
       <router-link
-          to=""
+          :to="`/my/edit/${user.getUno}`"
           class="block w-full py-4 px-6 bg-gray-800 text-white text-center font-medium rounded-lg shadow hover:bg-gray-700 transition duration-200"
       >
         내 정보 수정
