@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { ReviewDetail } from "../../../types/reviewTypes";
 import {
   fetchReviewDetailAPI,
   editReviewAPI,
   uploadImageAPI,
-  deleteReviewAPI
+  uploadBase64ImageAPI, deleteReviewAPI
 } from "../../../api/reviewAPI/productReviewAPI";
 
 const route = useRoute();
 const router = useRouter();
 const rno = ref<number | null>(null);
-const review = ref<ReviewDetail | null>(null);
+const review = ref(null);
 const submitting = ref(false);
 const pno = ref<number | null>(null);
 
@@ -20,7 +19,7 @@ const pno = ref<number | null>(null);
 const rcontent = ref("");
 const rstar = ref<number | null>(null);
 const selectedImageFile = ref<File | null>(null);
-const selectedImageBlob = ref<string | null>(null); // Blob URL로 이미지 미리보기
+const selectedImageBlob = ref<string | null>(null);
 const currentImageUrl = ref<string | null>(null);
 
 // 리뷰 상세 정보 가져오기
@@ -36,15 +35,10 @@ const fetchReviewDetail = async () => {
     rcontent.value = data.rcontent;
     rstar.value = data.rstar;
     currentImageUrl.value = data.rimage;
-    pno.value = data.pno
-  } catch (error: any) {
-    alert(error.message);
+    pno.value = data.pno;
+  } catch (error) {
+    console.error("리뷰 데이터를 불러오는 중 오류가 발생했습니다.");
   }
-};
-
-// 별점 설정 함수
-const setStar = (star: number) => {
-  rstar.value = star;
 };
 
 // 이미지 파일 선택 처리
@@ -53,7 +47,7 @@ const handleImageChange = (event: Event) => {
   const file = target.files?.[0];
   if (file) {
     selectedImageFile.value = file;
-    selectedImageBlob.value = URL.createObjectURL(file); // Blob URL 생성
+    selectedImageBlob.value = URL.createObjectURL(file);
   }
 };
 
@@ -65,10 +59,10 @@ const uploadImage = async () => {
   formData.append("file", selectedImageFile.value);
 
   try {
-    const response = await uploadImageAPI(formData);
-    return response.url;
+    const response = await uploadBase64ImageAPI(selectedImageFile.value);
+    return response; // 서버에서 반환된 URL
   } catch (error) {
-    console.log("이미지 업로드 중 오류가 발생했습니다.");
+    console.error("이미지 업로드 중 오류가 발생했습니다.");
     return null;
   }
 };
@@ -76,14 +70,13 @@ const uploadImage = async () => {
 // 리뷰 수정
 const editReview = async () => {
   if (!rno.value || !rcontent.value.trim() || !rstar.value) {
-    console.log("내용과 별점을 입력해주세요.");
+    console.error("내용과 별점을 입력해주세요.");
     return;
   }
 
   let imageUrl = currentImageUrl.value;
   if (selectedImageFile.value) {
     imageUrl = await uploadImage();
-    console.log("업로드된 새 이미지 URL:", imageUrl);
   }
 
   try {
@@ -91,17 +84,16 @@ const editReview = async () => {
     await editReviewAPI(rno.value, {
       rcontent: rcontent.value.trim(),
       rstar: rstar.value,
-      rimage: imageUrl || null
+      rimage: imageUrl || null,
     });
     await router.push(`/review/detail/${rno.value}`);
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (error) {
+    console.error("리뷰 수정 중 오류가 발생했습니다.");
   } finally {
     submitting.value = false;
   }
 };
 
-// 리뷰 삭제
 const deleteReview = async () => {
   if (!rno.value) {
     console.log("리뷰 번호가 없습니다.");
@@ -120,12 +112,12 @@ const deleteReview = async () => {
   }
 };
 
-
 onMounted(() => {
   rno.value = Number(route.params.rno);
   fetchReviewDetail();
 });
 </script>
+
 
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
@@ -144,7 +136,7 @@ onMounted(() => {
         />
         <img
             v-else-if="currentImageUrl && !selectedImageBlob"
-            :src="currentImageUrl"
+            :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${currentImageUrl}`"
             alt="Current Image"
             class="w-48 h-auto border rounded-lg"
         />

@@ -44,6 +44,15 @@ const goToEditPage = () => {
   }
 };
 
+const goToListPage = () => {
+  if (review.value?.pno) {
+    router.push(`/review/list/${review.value.pno}`);
+  } else {
+    router.push(`/review/list`);
+  }
+};
+
+
 onMounted(() => {
   rno.value = Number(route.params.rno);
   fetchReviewDetail();
@@ -71,7 +80,7 @@ onMounted(() => {
         <div>
           <img
               v-if="review.rimage"
-              :src="review.rimage"
+              :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${review.rimage}`"
               alt="리뷰 이미지"
               class="w-48 h-auto border rounded-lg"
           />
@@ -99,15 +108,21 @@ onMounted(() => {
       <div v-else class="text-center text-gray-400 py-6">리뷰 상세 정보를 불러올 수 없습니다.</div>
     </div>
 
-    <!-- 수정 버튼 -->
-    <div v-if="review && uno === review.uno" class="flex gap-4 mt-4">
+    <div v-if="review" class="flex gap-4 mt-4">
       <button
           @click="goToEditPage"
           class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
       >
         수정
       </button>
+      <button
+          @click="goToListPage"
+          class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+      >
+        목록으로 돌아가기
+      </button>
     </div>
+
   </div>
 </template>
 
