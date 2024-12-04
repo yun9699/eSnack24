@@ -5,6 +5,7 @@ export interface IProduct {
     ptitle_en: string | null
     ptitle_ja: string | null
     ptitle_zh: string | null
+    pcontent_ko: string | null
     price: number
     pfilename: string
     ano?: number[]
