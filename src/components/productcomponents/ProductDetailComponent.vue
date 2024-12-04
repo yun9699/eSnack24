@@ -33,6 +33,7 @@ const modalOpen = () => {
 const initProduct: IProduct = {
   pfilename: 'sample fileName',
   ptitle_ko: 'Sample Product',
+  pcontent_ko: 'Sample Content',
   price: 4000, // 기본 가격
   ano: []
 };
@@ -122,6 +123,7 @@ onMounted(() => {
     productRef.value.productDetail.product.ptitle_ko = data.ptitle_ko;
     productRef.value.productDetail.product.pfilename = data.pfilename;
     productRef.value.productDetail.product.ano = [...data.ano];
+    productRef.value.productDetail.product.pcontent_ko = data.pcontent_ko;
 
     console.log("----------------------data")
     console.log(data);
@@ -190,6 +192,14 @@ onMounted(() => {
           ⚠️ 주의: 이 제품은 사용자의 알러지 항목에 포함된 성분이 있습니다.
         </p>
       </div>
+    </div>
+
+    <!-- pcontent_ko 영역 스타일링 -->
+    <div class="w-full bg-white p-6 rounded-xl shadow-lg mt-6 border border-gray-100">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">제품 설명</h2>
+      <p class="text-lg text-gray-700 leading-relaxed break-words">
+        {{ productRef.productDetail.product.pcontent_ko }}
+      </p>
     </div>
 
     <!-- 버튼 -->
