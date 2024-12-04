@@ -101,7 +101,7 @@ const orderClick = () => {
   pnos.push(pno);
   ciqtys.push(1);
 
-  createOrder(pnos, ciqtys, "USD").then((ono) => {
+  createOrder(pnos, ciqtys).then((ono) => {
 
     console.log(ono);
     router.push(`/order/create/${ono}`);

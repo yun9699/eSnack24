@@ -3,6 +3,7 @@ import PaypalComponent from "../paypalcomponents/PaypalComponent.vue";
 import { onMounted, provide, ref } from "vue";
 import { useRoute } from "vue-router";
 import { viewOrder } from "../../api/orderapi/OrderAPI.ts";
+import TossComponent from "../tosscomponents/TossComponent.vue";
 
 const route = useRoute();
 
@@ -21,18 +22,24 @@ const currencies = ["KRW", "USD"];
 // 드롭다운 열림 상태 관리
 const isDropdownOpen = ref(false);
 
+const isTossOpen = ref(false);
+
 onMounted(() => {
+
   viewOrder(Number(route.params.ono)).then((order) => {
+
     console.log(order);
     data.value.currency = order.currency;
     data.value.total_amount_krw = order.total_amount;
     data.value.total_amount_usd = order.total_amount * 0.000713;
     data.value.total_amount = order.total_amount * 0.000713;
+
+    isTossOpen.value = true;
   });
 });
 
 provide("ono", route.params.ono);
-provide("currency", data.value.currency);
+provide("data", data);
 
 // 통화 변경 함수
 const changeCurrency = (newCurrency: string) => {
@@ -97,6 +104,8 @@ const changeCurrency = (newCurrency: string) => {
         PayPal 결제는 <span class="font-semibold text-gray-800">USD</span>로만 가능합니다.
       </p>
       <PaypalComponent class="w-full max-w-sm mx-auto" />
+
+      <TossComponent v-if="isTossOpen == true" class="w-full max-w-sm mx-auto" />
     </div>
   </div>
 </template>
