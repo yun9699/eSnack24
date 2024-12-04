@@ -4,6 +4,8 @@
 
   const user = useUserStore();
 
+  const uno = user.getUno
+
   const email: string = user.getUserEmail
 
   console.log()
@@ -63,7 +65,7 @@
 
       <!-- 리뷰관리 버튼 -->
       <router-link
-          to=""
+          :to="`/review/user/${uno}`"
           class="block w-full py-4 px-6 bg-gray-800 text-white text-center font-medium rounded-lg shadow hover:bg-gray-700 transition duration-200"
       >
         리뷰관리
