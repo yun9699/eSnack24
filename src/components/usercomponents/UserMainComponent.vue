@@ -4,9 +4,13 @@ import {RouterLink, useRouter} from "vue-router";
 
   const user = useUserStore();
 
+  const uno = user.getUno
+
   const router = useRouter();
 
   const email: string = user.getUserEmail
+
+  console.log()
 
   const ClickLogout = () => {
 
@@ -46,10 +50,9 @@ import {RouterLink, useRouter} from "vue-router";
       >
         내 정보 수정
       </router-link>
-
       <!-- 주문내역 버튼 -->
       <router-link
-          to=""
+          :to="`/my/${user.getUno}/order/list`"
           class="block w-full py-4 px-6 bg-gray-800 text-white text-center font-medium rounded-lg shadow hover:bg-gray-700 transition duration-200"
       >
         주문내역
@@ -65,7 +68,7 @@ import {RouterLink, useRouter} from "vue-router";
 
       <!-- 리뷰관리 버튼 -->
       <router-link
-          to=""
+          :to="`/review/user/${uno}`"
           class="block w-full py-4 px-6 bg-gray-800 text-white text-center font-medium rounded-lg shadow hover:bg-gray-700 transition duration-200"
       >
         리뷰관리

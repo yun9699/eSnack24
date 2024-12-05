@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ReviewRegister } from "../../../types/reviewTypes.ts";
-import { uploadImageAPI, submitReviewAPI } from "../../../api/reviewAPI/productReviewAPI.ts";
+import {uploadImageAPI, submitReviewAPI, uploadBase64ImageAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
 import {fetchProductTitleAPI} from "../../../api/productAPI/productAPI.ts";
 
 
@@ -46,7 +46,7 @@ const submitReview = async () => {
   let imageUrl = null;
   if (selectedImageFile.value) {
     try {
-      imageUrl = await uploadImageAPI(selectedImageFile.value);
+      imageUrl = await uploadBase64ImageAPI(selectedImageFile.value);
     } catch (error) {
       console.log(error.message);
       return;

@@ -68,6 +68,13 @@ const goToRegister = () => {
   router.push(`/review/${uno}/${pno.value}`);
 };
 
+const goToProductDetailPage = () => {
+  if (pno.value) {
+    router.push(`/product/list/${pno.value}`);
+  } else {
+    console.error("상품 번호가 없습니다.");
+  }
+};
 
 
 onMounted(() => {
@@ -86,6 +93,13 @@ onMounted(() => {
     >
       리뷰 등록
     </button>
+    <button
+        @click="goToProductDetailPage"
+        class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+    >
+      상품 상세로 돌아가기
+    </button>
+
 
     <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
     <div v-else>
@@ -100,7 +114,7 @@ onMounted(() => {
           <div class="mt-2">
             <img
                 v-if="review.rimage"
-                :src="review.rimage"
+                :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${review.rimage}`"
                 alt="리뷰 이미지"
                 class="w-24 h-auto mt-2 border rounded"
             />

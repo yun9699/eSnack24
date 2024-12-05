@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {ReviewDetail, ReviewRegister} from "../../types/reviewTypes.ts";
 
-const host = 'http://localhost:8080/api/v1/review'
+const host = 'https://esnack24.store/api/v1/review'
 
 export const getReviewList = async (page: number = 1, size: number = 10, pno?: number) => {
     try {
@@ -15,16 +15,24 @@ export const getReviewList = async (page: number = 1, size: number = 10, pno?: n
         throw error;
     }
 };
-
-// 이미지 업로드
-export const uploadImageAPI = async (file: File): Promise<string> => {
-    const formData = new FormData();
-    formData.append("file", file);
-
+//이미지 업로드
+export const uploadBase64ImageAPI = async (file: File): Promise<string> => {
     try {
-        const response = await axios.post(`${host}/upload-image`, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
+        const toBase64 = (file: File): Promise<string> =>
+            new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file); // Base64 변환
+                reader.onload = () => resolve(reader.result as string);
+                reader.onerror = (error) => reject(error);
+            });
+
+        const base64File = await toBase64(file);
+
+        console.log("Base64 데이터 확인:", base64File.substring(0, 100));
+        const response = await axios.post(`${host}/upload-image`, base64File, {
+            headers: { "Content-Type": "application/json" },
         });
+
         return response.data.url;
     } catch (error) {
         console.error("이미지 업로드 실패:", error);

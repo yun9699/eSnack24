@@ -3,7 +3,7 @@ import useUserStore from "../../stores/useUserStore.ts";
 
 const user = useUserStore();
 
-const host = 'http://localhost:8080/api/v1/order';
+const host = 'https://esnack24.store/api/v1/order';
 
 export const createOrder = async (pnos: number[], ciqtys: number[]) => {
 
@@ -25,6 +25,15 @@ export const viewOrder = async (ono: number) => {
 export const detailOrder = async (ono: number) => {
 
     const res = await axios.get(`${host}/detail/${ono}`);
+
+    return res.data;
+}
+
+export const userOrder = async (uno: number) => {
+
+    const res = await axios.get(`${host}/userorder/${uno}`);
+
+    console.log(res.data);
 
     return res.data;
 }
