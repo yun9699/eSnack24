@@ -1,4 +1,11 @@
 
+export interface IReadUser {
+
+    username: string
+    ugender: string
+    ucallnumber: string
+    ubirth: string
+}
 export interface IUser {
     uno?: number;
 }

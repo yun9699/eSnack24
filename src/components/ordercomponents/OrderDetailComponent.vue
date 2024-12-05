@@ -58,7 +58,7 @@ import {useRoute, useRouter} from "vue-router";
           </div>
           <!-- 제품 금액 -->
           <div class="text-right">
-            <p class="text-lg font-bold text-gray-800">{{ item.price }}</p>
+            <p class="text-lg font-bold text-gray-800">{{ item.price * item.oiqty }}</p>
           </div>
         </li>
       </ul>

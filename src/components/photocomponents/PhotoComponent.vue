@@ -118,7 +118,7 @@ const handleImageClick = async (image: string) => {
                     class="text-center space-y-2"
                 >
                   <img
-                      :src="`http://127.0.0.1:9000/static/${image}`"
+                      :src="`https://esnack24.store/fastapi/v1/static/${image}`"
                       :alt="image"
                       class="w-48 h-auto rounded-lg border border-gray-300 shadow hover:scale-105 transition transform"
                       @load="loadAllergyInfo(image)"
