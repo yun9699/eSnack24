@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://localhost:8080/api/v1/allergy"
+const host = "https://esnack24.store/api/v1/allergy"
 
 export const fetchAllergyInfo = async (filename: string): Promise<{ allergyTitles: string[], pno: number, ptitle_ko: string }> => {
     try {
