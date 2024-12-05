@@ -1,0 +1,80 @@
+"cart": {
+    "title": "장바구니",
+    "empty_message": "장바구니가 비었습니다.",
+    "clear_button": "장바구니 비우기",
+    "delete_button": "삭제",
+    "decrease_button": "감소",
+    "increase_button": "증가",
+    "load_more_button": "더보기",
+    "checkout_button": "결제하기"
+  }
+
+{
+  "myprofile": {
+    "greeting": "안녕하세요, {email}님!",
+    "logout_button": "로그아웃",
+    "buttons": {
+      "edit_profile": "내 정보 수정",
+      "order_history": "주문내역",
+      "my_inquiries": "내 문의 내역",
+      "review_management": "리뷰관리"
+    }
+  }
+}
+
+{
+  "edit_user": {
+    "title": "사용자 정보 수정",
+    "name_label": "이름",
+    "name_placeholder": "이름을 입력하세요",
+    "gender_label": "성별",
+    "birth_label": "생일",
+    "phone_label": "전화번호",
+    "phone_placeholder": "010-1234-5678",
+    "save_button": "저장하기"
+  },
+  "edit_allergy": {
+    "title": "알레르기 정보 수정",
+    "selected_button": "선택됨",
+    "unselected_button": "선택 안됨"
+  },
+  "modal": {
+    "confirm_message": "등록"
+  }
+}
+
+
+"order_confirmation": {
+    "title": "주문 확인",
+    "currency": "통화",
+    "total_amount": "총액",
+    "paypal_info": "PayPal 결제는"
+  }
+
+  {
+    "order_complete": {
+      "success_message": "결제가 완료되었습니다!",
+      "order_number": "주문 번호",
+      "payment_message": "결제 확인 후 배송이 시작됩니다.",
+      "view_order_details": "주문 상세보기",
+      "go_home": "홈으로 돌아가기",
+      "help_center": "고객센터"
+    }
+  }
+
+  {
+    "order_detail": {
+      "page_title": "주문 상세",
+      "quantity": "수량",
+      "total_amount": "총 금액",
+      "go_home": "홈으로 돌아가기"
+    }
+  }
+
+  {
+    "search_page": {
+      "placeholder": "검색어를 입력해 주세요",
+      "search_button": "검색",
+      "no_results": "검색 결과가 없습니다."
+    }
+  }
