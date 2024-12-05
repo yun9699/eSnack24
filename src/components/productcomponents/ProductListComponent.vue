@@ -127,10 +127,10 @@ onMounted(() => {
       <!-- 기타 버튼 -->
       <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">1+1</button>
       <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">세일</button>
-      <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">덤증정</button>
 
       <!-- "제외" 버튼 -->
       <button
+          v-if="uno>0"
           class="px-3 py-1"
           :class="isAllergyExcluded ? 'bg-red-500 text-white' : 'bg-red-300 text-gray-700'"
           @click="handleAllergyChange"
