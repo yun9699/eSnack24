@@ -4,6 +4,7 @@ import { onMounted, provide, ref } from "vue";
 import { useRoute } from "vue-router";
 import { viewOrder } from "../../api/orderapi/OrderAPI.ts";
 import TossComponent from "../tosscomponents/TossComponent.vue";
+import {getExchangeRate} from "../../api/exchangerateapi/exchangeRateAPI.ts";
 
 const route = useRoute();
 
@@ -15,6 +16,7 @@ const init = {
 };
 
 const data = ref(init);
+const exchangeRate = ref(0);
 
 // 지원하는 통화 리스트
 const currencies = ["KRW", "USD"];
@@ -26,16 +28,24 @@ const isTossOpen = ref(false);
 
 onMounted(() => {
 
-  viewOrder(Number(route.params.ono)).then((order) => {
+  getExchangeRate(data.value.currency).then((res) => {
 
-    console.log(order);
-    data.value.currency = order.currency;
-    data.value.total_amount_krw = order.total_amount;
-    data.value.total_amount_usd = order.total_amount * 0.000713;
-    data.value.total_amount = order.total_amount * 0.000713;
+    console.log(res);
+    exchangeRate.value = Number(res);
 
-    isTossOpen.value = true;
-  });
+    viewOrder(Number(route.params.ono)).then((order) => {
+
+      console.log(order);
+      data.value.currency = order.currency;
+      data.value.total_amount_krw = order.total_amount;
+      data.value.total_amount_usd = parseFloat((order.total_amount * exchangeRate.value).toFixed(2));
+      data.value.total_amount = parseFloat((order.total_amount * exchangeRate.value).toFixed(2));
+
+
+      isTossOpen.value = true;
+    });
+  })
+
 });
 
 provide("ono", route.params.ono);

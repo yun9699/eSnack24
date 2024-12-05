@@ -43,22 +43,24 @@ import {useRoute, useRouter} from "vue-router";
         <li
             v-for="item in orderItems"
             :key="item.pno"
-            class="flex items-center justify-between p-4 hover:bg-gray-50"
+            class="flex items-center justify-between p-4 hover:bg-gray-50 transition duration-300 ease-in-out transform hover:scale-105"
         >
           <!-- 제품 이미지 -->
-          <img
-              :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/${item.pfilename}`"
-              alt="제품 이미지"
-              class="w-20 h-20 object-cover rounded-md shadow-sm"
-          />
-          <!-- 제품 정보 -->
-          <div class="flex-1 ml-4">
-            <h2 class="text-lg font-semibold text-gray-800">{{ item.ptitle_ko }}</h2>
-            <p class="text-sm text-gray-500">수량: {{item.oiqty}}개</p>
-          </div>
-          <!-- 제품 금액 -->
-          <div class="text-right">
-            <p class="text-lg font-bold text-gray-800">{{ item.price * item.oiqty }}</p>
+          <RouterLink :to="`/product/list/${item.pno}`" class="flex items-center space-x-4 w-full">
+            <img
+                :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
+                :alt="item.ptitle_ko"
+                class="w-24 h-24 object-cover rounded-lg shadow-md"
+            />
+            <!-- 제품 정보 -->
+            <div class="flex-1">
+              <h2 class="text-lg font-semibold text-gray-800 truncate">{{ item.ptitle_ko }}</h2>
+              <p class="text-sm text-gray-500">수량: {{ item.oiqty }}개</p>
+            </div>
+          </RouterLink>
+          <!-- 제품 금액 (오른쪽 정렬) -->
+          <div class="text-right ml-4">
+            <p class="text-lg font-semibold text-gray-800">₩{{ item.price * item.oiqty }}</p>
           </div>
         </li>
       </ul>

@@ -1,7 +1,7 @@
 // api/paypalAPI.ts
 import axios from "axios";
 
-const host = 'https://esnack24.store/api/v1/paypal';
+const host = 'http://localhost:8080/api/v1/paypal';
 
 export const createOrder = async (order: any) => {
     console.log("createOrderLog");
