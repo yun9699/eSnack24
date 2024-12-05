@@ -3,7 +3,7 @@ import useUserStore from "../../stores/useUserStore.ts";
 
 const user = useUserStore();
 
-const host = 'http://localhost:8080/api/v1/order';
+const host = 'https://esnack24.store/api/v1/order';
 
 export const createOrder = async (pnos: number[], ciqtys: number[]) => {
 

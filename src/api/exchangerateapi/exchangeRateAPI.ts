@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = 'http://localhost:8080/api/v1/exchange-rate';
+const host = 'https://esnack24.store/api/v1/exchange-rate';
 
 export const getExchangeRate = async (targetCurrency: string) => {
 
