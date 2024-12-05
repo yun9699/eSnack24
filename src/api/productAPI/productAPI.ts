@@ -23,6 +23,13 @@ export const getList = async ( page:number = 1, size:number = 10) => {
 
 }
 
+export const getFilterList = async ( uno:number = 0, page:number = 1, size:number = 10) => {
+
+    const res = await axios.get(`${host}/list/filter?uno=${uno}&page=${page}&size=${size}`)
+
+    return res.data
+}
+
 export const getDetail = async (pno: number) => {
 
     const res = await axios.get(`${host}/detail/${pno}`)
