@@ -1,51 +1,93 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getList } from "../../api/productAPI/productAPI.ts";
-import {IProduct} from "../../types/productTypes.ts";
+import { getFilterList, getList } from "../../api/productAPI/productAPI.ts";
+import { IProduct } from "../../types/productTypes.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
-const serverData = ref<{ ProductList: IProduct[]; }>({
+const user = useUserStore();
+const uno: number = user.getUno;
+const userano: number = user.getPersonalAllergies;
+
+const serverData = ref<{ ProductList: IProduct[] }>({
   ProductList: [],
 });
 
-
 let pageNum: number = 1;
-
 let endPageNum: number = 1;
 
+// 제외 상태 관리
+const isAllergyExcluded = ref(false);
+
+// 알러지 제외 문구 관리
+const allergyMessage = ref("");
+
 const moreInfo = () => {
+  if (pageNum < endPageNum) {
+    pageNum++; // 페이지 번호 증가
+    getList(pageNum).then((result) => {
+      if (result && result.list) {
+        const newItems = result.list.filter(
+            (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
+        );
+        serverData.value.ProductList = [
+          ...serverData.value.ProductList,
+          ...newItems,
+        ];
+      }
+    })
+  }
+};
+// "제외" 버튼 클릭 시 실행
+const handleAllergyChange = () => {
+  console.log(userano);
 
-  pageNum++;
+  // 제외 상태 활성화
+  isAllergyExcluded.value = true;
 
-  getList(pageNum).then((result) => {
+  // 알러지 제외 문구 표시
+  allergyMessage.value = "본인의 알러지가 제외된 상품입니다.";
 
-    serverData.value.ProductList = [...serverData.value.ProductList, ...result.list];
-  })
-}
+  pageNum = 1;
 
+  // 기존 데이터 초기화
+  serverData.value.ProductList = [];
 
-// 페이지 데이터를 불러오는 함수
-// onMounted(async () => {
-//   const data = await getList()
-//   serverData.value.ProductList = data.list;
-//   endPageNum = data.pageNum;
-// });
-//
+  // 필터링된 데이터 가져오기
+  getFilterList(uno, pageNum).then((result) => {
+    console.log(result);
 
-onMounted(() => {
+    serverData.value.ProductList = result.list;
+  });
+};
 
+// "전체" 버튼 클릭 시 실행
+const handleAllergyReset = () => {
+  console.log("전체 버튼 클릭");
+
+  // 제외 상태 초기화
+  isAllergyExcluded.value = false;
+
+  // 알러지 제외 문구 제거
+  allergyMessage.value = "";
+
+  // 페이지 번호 초기화
+  pageNum = 1;
+
+  // 기존 데이터 초기화 후 첫 화면 데이터 가져오기
+  serverData.value.ProductList = [];
   getList(pageNum).then((res) => {
-
     serverData.value.ProductList = res.list;
-
     endPageNum = res.endPage;
+  });
+};
 
-  })
+// 컴포넌트 마운트 시 실행
+onMounted(() => {
+  getList(pageNum).then((res) => {
+    serverData.value.ProductList = res.list;
+    endPageNum = res.endPage;
+  });
 });
-
-
-
-
-
 </script>
 
 <template>
@@ -66,18 +108,35 @@ onMounted(() => {
     </div>
   </section>
 
+  <!-- Allergy Exclusion Message -->
+  <section v-if="allergyMessage" class="p-4 bg-red-100 text-center text-red-600 font-semibold">
+    {{ allergyMessage }}
+  </section>
+
   <!-- Search and Filter Section -->
   <section class="p-4">
     <div class="flex space-x-2 mb-4">
-      <input type="text" placeholder="상품명을 입력해주세요." class="w-full p-2 border rounded" />
-      <button class="px-4 py-2 bg-yellow-500 text-white rounded">검색</button>
-    </div>
-    <div class="flex space-x-2 mb-4">
-      <button class="px-4 py-1 bg-yellow-500 text-white rounded">전체</button>
-      <button class="px-4 py-1 bg-gray-200 text-gray-700 rounded">1+1</button>
-      <button class="px-4 py-1 bg-gray-200 text-gray-700 rounded">2+1</button>
-      <button class="px-4 py-1 bg-gray-200 text-gray-700 rounded">세일</button>
-      <button class="px-4 py-1 bg-gray-200 text-gray-700 rounded">덤증정</button>
+      <!-- "전체" 버튼 -->
+      <button
+          class="px-3 py-1 bg-yellow-500 text-white rounded"
+          @click="handleAllergyReset"
+      >
+        전체
+      </button>
+
+      <!-- 기타 버튼 -->
+      <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">1+1</button>
+      <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">세일</button>
+
+      <!-- "제외" 버튼 -->
+      <button
+          v-if="uno>0"
+          class="px-3 py-1"
+          :class="isAllergyExcluded ? 'bg-red-500 text-white' : 'bg-red-300 text-gray-700'"
+          @click="handleAllergyChange"
+      >
+        제외
+      </button>
     </div>
     <select class="p-2 border rounded w-full">
       <option>최신순</option>
@@ -96,11 +155,11 @@ onMounted(() => {
         </div>
 
         <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
-        <img
-            :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
-            :alt="item.ptitle_ko"
-            class="w-full h-32 object-contain"
-        />
+          <img
+              :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
+              :alt="item.ptitle_ko"
+              class="w-full h-32 object-contain"
+          />
         </RouterLink>
         <p class="mt-2 text-gray-700">{{ item.ptitle_ko }}</p>
         <p class="mt-2 text-orange-500 font-semibold">{{ item.price }}원</p>
@@ -117,6 +176,4 @@ onMounted(() => {
       더보기
     </button>
   </div>
-
-
 </template>

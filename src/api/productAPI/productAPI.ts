@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `https://esnack24.store/api/v1/product`
+const host = `http://localhost:8080/api/v1/product`
 
 
 export const getmainList = async ( page:number = 1, size:number = 10) => {
@@ -21,6 +21,13 @@ export const getList = async ( page:number = 1, size:number = 10) => {
 
     return res.data
 
+}
+
+export const getFilterList = async ( uno:number = 0, page:number = 1, size:number = 10) => {
+
+    const res = await axios.get(`${host}/list/filter?uno=${uno}&page=${page}&size=${size}`)
+
+    return res.data
 }
 
 export const getDetail = async (pno: number) => {
