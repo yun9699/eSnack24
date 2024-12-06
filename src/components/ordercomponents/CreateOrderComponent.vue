@@ -6,12 +6,13 @@ import { viewOrder } from "../../api/orderapi/OrderAPI.ts";
 import TossComponent from "../tosscomponents/TossComponent.vue";
 import { getExchangeRate } from "../../api/exchangerateapi/exchangeRateAPI.ts";
 import {useI18n} from "vue-i18n";
+import {IOrder} from "../../types/orderTypes.ts";
 
 const route = useRoute();
 
 const { t } = useI18n()
 
-const init = {
+const init: IOrder = {
   currency: "USD",
   total_amount: 0,
   total_amount_krw: 0,
