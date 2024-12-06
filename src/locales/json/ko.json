@@ -102,6 +102,17 @@
     "highest_price": "가격 높은순"
   },
 
+  "pDetail": {
+    "price": "가격",
+    "review_check": "리뷰확인",
+    "allergy_info": "알러지 정보",
+    "none": "해당 제품의 경우 알레르기 유발 성분이 존재하지 않습니다",
+    "warning": "주의: 해당 제품은 사용자의 알러지 항목에 포함된 성분이 있습니다.",
+    "product_description": "제품설명",
+    "buy": "구매하기",
+    "add_to_cart": "장바구니담기"
+  },
+
   "FAQList": {
     "order": "주문",
     "payment": "결제",

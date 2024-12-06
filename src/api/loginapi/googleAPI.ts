@@ -4,7 +4,7 @@ const auth_code_path = 'https://accounts.google.com/o/oauth2/v2/auth'
 
 const rest_api_key = '6550639460-vq6qpp6ea2u77fabbo3gkhud9mdedtn9.apps.googleusercontent.com';
 
-const redirect_uri = 'https://esnack24.store/login/googlere';
+const redirect_uri = 'http://localhost:8080/login/googlere';
 
 const access_token_url = 'https://oauth2.googleapis.com/token';
 

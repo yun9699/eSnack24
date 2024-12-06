@@ -3,11 +3,11 @@ import axios from 'axios';
 
 const rest_api_key = 'bbeea25e17d51b641cf643b1703c569b'
 
-const redirect_uri = 'https://esnack24.store/login/kakaore'
+const redirect_uri = 'http://localhost:8080/login/kakaore'
 
 const auth_code_path = `https://kauth.kakao.com/oauth/authorize`
 
-const access_token_url = 'https://kauth.kakao.com/oauth/token'
+const access_token_url = 'https://kauth.kakwwao.com/oauth/token'
 
 const host = `http://localhost:8080/api/v1/login/kakao`
 

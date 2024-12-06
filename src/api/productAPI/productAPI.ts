@@ -16,6 +16,7 @@ export const getList = async ( page:number = 1, size:number = 10) => {
 
     const res = await axios.get(`${host}/list?page=${page}&size=${size}`)
 
+    console.log(res)
     console.log(res.data);
 
 
@@ -31,9 +32,9 @@ export const getFilterList = async ( uno:number = 0, page:number = 1, size:numbe
 }
 
 export const getDetail = async (pno: number) => {
-
     const res = await axios.get(`${host}/detail/${pno}`)
 
+    console.log(res)
     return res.data
 
 }

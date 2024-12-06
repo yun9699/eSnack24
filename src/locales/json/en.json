@@ -102,6 +102,17 @@
     "highest_price": "Highest Price"
   },
 
+  "pDetail": {
+    "price": "Price",
+    "review_check": "Check Reviews",
+    "allergy_info": "Allergy Information",
+    "none": "There are no allergens present in this product.",
+    "warning": "Warning: This product contains ingredients included in your allergy list.",
+    "product_description": "Product Description",
+    "buy": "Buy Now",
+    "add_to_cart": "Add to Cart"
+  },
+
   "FAQList": {
     "order": "Order",
     "payment": "Payment",

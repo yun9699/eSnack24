@@ -102,6 +102,17 @@
     "highest_price": "价格从高到低"
   },
 
+  "pDetail": {
+    "price": "价格",
+    "review_check": "查看评论",
+    "allergy_info": "过敏信息",
+    "none": "该产品不含过敏原成分。",
+    "warning": "警告: 此产品包含在您的过敏列表中的成分。",
+    "product_description": "产品描述",
+    "buy": "立即购买",
+    "add_to_cart": "添加到购物车"
+  },
+
   "FAQList": {
     "order": "订单",
     "payment": "支付",

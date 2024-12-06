@@ -102,6 +102,17 @@
     "highest_price": "価格の高い順"
   },
 
+  "pDetail": {
+    "price": "価格",
+    "review_check": "レビュー確認",
+    "allergy_info": "アレルギー情報",
+    "none": "この製品にはアレルギー誘発成分は存在しません。",
+    "warning": "注意: この製品には、ユーザーのアレルギー項目に含まれている成分が含まれています。",
+    "product_description": "製品説明",
+    "buy": "購入する",
+    "add_to_cart": "カートに追加"
+  },
+
   "FAQList": {
     "order": "注文",
     "payment": "支払い",

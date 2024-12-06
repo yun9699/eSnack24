@@ -19,16 +19,16 @@ export const localeProduct = () => {
     }
 
     //내용 번역
-    const localePcontent = (productAPI: IProduct) => {
+    const localePcontent = (product: IProduct) => {
         switch (locale.value) {
             case 'en':
-                return productAPI.pcontent_en
+                return product.pcontent_en
             case 'ja':
-                return productAPI.pcontent_ja
+                return product.pcontent_ja
             case 'zh':
-                return productAPI.pcontent_zh
+                return product.pcontent_zh
             default:
-                return productAPI.pcontent_ko
+                return product.pcontent_ko
         }
     }
 

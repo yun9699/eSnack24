@@ -17,5 +17,8 @@ export interface IProduct {
 export interface IProductDetail {
     product: IProduct
     atitle_ko: string[]
+    atitle_en: string[]
+    atitle_ja: string[]
+    atitle_zh: string[]
     ano?: number[]
 }
