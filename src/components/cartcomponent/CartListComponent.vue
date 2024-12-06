@@ -4,6 +4,7 @@ import {clearCart, decCartItem, deleteCartItem, getCartList, incCartItem} from "
 import { ICartItem } from "../../types/cartTypes.ts";
 import {createOrder} from "../../api/orderapi/OrderAPI.ts";
 import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n";
 
 const initCartItem: ICartItem = {
   cino: 0,
@@ -18,6 +19,8 @@ const initCartItem: ICartItem = {
 };
 
 const router = useRouter();
+
+const { t } = useI18n()
 
 let pageNum: number = 1;
 
@@ -111,18 +114,19 @@ onMounted(() => {
   <div class="container mx-auto p-6 bg-gray-50 min-h-screen">
     <!-- 타이틀 및 장바구니 비우기 버튼 -->
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-extrabold text-gray-800">장바구니</h1>
+      <h1 class="text-3xl font-extrabold text-gray-800">{{ t('cart.title') }}</h1>
       <button
           v-if="totalItems != 0"
+          @click="clearCart()"
           class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-200"
       >
-        장바구니 비우기
+        {{ t('cart.clear_button') }}
       </button>
     </div>
 
     <!-- 장바구니 비었을 때 메시지 -->
     <div v-if="totalItems === 0" class="text-center mt-10">
-      <p class="text-gray-600 text-xl font-semibold">장바구니가 비었습니다.</p>
+      <p class="text-gray-600 text-xl font-semibold">{{ t('cart.empty_message') }}</p>
     </div>
 
     <!-- 장바구니 리스트 -->
@@ -153,7 +157,7 @@ onMounted(() => {
               @click="decreaseQty(item.cino)"
               class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-full shadow-md transition duration-200"
           >
-            -
+            {{ t('cart.decrease_button') }}
           </button>
 
           <!-- 상품 수량 -->
@@ -164,7 +168,7 @@ onMounted(() => {
               @click="increaseQty(item.cino)"
               class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-full shadow-md transition duration-200"
           >
-            +
+            {{ t('cart.increase_button') }}
           </button>
 
           <!-- 삭제 버튼 -->
@@ -172,7 +176,7 @@ onMounted(() => {
               @click="deleteItem(item.cino)"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-200"
           >
-            삭제
+            {{ t('cart.delete_button') }}
           </button>
         </div>
       </li>
@@ -185,7 +189,7 @@ onMounted(() => {
           v-if="pageNum < endPageNum"
           class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
       >
-        더보기
+        {{ t('cart.load_more_button') }}
       </button>
     </div>
 
@@ -196,7 +200,7 @@ onMounted(() => {
             @click="handleClickPay"
             class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300"
         >
-          결제하기
+          {{ t('cart.checkout_button') }}
         </button>
       </div>
     </div>

@@ -8,3 +8,10 @@ export interface IOrderItem {
     oiqty: number
     total_amount: string
 }
+
+export interface IOrder {
+    currency: string
+    total_amount: number
+    total_amount_krw: number
+    total_amount_usd: number
+}
