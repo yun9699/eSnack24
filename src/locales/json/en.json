@@ -85,5 +85,59 @@
   "pMain": {
     "popular": "Popular Products This Month",
     "moreinfo": "More Info"
-  }
+  },
+
+  "pList": {
+    "header": "Meet this month's promotional products prepared by eSnack.",
+    "event_product": "Event Products",
+    "differentiated_product": "Differentiated Products",
+    "fresh_product": "Fresh Products",
+    "app_download": "App Download",
+    "all": "All",
+    "sale": "Sale",
+    "exclude": "Exclude",
+    "more": "More Info",
+    "latest": "Latest",
+    "lowest_price": "Lowest Price",
+    "highest_price": "Highest Price"
+  },
+
+  "FAQList": {
+    "order": "Order",
+    "payment": "Payment",
+    "product": "Product",
+    "etc": "Other",
+    "report": "Report",
+    "faq": "Frequently Asked Questions",
+    "no_search_results": "No search results found.",
+    "search": "Search"
+  },
+
+  "QNAList": {
+    "search": "Search",
+    "my_inquiries": "My Inquiries",
+    "register_inquiry": "Register Inquiry",
+    "answer": "Answer",
+    "answered": "Replied",
+    "pending_answer": "Waiting",
+    "product_name": "Product Name",
+    "edit": "Edit",
+    "delete": "Delete",
+    "attachment": "Attachment",
+    "registration_date": "Registration Date",
+    "answer_date": "Answer Date",
+    "no_inquiries": "No inquiries found."
+  },
+
+  "QNARegister": {
+  "register_inquiry": "Register Inquiry",
+  "cancel": "Cancel",
+  "title": "Title",
+  "content": "Content",
+  "attachment": "Attach File",
+  "cancel_button": "Cancel",
+  "submit": "Submit"
+
+}
+
 }

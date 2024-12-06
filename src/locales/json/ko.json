@@ -85,5 +85,59 @@
   "pMain": {
     "popular": "이번 달 인기 상품",
     "moreinfo": "더보기"
+  },
+
+  "pList": {
+    "header": "eSanck이 준비한 이달의 행사상품을 만나보세요.",
+    "event_product": "행사상품",
+    "differentiated_product": "차별화 상품",
+    "fresh_product": "신선식품",
+    "app_download": "앱 다운로드",
+    "all": "전체",
+    "sale": "세일",
+    "exclude": "제외",
+    "more": "더보기",
+    "latest": "최신순",
+    "lowest_price": "가격 낮은순",
+    "highest_price": "가격 높은순"
+  },
+
+  "FAQList": {
+    "order": "주문",
+    "payment": "결제",
+    "product": "상품",
+    "etc": "기타",
+    "report": "신고",
+    "faq": "자주 묻는 질문",
+    "no_search_results": "검색 결과가 없습니다.",
+    "search": "검색하기"
+  },
+
+  "QNAList": {
+  "my_inquiries": "내 문의내역",
+  "register_inquiry": "문의등록",
+  "answer": "답변",
+  "answered": "답변완료",
+  "pending_answer": "답변대기",
+  "product_name": "상품명",
+  "edit": "수정",
+  "delete": "삭제",
+  "attachment": "첨부파일",
+  "registration_date": "등록일",
+  "answer_date": "답변일",
+  "no_inquiries": "문의 내역이 없습니다."
+  },
+
+  "QNARegister": {
+  "register_inquiry": "문의 등록",
+  "cancel": "취소",
+  "title": "제목",
+  "content": "내용",
+  "attachment": "파일 첨부",
+  "cancel_button": "취소",
+  "submit": "등록"
   }
+
+
+
 }

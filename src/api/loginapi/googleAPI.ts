@@ -8,7 +8,7 @@ const redirect_uri = 'https://esnack24.store/login/googlere';
 
 const access_token_url = 'https://oauth2.googleapis.com/token';
 
-const host = 'https://esnack24.store/api/v1/login/google';
+const host = 'http://localhost:8080/api/v1/login/google';
 
 
 export const getGoogleLoginLink = () => {

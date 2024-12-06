@@ -85,5 +85,57 @@
   "pMain": {
     "popular": "本月热门商品",
     "moreinfo": "更多信息"
+  },
+
+  "pList": {
+    "header": "来看看eSnack准备的本月促销商品吧。",
+    "event_product": "促销商品",
+    "differentiated_product": "差异化商品",
+    "fresh_product": "新鲜食品",
+    "app_download": "应用下载",
+    "all": "全部",
+    "sale": "促销",
+    "exclude": "排除",
+    "more": "更多",
+    "latest": "最新排序",
+    "lowest_price": "价格从低到高",
+    "highest_price": "价格从高到低"
+  },
+
+  "FAQList": {
+    "order": "订单",
+    "payment": "支付",
+    "product": "产品",
+    "etc": "其他",
+    "report": "报告",
+    "faq": "常见问题",
+    "no_search_results": "没有搜索结果。",
+    "search": "搜索"
+  },
+
+  "QNAList": {
+    "search": "搜索",
+    "my_inquiries": "我的咨询",
+    "register_inquiry": "登记咨询",
+    "answer": "回答",
+    "answered": "已回复",
+    "pending_answer": "待回复",
+    "product_name": "产品名称",
+    "edit": "编辑",
+    "delete": "删除",
+    "attachment": "附件",
+    "registration_date": "注册日期",
+    "answer_date": "回复日期",
+    "no_inquiries": "没有咨询记录。"
+  },
+
+  "QNARegister": {
+    "register_inquiry": "注册询问",
+    "cancel": "取消",
+    "title": "标题",
+    "content": "内容",
+    "attachment": "附件",
+    "cancel_button": "取消",
+    "submit": "提交"
   }
 }

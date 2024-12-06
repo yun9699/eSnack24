@@ -85,5 +85,59 @@
   "pMain": {
     "popular": "今月の人気商品",
     "moreinfo": "もっと見る"
+  },
+
+  "pList": {
+    "header": "eSnackが用意した今月のイベント商品をご覧ください。",
+    "event_product": "イベント商品",
+    "differentiated_product": "差別化商品",
+    "fresh_product": "新鮮食品",
+    "app_download": "アプリダウンロード",
+    "all": "全て",
+    "sale": "セール",
+    "exclude": "除外",
+    "more": "もっと見る",
+    "latest": "最新順",
+    "lowest_price": "価格の安い順",
+    "highest_price": "価格の高い順"
+  },
+
+  "FAQList": {
+    "order": "注文",
+    "payment": "支払い",
+    "product": "商品",
+    "etc": "その他",
+    "report": "報告",
+    "faq": "よくある質問",
+    "no_search_results": "検索結果がありません。",
+    "search": "検索"
+  },
+
+  "QNAList": {
+    "search": "検索",
+    "my_inquiries": "マイ問い合わせ",
+    "register_inquiry": "問い合わせ登録",
+    "answer": "回答",
+    "answered": "回答済み",
+    "pending_answer": "回答待ち",
+    "product_name": "商品名",
+    "edit": "編集",
+    "delete": "削除",
+    "attachment": "添付ファイル",
+    "registration_date": "登録日",
+    "answer_date": "回答日",
+    "no_inquiries": "問い合わせ履歴がありません。"
+  },
+
+  "QNARegister": {
+    "register_inquiry": "問い合わせ登録",
+    "cancel": "キャンセル",
+    "title": "タイトル",
+    "content": "内容",
+    "attachment": "ファイル添付",
+    "cancel_button": "キャンセル",
+    "submit": "登録"
+
   }
+
 }

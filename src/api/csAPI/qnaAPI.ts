@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `https://esnack24.store/api/v1/qna`;
+const host = `http://localhost:8080/api/v1/qna`;
 
 // QNA 목록 조회
 export const getQNAList = async (uno: number, page: number = 1, size: number = 10) => {

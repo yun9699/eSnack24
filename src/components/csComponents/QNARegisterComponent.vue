@@ -4,7 +4,9 @@ import { useRouter } from 'vue-router'
 import { registerQNA } from "../../api/csAPI/qnaAPI.ts"
 import { getToken } from "../../api/fcmAPI/fcmAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const router = useRouter()
 
 // 폼 데이터
@@ -83,12 +85,12 @@ onMounted(() => {
   <div class="max-w-4xl mx-auto p-4">
     <!-- 헤더 -->
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold">문의 등록</h2>
+      <h2 class="text-2xl font-bold">{{ t('QNARegister.register_inquiry') }}</h2>
       <button
           @click="router.push('/cs/qna')"
           class="px-4 py-2 text-gray-600 hover:text-gray-800"
       >
-        취소
+        {{ t('QNARegister.cancel') }}
       </button>
     </div>
 
@@ -96,7 +98,7 @@ onMounted(() => {
 
       <!-- 제목 -->
       <div>
-        <label class="block mb-2">제목</label>
+        <label class="block mb-2">{{ t('QNARegister.title') }}</label>
         <input
             v-model="formData.qtitle"
         type="text"
@@ -107,7 +109,7 @@ onMounted(() => {
 
       <!-- 내용 -->
       <div>
-        <label class="block mb-2">내용</label>
+        <label class="block mb-2">{{ t('QNARegister.content') }}</label>
         <textarea
             v-model="formData.qcontent"
         required
@@ -118,7 +120,7 @@ onMounted(() => {
 
       <!-- 파일 첨부 -->
       <div>
-        <label class="block mb-2">파일 첨부</label>
+        <label class="block mb-2">{{ t('QNARegister.attachment') }}</label>
         <input
             type="file"
             @change="handleFileUpload"
@@ -133,14 +135,14 @@ onMounted(() => {
             @click="router.push('/cs/qna')"
             class="px-6 py-2 border rounded-full hover:bg-gray-100"
         >
-          취소
+          {{ t('QNARegister.cancel') }}
         </button>
         <button
             @click="handleSubmit"
             type="submit"
             class="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600"
         >
-          등록
+          {{ t('QNARegister.submit') }}
         </button>
       </div>
   </div>
