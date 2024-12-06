@@ -1,23 +1,21 @@
 <script setup lang="ts">
+import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";  // i18n import 추가
 
-  import {useRoute, useRouter} from "vue-router";
+const route = useRoute();
+const router = useRouter();
 
+const { t } = useI18n();  // i18n 함수 초기화
 
-  const route = useRoute();
-  const router = useRouter();
+const ono = route.params.ono;
 
-  const ono = route.params.ono;
+const handleClickDetail = () => {
+  router.push(`/order/detail/${ono}`);
+};
 
-  const handleClickDetail = () => {
-
-    router.push(`/order/detail/${ono}`)
-  }
-
-  const handleClickHome = () => {
-
-    router.push('/');
-  }
-
+const handleClickHome = () => {
+  router.push('/');
+};
 </script>
 
 <template>
@@ -45,10 +43,10 @@
       </div>
 
       <!-- 성공 메시지 -->
-      <h1 class="text-center text-2xl font-bold text-gray-800 mb-4">결제가 완료되었습니다!</h1>
+      <h1 class="text-center text-2xl font-bold text-gray-800 mb-4">{{ t('order_complete.success_message') }}</h1>
       <p class="text-center text-gray-600 mb-6">
-        주문 번호: <span class="font-semibold text-gray-800">{{ ono }}</span><br />
-        결제 확인 후 배송이 시작됩니다.
+        {{ t('order_complete.order_number') }}: <span class="font-semibold text-gray-800">{{ ono }}</span><br />
+        {{ t('order_complete.payment_message') }}
       </p>
 
       <!-- 버튼 그룹 -->
@@ -57,20 +55,20 @@
             @click="handleClickDetail"
             class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md"
         >
-          주문 상세보기
+          {{ t('order_complete.view_order_details') }}
         </button>
         <button
             @click="handleClickHome"
             class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md"
         >
-          홈으로 돌아가기
+          {{ t('order_complete.go_home') }}
         </button>
       </div>
     </div>
 
     <!-- 하단 여백 -->
     <div class="mt-6 text-sm text-gray-500">
-      더 궁금한 점이 있으신가요? <a href="/help" class="text-blue-500 underline">고객센터</a>
+      더 궁금한 점이 있으신가요? <a href="/help" class="text-blue-500 underline">{{ t('order_complete.help_center') }}</a>
     </div>
   </div>
 </template>

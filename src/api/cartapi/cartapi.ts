@@ -1,5 +1,5 @@
 import useUserStore from "../../stores/useUserStore.ts";
-import axios from "axios";
+import jwtAxios from "../../util/jwtUtil.ts";
 
 const host = 'https://esnack24.store/api/v1/cart';
 
@@ -12,7 +12,7 @@ export const getCartList = async (page: number) => {
     console.log("uno");
     console.log(user.getUno);
 
-    const res = await axios.get(`${host}/list/${user.getUno}?page=${pageNum}`)
+    const res = await jwtAxios.get(`${host}/list/${user.getUno}?page=${pageNum}`)
 
     return res.data;
 }
@@ -21,7 +21,7 @@ export const addCartProduct = async (pno: number,ciqty: number) => {
 
     console.log(user.getUno);
 
-    const res = await axios.post(`${host}/add/${user.getUno}`,{pno,ciqty})
+    const res = await jwtAxios.post(`${host}/add/${user.getUno}`,{pno,ciqty})
     console.log(res.data);
 
     return res.data
@@ -29,28 +29,28 @@ export const addCartProduct = async (pno: number,ciqty: number) => {
 
 export const deleteCartItem = async (cino: number) => {
 
-    const res = await axios.delete(`${host}/deleteItem/${cino}`)
+    const res = await jwtAxios.delete(`${host}/deleteItem/${cino}`)
 
     return res.data
 }
 
 export const incCartItem = async (cino: number) => {
 
-    const res = await axios.put(`${host}/incqty/${cino}`)
+    const res = await jwtAxios.put(`${host}/incqty/${cino}`)
 
     return res.data
 }
 
 export const decCartItem = async (cino: number) => {
 
-    const res = await axios.put(`${host}/decqty/${cino}`)
+    const res = await jwtAxios.put(`${host}/decqty/${cino}`)
 
     return res.data
 }
 
 export const clearCart = async () => {
 
-    const res = await axios.delete(`${host}/clearItem/${user.getUno}`);
+    const res = await jwtAxios.delete(`${host}/clearItem/${user.getUno}`);
 
     return res.data
 }
