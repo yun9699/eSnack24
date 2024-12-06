@@ -42,6 +42,7 @@ const moreInfo = () => {
 
 const FilterInfo = () => {
   if (pageNum < endPageNum) {
+    console.log(pageNum)
     pageNum++; // 페이지 번호 증가
     getFilterList(pageNum).then((result) => {
       if (result && result.list) {

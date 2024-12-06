@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { registerQNA } from "../../api/csAPI/qnaAPI.ts"
 import { getToken } from "../../api/fcmAPI/fcmAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
+import axios from 'axios'
 
 const router = useRouter()
 
@@ -54,8 +55,7 @@ const handleSubmit = async () => {
   router.push('/cs/qna');
 
   // FCM 메시지 전송
-    const response = await fetch("http://10.10.10.145:8080/admin/api/v1/fcm/send", {
-      method: "POST",
+    const response = await axios.post("https://esnack24admin.store/admin/api/v1/fcm/send", {
       headers: {
         "Content-Type": "application/json",
       },

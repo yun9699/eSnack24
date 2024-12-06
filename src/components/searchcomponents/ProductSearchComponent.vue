@@ -26,7 +26,7 @@ const handleSearch = async () => {
       <input
           v-model="searchQuery"
           type="text"
-          :placeholder="t('search_page.placeholder')"  <!-- JSON에서 텍스트 가져오기 -->
+          :placeholder="t('search_page.placeholder')"
       class="flex-grow p-4 rounded-lg bg-white text-gray-800 focus:outline-none shadow-md"
       />
       <button
