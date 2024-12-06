@@ -3,7 +3,7 @@ import useUserStore from "../../stores/useUserStore.ts";
 
 const user = useUserStore();
 
-const host = "http://localhost:8080/api/v1/user"
+const host = `${import.meta.env.VITE_API_HOST}/user`;
 
 export const compareUserAllergies = async (uno: number, imageAllergies: string[]) => {
 

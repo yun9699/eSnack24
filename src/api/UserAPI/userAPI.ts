@@ -2,13 +2,14 @@ import axios from "axios";
 import useUserStore from "../../stores/useUserStore.ts";
 import {IAddress, IUserInfo} from "../../types/userRegisterTypes.ts";
 import {IReadUser} from "../../types/userTypes.ts";
+import jwtAxios from "../../util/jwtUtil.ts";
 
 const user = useUserStore();
 
 const uno: number = user.getUno;
 const userEmail: string = user.getUserEmail;
 
-const host = 'http://localhost:8080/api/v1';
+const host = `${import.meta.env.VITE_API_HOST}`;
 
 export const registerUser = async (userInfo: IUserInfo) => {
 
@@ -57,14 +58,14 @@ export const getTossUser = async () => {
 
 export const readUser = async () => {
 
-    const res = await axios.get(`${host}/login/read/${uno}`);
+    const res = await jwtAxios.get(`${host}/login/read/${uno}`);
 
     return res.data;
 }
 
 export const editUser = async (user: IReadUser) => {
 
-    const res = await axios.put(`${host}/login/edit/${uno}`, user);
+    const res = await jwtAxios.put(`${host}/login/edit/${uno}`, user);
 
     return res.data;
 }

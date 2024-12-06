@@ -1,7 +1,7 @@
 import axios from "axios";
 import {IRequestAllergy} from "../../types/commnunityTypes.ts";
 
-const host = 'http://localhost:8080/api/v1/request/allergy';
+const host = `${import.meta.env.VITE_API_HOST}/request/allergy`;
 
 export const getRequestAllergyList = async ( page: number = 1, size: number = 10) => {
     const res = await axios.get(`${host}/list?page=${page}&size=${size}`);

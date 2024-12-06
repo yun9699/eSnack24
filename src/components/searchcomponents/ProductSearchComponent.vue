@@ -2,12 +2,13 @@
 import { ref } from "vue";
 import { searchProducts } from "../../api/searchAPI/productSearchAPI.ts";
 import {ISearch} from "../../types/SearchTypes.ts";
+import { useI18n } from "vue-i18n"; // i18n import 추가
 
 const searchQuery = ref("");  // 검색어
 const searchProductList =  ref<ISearch[]>([]); // 검색 결과 리스트
 
 
-
+const { t } = useI18n(); // i18n 함수 초기화
 
 // 검색 버튼 클릭 핸들러
 const handleSearch = async () => {
@@ -25,14 +26,14 @@ const handleSearch = async () => {
       <input
           v-model="searchQuery"
           type="text"
-          placeholder="검색어를 입력해 주세요"
-          class="flex-grow p-4 rounded-lg bg-white text-gray-800 focus:outline-none shadow-md"
+          :placeholder="t('search_page.placeholder')"  <!-- JSON에서 텍스트 가져오기 -->
+      class="flex-grow p-4 rounded-lg bg-white text-gray-800 focus:outline-none shadow-md"
       />
       <button
           class="bg-white text-yellow-600 px-6 py-3 rounded-lg shadow-md hover:bg-yellow-100 transition"
           @click="handleSearch"
       >
-        검색
+        {{ t('search_page.search_button') }}  <!-- JSON에서 텍스트 가져오기 -->
       </button>
     </div>
 
@@ -41,10 +42,10 @@ const handleSearch = async () => {
       <ul>
         <li v-for="item in searchProductList" :key="item.pno" class="flex items-center justify-between bg-white p-4 rounded-lg shadow-lg mb-4 hover:shadow-xl transition">
           <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
-          <div class="flex flex-col">
-            <div class="text-gray-700 font-semibold">{{ item.ptitle_ko }}</div>
-            <div class="text-gray-500">{{ item.price }} 원</div>
-          </div>
+            <div class="flex flex-col">
+              <div class="text-gray-700 font-semibold">{{ item.ptitle_ko }}</div>
+              <div class="text-gray-500">{{ item.price }} 원</div>
+            </div>
           </RouterLink>
         </li>
       </ul>
@@ -52,7 +53,7 @@ const handleSearch = async () => {
 
     <!-- 검색 결과가 없을 때 -->
     <div v-else class="text-center text-gray-300 mt-8">
-      <p>검색 결과가 없습니다.</p>
+      <p>{{ t('search_page.no_results') }}</p> <!-- JSON에서 텍스트 가져오기 -->
     </div>
   </div>
 </template>

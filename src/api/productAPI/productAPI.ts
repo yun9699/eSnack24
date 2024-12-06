@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `http://localhost:8080/api/v1/product`
+const host = `${import.meta.env.VITE_API_HOST}/product`;
 
 
 export const getmainList = async ( page:number = 1, size:number = 10) => {

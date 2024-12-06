@@ -27,7 +27,7 @@ const userOrders = ref<IOrderDetail[]>([initData]);
 onMounted(() => {
   userOrder(uno).then((res) => {
     // Format the oregdate using dayjs
-    userOrders.value = res.map((order) => ({
+    userOrders.value = res.map((order: IOrderDetail) => ({
       ...order,
       oregdate: dayjs(order.oregdate).format('YYYY-MM-DD') // 'YYYY-MM-DD'
     }));
