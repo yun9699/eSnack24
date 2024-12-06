@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://localhost:8080/api/v1"
+const host = `${import.meta.env.VITE_API_HOST}`;
 
 export async function photoAPI(base64Image: string): Promise<any> {
     try {

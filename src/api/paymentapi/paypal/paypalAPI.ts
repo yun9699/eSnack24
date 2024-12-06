@@ -1,7 +1,7 @@
 // api/paypalAPI.ts
 import axios from "axios";
 
-const host = 'http://localhost:8080/api/v1/paypal';
+const host = `${import.meta.env.VITE_API_HOST}/paypal`;
 
 export const createOrder = async (order: any) => {
     console.log("createOrderLog");

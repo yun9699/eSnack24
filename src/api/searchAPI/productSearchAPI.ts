@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const host = `http://localhost:8080/api/v1/search`
+const host = `${import.meta.env.VITE_API_HOST}/search`;
 
 
 export const searchProducts = async (title:String) => {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `http://localhost:8080/api/v1/faq`;
+const host = `${import.meta.env.VITE_API_HOST}/faq`;
 
 // FAQ 목록 조회
 export const getFAQList = async (page: number = 1, size: number = 10, fcategory?: string) => {

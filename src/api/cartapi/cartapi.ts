@@ -1,7 +1,7 @@
 import useUserStore from "../../stores/useUserStore.ts";
 import jwtAxios from "../../util/jwtUtil.ts";
 
-const host = 'http://localhost:8080/api/v1/cart';
+const host = `${import.meta.env.VITE_API_HOST}/cart`;
 
 const user = useUserStore();
 

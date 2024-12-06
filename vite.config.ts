@@ -4,9 +4,10 @@ import vue from '@vitejs/plugin-vue'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  envDir: "../",
-  envPrefix: "PAYPAL",
+  envDir: "./.",
+  //envPrefix: "PAYPAL",
   server: {
+    host: "0.0.0.0",
     port: 5173,
     proxy: {
       "/api/v1/paypal": {
@@ -16,9 +17,4 @@ export default defineConfig({
       },
     },
   },
-  server:
-      {
-        host: "0.0.0.0", // 모든 네트워크 인터페이스에서 접속 허용
-        port: 5173,      // 기본 포트 (변경 가능)
-      },
 })

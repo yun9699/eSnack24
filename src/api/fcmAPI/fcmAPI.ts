@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `http://localhost:8080/api/v1/fcm`;
+const host = `${import.meta.env.VITE_API_HOST}/fcm`;
 
 // FAQ 목록 조회
 export const getToken = async () => {

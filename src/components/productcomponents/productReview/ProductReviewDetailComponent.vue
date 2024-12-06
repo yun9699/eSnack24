@@ -4,6 +4,9 @@ import { useRoute, useRouter } from "vue-router";
 import { ReviewDetail } from "../../../types/reviewTypes";
 import { fetchReviewDetailAPI } from "../../../api/reviewAPI/productReviewAPI";
 import useUserStore from "../../../stores/useUserStore.ts";
+import {useI18n} from "vue-i18n";
+
+const { t } = useI18n();
 
 const route = useRoute();
 const router = useRouter();
@@ -69,26 +72,26 @@ onMounted(() => {
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold text-gray-800">리뷰 상세 정보</h1>
+      <h1 class="text-2xl font-bold text-gray-800">{{ t('reviewDetail.Header') }}</h1>
     </div>
 
-    <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
+    <div v-if="loading" class="text-center text-gray-500">{{ t('reviewDetail.loadingReviewDetail') }}</div>
     <div v-else>
       <div v-if="review" class="space-y-4">
         <div>
-          <h2 class="text-lg font-semibold text-gray-700">상품 번호: {{ review.pno }}</h2>
-          <p class="text-sm text-gray-600">리뷰 번호: {{ review.rno }}</p>
-          <p class="text-sm text-gray-600">사용자 번호: {{ review.uno }}</p>
+          <h2 class="text-lg font-semibold text-gray-700">{{ t('reviewDetail.reviewDetailLabels.productNumber') }} : {{ review.pno }}</h2>
+          <p class="text-sm text-gray-600">{{ t('reviewDetail.reviewDetailLabels.reviewNumber') }} : {{ review.rno }}</p>
+          <p class="text-sm text-gray-600">{{ t('reviewDetail.reviewDetailLabels.userNumber') }} : {{ review.uno }}</p>
         </div>
 
         <div>
           <img
               v-if="review.rimage"
               :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${review.rimage}`"
-              alt="리뷰 이미지"
+              :alt="t('reviewDetail.reviewDetailLabels.image')"
               class="w-48 h-auto border rounded-lg"
           />
-          <p v-else class="text-sm text-gray-400">이미지가 없습니다.</p>
+          <p v-else class="text-sm text-gray-400">{{ t('reviewDetail.reviewDetailLabels.noImage') }}</p>
         </div>
 
         <div>
@@ -100,16 +103,16 @@ onMounted(() => {
         </div>
 
         <div>
-          <p class="text-gray-700">내용: {{ review.rcontent }}</p>
+          <p class="text-gray-700">{{ t('reviewDetail.reviewDetailLabels.content') }} : {{ review.rcontent }}</p>
         </div>
 
         <div class="text-xs text-gray-500">
-          <p>등록일: {{ formatDate(review.rregDate) }}</p>
-          <p>수정일: {{ formatDate(review.rmodDate) }}</p>
+          <p>{{ t('reviewDetail.reviewDetailLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}</p>
+          <p>{{ t('reviewDetail.reviewDetailLabels.modificationDate') }} : {{ formatDate(review.rmodDate) }}</p>
         </div>
       </div>
 
-      <div v-else class="text-center text-gray-400 py-6">리뷰 상세 정보를 불러올 수 없습니다.</div>
+      <div v-else class="text-center text-gray-400 py-6">{{ t('reviewDetail.reviewDetailLabels.noReviewDetails') }}</div>
     </div>
 
     <div  class="flex gap-4 mt-4">
@@ -117,13 +120,13 @@ onMounted(() => {
           @click="goToEditPage"
           class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
       >
-        수정
+        {{ t('reviewDetail.buttons.editReviewDetail') }}
       </button>
       <button
           @click="goToListPage"
           class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
       >
-        목록으로 돌아가기
+        {{ t('reviewDetail.buttons.goBackToReviewList') }}
       </button>
     </div>
 

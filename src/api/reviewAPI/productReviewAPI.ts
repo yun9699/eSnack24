@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {ReviewDetail, ReviewRegister} from "../../types/reviewTypes.ts";
 
-const host = 'http://localhost:8080/api/v1/review'
+const host = `${import.meta.env.VITE_API_HOST}/review`;
 
 export const getReviewList = async (page: number = 1, size: number = 10, pno?: number) => {
     try {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = 'http://localhost:8080/api/v1/exchange-rate';
+const host = `${import.meta.env.VITE_API_HOST}/exchange-rate`;
 
 export const getExchangeRate = async (targetCurrency: string) => {
 
