@@ -8,6 +8,8 @@ const user = useUserStore();
 const uno: number = user.getUno;
 const userano: number = user.getPersonalAllergies;
 
+
+
 const serverData = ref<{ ProductList: IProduct[] }>({
   ProductList: [],
 });
@@ -25,6 +27,23 @@ const moreInfo = () => {
   if (pageNum < endPageNum) {
     pageNum++; // 페이지 번호 증가
     getList(pageNum).then((result) => {
+      if (result && result.list) {
+        const newItems = result.list.filter(
+            (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
+        );
+        serverData.value.ProductList = [
+          ...serverData.value.ProductList,
+          ...newItems,
+        ];
+      }
+    })
+  }
+};
+
+const FilterInfo = () => {
+  if (pageNum < endPageNum) {
+    pageNum++; // 페이지 번호 증가
+    getFilterList(pageNum).then((result) => {
       if (result && result.list) {
         const newItems = result.list.filter(
             (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
@@ -62,7 +81,6 @@ const handleAllergyChange = () => {
 
 // "전체" 버튼 클릭 시 실행
 const handleAllergyReset = () => {
-  console.log("전체 버튼 클릭");
 
   // 제외 상태 초기화
   isAllergyExcluded.value = false;
@@ -96,7 +114,7 @@ onMounted(() => {
     <div class="flex space-x-4">
       <button class="px-4 py-2 bg-yellow-600 text-white rounded">행사상품</button>
       <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">차별화 상품</button>
-      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">Fresh Food</button>
+      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">신선 식품</button>
     </div>
   </header>
 
@@ -168,6 +186,7 @@ onMounted(() => {
   </section>
 
   <div class="mt-10 m-10 text-center">
+    <div v-if="isAllergyExcluded === false">
     <button
         @click="moreInfo()"
         v-if="pageNum < endPageNum"
@@ -175,5 +194,16 @@ onMounted(() => {
     >
       더보기
     </button>
+    </div>
+
+    <div v-if="isAllergyExcluded === true">
+      <button
+          @click="FilterInfo()"
+          v-if="pageNum < endPageNum"
+          class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+      >
+        더보기 filter
+      </button>
+    </div>
   </div>
 </template>

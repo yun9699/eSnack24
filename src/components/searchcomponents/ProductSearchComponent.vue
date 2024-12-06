@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { searchProducts } from "../../api/searchAPI/productSearchAPI.ts";
+import {ISearch} from "../../types/SearchTypes.ts";
 
 const searchQuery = ref("");  // 검색어
-const searchProductList = ref([]);  // 검색 결과 리스트
+const searchProductList =  ref<ISearch[]>([]); // 검색 결과 리스트
+
+
+
 
 // 검색 버튼 클릭 핸들러
 const handleSearch = async () => {
   console.log("검색어:", searchQuery.value);
   // 검색 API 호출
-  await searchProducts(searchQuery.value).then((result) => {
-    searchProductList.value = result;  // 검색 결과 업데이트
-  });
+  const result: ISearch[] = await searchProducts(searchQuery.value);
+  searchProductList.value = result;  // 검색 결과 업데이트
 };
 </script>
 
