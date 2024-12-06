@@ -2,14 +2,13 @@ import axios from "axios";
 
 const auth_code_path = 'https://accounts.google.com/o/oauth2/v2/auth'
 
-const rest_api_key = '6550639460-vq6qpp6ea2u77fabbo3gkhud9mdedtn9.apps.googleusercontent.com';
+const rest_api_key = import.meta.env.VITE_GOOGLE_REST_KEY;
 
-const redirect_uri = 'https://esnack24.store/login/googlere';
+const redirect_uri = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
 
 const access_token_url = 'https://oauth2.googleapis.com/token';
 
-const host = 'https://esnack24.store/api/v1/login/google';
-
+const host = `${import.meta.env.VITE_API_HOST}/login/google`;
 
 export const getGoogleLoginLink = () => {
 

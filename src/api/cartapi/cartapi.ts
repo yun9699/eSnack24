@@ -1,7 +1,7 @@
 import useUserStore from "../../stores/useUserStore.ts";
 import axios from "axios";
 
-const host = 'https://esnack24.store/api/v1/cart';
+const host = `${import.meta.env.VITE_API_HOST}/cart`;
 
 const user = useUserStore();
 

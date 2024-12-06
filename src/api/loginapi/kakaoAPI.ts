@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 
-const rest_api_key = 'bbeea25e17d51b641cf643b1703c569b'
+const rest_api_key = import.meta.env.VITE_KAKAO_REST_KEY;
 
-const redirect_uri = 'https://esnack24.store/login/kakaore'
+const redirect_uri = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
 const auth_code_path = `https://kauth.kakao.com/oauth/authorize`
 
 const access_token_url = 'https://kauth.kakao.com/oauth/token'
 
-const host = `https://esnack24.store/api/v1/login/kakao`
+const host = `${import.meta.env.VITE_API_HOST}/login/kakao`;
 
 export const getKakaoMemberWithAccessToken = async (accessToken:string)  => {
 

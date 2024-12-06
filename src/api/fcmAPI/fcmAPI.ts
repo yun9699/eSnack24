@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `https://esnack24.store/api/v1/fcm`;
+const host = `${import.meta.env.VITE_API_HOST}/fcm`;
 
 // FAQ 목록 조회
 export const getToken = async () => {

@@ -8,7 +8,7 @@ const user = useUserStore();
 const uno: number = user.getUno;
 const userEmail: string = user.getUserEmail;
 
-const host = 'https://esnack24.store/api/v1';
+const host = `${import.meta.env.VITE_API_HOST}`;
 
 export const registerUser = async (userInfo: IUserInfo) => {
 

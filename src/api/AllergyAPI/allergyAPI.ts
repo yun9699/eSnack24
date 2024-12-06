@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = 'https://esnack24.store/api/v1/allergy'
+const host = `${import.meta.env.VITE_API_HOST}/allergy`;
 
 export const getAllergyListKo = async () => {
 
