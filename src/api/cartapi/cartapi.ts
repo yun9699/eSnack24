@@ -1,5 +1,4 @@
 import useUserStore from "../../stores/useUserStore.ts";
-import axios from "axios";
 import jwtAxios from "../../util/jwtUtil.ts";
 
 const host = 'http://localhost:8080/api/v1/cart';
