@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const host = `https://esnack24.store/api/v1/search`
+const host = `${import.meta.env.VITE_API_HOST}/search`;
 
 
 export const searchProducts = async (title:String) => {

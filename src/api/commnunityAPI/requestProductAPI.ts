@@ -1,7 +1,7 @@
 import axios from "axios";
 import {IRequestProduct} from "../../types/commnunityTypes.ts";
 
-const host = 'https://esnack24.store/api/v1/request/product';
+const host = `${import.meta.env.VITE_API_HOST}/request/product`;
 
 export const getRequestProductList = async ( page: number = 1, size: number = 10) => {
     const res = await axios.get(`${host}/list?page=${page}&size=${size}`);
