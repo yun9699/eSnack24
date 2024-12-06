@@ -8,7 +8,7 @@
   import useUserStore from "../../stores/useUserStore.ts";
   import {editUserAllergies} from "../../api/UserAPI/userAllergyAPI.ts";
 
-  const init = {
+  const init: IReadUser = {
     username: '',
     ubirth: '',
     ucallnumber: '',
