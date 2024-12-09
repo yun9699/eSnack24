@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = 'http://localhost:8080/api/v1/login'
+const host = `${import.meta.env.VITE_API_HOST}/login`
 
 export const refreshRequest = async (accessToken: string, refreshToken: string) => {
 
