@@ -88,6 +88,12 @@ onMounted(() => {
       >
         QNA
       </button>
+      <button
+          class="px-8 py-2 rounded-full text-lg font-medium border border-gray-300 text-gray-600"
+          @click="$router.push('/request/product/list')"
+      >
+        신고
+      </button>
     </div>
 
     <!-- 검색창 -->
