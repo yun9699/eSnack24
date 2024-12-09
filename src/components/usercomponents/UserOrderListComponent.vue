@@ -2,19 +2,10 @@
 import useUserStore from "../../stores/useUserStore.ts";
 import { onMounted, ref } from "vue";
 import { userOrder } from "../../api/orderapi/OrderAPI.ts";
-import dayjs from 'dayjs'; // Import dayjs
+import dayjs from 'dayjs';
+import {IOrderDetail} from "../../types/userTypes.ts"; // Import dayjs
 
-interface IOrderDetail {
-  uno: number;
-  ono: number;
-  oregdate: string;
-  orderItems: Array<{
-    ptitle_ko: string;
-    price: number;
-    pfilename: string;
-    oiqty: number;
-  }>;
-}
+
 
 const initData: IOrderDetail = {
   uno: 0,
@@ -27,6 +18,7 @@ const initData: IOrderDetail = {
     oiqty: 1
   }]
 };
+
 
 const user = useUserStore();
 const uno = user.getUno;

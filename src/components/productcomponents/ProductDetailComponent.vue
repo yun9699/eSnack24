@@ -208,13 +208,13 @@ onMounted(() => {
           class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
           @click="orderClick"
       >
-        Buy Now
+        구매하기
       </button>
       <button
           class="w-full lg:w-auto bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
           @click="handleClickAddCart"
       >
-        Add to Cart
+        장바구니담기
       </button>
     </div>
     <CommonCartAddModalComponent
