@@ -181,9 +181,9 @@ onMounted(() => {
 
       <!-- 알러지 정보 -->
       <div class="text-center mb-6 mt-2"> <!-- mt-2 추가 -->
-        <div class="flex items-center">
+        <div class="flex items-center whitespace-nowrap">
           <h2 class="text-lg font-bold text-gray-800 mb-0 mr-2">{{ t('pDetail.allergy_info') }} :</h2>
-          <p class="text-base text-gray-700 mb-0">
+          <p class="text-base text-gray-700 mb-0 flex flex-wrap">
             <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">{{ t('pDetail.none') }}</span>
             <span v-else>
             <span
@@ -193,6 +193,7 @@ onMounted(() => {
                 'text-red-600 font-bold': mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]),
                 'text-gray-800': !mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index])
               }"
+                class="inline-block"
             >
               {{ localeAtitle({
               ano: productRef.productDetail.product.ano[index],
@@ -208,7 +209,8 @@ onMounted(() => {
         </div>
 
 
-      <!-- 사용자 알러지 경고 -->
+
+        <!-- 사용자 알러지 경고 -->
         <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
           <p class="text-red-600 font-medium text-center">
             ⚠️ {{ t('pDetail.warning') }}
