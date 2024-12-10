@@ -192,6 +192,7 @@
   },
 
   "edit_user": {
+    "title": "修改用户信息",
     "name_label": "姓名",
     "name_placeholder": "请输入姓名",
     "gender_label": "性别",

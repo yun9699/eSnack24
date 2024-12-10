@@ -192,6 +192,7 @@
   },
 
   "edit_user": {
+    "title": "Modify User Information",
     "name_label": "Name",
     "name_placeholder": "Enter your name",
     "gender_label": "Gender",
@@ -320,7 +321,7 @@
   },
 
   "user_reviewList": {
-    "userReviewListHeader": "User Review List",
+    "Header": "User Review List",
     "loadingUserReviews": "Loading...",
     "noUserReviewsMessage": "No reviews available.",
     "userReviewLabels": {
