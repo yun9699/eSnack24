@@ -54,6 +54,10 @@ const handleImageChange = (event: Event) => {
   }
 };
 
+const setStar = (star: number) => {
+  rstar.value = star;
+};
+
 // 이미지 업로드 처리
 const uploadImage = async () => {
   if (!selectedImageFile.value) return null;
