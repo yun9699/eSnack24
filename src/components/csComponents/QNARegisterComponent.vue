@@ -58,7 +58,7 @@ const handleSubmit = async () => {
 
   // FCM 메시지 전송
   const response = await axios.post(
-      "https://esnack24admin/admin/api/v1/fcm/send",
+      "https://esnack24admin.store/admin/api/v1/fcm/send",
       {
         token: fcmData.value.token,  // 배열 형태로 전달된 토큰
         title: "새로운 QNA가 등록되었습니다.",
