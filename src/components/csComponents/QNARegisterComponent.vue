@@ -38,36 +38,38 @@ const handleFileUpload = (event: any) => {
 // 등록 처리
 const handleSubmit = async () => {
 
-  // QNA 등록 API 호출
-  await registerQNA(formData.value);
+    // QNA 등록 API 호출
+    await registerQNA(formData.value);
 
-  // FCM 토큰 가져오기
-  const res = await getToken();  // 비동기 호출로 토큰 가져오기
-  console.log(res);  // 응답 확인
+    // FCM 토큰 가져오기
+    const res = await getToken();  // 비동기 호출로 토큰 가져오기
+    console.log(res);  // 응답 확인
 
-  if (res) {
-    fcmData.value.token = res;  // 토큰 배열 할당
-    console.log(fcmData.value.token);
+    if (res) {
+      fcmData.value.token = res;  // 토큰 배열 할당
+      console.log(fcmData.value.token);
 
-  } else {
-    console.error("FCM 토큰이 없습니다.");
-    return;  // 토큰이 없으면 종료
-  }
+    } else {
+      console.error("FCM 토큰이 없습니다.");
+      return;  // 토큰이 없으면 종료
+    }
 
   router.push('/cs/qna');
 
   // FCM 메시지 전송
-  const response = await axios.post("https://esnack24admin.store/admin/api/v1/fcm/send", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      token: fcmData.value.token,  // 배열 형태로 전달된 토큰
-      title: "새로운 QNA가 등록되었습니다.",
-      body: "QNA 내용을 확인해주세요."
-    })
-  });
+  const response = await axios.post(
+      "https://esnack24admin/admin/api/v1/fcm/send",
+      {
+        token: fcmData.value.token,  // 배열 형태로 전달된 토큰
+        title: "새로운 QNA가 등록되었습니다.",
+        body: "QNA 내용을 확인해주세요.",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+  );
 
   if (!response.ok) {
     throw new Error('FCM 메시지 전송 실패');
