@@ -6,12 +6,14 @@ import { getDetail } from "../../api/productAPI/productAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {addCartProduct} from "../../api/cartapi/cartapi.ts";
 import CommonCartAddModalComponent from "../../common/components/CommonCartAddModalComponent.vue";
-import {createOrder, viewOrder} from "../../api/orderapi/OrderAPI.ts";
+import {createOrder} from "../../api/orderapi/OrderAPI.ts";
 import {useI18n} from "vue-i18n";
 import {localeProduct} from "../../locales/localeProduct.ts";
+import {localeAllergy} from "../../locales/localeAllergy.ts";
 
 const { t } = useI18n()
 const { localePtitle, localePcontent } = localeProduct()
+const { localeAtitle } = localeAllergy()
 
 const route = useRoute();
 const router = useRouter();
@@ -115,22 +117,28 @@ const orderClick = () => {
 
 
 onMounted(() => {
-  console.log("uno:", uno)
-  console.log("userano:", userano)
-  console.log("pno:", pno)
-
   getDetail(pno).then((data) => {
-
-
-    productRef.value.productDetail.product.price = data.price;
-    productRef.value.productDetail.atitle_ko = data.atitle_ko || [];
-    productRef.value.productDetail.product.ptitle_ko = data.ptitle_ko;
-    productRef.value.productDetail.product.pfilename = data.pfilename;
-    productRef.value.productDetail.product.ano = [...data.ano];
-    productRef.value.productDetail.product.pcontent_ko = data.pcontent_ko;
-
-    console.log("----------------------data")
-    console.log(data);
+    productRef.value.productDetail.product = {
+      ...productRef.value.productDetail.product,
+      price: data.price,
+      ptitle_ko: data.ptitle_ko,
+      ptitle_en: data.ptitle_en,
+      ptitle_ja: data.ptitle_ja,
+      ptitle_zh: data.ptitle_zh,
+      pcontent_ko: data.pcontent_ko,
+      pcontent_en: data.pcontent_en,
+      pcontent_ja: data.pcontent_ja,
+      pcontent_zh: data.pcontent_zh,
+      pfilename: data.pfilename,
+      ano: [...data.ano]
+    };
+    productRef.value.productDetail = {
+      ...productRef.value.productDetail,
+      atitle_ko: data.atitle_ko,
+      atitle_en: data.atitle_en,
+      atitle_ja: data.atitle_ja,
+      atitle_zh: data.atitle_zh
+    };
   });
 });
 </script>
@@ -184,7 +192,13 @@ onMounted(() => {
                 :key="index"
                 :class="mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]) ? 'text-red-600 font-bold' : 'text-gray-800'"
             >
-              {{ allergy }}<span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
+              {{ localeAtitle({
+              ano: productRef.productDetail.product.ano[index],
+              atitle_ko: allergy,
+              atitle_en: productRef.productDetail.atitle_en?.[index],
+              atitle_ja: productRef.productDetail.atitle_ja?.[index],
+              atitle_zh: productRef.productDetail.atitle_zh?.[index]
+            }) }}<span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
             </span>
           </span>
         </p>
