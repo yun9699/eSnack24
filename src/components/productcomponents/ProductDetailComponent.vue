@@ -139,58 +139,60 @@ onMounted(() => {
       atitle_ja: data.atitle_ja,
       atitle_zh: data.atitle_zh
     };
+
+    // 페이지가 로드된 후 스크롤을 맨 위로 이동
+    window.scrollTo(0, 0);
   });
 });
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto p-6 flex flex-col items-center gap-10 bg-white shadow-lg rounded-lg">
+  <div class="bg-gray-100 min-h-screen flex flex-col items-center">
     <!-- 제품 이미지 -->
-    <div class="flex justify-center items-center w-full max-w-md mx-auto">
+    <div class="w-full h-[50vh] overflow-hidden bg-gray-200">
       <img
           :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/${productRef.productDetail.product.pfilename}`"
           alt="Product Image"
-          class="w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80 object-cover rounded-lg border-2 border-gray-200 shadow-md"
+          class="w-full h-full object-cover"
+          style="aspect-ratio: 16 / 9"
       />
     </div>
 
     <!-- 제품 정보 -->
-    <div class="text-center w-full max-w-xl space-y-6">
-      <!-- 제품 이름 -->
-      <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
-        {{ localePtitle(productRef.productDetail.product) }}
-      </h1>
-
-      <!-- 가격과 리뷰확인 버튼을 같은 선상에 배치 -->
-      <div class="flex justify-between w-full mt-2">
-        <!-- 가격을 완전 중앙에 배치 -->
-        <div class="flex-1 text-center">
-          <div class="text-xl font-semibold text-gray-700">
-            {{ t('pDetail.price') }} :
-            <span class="text-green-600">
-              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }} ₩
-            </span>
-          </div>
-        </div>
-
-        <!-- 리뷰 확인 버튼 (오른쪽에 붙임) -->
+    <div class="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg -mt-16 relative z-10">
+      <!-- 제품 이름 및 리뷰 버튼 -->
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 tracking-tight">
+          {{ localePtitle(productRef.productDetail.product) }}
+        </h1>
         <router-link :to="`/review/list/${pno}`">
-          <button class="bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition">
-            {{ t('pDetail.review_check') }}
-          </button>
+          <span class="text-[#F9BB00] text-lg font-semibold hover:underline">
+            {{ t('pDetail.review_check') }} ➤
+          </span>
         </router-link>
       </div>
 
-      <!-- 알러지 정보 -->
+      <!-- 가격 -->
       <div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">{{ t('pDetail.allergy_info') }} :</h2>
-        <p class="text-base text-gray-700">
-          <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">{{ t('pDetail.none') }}</span>
-          <span v-else>
+        <p class="text-2xl sm:text-3xl font-bold text-left" :style="{ color: '#000000' }">
+          ₩ {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}
+        </p>
+      </div>
+
+      <!-- 알러지 정보 -->
+      <div class="text-center mb-6">
+        <div class="flex items-center">
+          <h2 class="text-lg font-bold text-gray-800 mb-0 mr-2">{{ t('pDetail.allergy_info') }} :</h2>
+          <p class="text-base text-gray-700 mb-0">
+            <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">{{ t('pDetail.none') }}</span>
+            <span v-else>
             <span
                 v-for="(allergy, index) in productRef.productDetail.atitle_ko"
                 :key="index"
-                :class="mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]) ? 'text-red-600 font-bold' : 'text-gray-800'"
+                :class="{
+                'text-red-600 font-bold': mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]),
+                'text-gray-800': !mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index])
+              }"
             >
               {{ localeAtitle({
               ano: productRef.productDetail.product.ano[index],
@@ -198,56 +200,39 @@ onMounted(() => {
               atitle_en: productRef.productDetail.atitle_en?.[index],
               atitle_ja: productRef.productDetail.atitle_ja?.[index],
               atitle_zh: productRef.productDetail.atitle_zh?.[index]
-            }) }}<span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
+            }) }}
+              <span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
             </span>
           </span>
-        </p>
+          </p>
+        </div>
+
+        <!-- 사용자 알러지 경고 -->
+        <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
+          <p class="text-red-600 font-medium text-center">
+            ⚠️ {{ t('pDetail.warning') }}
+          </p>
+        </div>
       </div>
 
-      <!-- 사용자 알러지 경고 -->
-      <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
-        <p class="text-red-600 font-medium text-center">
-          ⚠️ {{ t('pDetail.warning') }}
-        </p>
+      <!-- 버튼 -->
+      <div class="flex justify-center gap-4 mb-4">
+        <!-- 장바구니 버튼 -->
+        <button
+            class="bg-white text-[#F9BB00] border-2 border-[#F9BB00] py-3 px-8 rounded-full text-lg font-medium hover:bg-[#FFF3CC] hover:border-[#e0a500] transition shadow-lg"
+            @click="handleClickAddCart"
+        >
+          {{ t('pDetail.add_to_cart') }}
+        </button>
+
+        <!-- 구매 버튼 -->
+        <button
+            class="bg-[#F9BB00] text-white py-3 px-8 rounded-full text-lg font-medium hover:bg-[#e0a500] transition shadow-lg"
+            @click="orderClick"
+        >
+          {{ t('pDetail.buy') }}
+        </button>
       </div>
     </div>
-
-    <!-- 제품 컨텐츠 영역 스타일링 -->
-    <div class="w-full bg-white p-6 rounded-xl shadow-lg mt-6 border border-gray-100">
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ t('pDetail.product_description') }}</h2>
-      <p class="text-lg text-gray-700 leading-relaxed break-words">
-        {{ localePcontent(productRef.productDetail.product) }}
-      </p>
-    </div>
-
-    <!-- 버튼 -->
-    <div class="w-full max-w-lg flex justify-between gap-4 mt-4">
-      <button
-          class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
-          @click="orderClick"
-      >
-        {{ t('pDetail.buy') }}
-      </button>
-      <button
-          class="w-full lg:w-auto bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
-          @click="handleClickAddCart"
-      >
-        {{ t('pDetail.add_to_cart') }}
-      </button>
-    </div>
-    <CommonCartAddModalComponent
-        v-if="isModalStatus"
-        :isModalStatus="isModalStatus"
-        :modalClose="modalClose"
-    />
   </div>
 </template>
-
-<style scoped>
-/* Tailwind로 주요 스타일을 다룰 수 있도록 설정 */
-</style>
-
-
-<style scoped>
-/* Tailwind를 사용하므로 추가 스타일링은 필요 없습니다 */
-</style>
