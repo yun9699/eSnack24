@@ -3,6 +3,11 @@ import { onMounted, ref } from "vue";
 import { getFilterList, getList } from "../../api/productAPI/productAPI.ts";
 import { IProduct } from "../../types/productTypes.ts";
 import useUserStore from "../../stores/useUserStore.ts";
+import {useI18n} from "vue-i18n";
+import {localeProduct} from "../../locales/localeProduct.ts";
+
+const { t } = useI18n()
+const { localePtitle } = localeProduct()
 
 const user = useUserStore();
 const uno: number = user.getUno;
@@ -88,23 +93,43 @@ onMounted(() => {
     endPageNum = res.endPage;
   });
 });
+
+
+const FilterInfo = () => {
+  if (pageNum < endPageNum) {
+    console.log(pageNum)
+    pageNum++; // 페이지 번호 증가
+    getFilterList(pageNum).then((result) => {
+      if (result && result.list) {
+        const newItems = result.list.filter(
+            (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
+        );
+        serverData.value.ProductList = [
+          ...serverData.value.ProductList,
+          ...newItems,
+        ];
+      }
+    })
+  }
+};
+
 </script>
 
 <template>
   <!-- Header Section -->
   <header class="bg-yellow-500 p-4 flex justify-between items-center">
     <div class="flex space-x-4">
-      <button class="px-4 py-2 bg-yellow-600 text-white rounded">행사상품</button>
-      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">차별화 상품</button>
-      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">Fresh Food</button>
+      <button class="px-4 py-2 bg-yellow-600 text-white rounded">{{ t('pList.event_product') }}</button>
+      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.differentiated_product') }}</button>
+      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.fresh_product') }}</button>
     </div>
   </header>
 
   <!-- Banner Section -->
   <section class="p-4 bg-gray-100 text-center">
-    <p class="text-gray-600">이스낵이 준비한 이달의 행사상품을 만나보세요.</p>
+    <p class="text-gray-600">{{ t('pList.header') }}</p>
     <div class="bg-yellow-200 p-4 mt-2 rounded">
-      <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">앱 다운로드</button>
+      <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">{{ t('pList.app_download') }}</button>
     </div>
   </section>
 
@@ -121,12 +146,12 @@ onMounted(() => {
           class="px-3 py-1 bg-yellow-500 text-white rounded"
           @click="handleAllergyReset"
       >
-        전체
+        {{ t('pList.all') }}
       </button>
 
       <!-- 기타 버튼 -->
       <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">1+1</button>
-      <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">세일</button>
+      <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded">{{ t('pList.sale') }}</button>
 
       <!-- "제외" 버튼 -->
       <button
@@ -135,7 +160,7 @@ onMounted(() => {
           :class="isAllergyExcluded ? 'bg-red-500 text-white' : 'bg-red-300 text-gray-700'"
           @click="handleAllergyChange"
       >
-        제외
+        {{ t('pList.exclude') }}
       </button>
     </div>
     <select class="p-2 border rounded w-full">
@@ -161,19 +186,32 @@ onMounted(() => {
               class="w-full h-32 object-contain"
           />
         </RouterLink>
-        <p class="mt-2 text-gray-700">{{ item.ptitle_ko }}</p>
-        <p class="mt-2 text-orange-500 font-semibold">{{ item.price }}원</p>
+        <p class="mt-2 text-gray-700">{{ localePtitle(item) }}</p>
+        <p class="mt-2 text-orange-500 font-semibold">{{ item.price }}₩</p>
       </div>
     </div>
   </section>
 
   <div class="mt-10 m-10 text-center">
+    <div v-if="isAllergyExcluded === false">
     <button
         @click="moreInfo()"
         v-if="pageNum < endPageNum"
         class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
     >
-      더보기
+      {{ t('pList.more') }}
+
     </button>
+    </div>
+
+    <div v-if="isAllergyExcluded === true">
+      <button
+          @click="FilterInfo()"
+          v-if="pageNum < endPageNum"
+          class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+      >
+        더보기 filter
+      </button>
+    </div>
   </div>
 </template>

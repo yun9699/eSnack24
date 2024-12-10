@@ -68,7 +68,7 @@ const handleClickHome = () => {
 
     <!-- 하단 여백 -->
     <div class="mt-6 text-sm text-gray-500">
-      더 궁금한 점이 있으신가요? <a href="/help" class="text-blue-500 underline">{{ t('order_complete.help_center') }}</a>
+      {{ t('order_complete.more_info') }} <a href="/help" class="text-blue-500 underline">{{ t('order_complete.help_center') }}</a>
     </div>
   </div>
 </template>

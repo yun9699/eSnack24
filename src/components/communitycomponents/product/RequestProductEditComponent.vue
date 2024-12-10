@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {
   deleteRequestProduct,
   editRequestProduct,
@@ -8,7 +9,7 @@ import {
 } from "../../../api/commnunityAPI/requestProductAPI.ts";
 import {IRequestProduct} from "../../../types/commnunityTypes.ts";
 
-
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const cpno = ref<number | null>(null);
@@ -84,14 +85,20 @@ onMounted(() => {
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold text-gray-800">수정</h1>
+      <h1 class="text-2xl font-bold text-gray-800">
+        {{ t('productReportEdit.productReportEditHeader') }}
+      </h1>
     </div>
 
-    <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
+    <div v-if="loading" class="text-center text-gray-500">
+      {{ t('productReportEdit.loadingProductReportEdit') }}
+    </div>
     <div v-else>
       <div v-if="requestProduct" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">제목</label>
+          <label class="block text-sm font-medium text-gray-700">
+            {{ t('productReportEdit.productReportEditLabels.title') }}
+          </label>
           <textarea
               v-model="cptitle"
               rows="4"
@@ -99,7 +106,9 @@ onMounted(() => {
           ></textarea>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">신고 내용</label>
+          <label class="block text-sm font-medium text-gray-700">
+            {{ t('productReportEdit.productReportEditLabels.content') }}
+          </label>
           <textarea
               v-model="cpproduct"
               rows="4"
@@ -112,7 +121,10 @@ onMounted(() => {
             @click="editProduct"
             class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
         >
-          {{ submitting ? "수정 중..." : "수정하기" }}
+          {{ submitting
+            ? t('productReportEdit.productReportEditButtons.edit.loading')
+            : t('productReportEdit.productReportEditButtons.edit.default')
+          }}
         </button>
 
         <div class="mt-4 text-right">
@@ -121,13 +133,14 @@ onMounted(() => {
               class="px-4 py-2 text-sm text-red-600 bg-red-200 rounded-lg hover:bg-red-300 disabled:opacity-50"
               :disabled="submitting"
           >
-            삭제
+            {{ t('productReportEdit.productReportEditButtons.delete') }}
           </button>
         </div>
       </div>
 
-      <div v-else class="text-center text-gray-400 py-6">데이터를 불러오는 중입니다...</div>
+      <div v-else class="text-center text-gray-400 py-6">
+        {{ t('productReportEdit.noProductReportData') }}
+      </div>
     </div>
   </div>
-
 </template>

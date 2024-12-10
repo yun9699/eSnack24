@@ -6,7 +6,14 @@ import { getDetail } from "../../api/productAPI/productAPI.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {addCartProduct} from "../../api/cartapi/cartapi.ts";
 import CommonCartAddModalComponent from "../../common/components/CommonCartAddModalComponent.vue";
-import {createOrder, viewOrder} from "../../api/orderapi/OrderAPI.ts";
+import {createOrder} from "../../api/orderapi/OrderAPI.ts";
+import {useI18n} from "vue-i18n";
+import {localeProduct} from "../../locales/localeProduct.ts";
+import {localeAllergy} from "../../locales/localeAllergy.ts";
+
+const { t } = useI18n()
+const { localePtitle, localePcontent } = localeProduct()
+const { localeAtitle } = localeAllergy()
 
 const route = useRoute();
 const router = useRouter();
@@ -110,23 +117,28 @@ const orderClick = () => {
 
 
 onMounted(() => {
-  console.log(uno)
-  console.log(userano)
-  console.log("pno",pno)
-
-
   getDetail(pno).then((data) => {
-
-
-    productRef.value.productDetail.product.price = data.price;
-    productRef.value.productDetail.atitle_ko = data.atitle_ko || [];
-    productRef.value.productDetail.product.ptitle_ko = data.ptitle_ko;
-    productRef.value.productDetail.product.pfilename = data.pfilename;
-    productRef.value.productDetail.product.ano = [...data.ano];
-    productRef.value.productDetail.product.pcontent_ko = data.pcontent_ko;
-
-    console.log("----------------------data")
-    console.log(data);
+    productRef.value.productDetail.product = {
+      ...productRef.value.productDetail.product,
+      price: data.price,
+      ptitle_ko: data.ptitle_ko,
+      ptitle_en: data.ptitle_en,
+      ptitle_ja: data.ptitle_ja,
+      ptitle_zh: data.ptitle_zh,
+      pcontent_ko: data.pcontent_ko,
+      pcontent_en: data.pcontent_en,
+      pcontent_ja: data.pcontent_ja,
+      pcontent_zh: data.pcontent_zh,
+      pfilename: data.pfilename,
+      ano: [...data.ano]
+    };
+    productRef.value.productDetail = {
+      ...productRef.value.productDetail,
+      atitle_ko: data.atitle_ko,
+      atitle_en: data.atitle_en,
+      atitle_ja: data.atitle_ja,
+      atitle_zh: data.atitle_zh
+    };
   });
 });
 </script>
@@ -146,7 +158,7 @@ onMounted(() => {
     <div class="text-center w-full max-w-xl space-y-6">
       <!-- 제품 이름 -->
       <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
-        {{ productRef.productDetail.product.ptitle_ko }}
+        {{ localePtitle(productRef.productDetail.product) }}
       </h1>
 
       <!-- 가격과 리뷰확인 버튼을 같은 선상에 배치 -->
@@ -154,9 +166,9 @@ onMounted(() => {
         <!-- 가격을 완전 중앙에 배치 -->
         <div class="flex-1 text-center">
           <div class="text-xl font-semibold text-gray-700">
-            가격:
+            {{ t('pDetail.price') }} :
             <span class="text-green-600">
-              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}원
+              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }} ₩
             </span>
           </div>
         </div>
@@ -164,23 +176,29 @@ onMounted(() => {
         <!-- 리뷰 확인 버튼 (오른쪽에 붙임) -->
         <router-link :to="`/review/list/${pno}`">
           <button class="bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition">
-            리뷰확인
+            {{ t('pDetail.review_check') }}
           </button>
         </router-link>
       </div>
 
       <!-- 알러지 정보 -->
       <div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">알러지 정보:</h2>
+        <h2 class="text-lg font-bold text-gray-800 mb-2">{{ t('pDetail.allergy_info') }} :</h2>
         <p class="text-base text-gray-700">
-          <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">없음</span>
+          <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">{{ t('pDetail.none') }}</span>
           <span v-else>
             <span
                 v-for="(allergy, index) in productRef.productDetail.atitle_ko"
                 :key="index"
                 :class="mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]) ? 'text-red-600 font-bold' : 'text-gray-800'"
             >
-              {{ allergy }}<span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
+              {{ localeAtitle({
+              ano: productRef.productDetail.product.ano[index],
+              atitle_ko: allergy,
+              atitle_en: productRef.productDetail.atitle_en?.[index],
+              atitle_ja: productRef.productDetail.atitle_ja?.[index],
+              atitle_zh: productRef.productDetail.atitle_zh?.[index]
+            }) }}<span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
             </span>
           </span>
         </p>
@@ -189,16 +207,16 @@ onMounted(() => {
       <!-- 사용자 알러지 경고 -->
       <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
         <p class="text-red-600 font-medium text-center">
-          ⚠️ 주의: 이 제품은 사용자의 알러지 항목에 포함된 성분이 있습니다.
+          ⚠️ {{ t('pDetail.warning') }}
         </p>
       </div>
     </div>
 
-    <!-- pcontent_ko 영역 스타일링 -->
+    <!-- 제품 컨텐츠 영역 스타일링 -->
     <div class="w-full bg-white p-6 rounded-xl shadow-lg mt-6 border border-gray-100">
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">제품 설명</h2>
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ t('pDetail.product_description') }}</h2>
       <p class="text-lg text-gray-700 leading-relaxed break-words">
-        {{ productRef.productDetail.product.pcontent_ko }}
+        {{ localePcontent(productRef.productDetail.product) }}
       </p>
     </div>
 
@@ -208,13 +226,13 @@ onMounted(() => {
           class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
           @click="orderClick"
       >
-        Buy Now
+        {{ t('pDetail.buy') }}
       </button>
       <button
           class="w-full lg:w-auto bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
           @click="handleClickAddCart"
       >
-        Add to Cart
+        {{ t('pDetail.add_to_cart') }}
       </button>
     </div>
     <CommonCartAddModalComponent

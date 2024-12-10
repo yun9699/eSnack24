@@ -1,10 +1,11 @@
-
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {IRequestProduct} from "../../../types/commnunityTypes.ts";
 import {getRequestProductList} from "../../../api/commnunityAPI/requestProductAPI.ts";
 
+const { t } = useI18n();
 
 const requestProduct = ref<IRequestProduct[]>([]);
 const page = ref(1);
@@ -15,7 +16,6 @@ const hasMore = ref(true);
 const router = useRouter();
 
 const fetchRequestProduct = async () => {
-
   loading.value = true;
   try {
     const data = await getRequestProductList(page.value, size.value);
@@ -34,10 +34,10 @@ const fetchRequestProduct = async () => {
 };
 
 const loadMore = async () => {
-  const currentScrollY = window.scrollY; // 현재 스크롤 위치 저장
-  page.value += 1; // 다음 페이지 요청
-  await fetchRequestProduct(); // 데이터를 가져옴
-  window.scrollTo(0, currentScrollY); // 스크롤 위치 복원
+  const currentScrollY = window.scrollY;
+  page.value += 1;
+  await fetchRequestProduct();
+  window.scrollTo(0, currentScrollY);
 };
 
 const formatDate = (dateString: string) => {
@@ -66,20 +66,26 @@ onMounted(() => {
         class="px-4 py-2 bg-red-400 text-white rounded-lg hover:bg-red-400"
         @click="$router.push('/request/allergy/list')"
     >
-      알러지 신고
+      {{ t('productReportList.buttons.reportAllergy') }}
     </button>
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">상품 신고 리스트</h1>
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">
+      {{ t('productReportList.productReportListHeader') }}
+    </h1>
 
     <button
         @click="goToRegister"
         class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
     >
-      상품 요청 등록
+      {{ t('productReportList.buttons.registerProductRequest') }}
     </button>
 
-    <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
+    <div v-if="loading" class="text-center text-gray-500">
+      {{ t('productReportList.loadingProductReports') }}
+    </div>
     <div v-else>
-      <div v-if="requestProduct.length === 0" class="text-center text-gray-400 py-6">리스트가 없습니다.</div>
+      <div v-if="requestProduct.length === 0" class="text-center text-gray-400 py-6">
+        {{ t('productReportList.noProductReportsMessage') }}
+      </div>
       <ul class="space-y-4">
         <li
             v-for="product in requestProduct"
@@ -87,12 +93,24 @@ onMounted(() => {
             class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
             @click="goToDetail(product.cpno)"
         >
-          <h3 class="text-lg font-semibold text-gray-700">번호: {{ product.cpno }}</h3>
-          <p class="text-gray-700 mt-2">제목: {{ product.cptitle }}</p>
-          <p class="text-gray-700 mt-2">신고 내용: {{ product.cpproduct }}</p>
-          <p class="text-gray-700 mt-2">답변: {{ product.cpanswer }}</p>
-          <p class="text-xs text-gray-500 mt-2">등록일: {{ formatDate(product.cpregdate) }}</p>
-          <p class="text-xs text-gray-500">수정일: {{ formatDate(product.cpmoddate) }}</p>
+          <h3 class="text-lg font-semibold text-gray-700">
+            {{ t('productReportList.productReportLabels.number') }}: {{ product.cpno }}
+          </h3>
+          <p class="text-gray-700 mt-2">
+            {{ t('productReportList.productReportLabels.title') }}: {{ product.cptitle }}
+          </p>
+          <p class="text-gray-700 mt-2">
+            {{ t('productReportList.productReportLabels.content') }}: {{ product.cpproduct }}
+          </p>
+          <p class="text-gray-700 mt-2">
+            {{ t('productReportList.productReportLabels.answer') }}: {{ product.cpanswer }}
+          </p>
+          <p class="text-xs text-gray-500 mt-2">
+            {{ t('productReportList.productReportLabels.registrationDate') }}: {{ formatDate(product.cpregdate) }}
+          </p>
+          <p class="text-xs text-gray-500">
+            {{ t('productReportList.productReportLabels.modificationDate') }}: {{ formatDate(product.cpmoddate) }}
+          </p>
         </li>
       </ul>
       <button
@@ -100,9 +118,8 @@ onMounted(() => {
           @click.prevent="loadMore"
           class="w-full mt-6 py-2 bg-blue-600 text-white text-lg font-bold rounded-lg hover:bg-blue-700 transition"
       >
-        더 보기
+        {{ t('productReportList.buttons.loadMoreProductReports') }}
       </button>
     </div>
   </div>
 </template>
-

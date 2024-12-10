@@ -2,13 +2,18 @@
 import { onMounted, ref, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import { getFAQList, getFAQOne } from "../../api/csAPI/faqAPI.ts"
+import { useI18n } from 'vue-i18n'
+import {localeFAQ} from "../../locales/localeFAQ.ts";
+
+const { t } = useI18n()
+const { localeFtitle, localeFcontent } = localeFAQ()
 
 // 카테고리 정의
 const categories = [
-  { label: '주문', value: 'ORDER' },
-  { label: '결제', value: 'PAYMENT' },
-  { label: '상품', value: 'PRODUCT' },
-  { label: '기타', value: 'ETC' }
+  { label: t('FAQList.order'), value: 'ORDER' },
+  { label: t('FAQList.payment'), value: 'PAYMENT' },
+  { label: t('FAQList.product'), value: 'PRODUCT' },
+  { label: t('FAQList.etc'), value: 'ETC' }
 ]
 
 // 상태 관리
@@ -97,7 +102,7 @@ onMounted(() => {
           class="px-8 py-2 rounded-full text-lg font-medium border border-gray-300 text-gray-600"
           @click="$router.push('/request/product/list')"
       >
-        신고
+        {{ t('FAQList.report') }}
       </button>
 
     </div>
@@ -107,7 +112,7 @@ onMounted(() => {
       <input
           type="text"
           v-model="searchKeyword"
-          placeholder="검색하기"
+          :placeholder="t('FAQList.search')"
           class="w-full p-3 pl-12 border border-gray-300 rounded-full"
       >
       <Icon
@@ -117,7 +122,7 @@ onMounted(() => {
     </div>
 
     <!-- 자주묻는 질문 헤더 -->
-    <h2 class="text-2xl font-bold mb-4">자주묻는 질문</h2>
+    <h2 class="text-2xl font-bold mb-4">{{ t('FAQList.faq') }}</h2>
 
     <!-- 카테고리 버튼들 -->
     <div class="flex gap-3 mb-6 flex-wrap">
@@ -151,7 +156,7 @@ onMounted(() => {
             <span class="px-2 py-1 text-sm rounded-full bg-gray-100 text-gray-600 shrink-0">
           {{ changeCategoryLabel(faq.fcategory) }}
         </span>
-            <span class="text-left">{{ faq.ftitle }}</span>
+            <span class="text-left">{{ localeFtitle(faq) }}</span>
           </div>
           <Icon
               :icon="openFaq === faq.fno ? 'mdi:chevron-up' : 'mdi:chevron-down'"
@@ -162,7 +167,7 @@ onMounted(() => {
             v-if="openFaq === faq.fno"
             class="pb-4 text-gray-600 bg-gray-50 p-4 rounded-lg"
         >
-          {{ faqDetail?.fcontent }}
+          {{ localeFcontent(faqDetail) }}
         </div>
       </div>
     </div>
@@ -172,7 +177,7 @@ onMounted(() => {
         v-if="filteredFaqs.length === 0"
         class="text-center py-8 text-gray-500"
     >
-      검색 결과가 없습니다.
+      {{ t('FAQList.no_search_results') }}
     </div>
   </div>
 </template>

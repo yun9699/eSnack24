@@ -7,6 +7,9 @@
   import {getAllergyListKo} from "../../api/AllergyAPI/allergyAPI.ts";
   import useUserStore from "../../stores/useUserStore.ts";
   import {editUserAllergies} from "../../api/UserAPI/userAllergyAPI.ts";
+  import {useI18n} from "vue-i18n";
+
+  const { t } = useI18n();
 
   const init: IReadUser = {
     username: '',
@@ -76,7 +79,7 @@
 <template>
   <CommonCheckModalComponent
       v-if="isCheckModalOpen"
-      msg="등록"
+      :msg="t('edit_user.confirm_message')"
       :is-open="isCheckModalOpen"
       :fn="editFn"
       @closeModal="isCheckModalOpen = false"
@@ -87,43 +90,43 @@
     <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6 mb-6">
       <!-- 타이틀 -->
       <h1 class="text-3xl font-semibold text-gray-800 text-center mb-8">
-        사용자 정보 수정
+        {{ t('edit_user.title') }}
       </h1>
 
       <!-- 이름 입력 -->
       <div class="mb-6">
         <label for="name" class="block text-sm font-medium text-gray-600 mb-2">
-          이름
+          {{ t('edit_user.name_label') }}
         </label>
         <input
             id="name"
             v-model="user.username"
             type="text"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-            placeholder="이름을 입력하세요"
+            :placeholder="t('edit_user.name_placeholder')"
         />
       </div>
 
       <!-- 성별 선택 -->
       <div class="mb-6">
         <label for="gender" class="block text-sm font-medium text-gray-600 mb-2">
-          성별
+          {{ t('edit_user.gender_label') }}
         </label>
         <select
             id="gender"
             v-model="user.ugender"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
         >
-          <option value="male">남성</option>
-          <option value="female">여성</option>
-          <option value="other">기타</option>
+          <option value="male">{{ t('edit_user.male') }}</option>
+          <option value="female">{{ t('edit_user.female') }}</option>
+          <option value="other">{{ t('edit_user.etc') }}</option>
         </select>
       </div>
 
       <!-- 생일 입력 -->
       <div class="mb-6">
         <label for="birthDate" class="block text-sm font-medium text-gray-600 mb-2">
-          생일
+          {{ t('edit_user.birth_label') }}
         </label>
         <input
             id="birthDate"
@@ -136,14 +139,14 @@
       <!-- 전화번호 입력 -->
       <div class="mb-6">
         <label for="phone" class="block text-sm font-medium text-gray-600 mb-2">
-          전화번호
+          {{ t('edit_user.phone_label') }}
         </label>
         <input
             id="phone"
             v-model="user.ucallnumber"
             type="tel"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-            placeholder="010-1234-5678"
+            :placeholder="t('edit_user.phone_placeholder')"
         />
       </div>
     </div>
@@ -152,7 +155,7 @@
     <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6 mb-6">
       <!-- 타이틀 -->
       <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
-        알레르기 정보 수정
+        {{ t('edit_user.edit_allergy') }}
       </h2>
 
       <!-- 알레르기 목록 그리드 -->
@@ -178,7 +181,7 @@
         @click="handleClickEdit"
         class="w-full max-w-lg py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-200"
     >
-      저장하기
+      {{ t('edit_user.save_button') }}
     </button>
   </div>
 

@@ -4,7 +4,9 @@ import { useRoute, useRouter } from "vue-router";
 import { ReviewRegister } from "../../../types/reviewTypes.ts";
 import {uploadImageAPI, submitReviewAPI, uploadBase64ImageAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
 import {fetchProductTitleAPI} from "../../../api/productAPI/productAPI.ts";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 
 const uno = ref<number | null>(null);
 const pno = ref<number | null>(null);
@@ -91,16 +93,16 @@ onMounted(() => {
 <template>
   <div class="p-4 border rounded-lg">
     <div class="flex items-center mb-4">
-      <h2 class="text-lg font-semibold">후기 작성</h2>
+      <h2 class="text-lg font-semibold">{{ t('reviewRegister.Header') }}</h2>
     </div>
 
     <div class="mb-4">
-      <p><strong>uno:</strong> {{ uno }}</p>
-      <p><strong>상품 번호:</strong> {{ pno }}</p>
+<!--      <p><strong>uno:</strong> {{ uno }}</p>-->
+      <p><strong>{{ t('reviewRegister.labels.reviewProductNumber') }} :</strong> {{ pno }}</p>
     </div>
 
     <div class="mb-4">
-      <p>이미지 업로드 (선택)</p>
+      <p>{{ t('reviewRegister.labels.imageUpload') }}</p>
       <input type="file" @change="handleImageChange" class="w-full p-2 border rounded-lg" />
       <div v-if="selectedImageBlob" class="mt-2">
         <img :src="selectedImageBlob" alt="Uploaded image" class="w-32 h-32 object-cover border rounded-lg" />
@@ -108,7 +110,7 @@ onMounted(() => {
     </div>
 
     <div class="mb-4">
-      <p>이 상품 어떠셨나요? (상품명: {{ productTitle }})</p>
+      <p>{{ t('reviewRegister.labels.productExperience') }} : {{ productTitle }})</p>
       <div class="flex">
         <span
             v-for="star in 5"
@@ -122,12 +124,12 @@ onMounted(() => {
     </div>
 
     <div class="mb-4">
-      <p>어떤 점이 좋았나요?</p>
+      <p>{{ t('reviewRegister.labels.positiveFeedback') }}</p>
       <textarea
           v-model="reviewText"
           rows="4"
           class="w-full p-2 border rounded-lg"
-          placeholder="후기 입력(필수)"
+          :placeholder="t('reviewRegister.labels.reviewPlaceholder')"
       ></textarea>
     </div>
 
@@ -136,7 +138,7 @@ onMounted(() => {
         @click="submitReview"
         class="w-full py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 disabled:opacity-50"
     >
-      {{ submitting ? '등록 중...' : '등록하기' }}
+      {{ submitting ? t('reviewRegister.button.reviewSubmitting') : t('reviewRegister.button.reviewSubmit') }}
     </button>
   </div>
 </template>
