@@ -237,5 +237,10 @@ onMounted(() => {
         </button>
       </div>
     </div>
+    <CommonCartAddModalComponent
+        v-if="isModalStatus"
+        :isModalStatus="isModalStatus"
+        :modalClose="modalClose"
+    />
   </div>
 </template>
