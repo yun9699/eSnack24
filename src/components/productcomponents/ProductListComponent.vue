@@ -42,6 +42,25 @@ const moreInfo = () => {
     })
   }
 };
+
+const FilterInfo = () => {
+  if (pageNum < endPageNum) {
+    console.log(pageNum)
+    pageNum++; // 페이지 번호 증가
+    getFilterList(pageNum).then((result) => {
+      if (result && result.list) {
+        const newItems = result.list.filter(
+            (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
+        );
+        serverData.value.ProductList = [
+          ...serverData.value.ProductList,
+          ...newItems,
+        ];
+      }
+    })
+  }
+};
+
 // "제외" 버튼 클릭 시 실행
 const handleAllergyChange = () => {
   console.log(userano);
@@ -95,23 +114,6 @@ onMounted(() => {
 });
 
 
-const FilterInfo = () => {
-  if (pageNum < endPageNum) {
-    console.log(pageNum)
-    pageNum++; // 페이지 번호 증가
-    getFilterList(pageNum).then((result) => {
-      if (result && result.list) {
-        const newItems = result.list.filter(
-            (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
-        );
-        serverData.value.ProductList = [
-          ...serverData.value.ProductList,
-          ...newItems,
-        ];
-      }
-    })
-  }
-};
 
 </script>
 
