@@ -8,7 +8,6 @@ import { localeAllergy } from '../../locales/localeAllergy' // 추가
 
 const { t } = useI18n()
 
-
 // // 현재 선택된 언어 가져오기
 // const localeStore = useLocaleStore()
 // const { currentLang } = storeToRefs(localeStore)
