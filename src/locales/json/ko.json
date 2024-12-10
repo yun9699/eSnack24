@@ -74,7 +74,8 @@
     "cart": "장바구니",
     "camera": "카메라",
     "contact": "헬프센터",
-    "profile": "프로필"
+    "profile": "프로필",
+    "login": "로그인"
   },
   "pMain": {
     "popular": "이번 달 인기 상품",

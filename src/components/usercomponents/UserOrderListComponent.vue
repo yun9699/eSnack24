@@ -3,7 +3,8 @@ import useUserStore from "../../stores/useUserStore.ts";
 import { onMounted, ref } from "vue";
 import { userOrder } from "../../api/orderapi/OrderAPI.ts";
 import dayjs from 'dayjs';
-import {useI18n} from "vue-i18n"; // Import dayjs
+import {useI18n} from "vue-i18n";
+import {IOrderDetail} from "../../types/userTypes.ts";
 
 const { t } = useI18n()
 
@@ -83,17 +84,17 @@ onMounted(() => {
           <router-link :to="`/order/detail/${order.ono}`">
             <button v-if="order.orderItems.length <= 3" class="bg-blue-500 text-white flex items-center justify-center w-full py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
               {{ t('UserOrderList.view_product_details') }}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
 
-          <button v-else class="bg-blue-500 text-white flex items-center justify-center w-full py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
-            {{ t('UserOrderList.etc') }} {{ order.orderItems.length - 3 }}{{ t('UserOrderList.view_all_products') }}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+            <button v-else class="bg-blue-500 text-white flex items-center justify-center w-full py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
+              {{ t('UserOrderList.etc') }} {{ order.orderItems.length - 3 }}{{ t('UserOrderList.view_all_products') }}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </router-link>
         </div>
       </div>

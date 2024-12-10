@@ -79,7 +79,8 @@
     "cart": "Cart",
     "camera": "Camera",
     "contact": "Help Center",
-    "profile": "Profile"
+    "profile": "Profile",
+    "login": "Sign in"
   },
 
   "pMain": {

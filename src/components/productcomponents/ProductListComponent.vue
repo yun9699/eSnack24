@@ -93,6 +93,26 @@ onMounted(() => {
     endPageNum = res.endPage;
   });
 });
+
+
+const FilterInfo = () => {
+  if (pageNum < endPageNum) {
+    console.log(pageNum)
+    pageNum++; // 페이지 번호 증가
+    getFilterList(pageNum).then((result) => {
+      if (result && result.list) {
+        const newItems = result.list.filter(
+            (item) => !serverData.value.ProductList.some((existing) => existing.pno === item.pno)
+        );
+        serverData.value.ProductList = [
+          ...serverData.value.ProductList,
+          ...newItems,
+        ];
+      }
+    })
+  }
+};
+
 </script>
 
 <template>
@@ -173,12 +193,25 @@ onMounted(() => {
   </section>
 
   <div class="mt-10 m-10 text-center">
+    <div v-if="isAllergyExcluded === false">
     <button
         @click="moreInfo()"
         v-if="pageNum < endPageNum"
         class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
     >
       {{ t('pList.more') }}
+
     </button>
+    </div>
+
+    <div v-if="isAllergyExcluded === true">
+      <button
+          @click="FilterInfo()"
+          v-if="pageNum < endPageNum"
+          class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+      >
+        더보기 filter
+      </button>
+    </div>
   </div>
 </template>
