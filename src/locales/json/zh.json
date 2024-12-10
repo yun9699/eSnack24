@@ -177,7 +177,11 @@
     "decrease_button": "减少",
     "increase_button": "增加",
     "load_more_button": "加载更多",
-    "checkout_button": "结账"
+    "checkout_button": "结账",
+    "order_amount": "订单金额",
+    "product_discount": "商品折扣",
+    "shipping_fee": "运费",
+    "total_payment_amount": "总支付预计金额"
   },
 
   "userprofile": {

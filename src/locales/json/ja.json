@@ -177,7 +177,11 @@
     "decrease_button": "減らす",
     "increase_button": "追加",
     "load_more_button": "さらに読み込む",
-    "checkout_button": "レジに進む"
+    "checkout_button": "レジに進む",
+    "order_amount": "注文金額",
+    "product_discount": "商品割引",
+    "shipping_fee": "配送料",
+    "total_payment_amount": "総支払予定金額"
   },
 
   "userprofile": {

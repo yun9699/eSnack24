@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
@@ -11,12 +12,9 @@ const { locale } = useI18n()
 const localeStore = useLocaleStore()
 const { currentLang } = storeToRefs(localeStore)
 
-// 메뉴가 열려 있는지 여부를 나타내는 상태
 const isMenuOpen = ref(false)
-// 언어 선택 드롭다운 상태
 const isLangMenuOpen = ref(false)
 
-// 사용 가능한 언어 목록
 const languages = {
   ko: '한국어',
   en: 'English',
@@ -24,7 +22,6 @@ const languages = {
   zh: '简体中文'
 }
 
-// 언어 변경 함수
 const changeLang = async (lang: string) => {
   if (lang !== locale.value) {
     await loadLocalMessages(lang)
@@ -34,27 +31,26 @@ const changeLang = async (lang: string) => {
   isLangMenuOpen.value = false
 }
 
-// 뒤로가기 함수
 const goBack = () => {
   router.go(-1)
 }
 </script>
 
 <template>
-  <header class="py-4">
-    <div class="flex justify-between items-center bg-orange-300">
+  <header class="w-full bg-white">
+    <div class="max-w-screen-xl mx-auto flex justify-between items-center px-4 py-3">
       <!-- 뒤로가기 버튼 -->
       <button
           @click="goBack"
           class="p-2 text-gray-600 hover:text-black flex items-center"
       >
-        <Icon icon="ion:chevron-back" class="text-2xl" />
+        <Icon icon="ion:chevron-back" class="text-3xl" />
       </button>
 
       <!-- 로고 -->
       <div class="flex-1 text-center">
         <RouterLink to="/">
-          <img src="/eSnack24_logo_plain.png" class="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-32 mx-auto" />
+          <img src="/eSnack24Logo2.png" class="w-40 sm:w-48 md:w-56 lg:w-72 xl:w-96 mx-auto" />
         </RouterLink>
       </div>
 
@@ -64,7 +60,7 @@ const goBack = () => {
             @click="isLangMenuOpen = !isLangMenuOpen"
             class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-black"
         >
-          <Icon icon="fluent-mdl2:locale-language" />
+          <Icon icon="fluent-mdl2:locale-language" class="text-2xl" />
           <span class="hidden sm:inline">{{ languages[currentLang] }}</span>
         </button>
 

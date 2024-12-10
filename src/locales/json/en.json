@@ -177,7 +177,11 @@
     "decrease_button": "Reduce",
     "increase_button": "Add",
     "load_more_button": "Load More",
-    "checkout_button": "Checkout"
+    "checkout_button": "Checkout",
+    "order_amount": "Order Amount",
+    "product_discount": "Product Discount",
+    "shipping_fee": "Shipping Fee",
+    "total_payment_amount": "Total Payment Amount"
   },
 
   "userprofile": {
