@@ -71,48 +71,76 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">{{ t('user_reviewList.Header') }}</h1>
-    <div v-if="loading" class="text-center text-gray-500">{{ t('user_reviewList.loadingUserReviews') }}</div>
+  <div class="max-w-4xl mx-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg shadow-lg">
+    <!-- 타이틀 -->
+    <h1 class="text-3xl font-extrabold text-gray-500 text-center mb-6">
+      {{ t('user_reviewList.Header') }}
+    </h1>
+    <div class="w-24 h-1 bg-yellow-500 mx-auto rounded mb-8"></div>
+
+    <!-- 로딩 상태 -->
+    <div v-if="loading" class="text-center text-gray-500">
+      {{ t('user_reviewList.loadingUserReviews') }}
+    </div>
+
+    <!-- 리뷰 리스트 -->
     <div v-else>
-      <div v-if="reviews.length === 0" class="text-center text-gray-400 py-6">{{ t('user_reviewList.noUserReviewsMessage') }}</div>
-      <ul class="space-y-4">
+      <div v-if="reviews.length === 0" class="text-center text-gray-400 py-6">
+        {{ t('user_reviewList.noUserReviewsMessage') }}
+      </div>
+      <ul class="space-y-6">
         <li
             v-for="review in reviews"
             :key="review.rno"
             @click="goToDetail(review.rno)"
-            class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
+            class="p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow border-t-4 border-yellow-400 cursor-pointer"
         >
-          <div class="mt-2">
+          <div class="flex items-center space-x-4">
             <img
                 v-if="review.rimage"
                 :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${review.rimage}`"
                 :alt="t('user_reviewList.userReviewLabels.image')"
-                class="w-24 h-auto mt-2 border rounded"
+                class="w-24 h-24 object-cover rounded-lg border"
             />
-            <span v-else class="text-sm text-gray-400">{{ t('user_reviewList.userReviewLabels.noImage') }}</span>
+            <div>
+              <p class="text-yellow-500 text-lg mb-2">
+                <span v-for="star in 5" :key="star">
+                  {{ star <= review.rstar ? "★" : "☆" }}
+                </span>
+              </p>
+              <h3 class="text-lg font-semibold text-gray-700">
+                {{ t('user_reviewList.userReviewLabels.productNumber') }} : {{ review.pno }}
+              </h3>
+              <p class="text-sm text-gray-600">
+                {{ t('user_reviewList.userReviewLabels.reviewNumber') }} : {{ review.rno }}
+              </p>
+              <p class="text-sm text-gray-600">
+                {{ t('user_reviewList.userReviewLabels.userNumber') }} : {{ review.uno }}
+              </p>
+            </div>
           </div>
-          <p class="text-yellow-500 text-lg mt-2">
-            <span v-for="star in 5" :key="star">
-              {{ star <= review.rstar ? "★" : "☆" }}
-            </span>
+          <p class="text-gray-700 mt-4">
+            {{ t('user_reviewList.userReviewLabels.content') }} : {{ review.rcontent }}
           </p>
-          <h3 class="text-lg font-semibold text-gray-700">{{ t('user_reviewList.userReviewLabels.productNumber') }} : {{ review.pno }}</h3>
-          <p class="text-sm text-gray-600">{{ t('user_reviewList.userReviewLabels.reviewNumber') }} : {{ review.rno }}</p>
-          <p class="text-sm text-gray-600">{{ t('user_reviewList.userReviewLabels.userNumber') }} : {{ review.uno }}</p>
-          <p class="text-gray-700 mt-2">{{ t('user_reviewList.userReviewLabels.content') }} : {{ review.rcontent }}</p>
-          <p class="text-xs text-gray-500 mt-2">{{ t('user_reviewList.userReviewLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}</p>
-          <p class="text-xs text-gray-500">{{ t('user_reviewList.userReviewLabels.modificationDate') }} : {{ formatDate(review.rmodDate) }}</p>
+          <p class="text-xs text-gray-500 mt-4">
+            {{ t('user_reviewList.userReviewLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}
+          </p>
+          <p class="text-xs text-gray-500">
+            {{ t('user_reviewList.userReviewLabels.modificationDate') }} : {{ formatDate(review.rmodDate) }}
+          </p>
         </li>
       </ul>
+
+      <!-- 더 보기 버튼 -->
       <button
           v-if="hasMore"
           @click.prevent="loadMore"
-          class="w-full mt-6 py-2 bg-blue-600 text-white text-lg font-bold rounded-lg hover:bg-blue-700 transition"
+          class="w-full mt-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-lg font-bold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition"
       >
         {{ t('user_reviewList.userReviewLabels.loadMoreUserReviews') }}
       </button>
     </div>
   </div>
 </template>
+
 
