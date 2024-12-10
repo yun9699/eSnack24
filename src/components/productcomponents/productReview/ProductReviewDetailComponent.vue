@@ -71,9 +71,7 @@ onMounted(() => {
 
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
-    <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold text-gray-800">{{ t('reviewDetail.Header') }}</h1>
-    </div>
+
 
     <div v-if="loading" class="text-center text-gray-500">{{ t('reviewDetail.loadingReviewDetail') }}</div>
     <div v-else>
@@ -115,20 +113,25 @@ onMounted(() => {
       <div v-else class="text-center text-gray-400 py-6">{{ t('reviewDetail.reviewDetailLabels.noReviewDetails') }}</div>
     </div>
 
-    <div  class="flex gap-4 mt-4">
-      <button v-if="review && uno === review.uno"
+    <div class="flex justify-center gap-4 mt-8">
+      <!-- 수정 버튼 -->
+      <button
+          v-if="review && uno === review.uno"
           @click="goToEditPage"
-          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          class="px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-600 transition"
       >
         {{ t('reviewDetail.buttons.editReviewDetail') }}
       </button>
+
+      <!-- 리스트로 돌아가기 버튼 -->
       <button
           @click="goToListPage"
-          class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+          class="px-6 py-3 bg-white text-yellow-500 border border-yellow-500 font-semibold rounded-lg shadow-md hover:bg-yellow-500 hover:text-white transition"
       >
         {{ t('reviewDetail.buttons.goBackToReviewList') }}
       </button>
     </div>
+
 
   </div>
 </template>

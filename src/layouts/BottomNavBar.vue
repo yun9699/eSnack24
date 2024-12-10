@@ -12,7 +12,6 @@ const user = useUserStore();
 
 const isHidden = ref(false);
 const showToTopButton = ref(false);
-const bottomNavHeight = ref(0);
 
 let lastScrollPosition = 0;
 
@@ -24,13 +23,6 @@ const handleScroll = () => {
   lastScrollPosition = currentScrollPosition;
 };
 
-// 하단바 높이 계산
-const updateBottomPadding = () => {
-  const bottomNav = document.querySelector('nav');
-  if (bottomNav) {
-    bottomNavHeight.value = bottomNav.offsetHeight;
-  }
-};
 
 // 맨 위로 이동
 const scrollToTop = () => {
@@ -40,13 +32,12 @@ const scrollToTop = () => {
 // 이벤트 등록
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', updateBottomPadding);
-  updateBottomPadding();
+
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
-  window.removeEventListener('resize', updateBottomPadding);
+
 });
 </script>
 
@@ -131,5 +122,20 @@ onUnmounted(() => {
       </router-link>
     </div>
   </nav>
+  <!-- 맨 위로 가기 버튼 -->
+  <button
+      v-if="showToTopButton"
+      @click="scrollToTop"
+      class="fixed bottom-20 right-4 bg-yellow-400 text-white p-3 rounded-full shadow-lg hover:bg-yellow-500 transition duration-200"
+  >
+    <Icon icon="material-symbols:arrow-upward-rounded" class="text-xl" />
+  </button>
 </template>
+
+<style>
+/* 맨 위로 가기 버튼 스타일 */
+button {
+  z-index: 1000;
+}
+</style>
 
