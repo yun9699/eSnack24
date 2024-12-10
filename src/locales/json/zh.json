@@ -79,11 +79,393 @@
     "cart": "购物车",
     "camera": "相机",
     "contact": "帮助中心",
-    "profile": "个人资料"
+    "profile": "个人资料",
+    "login": "登录"
   },
 
   "pMain": {
     "popular": "本月热门商品",
     "moreinfo": "更多信息"
+  },
+
+  "pList": {
+    "header": "来看看eSnack准备的本月促销商品吧。",
+    "event_product": "促销商品",
+    "differentiated_product": "差异化商品",
+    "fresh_product": "新鲜食品",
+    "app_download": "应用下载",
+    "all": "全部",
+    "sale": "促销",
+    "exclude": "排除",
+    "more": "更多",
+    "latest": "最新排序",
+    "lowest_price": "价格从低到高",
+    "highest_price": "价格从高到低"
+  },
+
+  "pDetail": {
+    "price": "价格",
+    "review_check": "查看评论",
+    "allergy_info": "过敏信息",
+    "none": "该产品不含过敏原成分。",
+    "warning": "警告: 此产品包含在您的过敏列表中的成分。",
+    "product_description": "产品描述",
+    "buy": "立即购买",
+    "add_to_cart": "添加到购物车"
+  },
+
+  "ProductSearch" : {
+    "search_button": "搜索",
+    "no_results": "未找到搜索结果。",
+    "placeholder": "请输入搜索关键词"
+  },
+
+  "FAQList": {
+    "order": "订单",
+    "payment": "支付",
+    "product": "产品",
+    "etc": "其他",
+    "report": "报告",
+    "faq": "常见问题",
+    "no_search_results": "没有搜索结果。",
+    "search": "搜索"
+  },
+
+  "QNAList": {
+    "search": "搜索",
+    "my_inquiries": "我的咨询",
+    "register_inquiry": "登记咨询",
+    "answer": "回答",
+    "answered": "已回复",
+    "pending_answer": "待回复",
+    "product_name": "产品名称",
+    "edit": "编辑",
+    "delete": "删除",
+    "attachment": "附件",
+    "registration_date": "注册日期",
+    "answer_date": "回复日期",
+    "no_inquiries": "没有咨询记录。"
+  },
+
+  "QNARegister": {
+    "register_inquiry": "注册询问",
+    "cancel": "取消",
+    "title": "标题",
+    "content": "内容",
+    "attachment": "附件",
+    "cancel_button": "取消",
+    "submit": "提交"
+  },
+
+  "UserOrderList": {
+    "order_tracking": "订单/配送追踪",
+    "order_number": "订单号",
+    "order_date": "订单日期",
+    "quantity": "数量",
+    "piece": "个",
+    "view_product_details": "查看商品详情",
+    "etc": "等",
+    "view_all_products": "查看全部商品"
+  },
+
+
+  "cart": {
+    "title": "购物车",
+    "empty_message": "购物车是空的。",
+    "clear_button": "清空购物车",
+    "delete_button": "删除",
+    "decrease_button": "减少",
+    "increase_button": "增加",
+    "load_more_button": "加载更多",
+    "checkout_button": "结账"
+  },
+
+  "userprofile": {
+    "greeting": "您好，{email}！",
+    "logout_button": "退出登录",
+    "buttons": {
+      "edit_profile": "编辑个人信息",
+      "order_history": "订单记录",
+      "my_inquiries": "我的咨询记录",
+      "review_management": "评价管理"
+    }
+  },
+
+  "edit_user": {
+    "name_label": "姓名",
+    "name_placeholder": "请输入姓名",
+    "gender_label": "性别",
+    "male": "男",
+    "female": "女",
+    "etc": "其他",
+    "birth_label": "出生日期",
+    "phone_label": "电话号码",
+    "phone_placeholder": "010-1234-5678",
+    "edit_allergy": "编辑我的过敏信息",
+    "save_button": "保存",
+    "confirm_message": "注册"
+  },
+
+  "order_confirmation": {
+    "title": "订单确认",
+    "currency": "货币",
+    "total_amount": "总金额",
+    "paypal_info": "PayPal支付"
+  },
+  "order_complete": {
+    "order_number": "订单号",
+    "payment_message": "支付确认后将开始发货。",
+    "view_order_details": "查看订单详情",
+    "go_home": "返回首页",
+    "help_center": "客户服务"
+  },
+  "order_detail": {
+    "page_title": "订单详情",
+    "quantity": "数量",
+    "total_amount": "总金额",
+    "go_home": "返回首页"
+  },
+
+  "photo": {
+    "cameraHeader": "相机",
+    "toggleButton": {
+      "on": "关闭相机",
+      "off": "打开相机"
+    },
+    "switchCameraButton": "切换相机",
+    "takePhotoButton": "拍照",
+    "modal": {
+      "title": "相似商品搜索结果",
+      "noResults": "未找到搜索结果。",
+      "imageNames": "图像名称",
+      "allergyInfo": "查看过敏信息",
+      "noAllergyInfo": "无过敏信息"
+    },
+    "allergyModal": {
+      "title": "过敏详细信息"
+    }
+  },
+  "reviewRegister": {
+    "Header": "撰写评价",
+    "labels": {
+      "reviewProductNumber": "商品编号",
+      "imageUpload": "上传图片（可选）",
+      "productExperience": "这个商品怎么样？（商品名",
+      "positiveFeedback": "您喜欢哪些方面？",
+      "reviewPlaceholder": "输入评价（必填）"
+    },
+    "button": {
+      "reviewSubmit": "提交",
+      "reviewSubmitting": "提交中..."
+    }
+  },
+  "reviewList": {
+    "Header": "评价列表",
+    "buttons": {
+      "registerReview": "发布评价",
+      "goToProductDetail": "返回商品详情",
+      "loadMoreReviews": "加载更多"
+    },
+    "loadingReviews": "加载中...",
+    "noReviewsMessage": "暂无评价。",
+    "reviewLabels": {
+      "noImage": "无图片",
+      "productNumber": "商品编号",
+      "reviewNumber": "评价编号",
+      "userNumber": "用户编号",
+      "content": "内容",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期"
+    }
+  },
+  "reviewEdit": {
+    "Header": "编辑评价",
+    "labels": {
+      "reviewImage": "图片",
+      "noImage": "无图片",
+      "rating": "评分",
+      "reviewContent": "内容",
+      "loadingReviewData": "正在加载评价数据..."
+    },
+    "buttons": {
+      "editReview": {
+        "default": "编辑",
+        "loading": "编辑中..."
+      },
+      "deleteReview": "删除"
+    }
+  },
+  "reviewDetail": {
+    "Header": "评价详细信息",
+    "loadingReviewDetail": "加载中...",
+    "reviewDetailLabels": {
+      "productNumber": "商品编号",
+      "reviewNumber": "评价编号",
+      "userNumber": "用户编号",
+      "image": "图片",
+      "noImage": "无图片",
+      "content": "内容",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期",
+      "noReviewDetails": "无法加载评价详细信息。"
+    },
+    "buttons": {
+      "editReviewDetail": "编辑",
+      "goBackToReviewList": "返回列表"
+    }
+  },
+  "user_reviewList": {
+    "Header": "用户评价列表",
+    "loadingUserReviews": "加载中...",
+    "noUserReviewsMessage": "暂无评价。",
+    "userReviewLabels": {
+      "image": "评价图片",
+      "noImage": "无图片",
+      "productNumber": "商品编号",
+      "reviewNumber": "评价编号",
+      "userNumber": "用户编号",
+      "content": "内容",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期"
+    },
+    "buttons": {
+      "loadMoreUserReviews": "加载更多"
+    }
+  },
+
+  "allergyReport": {
+    "allergyReportHeader": "过敏报告提交",
+    "placeholders": {
+      "allergyReportTitle": "输入标题",
+      "allergyReportContent": "输入报告内容"
+    },
+    "buttons": {
+      "submitAllergyReport": {
+        "default": "提交",
+        "loading": "提交中..."
+      }
+    }
+  },
+
+  "allergyReportList": {
+    "allergyReportListHeader": "过敏报告列表",
+    "buttons": {
+      "reportProduct": "举报商品",
+      "registerAllergyRequest": "注册过敏请求",
+      "loadMoreAllergyReports": "加载更多"
+    },
+    "loadingAllergyReports": "加载中...",
+    "noAllergyReportsMessage": "无列表。",
+    "allergyReportLabels": {
+      "number": "编号",
+      "title": "标题",
+      "content": "报告内容",
+      "answer": "回复",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期"
+    }
+  },
+
+  "allergyReportEdit": {
+    "allergyReportEditHeader": "编辑过敏报告",
+    "loadingAllergyReportEdit": "加载中...",
+    "allergyReportEditLabels": {
+      "title": "标题",
+      "content": "报告内容"
+    },
+    "allergyReportEditButtons": {
+      "edit": {
+        "default": "编辑",
+        "loading": "编辑中..."
+      },
+      "delete": "删除"
+    },
+    "noAllergyReportData": "正在加载数据..."
+  },
+
+  "allergyReportDetail": {
+    "allergyReportDetailHeader": "过敏报告详细信息",
+    "loadingAllergyReportDetail": "加载中...",
+    "allergyReportDetailLabels": {
+      "listNumber": "列表编号",
+      "title": "标题",
+      "content": "内容",
+      "answer": "回复",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期",
+      "noAllergyReportDetails": "无法加载列表详细信息。"
+    },
+    "allergyReportDetailButtons": {
+      "editAllergyReport": "编辑",
+      "goBackToAllergyReportList": "返回列表"
+    }
+  },
+
+  "productReport": {
+    "productReportHeader": "商品报告提交",
+    "placeholders": {
+      "productReportTitle": "输入标题",
+      "productReportContent": "输入报告内容"
+    },
+    "buttons": {
+      "submitProductReport": {
+        "default": "提交",
+        "loading": "提交中..."
+      }
+    }
+  },
+
+  "productReportList": {
+    "productReportListHeader": "商品报告列表",
+    "buttons": {
+      "reportAllergy": "报告过敏",
+      "registerProductRequest": "注册商品请求",
+      "loadMoreProductReports": "加载更多"
+    },
+    "loadingProductReports": "加载中...",
+    "noProductReportsMessage": "无列表。",
+    "productReportLabels": {
+      "number": "编号",
+      "title": "标题",
+      "content": "报告内容",
+      "answer": "回复",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期"
+    }
+  },
+
+  "productReportEdit": {
+    "productReportEditHeader": "编辑商品报告",
+    "loadingProductReportEdit": "加载中...",
+    "productReportEditLabels": {
+      "title": "标题",
+      "content": "报告内容"
+    },
+    "productReportEditButtons": {
+      "edit": {
+        "default": "编辑",
+        "loading": "编辑中..."
+      },
+      "delete": "删除"
+    },
+    "noProductReportData": "正在加载数据..."
+  },
+
+  "productReportDetail": {
+    "productReportDetailHeader": "商品报告详细信息",
+    "loadingProductReportDetail": "加载中...",
+    "productReportDetailLabels": {
+      "listNumber": "列表编号",
+      "title": "标题",
+      "content": "内容",
+      "answer": "回复",
+      "registrationDate": "发布日期",
+      "modificationDate": "修改日期",
+      "noProductReportDetails": "无法加载列表详细信息。"
+    },
+    "buttons": {
+      "editProductReportDetail": "编辑",
+      "goBackToProductReportList": "返回列表"
+    }
   }
 }

@@ -7,7 +7,9 @@ import { useAllergyWarning } from "../../hooks/camerahooks/useAllergyWarning.ts"
 import Modal from "../modalcomponents/Modal.vue";
 import useUserStore from "../../stores/useUserStore.ts";
 import { fetchAllergyInfo } from "../../api/productAPI/productCameraAllegyAPI.ts";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 
 const { isToggled, toggle, switchCamera } = useCamera();
 const { similarImages, photosend } = useImageProcessor();
@@ -49,7 +51,7 @@ const handleImageClick = async (image: string) => {
 
 <template>
   <div class="max-w-4xl mx-auto py-8 px-6 bg-gray-50 rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">카메라</h1>
+    <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">{{ t('photo.cameraHeader') }}</h1>
 
     <video
         ref="videoElement"
@@ -70,20 +72,20 @@ const handleImageClick = async (image: string) => {
           @click="toggle"
           class="px-6 py-3 bg-blue-600 text-white text-lg font-bold rounded-lg shadow hover:bg-blue-700 transition"
       >
-        {{ isToggled ? "카메라 끄기" : "카메라 켜기" }}
+        {{ isToggled ? t('photo.toggleButton.on') : t('photo.toggleButton.off') }}
       </button>
       <button
           @click="switchCamera"
           class="px-6 py-3 bg-green-600 text-white text-lg font-bold rounded-lg shadow hover:bg-green-700 transition"
       >
-        카메라 전환
+        {{ t('photo.switchCameraButton') }}
       </button>
       <button
           v-if="isToggled"
           @click="takePhotoAndShowResult"
           class="px-6 py-3 bg-purple-600 text-white text-lg font-bold rounded-lg shadow hover:bg-purple-700 transition"
       >
-        사진 찍기
+        {{ t('photo.takePhotoButton') }}
       </button>
     </div>
 
@@ -92,9 +94,9 @@ const handleImageClick = async (image: string) => {
         @update:visible="isModalVisible = $event"
         class="mt-8"
     >
-      <h2 class="text-xl font-bold text-gray-800 mb-4">유사 상품 검색 결과</h2>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">{{ t('photo.modal.title') }}</h2>
       <p v-if="Object.keys(similarImages).length === 0" class="text-gray-500">
-        검색 결과가 없습니다.
+        {{ t('photo.modal.noResults') }}
       </p>
       <ul
           v-if="Object.keys(similarImages).length > 0"
@@ -124,7 +126,7 @@ const handleImageClick = async (image: string) => {
                       @load="loadAllergyInfo(image)"
                       @click="handleImageClick(image)"
                   />
-                  <p class="text-gray-600">{{ imageNames[image] }}</p>
+                  <p class="text-gray-600">{{ t(`photo.imageNames.${image}`, image) }}</p>
                   <p
                       @click="showAllergyModal(image)"
                       class="cursor-pointer text-lg"
@@ -133,7 +135,7 @@ const handleImageClick = async (image: string) => {
                       'text-green-500': !allergyInfo[image],
                     }"
                   >
-                    {{ allergyInfo[image] ? "알러지 정보 보기" : "알러지 정보 없음" }}
+                    {{ allergyInfo[image] ? t('photo.modal.allergyInfo') : t('photo.modal.noAllergyInfo') }}
                   </p>
                 </li>
               </ul>
@@ -148,7 +150,7 @@ const handleImageClick = async (image: string) => {
         @update:visible="isAllergyModalVisible = $event"
         class="mt-8"
     >
-      <h2 class="text-xl font-bold text-gray-800 mb-4">알러지 상세 정보</h2>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">{{ t('photo.allergyModal.title') }}</h2>
       <p v-if="currentAllergyInfo" class="text-gray-600">
   <span
       v-for="(info, index) in currentAllergyInfo.split(',')"

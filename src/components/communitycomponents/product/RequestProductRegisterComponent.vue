@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {IRequestProduct} from "../../../types/commnunityTypes.ts";
 import {registerRequestProduct} from "../../../api/commnunityAPI/requestProductAPI.ts";
 
+const { t } = useI18n();
 
 const cptitle = ref("");
 const cpproduct = ref("");
 const submitting = ref(false);
 const router = useRouter();
 const route = useRoute();
-
 
 const submitRequestProduct = async () => {
   if (!cptitle.value.trim() || !cpproduct.value.trim()) {
@@ -37,17 +38,14 @@ const submitRequestProduct = async () => {
     submitting.value = false;
   }
 };
-
-onMounted(() => {
-  submitRequestProduct();
-});
 </script>
-
 
 <template>
   <div class="p-4 border rounded-lg">
     <div class="flex items-center mb-4">
-      <h2 class="text-lg font-semibold">상품 신고 작성</h2>
+      <h2 class="text-lg font-semibold">
+        {{ t('productReport.productReportHeader') }}
+      </h2>
     </div>
 
     <div class="mb-4">
@@ -55,7 +53,7 @@ onMounted(() => {
           v-model="cptitle"
           rows="4"
           class="w-full p-2 border rounded-lg"
-          placeholder="제목 입력"
+          :placeholder="t('productReport.placeholders.productReportTitle')"
       ></textarea>
     </div>
 
@@ -64,7 +62,7 @@ onMounted(() => {
           v-model="cpproduct"
           rows="4"
           class="w-full p-2 border rounded-lg"
-          placeholder="신고 내용 입력"
+          :placeholder="t('productReport.placeholders.productReportContent')"
       ></textarea>
     </div>
 
@@ -73,7 +71,10 @@ onMounted(() => {
         @click="submitRequestProduct"
         class="w-full py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 disabled:opacity-50"
     >
-      {{ submitting ? '등록 중...' : '등록하기' }}
+      {{ submitting
+        ? t('productReport.buttons.submitProductReport.loading')
+        : t('productReport.buttons.submitProductReport.default')
+      }}
     </button>
   </div>
 </template>
