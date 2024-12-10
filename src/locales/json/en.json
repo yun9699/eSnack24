@@ -79,11 +79,399 @@
     "cart": "Cart",
     "camera": "Camera",
     "contact": "Help Center",
-    "profile": "Profile"
+    "profile": "Profile",
+    "login": "Sign in"
   },
 
   "pMain": {
     "popular": "Popular Products This Month",
     "moreinfo": "More Info"
+  },
+
+  "pList": {
+    "header": "Meet this month's promotional products prepared by eSnack.",
+    "event_product": "Event Products",
+    "differentiated_product": "Differentiated Products",
+    "fresh_product": "Fresh Products",
+    "app_download": "App Download",
+    "all": "All",
+    "sale": "Sale",
+    "exclude": "Exclude",
+    "more": "More Info",
+    "latest": "Latest",
+    "lowest_price": "Lowest Price",
+    "highest_price": "Highest Price"
+  },
+
+  "ProductSearch" : {
+    "search_button": "Search",
+    "no_results": "No search results found.",
+    "placeholder": "Please enter search keywords"
+  },
+
+  "pDetail": {
+    "price": "Price",
+    "review_check": "Check Reviews",
+    "allergy_info": "Allergy Information",
+    "none": "There are no allergens present in this product.",
+    "warning": "Warning: This product contains ingredients included in your allergy list.",
+    "product_description": "Product Description",
+    "buy": "Buy Now",
+    "add_to_cart": "Add to Cart"
+  },
+
+  "FAQList": {
+    "order": "Order",
+    "payment": "Payment",
+    "product": "Product",
+    "etc": "Other",
+    "report": "Report",
+    "faq": "Frequently Asked Questions",
+    "no_search_results": "No search results found.",
+    "search": "Search"
+  },
+
+  "QNAList": {
+    "search": "Search",
+    "my_inquiries": "My Inquiries",
+    "register_inquiry": "Register Inquiry",
+    "answer": "Answer",
+    "answered": "Replied",
+    "pending_answer": "Waiting",
+    "product_name": "Product Name",
+    "edit": "Edit",
+    "delete": "Delete",
+    "attachment": "Attachment",
+    "registration_date": "Registration Date",
+    "answer_date": "Answer Date",
+    "no_inquiries": "No inquiries found."
+  },
+
+  "QNARegister": {
+  "register_inquiry": "Register Inquiry",
+  "cancel": "Cancel",
+  "title": "Title",
+  "content": "Content",
+  "attachment": "Attach File",
+  "cancel_button": "Cancel",
+  "submit": "Submit"
+},
+
+  "UserOrderList": {
+    "order_tracking": "Order/Shipping Tracking",
+    "order_number": "Order Number",
+    "order_date": "Order Date",
+    "quantity": "Quantity",
+    "piece": "ea",
+    "view_product_details": "View Product Details",
+    "etc": "etc.",
+    "view_all_products": "View All Products"
+  },
+
+
+  "cart": {
+    "title": "Cart",
+    "empty_message": "Your cart is empty.",
+    "clear_button": "Clear Cart",
+    "delete_button": "Remove",
+    "decrease_button": "Reduce",
+    "increase_button": "Add",
+    "load_more_button": "Load More",
+    "checkout_button": "Checkout"
+  },
+
+  "userprofile": {
+    "greeting": "Hello, {email}!",
+    "logout_button": "Logout",
+    "buttons": {
+      "edit_profile": "Edit Profile",
+      "order_history": "Order History",
+      "my_inquiries": "My Inquiries",
+      "review_management": "Review Management"
+    }
+  },
+
+  "edit_user": {
+    "name_label": "Name",
+    "name_placeholder": "Enter your name",
+    "gender_label": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "etc": "Other",
+    "birth_label": "Date of Birth",
+    "phone_label": "Phone Number",
+    "phone_placeholder": "010-1234-5678",
+    "edit_allergy": "Edit My Allergy Information",
+    "save_button": "Save",
+    "confirm_message": "Register"
+  },
+
+  "order_confirmation": {
+    "title": "Order Confirmation",
+    "currency": "Currency",
+    "total_amount": "Total Amount",
+    "paypal_info": "PayPal Payment"
+  },
+  "order_complete": {
+    "success_message": "Payment Completed Successfully!",
+    "order_number": "Order Number",
+    "payment_message": "Shipping will begin after payment confirmation.",
+    "view_order_details": "View Order Details",
+    "go_home": "Return to Home",
+    "help_center": "Customer Support"
+  },
+  "order_detail": {
+    "page_title": "Order Details",
+    "quantity": "Quantity",
+    "total_amount": "Total Amount",
+    "go_home": "Return to Home"
+  },
+
+  "photo": {
+    "cameraHeader": "Camera",
+    "toggleButton": {
+      "on": "Turn Off Camera",
+      "off": "Turn On Camera"
+    },
+    "switchCameraButton": "Switch Camera",
+    "takePhotoButton": "Take Photo",
+    "modal": {
+      "title": "Similar Product Search Results",
+      "noResults": "No search results found.",
+      "imageNames": "Image Names",
+      "allergyInfo": "View Allergy Information",
+      "noAllergyInfo": "No Allergy Information"
+    },
+    "allergyModal": {
+      "title": "Allergy Details"
+    }
+  },
+
+  "reviewRegister": {
+    "Header": "Write Review",
+    "labels": {
+      "reviewProductNumber": "Product Number",
+      "imageUpload": "Image Upload (Optional)",
+      "productExperience": "How was this product? (Product Name",
+      "positiveFeedback": "What did you like about it?",
+      "reviewPlaceholder": "Enter review (Required)"
+    },
+    "button": {
+      "reviewSubmit": "Submit",
+      "reviewSubmitting": "Submitting..."
+    }
+  },
+
+  "reviewList": {
+    "Header": "Review List",
+    "buttons": {
+      "registerReview": "Write Review",
+      "goToProductDetail": "Back to Product Details",
+      "loadMoreReviews": "Load More"
+    },
+    "loadingReviews": "Loading...",
+    "noReviewsMessage": "No reviews available.",
+    "reviewLabels": {
+      "noImage": "No image",
+      "productNumber": "Product Number",
+      "reviewNumber": "Review Number",
+      "userNumber": "User Number",
+      "content": "Content",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date"
+    }
+  },
+
+  "reviewEdit": {
+    "Header": "Edit Review",
+    "labels": {
+      "reviewImage": "Image",
+      "noImage": "No image",
+      "rating": "Rating",
+      "reviewContent": "Content",
+      "loadingReviewData": "Loading review data..."
+    },
+    "buttons": {
+      "editReview": {
+        "default": "Edit",
+        "loading": "Editing..."
+      },
+      "deleteReview": "Delete"
+    }
+  },
+
+  "reviewDetail": {
+    "loadingReviewDetail": "Loading...",
+    "reviewDetailLabels": {
+      "productNumber": "Product Number",
+      "reviewNumber": "Review Number",
+      "userNumber": "User Number",
+      "image": "Image",
+      "noImage": "No image",
+      "content": "Content",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date",
+      "noReviewDetails": "Unable to load review details."
+    },
+    "buttons": {
+      "editReviewDetail": "Edit",
+      "goBackToReviewList": "Back to List"
+    }
+  },
+
+  "user_reviewList": {
+    "userReviewListHeader": "User Review List",
+    "loadingUserReviews": "Loading...",
+    "noUserReviewsMessage": "No reviews available.",
+    "userReviewLabels": {
+      "image": "Image",
+      "noImage": "No image",
+      "productNumber": "Product Number",
+      "reviewNumber": "Review Number",
+      "userNumber": "User Number",
+      "content": "Content",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date"
+    },
+    "buttons": {
+      "loadMoreUserReviews": "Load More"
+    }
+  },
+
+  "allergyReport": {
+    "allergyReportHeader": "Allergy Report Submission",
+    "placeholders": {
+      "allergyReportTitle": "Enter title",
+      "allergyReportContent": "Enter report content"
+    },
+    "buttons": {
+      "submitAllergyReport": {
+        "default": "Submit",
+        "loading": "Submitting..."
+      }
+    }
+  },
+
+  "allergyReportList": {
+    "allergyReportListHeader": "Allergy Report List",
+    "buttons": {
+      "reportProduct": "Report Product",
+      "registerAllergyRequest": "Register Allergy Request",
+      "loadMoreAllergyReports": "Load More"
+    },
+    "loadingAllergyReports": "Loading...",
+    "noAllergyReportsMessage": "No list available.",
+    "allergyReportLabels": {
+      "number": "Number",
+      "title": "Title",
+      "content": "Report Content",
+      "answer": "Answer",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date"
+    }
+  },
+
+  "allergyReportEdit": {
+    "allergyReportEditHeader": "Edit Allergy Report",
+    "loadingAllergyReportEdit": "Loading...",
+    "allergyReportEditLabels": {
+      "title": "Title",
+      "content": "Report Content"
+    },
+    "allergyReportEditButtons": {
+      "edit": {
+        "default": "Edit",
+        "loading": "Editing..."
+      },
+      "delete": "Delete"
+    },
+    "noAllergyReportData": "Loading data..."
+  },
+
+  "allergyReportDetail": {
+    "allergyReportDetailHeader": "Allergy Report Details",
+    "loadingAllergyReportDetail": "Loading...",
+    "allergyReportDetailLabels": {
+      "listNumber": "List Number",
+      "title": "Title",
+      "content": "Content",
+      "answer": "Answer",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date",
+      "noAllergyReportDetails": "Unable to load list details."
+    },
+    "allergyReportDetailButtons": {
+      "editAllergyReport": "Edit",
+      "goBackToAllergyReportList": "Back to List"
+    }
+  },
+
+  "productReport": {
+    "productReportHeader": "Product Report Submission",
+    "placeholders": {
+      "productReportTitle": "Enter title",
+      "productReportContent": "Enter report content"
+    },
+    "buttons": {
+      "submitProductReport": {
+        "default": "Submit",
+        "loading": "Submitting..."
+      }
+    }
+  },
+
+  "productReportList": {
+    "productReportListHeader": "Product Report List",
+    "buttons": {
+      "reportAllergy": "Report Allergy",
+      "registerProductRequest": "Register Product Request",
+      "loadMoreProductReports": "Load More"
+    },
+    "loadingProductReports": "Loading...",
+    "noProductReportsMessage": "No list available.",
+    "productReportLabels": {
+      "number": "Number",
+      "title": "Title",
+      "content": "Report Content",
+      "answer": "Answer",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date"
+    }
+  },
+
+  "productReportEdit": {
+    "productReportEditHeader": "Edit Product Report",
+    "loadingProductReportEdit": "Loading...",
+    "productReportEditLabels": {
+      "title": "Title",
+      "content": "Report Content"
+    },
+    "productReportEditButtons": {
+      "edit": {
+        "default": "Edit",
+        "loading": "Editing..."
+      },
+      "delete": "Delete"
+    },
+    "noProductReportData": "Loading data..."
+  },
+
+  "productReportDetail": {
+    "productReportDetailHeader": "Product Report Details",
+    "loadingProductReportDetail": "Loading...",
+    "productReportDetailLabels": {
+      "listNumber": "List Number",
+      "title": "Title",
+      "content": "Content",
+      "answer": "Answer",
+      "registrationDate": "Registration Date",
+      "modificationDate": "Modification Date",
+      "noProductReportDetails": "Unable to load list details."
+    },
+    "buttons": {
+      "editProductReportDetail": "Edit",
+      "goBackToProductReportList": "Back to List"
+    }
   }
+
 }

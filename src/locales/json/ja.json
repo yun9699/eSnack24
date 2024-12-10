@@ -79,11 +79,398 @@
     "cart": "カート",
     "camera": "カメラ",
     "contact": "ヘルプセンター",
-    "profile": "プロフィール"
+    "profile": "プロフィール",
+    "login": "ログイン"
   },
 
   "pMain": {
     "popular": "今月の人気商品",
     "moreinfo": "もっと見る"
+  },
+
+  "pList": {
+    "header": "eSnackが用意した今月のイベント商品をご覧ください。",
+    "event_product": "イベント商品",
+    "differentiated_product": "差別化商品",
+    "fresh_product": "新鮮食品",
+    "app_download": "アプリダウンロード",
+    "all": "全て",
+    "sale": "セール",
+    "exclude": "除外",
+    "more": "もっと見る",
+    "latest": "最新順",
+    "lowest_price": "価格の安い順",
+    "highest_price": "価格の高い順"
+  },
+
+  "pDetail": {
+    "price": "価格",
+    "review_check": "レビュー確認",
+    "allergy_info": "アレルギー情報",
+    "none": "この製品にはアレルギー誘発成分は存在しません。",
+    "warning": "注意: この製品には、ユーザーのアレルギー項目に含まれている成分が含まれています。",
+    "product_description": "製品説明",
+    "buy": "購入する",
+    "add_to_cart": "カートに追加"
+  },
+
+  "FAQList": {
+    "order": "注文",
+    "payment": "支払い",
+    "product": "商品",
+    "etc": "その他",
+    "report": "報告",
+    "faq": "よくある質問",
+    "no_search_results": "検索結果がありません。",
+    "search": "検索"
+  },
+
+  "ProductSearch" : {
+    "search_button": "検索",
+    "no_results": "検索結果がありません。",
+    "placeholder": "検索キーワードを入力してください"
+  },
+
+  "QNAList": {
+    "search": "検索",
+    "my_inquiries": "マイ問い合わせ",
+    "register_inquiry": "問い合わせ登録",
+    "answer": "回答",
+    "answered": "回答済み",
+    "pending_answer": "回答待ち",
+    "product_name": "商品名",
+    "edit": "編集",
+    "delete": "削除",
+    "attachment": "添付ファイル",
+    "registration_date": "登録日",
+    "answer_date": "回答日",
+    "no_inquiries": "問い合わせ履歴がありません。"
+  },
+
+  "QNARegister": {
+    "register_inquiry": "問い合わせ登録",
+    "cancel": "キャンセル",
+    "title": "タイトル",
+    "content": "内容",
+    "attachment": "ファイル添付",
+    "cancel_button": "キャンセル",
+    "submit": "登録"
+  },
+
+  "UserOrderList": {
+    "order_tracking": "注文/配送追跡",
+    "order_number": "注文番号",
+    "order_date": "注文日",
+    "quantity": "数量",
+    "piece": "個",
+    "view_product_details": "商品詳細を見る",
+    "etc": "他",
+    "view_all_products": "全商品を見る"
+  },
+
+
+  "cart": {
+    "title": "カート",
+    "empty_message": "カートが空です。",
+    "clear_button": "カートを空にする",
+    "delete_button": "削除",
+    "decrease_button": "減らす",
+    "increase_button": "追加",
+    "load_more_button": "さらに読み込む",
+    "checkout_button": "レジに進む"
+  },
+
+  "userprofile": {
+    "greeting": "こんにちは、{email}さん！",
+    "logout_button": "ログアウト",
+    "buttons": {
+      "edit_profile": "プロフィール編集",
+      "order_history": "注文履歴",
+      "my_inquiries": "お問い合わせ履歴",
+      "review_management": "レビュー管理"
+    }
+  },
+
+  "edit_user": {
+    "name_label": "名前",
+    "name_placeholder": "名前を入力してください",
+    "gender_label": "性別",
+    "male": "男性",
+    "female": "女性",
+    "etc": "その他",
+    "birth_label": "生年月日",
+    "phone_label": "電話番号",
+    "phone_placeholder": "010-1234-5678",
+    "edit_allergy": "アレルギー情報の編集",
+    "save_button": "保存",
+    "confirm_message": "登録"
+  },
+
+  "order_confirmation": {
+    "title": "注文確認",
+    "currency": "通貨",
+    "total_amount": "総額",
+    "paypal_info": "PayPal決済は"
+  },
+  "order_complete": {
+    "success_message": "決済が完了しました！",
+    "order_number": "注文番号",
+    "payment_message": "支払い確認後、配送を開始いたします。",
+    "view_order_details": "注文詳細を見る",
+    "go_home": "ホームに戻る",
+    "help_center": "カスタマーセンター"
+  },
+  "order_detail": {
+    "page_title": "注文詳細",
+    "quantity": "数量",
+    "total_amount": "総額",
+    "go_home": "ホームに戻る"
+  },
+
+  "photo": {
+    "cameraHeader": "カメラ",
+    "toggleButton": {
+      "on": "カメラを消す",
+      "off": "カメラをつける"
+    },
+    "switchCameraButton": "カメラを切り替える",
+    "takePhotoButton": "写真を撮る",
+    "modal": {
+      "title": "類似商品検索結果",
+      "noResults": "検索結果がありません。",
+      "imageNames": "画像名",
+      "allergyInfo": "アレルギー情報を見る",
+      "noAllergyInfo": "アレルギー情報なし"
+    },
+    "allergyModal": {
+      "title": "アレルギー詳細"
+    }
+  },
+
+  "reviewRegister": {
+    "Header": "レビュー作成",
+    "labels": {
+      "reviewProductNumber": "商品番号",
+      "imageUpload": "画像アップロード（オプション）",
+      "productExperience": "この商品はいかがでしたか？（商品名",
+      "positiveFeedback": "どんな点が良かったですか？",
+      "reviewPlaceholder": "レビューを入力（必須）"
+    },
+    "button": {
+      "reviewSubmit": "登録する",
+      "reviewSubmitting": "登録中..."
+    }
+  },
+
+  "reviewList": {
+    "Header": "レビューリスト",
+    "buttons": {
+      "registerReview": "レビュー登録",
+      "goToProductDetail": "商品詳細に戻る",
+      "loadMoreReviews": "さらに読み込む"
+    },
+    "loadingReviews": "読み込み中...",
+    "noReviewsMessage": "レビューがありません。",
+    "reviewLabels": {
+      "noImage": "画像がありません",
+      "productNumber": "商品番号",
+      "reviewNumber": "レビュー番号",
+      "userNumber": "ユーザー番号",
+      "content": "内容",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日"
+    }
+  },
+
+  "reviewEdit": {
+    "Header": "レビュー編集",
+    "labels": {
+      "reviewImage": "画像",
+      "noImage": "画像がありません",
+      "rating": "評価",
+      "reviewContent": "内容",
+      "loadingReviewData": "レビューデータを読み込んでいます..."
+    },
+    "buttons": {
+      "editReview": {
+        "default": "編集する",
+        "loading": "編集中..."
+      },
+      "deleteReview": "削除"
+    }
+  },
+
+  "reviewDetail": {
+    "loadingReviewDetail": "読み込み中...",
+    "reviewDetailLabels": {
+      "productNumber": "商品番号",
+      "reviewNumber": "レビュー番号",
+      "userNumber": "ユーザー番号",
+      "image": "画像",
+      "noImage": "画像がありません",
+      "content": "内容",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日",
+      "noReviewDetails": "レビュー詳細情報を読み込めません。"
+    },
+    "buttons": {
+      "editReviewDetail": "編集",
+      "goBackToReviewList": "リストに戻る"
+    }
+  },
+
+  "user_reviewList": {
+    "userReviewListHeader": "ユーザーレビューリスト",
+    "loadingUserReviews": "読み込み中...",
+    "noUserReviewsMessage": "レビューがありません。",
+    "userReviewLabels": {
+      "image": "画像",
+      "noImage": "画像がありません",
+      "productNumber": "商品番号",
+      "reviewNumber": "レビュー番号",
+      "userNumber": "ユーザー番号",
+      "content": "内容",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日"
+    },
+    "buttons": {
+      "loadMoreUserReviews": "さらに読み込む"
+    }
+  },
+
+  "allergyReport": {
+    "allergyReportHeader": "アレルギー報告の作成",
+    "placeholders": {
+      "allergyReportTitle": "タイトルを入力",
+      "allergyReportContent": "報告内容を入力"
+    },
+    "buttons": {
+      "submitAllergyReport": {
+        "default": "登録する",
+        "loading": "登録中..."
+      }
+    }
+  },
+
+  "allergyReportList": {
+    "allergyReportListHeader": "アレルギー報告リスト",
+    "buttons": {
+      "reportProduct": "商品を報告",
+      "registerAllergyRequest": "アレルギー要求を登録",
+      "loadMoreAllergyReports": "さらに読み込む"
+    },
+    "loadingAllergyReports": "読み込み中...",
+    "noAllergyReportsMessage": "リストがありません。",
+    "allergyReportLabels": {
+      "number": "番号",
+      "title": "タイトル",
+      "content": "報告内容",
+      "answer": "回答",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日"
+    }
+  },
+
+  "allergyReportEdit": {
+    "allergyReportEditHeader": "アレルギー報告の編集",
+    "loadingAllergyReportEdit": "読み込み中...",
+    "allergyReportEditLabels": {
+      "title": "タイトル",
+      "content": "報告内容"
+    },
+    "allergyReportEditButtons": {
+      "edit": {
+        "default": "編集する",
+        "loading": "編集中..."
+      },
+      "delete": "削除"
+    },
+    "noAllergyReportData": "データを読み込んでいます..."
+  },
+
+  "allergyReportDetail": {
+    "allergyReportDetailHeader": "アレルギー報告の詳細情報",
+    "loadingAllergyReportDetail": "読み込み中...",
+    "allergyReportDetailLabels": {
+      "listNumber": "リスト番号",
+      "title": "タイトル",
+      "content": "内容",
+      "answer": "回答",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日",
+      "noAllergyReportDetails": "リスト詳細を読み込めません。"
+    },
+    "allergyReportDetailButtons": {
+      "editAllergyReport": "編集",
+      "goBackToAllergyReportList": "リストに戻る"
+    }
+  },
+
+  "productReport": {
+    "productReportHeader": "商品報告の作成",
+    "placeholders": {
+      "productReportTitle": "タイトルを入力",
+      "productReportContent": "報告内容を入力"
+    },
+    "buttons": {
+      "submitProductReport": {
+        "default": "登録する",
+        "loading": "登録中..."
+      }
+    }
+  },
+
+  "productReportList": {
+    "productReportListHeader": "商品報告リスト",
+    "buttons": {
+      "reportAllergy": "アレルギーを報告",
+      "registerProductRequest": "商品要求を登録",
+      "loadMoreProductReports": "さらに読み込む"
+    },
+    "loadingProductReports": "読み込み中...",
+    "noProductReportsMessage": "リストがありません。",
+    "productReportLabels": {
+      "number": "番号",
+      "title": "タイトル",
+      "content": "報告内容",
+      "answer": "回答",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日"
+    }
+  },
+
+  "productReportEdit": {
+    "productReportEditHeader": "商品報告の編集",
+    "loadingProductReportEdit": "読み込み中...",
+    "productReportEditLabels": {
+      "title": "タイトル",
+      "content": "報告内容"
+    },
+    "productReportEditButtons": {
+      "edit": {
+        "default": "編集する",
+        "loading": "編集中..."
+      },
+      "delete": "削除"
+    },
+    "noProductReportData": "データを読み込んでいます..."
+  },
+
+  "productReportDetail": {
+    "productReportDetailHeader": "商品報告の詳細情報",
+    "loadingProductReportDetail": "読み込み中...",
+    "productReportDetailLabels": {
+      "listNumber": "リスト番号",
+      "title": "タイトル",
+      "content": "内容",
+      "answer": "回答",
+      "registrationDate": "登録日",
+      "modificationDate": "更新日",
+      "noProductReportDetails": "リスト詳細を読み込めません。"
+    },
+    "buttons": {
+      "editProductReportDetail": "編集",
+      "goBackToProductReportList": "リストに戻る"
+    }
   }
 }
