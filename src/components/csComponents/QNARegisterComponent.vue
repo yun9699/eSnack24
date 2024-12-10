@@ -55,16 +55,19 @@ const handleSubmit = async () => {
   router.push('/cs/qna');
 
   // FCM 메시지 전송
-    const response = await axios.post("https://esnack24admin.store/admin/api/v1/fcm/send", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+  const response = await axios.post(
+      "https://esnack24admin/admin/api/v1/fcm/send",
+      {
         token: fcmData.value.token,  // 배열 형태로 전달된 토큰
         title: "새로운 QNA가 등록되었습니다.",
-        body: "QNA 내용을 확인해주세요."
-      })
-    });
+        body: "QNA 내용을 확인해주세요.",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+  );
 
     if (!response.ok) {
       throw new Error('FCM 메시지 전송 실패');
