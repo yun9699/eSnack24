@@ -105,6 +105,8 @@ const handleClikeMove = () => {
       </div>
     </div>
   </div>
+
+
 </template>
 
 <style scoped>

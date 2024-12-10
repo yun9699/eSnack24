@@ -2,11 +2,13 @@
 
 
 
+import Footer from "../../layouts/Footer.vue";
 </script>
 
 <template>
 
  <RouterView/>
+  <Footer/>
 </template>
 
 <style scoped>
