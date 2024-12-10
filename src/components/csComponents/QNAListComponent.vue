@@ -3,6 +3,9 @@ import { onMounted, ref, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import {deleteQNA, getQNAList, getQNAOne} from "../../api/csAPI/qnaAPI.ts"
 import useUserStore from "../../stores/useUserStore.ts";
+import {useI18n} from "vue-i18n";
+
+const { t } = useI18n()
 
 // 상태 관리
 const openQna = ref<number | null>(null)
@@ -88,6 +91,12 @@ onMounted(() => {
       >
         QNA
       </button>
+      <button
+          class="px-8 py-2 rounded-full text-lg font-medium border border-gray-300 text-gray-600"
+          @click="$router.push('/request/product/list')"
+      >
+        {{ t('FAQList.report') }}
+      </button>
     </div>
 
     <!-- 검색창 -->
@@ -95,7 +104,7 @@ onMounted(() => {
       <input
           type="text"
           v-model="searchKeyword"
-          placeholder="검색하기"
+          :placeholder="t('FAQList.search')"
           class="w-full p-3 pl-12 border border-gray-300 rounded-full"
       >
       <Icon
@@ -106,12 +115,12 @@ onMounted(() => {
 
     <!-- 내 문의내역 헤더와 등록 버튼 -->
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">내 문의내역</h2>
+      <h2 class="text-2xl font-bold">{{ t('QNAList.my_inquiries') }}</h2>
       <button
           @click="$router.push('/cs/qna/register')"
           class="px-6 py-2 bg-red-500 text-white rounded-full"
       >
-        문의등록
+        {{ t('QNAList.register_inquiry') }}
       </button>
     </div>
 
@@ -129,7 +138,7 @@ onMounted(() => {
           <div class="flex items-start gap-3 flex-1">
             <span class="px-2 py-1 text-sm rounded-full"
                   :class="qna.qstatus ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'">
-              {{ qna.qstatus ? '답변완료' : '답변대기' }}
+               {{ qna.qstatus ? t('QNAList.answered') : t('QNAList.pending_answer') }}
             </span>
             <span class="text-left">{{ qna.qtitle }}</span>
           </div>
@@ -150,13 +159,13 @@ onMounted(() => {
             <!-- 답변이 없을 때만 수정/삭제 버튼 표시 -->
             <div v-if="!qnaDetail?.qanswer" class="flex gap-2">
               <button class="px-4 py-1 text-sm border border-red-500 text-red-500 rounded-full hover:bg-red-50">
-                수정
+                {{ t('QNAList.edit') }}
               </button>
               <button
                   @click="handleRemove(qna.qno)"
                   class="px-4 py-1 text-sm border border-gray-300 text-gray-600 rounded-full hover:bg-gray-50"
               >
-                삭제
+                {{ t('QNAList.delete') }}
               </button>
             </div>
           </div>
@@ -166,20 +175,20 @@ onMounted(() => {
 
           <!-- 첨부 파일 -->
           <div v-if="qnaDetail?.qfilename" class="mb-4 text-sm">
-            첨부파일: {{ qnaDetail.qfilename }}
+            {{ t('QNAList.attachment') }}: {{ qnaDetail.qfilename }}
           </div>
 
           <!-- 등록일 -->
           <div class="text-sm text-gray-500">
-            등록일: {{ formatDate(qnaDetail?.qregdate) }}
+            {{ t('QNAList.registration_date') }}: {{ formatDate(qnaDetail?.qregdate) }}
           </div>
 
           <!-- 답변 내용 -->
           <div v-if="qnaDetail?.qanswer" class="mt-4 p-4 bg-white rounded">
-            <div class="font-bold mb-2">답변</div>
+            <div class="font-bold mb-2">{{ t('QNAList.answer') }}</div>
             <div class="mb-2">{{ qnaDetail.qanswer }}</div>
             <div class="text-sm text-gray-500">
-              답변일: {{ formatDate(qnaDetail?.qmoddate) }}
+              {{ t('QNAList.answer_date') }}: {{ formatDate(qnaDetail?.qmoddate) }}
             </div>
           </div>
         </div>
@@ -191,7 +200,7 @@ onMounted(() => {
         v-if="filteredQnas.length === 0"
         class="text-center py-8 text-gray-500"
     >
-      문의 내역이 없습니다.
+      {{ t('QNAList.no_inquiries') }}
     </div>
   </div>
 </template>

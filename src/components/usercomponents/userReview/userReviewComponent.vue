@@ -4,7 +4,9 @@ import { ref, onMounted } from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {Review} from "../../../types/reviewTypes.ts";
 import {getUserReviewList} from "../../../api/reviewAPI/userReviewAPI.ts";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 
 const reviews = ref<Review[]>([]);
 const page = ref(1);
@@ -70,10 +72,10 @@ onMounted(() => {
 
 <template>
   <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">사용자 리뷰 리스트</h1>
-    <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">{{ t('user_reviewList.Header') }}</h1>
+    <div v-if="loading" class="text-center text-gray-500">{{ t('user_reviewList.loadingUserReviews') }}</div>
     <div v-else>
-      <div v-if="reviews.length === 0" class="text-center text-gray-400 py-6">리뷰가 없습니다.</div>
+      <div v-if="reviews.length === 0" class="text-center text-gray-400 py-6">{{ t('user_reviewList.noUserReviewsMessage') }}</div>
       <ul class="space-y-4">
         <li
             v-for="review in reviews"
@@ -85,22 +87,22 @@ onMounted(() => {
             <img
                 v-if="review.rimage"
                 :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${review.rimage}`"
-                alt="리뷰 이미지"
+                :alt="t('user_reviewList.userReviewLabels.image')"
                 class="w-24 h-auto mt-2 border rounded"
             />
-            <span v-else class="text-sm text-gray-400">이미지가 없습니다.</span>
+            <span v-else class="text-sm text-gray-400">{{ t('user_reviewList.userReviewLabels.noImage') }}</span>
           </div>
           <p class="text-yellow-500 text-lg mt-2">
             <span v-for="star in 5" :key="star">
               {{ star <= review.rstar ? "★" : "☆" }}
             </span>
           </p>
-          <h3 class="text-lg font-semibold text-gray-700">상품 번호: {{ review.pno }}</h3>
-          <p class="text-sm text-gray-600">리뷰 번호: {{ review.rno }}</p>
-          <p class="text-sm text-gray-600">사용자 번호: {{ review.uno }}</p>
-          <p class="text-gray-700 mt-2">내용: {{ review.rcontent }}</p>
-          <p class="text-xs text-gray-500 mt-2">등록일: {{ formatDate(review.rregDate) }}</p>
-          <p class="text-xs text-gray-500">수정일: {{ formatDate(review.rmodDate) }}</p>
+          <h3 class="text-lg font-semibold text-gray-700">{{ t('user_reviewList.userReviewLabels.productNumber') }} : {{ review.pno }}</h3>
+          <p class="text-sm text-gray-600">{{ t('user_reviewList.userReviewLabels.reviewNumber') }} : {{ review.rno }}</p>
+          <p class="text-sm text-gray-600">{{ t('user_reviewList.userReviewLabels.userNumber') }} : {{ review.uno }}</p>
+          <p class="text-gray-700 mt-2">{{ t('user_reviewList.userReviewLabels.content') }} : {{ review.rcontent }}</p>
+          <p class="text-xs text-gray-500 mt-2">{{ t('user_reviewList.userReviewLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}</p>
+          <p class="text-xs text-gray-500">{{ t('user_reviewList.userReviewLabels.modificationDate') }} : {{ formatDate(review.rmodDate) }}</p>
         </li>
       </ul>
       <button
@@ -108,7 +110,7 @@ onMounted(() => {
           @click.prevent="loadMore"
           class="w-full mt-6 py-2 bg-blue-600 text-white text-lg font-bold rounded-lg hover:bg-blue-700 transition"
       >
-        더 보기
+        {{ t('user_reviewList.userReviewLabels.loadMoreUserReviews') }}
       </button>
     </div>
   </div>

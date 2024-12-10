@@ -6,12 +6,10 @@
     "register": "가입",
     "date_format": "연도-월-일"
   },
-
   "login": {
     "register_title": "회원가입",
     "sns_login": "SNS계정으로 간편하게 로그인/회원가입"
   },
-
   "userInfo": {
     "title": "사용자 정보",
     "name": {
@@ -35,7 +33,6 @@
       "label": "생년월일"
     }
   },
-
   "userAddress": {
     "title": "주소 입력",
     "country": {
@@ -68,22 +65,391 @@
     },
     "check_primary": "기본 주소로 설정"
   },
-
   "userAllergy": {
     "selectTitle": "본인의 알레르기가 있는 식품을 모두 선택해주세요.",
-    "selectInfo":  "알레르기가 없다면 바로 가입을 눌러주세요."
+    "selectInfo": "알레르기가 없다면 바로 가입을 눌러주세요."
   },
-
   "bottom_nav": {
     "search": "검색",
     "cart": "장바구니",
     "camera": "카메라",
     "contact": "헬프센터",
-    "profile": "프로필"
+    "profile": "프로필",
+    "login": "로그인"
   },
-
   "pMain": {
     "popular": "이번 달 인기 상품",
     "moreinfo": "더보기"
+  },
+  "pList": {
+    "header": "eSanck이 준비한 이달의 행사상품을 만나보세요.",
+    "event_product": "행사상품",
+    "differentiated_product": "차별화 상품",
+    "fresh_product": "신선식품",
+    "app_download": "앱 다운로드",
+    "all": "전체",
+    "sale": "세일",
+    "exclude": "제외",
+    "more": "더보기",
+    "latest": "최신순",
+    "lowest_price": "가격 낮은순",
+    "highest_price": "가격 높은순"
+  },
+  "pDetail": {
+    "price": "가격",
+    "review_check": "리뷰확인",
+    "allergy_info": "알러지 정보",
+    "none": "해당 제품의 경우 알레르기 유발 성분이 존재하지 않습니다",
+    "warning": "주의: 해당 제품은 사용자의 알러지 항목에 포함된 성분이 있습니다.",
+    "product_description": "제품설명",
+    "buy": "구매하기",
+    "add_to_cart": "장바구니담기"
+  },
+  "ProductSearch": {
+    "search_button": "검색",
+    "no_results": "검색결과가 없습니다.",
+    "placeholder": "검색어를 입력해주세요"
+  },
+  "FAQList": {
+    "order": "주문",
+    "payment": "결제",
+    "product": "상품",
+    "etc": "기타",
+    "report": "신고",
+    "faq": "자주 묻는 질문",
+    "no_search_results": "검색 결과가 없습니다.",
+    "search": "검색하기"
+  },
+  "QNAList": {
+    "my_inquiries": "내 문의내역",
+    "register_inquiry": "문의등록",
+    "answer": "답변",
+    "answered": "답변완료",
+    "pending_answer": "답변대기",
+    "product_name": "상품명",
+    "edit": "수정",
+    "delete": "삭제",
+    "attachment": "첨부파일",
+    "registration_date": "등록일",
+    "answer_date": "답변일",
+    "no_inquiries": "문의 내역이 없습니다."
+  },
+  "QNARegister": {
+    "register_inquiry": "문의 등록",
+    "cancel": "취소",
+    "title": "제목",
+    "content": "내용",
+    "attachment": "파일 첨부",
+    "cancel_button": "취소",
+    "submit": "등록"
+  },
+  "UserOrderList": {
+    "order_tracking": "주문/배송 조회",
+    "order_number": "주문번호",
+    "order_date": "주문날짜",
+    "quantity": "수량",
+    "piece": "개",
+    "view_product_details": "상품 자세히 보기",
+    "etc": "외",
+    "view_all_products": "건 전체상품 보기"
+  },
+  "cart": {
+    "title": "장바구니",
+    "empty_message": "장바구니가 비었습니다.",
+    "clear_button": "장바구니 비우기",
+    "delete_button": "삭제",
+    "decrease_button": "감소",
+    "increase_button": "증가",
+    "load_more_button": "더보기",
+    "checkout_button": "결제하기"
+  },
+  "userprofile": {
+    "greeting": "안녕하세요, {email}님!",
+    "logout_button": "로그아웃",
+    "buttons": {
+      "edit_profile": "내 정보 수정",
+      "order_history": "주문내역",
+      "my_inquiries": "내 문의 내역",
+      "review_management": "리뷰관리"
+    }
+  },
+  "edit_user": {
+    "title": "사용자 정보 수정",
+    "name_label": "이름",
+    "name_placeholder": "이름을 입력하세요",
+    "gender_label": "성별",
+    "male": "남자",
+    "female": "여자",
+    "etc": "기타",
+    "birth_label": "생년월일",
+    "phone_label": "전화번호",
+    "phone_placeholder": "010-1234-5678",
+    "edit_allergy": "나의 알레르기 정보 수정",
+    "save_button": "저장하기",
+    "confirm_message": "등록"
+  },
+  "order_confirmation": {
+    "title": "주문 확인",
+    "currency": "통화",
+    "total_amount": "총액",
+    "paypal_info": "PayPal 결제는"
+  },
+  "order_complete": {
+    "success_message": "결제가 완료되었습니다!",
+    "order_number": "주문 번호",
+    "payment_message": "결제 확인 후 배송이 시작됩니다.",
+    "view_order_details": "주문 상세보기",
+    "go_home": "홈으로 돌아가기",
+    "more_info": "더 궁금하신 점이 있으신가요?",
+    "help_center": "고객센터"
+  },
+  "order_detail": {
+    "page_title": "주문 상세",
+    "quantity": "수량",
+    "total_amount": "총 금액",
+    "go_home": "홈으로 돌아가기"
+  },
+  "photo": {
+    "cameraHeader": "카메라",
+    "toggleButton": {
+      "on": "카메라 끄기",
+      "off": "카메라 켜기"
+    },
+    "switchCameraButton": "카메라 전환",
+    "takePhotoButton": "사진 찍기",
+    "modal": {
+      "title": "유사 상품 검색 결과",
+      "noResults": "검색 결과가 없습니다.",
+      "imageNames": "이미지 이름",
+      "allergyInfo": "알러지 정보 보기",
+      "noAllergyInfo": "알러지 정보 없음"
+    },
+    "allergyModal": {
+      "title": "알러지 상세 정보"
+    }
+  },
+  "reviewRegister": {
+    "Header": "후기 작성",
+    "labels": {
+      "reviewProductNumber": "상품 번호",
+      "imageUpload": "이미지 업로드 (선택사항)",
+      "productExperience": "이 상품 어떠셨나요? (상품명",
+      "positiveFeedback": "어떤 점이 좋았나요?",
+      "reviewPlaceholder": "후기 입력(필수)"
+    },
+    "button": {
+      "reviewSubmit": "등록하기",
+      "reviewSubmitting": "등록 중..."
+    }
+  },
+  "reviewList": {
+    "Header": "리뷰 리스트",
+    "buttons": {
+      "registerReview": "리뷰 등록",
+      "goToProductDetail": "상품 상세로 돌아가기",
+      "loadMoreReviews": "더 보기"
+    },
+    "loadingReviews": "로딩 중...",
+    "noReviewsMessage": "리뷰가 없습니다.",
+    "reviewLabels": {
+      "noImage": "이미지가 없습니다.",
+      "productNumber": "상품 번호",
+      "reviewNumber": "리뷰 번호",
+      "userNumber": "사용자 번호",
+      "content": "내용",
+      "registrationDate": "등록일",
+      "modificationDate": "수정일"
+    }
+  },
+  "reviewEdit": {
+    "Header": "리뷰 수정",
+    "labels": {
+      "reviewImage": "이미지",
+      "noImage": "이미지가 없습니다.",
+      "rating": "별점",
+      "reviewContent": "내용",
+      "loadingReviewData": "리뷰 데이터를 불러오는 중입니다..."
+    },
+    "buttons": {
+      "editReview": {
+        "default": "수정하기",
+        "loading": "수정 중..."
+      },
+      "deleteReview": "삭제"
+    }
+  },
+  "reviewDetail": {
+    "Header": "리뷰 상세 정보",
+    "loadingReviewDetail": "로딩 중...",
+    "reviewDetailLabels": {
+      "productNumber": "상품 번호",
+      "reviewNumber": "리뷰 번호",
+      "userNumber": "사용자 번호",
+      "image": "이미지",
+      "noImage": "이미지가 없습니다.",
+      "content": "내용",
+      "registrationDate": "등록일",
+      "modificationDate": "수정일",
+      "noReviewDetails": "리뷰 상세 정보를 불러올 수 없습니다."
+    },
+    "buttons": {
+      "editReviewDetail": "수정",
+      "goBackToReviewList": "목록으로 돌아가기"
+    }
+  },
+  "user_reviewList": {
+    "Header": "사용자 리뷰 리스트",
+    "loadingUserReviews": "로딩 중...",
+    "noUserReviewsMessage": "리뷰가 없습니다.",
+    "userReviewLabels": {
+      "image": "리뷰 이미지",
+      "noImage": "이미지가 없습니다.",
+      "productNumber": "상품 번호",
+      "reviewNumber": "리뷰 번호",
+      "userNumber": "사용자 번호",
+      "content": "내용",
+      "registrationDate": "등록일",
+      "modificationDate": "수정일"
+    },
+    "buttons": {
+      "loadMoreUserReviews": "더 보기"
+    }
+  },
+
+  "allergyReport": {
+    "allergyReportHeader": "알러지 신고 작성",
+    "placeholders": {
+      "allergyReportTitle": "제목 입력",
+      "allergyReportContent": "신고 내용 입력"
+    },
+    "buttons": {
+      "submitAllergyReport": {
+        "default": "등록하기",
+        "loading": "등록 중..."
+      }
+    }
+  },
+
+  "allergyReportList": {
+  "allergyReportListHeader": "알러지 신고 리스트",
+  "buttons": {
+    "reportProduct": "상품 신고",
+    "registerAllergyRequest": "알러지 요청 등록",
+    "loadMoreAllergyReports": "더 보기"
+  },
+  "loadingAllergyReports": "로딩 중...",
+  "noAllergyReportsMessage": "리스트가 없습니다.",
+  "allergyReportLabels": {
+    "number": "번호",
+    "title": "제목",
+    "content": "신고 내용",
+    "answer": "답변",
+    "registrationDate": "등록일",
+    "modificationDate": "수정일"
   }
+},
+
+  "allergyReportEdit": {
+  "allergyReportEditHeader": "알러지 신고 수정",
+  "loadingAllergyReportEdit": "로딩 중...",
+  "allergyReportEditLabels": {
+    "title": "제목",
+    "content": "신고 내용"
+  },
+  "allergyReportEditButtons": {
+    "edit": {
+      "default": "수정하기",
+      "loading": "수정 중..."
+    },
+    "delete": "삭제"
+  },
+  "noAllergyReportData": "데이터를 불러오는 중입니다..."
+},
+
+  "allergyReportDetail": {
+  "allergyReportDetailHeader": "알러지 신고 상세 정보",
+  "loadingAllergyReportDetail": "로딩 중...",
+  "allergyReportDetailLabels": {
+    "listNumber": "리스트 번호",
+    "title": "제목",
+    "content": "내용",
+    "answer": "답변",
+    "registrationDate": "등록일",
+    "modificationDate": "수정일",
+    "noAllergyReportDetails": "리스트 상세 정보를 불러올 수 없습니다."
+  },
+  "allergyReportDetailButtons": {
+    "editAllergyReport": "수정",
+    "goBackToAllergyReportList": "리스트로 돌아가기"
+  }
+},
+
+  "productReport": {
+    "productReportHeader": "상품 신고 작성",
+    "placeholders": {
+      "productReportTitle": "제목 입력",
+      "productReportContent": "신고 내용 입력"
+    },
+    "buttons": {
+      "submitProductReport": {
+        "default": "등록하기",
+        "loading": "등록 중..."
+      }
+    }
+  },
+
+  "productReportList": {
+  "productReportListHeader": "상품 신고 리스트",
+  "buttons": {
+    "reportAllergy": "알러지 신고",
+    "registerProductRequest": "상품 요청 등록",
+    "loadMoreProductReports": "더 보기"
+  },
+  "loadingProductReports": "로딩 중...",
+  "noProductReportsMessage": "리스트가 없습니다.",
+  "productReportLabels": {
+    "number": "번호",
+    "title": "제목",
+    "content": "신고 내용",
+    "answer": "답변",
+    "registrationDate": "등록일",
+    "modificationDate": "수정일"
+  }
+},
+
+  "productReportEdit": {
+  "productReportEditHeader": "상품 신고 수정",
+  "loadingProductReportEdit": "로딩 중...",
+  "productReportEditLabels": {
+    "title": "제목",
+    "content": "신고 내용"
+  },
+  "productReportEditButtons": {
+    "edit": {
+      "default": "수정하기",
+      "loading": "수정 중..."
+    },
+    "delete": "삭제"
+  },
+  "noProductReportData": "데이터를 불러오는 중입니다..."
+},
+
+  "productReportDetail": {
+  "productReportDetailHeader": "상품 신고 상세 정보",
+  "loadingProductReportDetail": "로딩 중...",
+  "productReportDetailLabels": {
+    "listNumber": "리스트 번호",
+    "title": "제목",
+    "content": "내용",
+    "answer": "답변",
+    "registrationDate": "등록일",
+    "modificationDate": "수정일",
+    "noProductReportDetails": "리스트 상세 정보를 불러올 수 없습니다."
+  },
+  "buttons": {
+    "editProductReportDetail": "수정",
+    "goBackToProductReportList": "리스트로 돌아가기"
+    }
+  }
+
 }

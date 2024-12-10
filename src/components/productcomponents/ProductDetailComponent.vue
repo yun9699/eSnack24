@@ -7,6 +7,11 @@ import useUserStore from "../../stores/useUserStore.ts";
 import {addCartProduct} from "../../api/cartapi/cartapi.ts";
 import CommonCartAddModalComponent from "../../common/components/CommonCartAddModalComponent.vue";
 import {createOrder, viewOrder} from "../../api/orderapi/OrderAPI.ts";
+import {useI18n} from "vue-i18n";
+import {localeProduct} from "../../locales/localeProduct.ts";
+
+const { t } = useI18n()
+const { localePtitle, localePcontent } = localeProduct()
 
 const route = useRoute();
 const router = useRouter();
@@ -110,10 +115,9 @@ const orderClick = () => {
 
 
 onMounted(() => {
-  console.log(uno)
-  console.log(userano)
-  console.log("pno",pno)
-
+  console.log("uno:", uno)
+  console.log("userano:", userano)
+  console.log("pno:", pno)
 
   getDetail(pno).then((data) => {
 
@@ -146,7 +150,7 @@ onMounted(() => {
     <div class="text-center w-full max-w-xl space-y-6">
       <!-- 제품 이름 -->
       <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
-        {{ productRef.productDetail.product.ptitle_ko }}
+        {{ localePtitle(productRef.productDetail.product) }}
       </h1>
 
       <!-- 가격과 리뷰확인 버튼을 같은 선상에 배치 -->
@@ -154,9 +158,9 @@ onMounted(() => {
         <!-- 가격을 완전 중앙에 배치 -->
         <div class="flex-1 text-center">
           <div class="text-xl font-semibold text-gray-700">
-            가격:
+            {{ t('pDetail.price') }} :
             <span class="text-green-600">
-              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }}원
+              {{ new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productRef.productDetail.product.price).replace('₩', '') }} ₩
             </span>
           </div>
         </div>
@@ -164,16 +168,16 @@ onMounted(() => {
         <!-- 리뷰 확인 버튼 (오른쪽에 붙임) -->
         <router-link :to="`/review/list/${pno}`">
           <button class="bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition">
-            리뷰확인
+            {{ t('pDetail.review_check') }}
           </button>
         </router-link>
       </div>
 
       <!-- 알러지 정보 -->
       <div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">알러지 정보:</h2>
+        <h2 class="text-lg font-bold text-gray-800 mb-2">{{ t('pDetail.allergy_info') }} :</h2>
         <p class="text-base text-gray-700">
-          <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">없음</span>
+          <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">{{ t('pDetail.none') }}</span>
           <span v-else>
             <span
                 v-for="(allergy, index) in productRef.productDetail.atitle_ko"
@@ -189,16 +193,16 @@ onMounted(() => {
       <!-- 사용자 알러지 경고 -->
       <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
         <p class="text-red-600 font-medium text-center">
-          ⚠️ 주의: 이 제품은 사용자의 알러지 항목에 포함된 성분이 있습니다.
+          ⚠️ {{ t('pDetail.warning') }}
         </p>
       </div>
     </div>
 
-    <!-- pcontent_ko 영역 스타일링 -->
+    <!-- 제품 컨텐츠 영역 스타일링 -->
     <div class="w-full bg-white p-6 rounded-xl shadow-lg mt-6 border border-gray-100">
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">제품 설명</h2>
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ t('pDetail.product_description') }}</h2>
       <p class="text-lg text-gray-700 leading-relaxed break-words">
-        {{ productRef.productDetail.product.pcontent_ko }}
+        {{ localePcontent(productRef.productDetail.product) }}
       </p>
     </div>
 
@@ -208,13 +212,13 @@ onMounted(() => {
           class="w-full lg:w-auto bg-red-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-red-600 transition shadow-md"
           @click="orderClick"
       >
-        구매하기
+        {{ t('pDetail.buy') }}
       </button>
       <button
           class="w-full lg:w-auto bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition shadow-md"
           @click="handleClickAddCart"
       >
-        장바구니담기
+        {{ t('pDetail.add_to_cart') }}
       </button>
     </div>
     <CommonCartAddModalComponent

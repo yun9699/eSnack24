@@ -7,6 +7,9 @@ import {
   uploadImageAPI,
   uploadBase64ImageAPI, deleteReviewAPI
 } from "../../../api/reviewAPI/productReviewAPI";
+import {useI18n} from "vue-i18n";
+
+const { t } = useI18n();
 
 const route = useRoute();
 const router = useRouter();
@@ -136,11 +139,11 @@ onMounted(() => {
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold text-gray-800">리뷰 수정</h1>
+      <h1 class="text-2xl font-bold text-gray-800">{{ t('reviewEdit.Header') }}</h1>
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700">이미지</label>
+      <label class="block text-sm font-medium text-gray-700">{{ t('reviewEdit.labels.reviewImage') }}</label>
       <div class="mt-2 space-y-2">
         <img
             v-if="selectedImageBlob"
@@ -154,7 +157,7 @@ onMounted(() => {
             alt="Current Image"
             class="w-48 h-auto border rounded-lg"
         />
-        <p v-else class="text-sm text-gray-400">이미지가 없습니다.</p>
+        <p v-else class="text-sm text-gray-400">{{ t('reviewEdit.labels.noImage') }}</p>
 
       </div>
       <input type="file" @change="handleImageChange" class="mt-2 w-full p-2 border rounded-lg" />
@@ -162,7 +165,7 @@ onMounted(() => {
 
     <div v-if="review" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700">별점</label>
+        <label class="block text-sm font-medium text-gray-700">{{ t('reviewEdit.labels.rating') }}</label>
         <div class="flex space-x-1 mt-2">
           <span
               v-for="star in 5"
@@ -177,7 +180,7 @@ onMounted(() => {
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700">내용</label>
+        <label class="block text-sm font-medium text-gray-700">{{ t('reviewEdit.labels.reviewContent') }}</label>
         <textarea
             v-model="rcontent"
             rows="4"
@@ -190,17 +193,17 @@ onMounted(() => {
           @click="editReview"
           class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
       >
-        {{ submitting ? "수정 중..." : "수정하기" }}
+        {{ submitting ? t('reviewEdit.buttons.editReview.loading') : t('reviewEdit.buttons.editReview.default') }}
       </button>
       <button
           @click="deleteReview"
           class="px-4 py-2 text-sm text-red-600 bg-red-200 rounded-lg hover:bg-red-300 disabled:opacity-50"
           :disabled="submitting"
       >
-        삭제
+        {{ t('reviewEdit.buttons.deleteReview') }}
       </button>
     </div>
 
-    <div v-else class="text-center text-gray-400 py-6">리뷰 데이터를 불러오는 중입니다...</div>
+    <div v-else class="text-center text-gray-400 py-6">{{ t('reviewEdit.labels.loadingReviewData') }}</div>
   </div>
 </template>
