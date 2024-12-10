@@ -7,7 +7,7 @@ import BottomNavBar from "../../layouts/BottomNavBar.vue";
 <template>
   <Basiclayout/>
   <router-view/>
-<!--  <BottomNavBar/>-->
+  <Footer/>
 </template>
 
 <style scoped>

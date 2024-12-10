@@ -3,11 +3,12 @@ import { computed, ref } from "vue";
 
 const useUserStore = defineStore('userStore', () => {
     const user = ref< {
-        uno: number, anos: number[], email: string, accessToken: string, refreshToken: string } >(
+        uno: number, anos: number[], email: string, username: string, accessToken: string, refreshToken: string } >(
             {
                 uno: 0,
                 anos: [],
                 email: '',
+                username: '',
                 accessToken: '',
                 refreshToken: ''
             });
@@ -22,6 +23,11 @@ const useUserStore = defineStore('userStore', () => {
     const setUserEmail = (email: string) => {
 
         user.value.email = email;
+    }
+
+    const setUserName = (username: string) => {
+
+        user.value.username = username;
     }
 
     const setAccessToken = (accessToken: string) => {
@@ -41,6 +47,8 @@ const useUserStore = defineStore('userStore', () => {
 
     const getUserEmail = computed(() => user.value.email);
 
+    const getUserName = computed(() => user.value.username);
+
     const getAccessToken = computed(() => user.value.accessToken);
 
     const getRefreshToken = computed(() => user.value.refreshToken);
@@ -49,6 +57,7 @@ const useUserStore = defineStore('userStore', () => {
         user, setUno, getUno,
         setPersonalAllergies, getPersonalAllergies,
         setUserEmail, getUserEmail,
+        setUserName, getUserName,
         setAccessToken, getAccessToken,
         setRefreshToken, getRefreshToken,
     };

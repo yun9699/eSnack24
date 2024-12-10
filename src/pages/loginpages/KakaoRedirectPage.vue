@@ -25,6 +25,7 @@ onMounted(() => {
         user.setUno(result.uno);
         user.setPersonalAllergies(result.anos);
         user.setUserEmail(result.email);
+        user.setUserName(result.username);
         user.setAccessToken(result.accessToken);
         user.setRefreshToken(result.refreshToken);
 

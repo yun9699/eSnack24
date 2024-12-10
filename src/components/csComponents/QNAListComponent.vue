@@ -87,7 +87,8 @@ onMounted(() => {
         FAQ
       </button>
       <button
-          class="px-8 py-2 rounded-full text-lg font-medium bg-red-500 text-white"
+          class="px-8 py-2 rounded-full text-lg font-medium"
+          :style="{ backgroundColor: '#F9BB00', color: 'white' }"
       >
         QNA
       </button>
@@ -118,7 +119,8 @@ onMounted(() => {
       <h2 class="text-2xl font-bold">{{ t('QNAList.my_inquiries') }}</h2>
       <button
           @click="$router.push('/cs/qna/register')"
-          class="px-6 py-2 bg-red-500 text-white rounded-full"
+          class="px-6 py-2 rounded-full"
+          :style="{ backgroundColor: '#F9BB00', color: 'white' }"
       >
         {{ t('QNAList.register_inquiry') }}
       </button>
@@ -132,7 +134,7 @@ onMounted(() => {
           class="border-b border-gray-200"
       >
         <button
-            class="w-full flex items-center py-4 hover:text-red-500 transition-colors"
+            class="w-full flex items-center py-4 hover:text-yellow-600 transition-colors"
             @click="toggleQna(qna.qno)"
         >
           <div class="flex items-start gap-3 flex-1">
@@ -158,7 +160,7 @@ onMounted(() => {
             </div>
             <!-- 답변이 없을 때만 수정/삭제 버튼 표시 -->
             <div v-if="!qnaDetail?.qanswer" class="flex gap-2">
-              <button class="px-4 py-1 text-sm border border-red-500 text-red-500 rounded-full hover:bg-red-50">
+              <button class="px-4 py-1 text-sm border border-yellow-600 text-yellow-600 rounded-full hover:bg-yellow-50">
                 {{ t('QNAList.edit') }}
               </button>
               <button

@@ -88,7 +88,8 @@ onMounted(() => {
     <!-- FAQ/QNA 탭 -->
     <div class="flex gap-4 mb-6">
       <button
-          class="px-8 py-2 rounded-full text-lg font-medium bg-red-500 text-white"
+          class="px-8 py-2 rounded-full text-lg font-medium text-white"
+          style="background-color: #F9BB00;"
       >
         FAQ
       </button>
@@ -104,7 +105,6 @@ onMounted(() => {
       >
         {{ t('FAQList.report') }}
       </button>
-
     </div>
 
     <!-- 검색창 -->
@@ -132,9 +132,10 @@ onMounted(() => {
           :class="[
           'px-6 py-2 rounded-full font-medium transition-colors',
           selectedCategory === category.value
-            ? 'bg-red-500 text-white'
-            : 'border border-gray-300 text-gray-600 hover:border-red-500'
+            ? 'text-white'
+            : 'border border-gray-300 text-gray-600 hover:border-yellow-500'
         ]"
+          :style="{ backgroundColor: selectedCategory === category.value ? '#F9BB00' : 'transparent' }"
           @click="handleCategoryChange(category.value)"
       >
         {{ category.label }}
@@ -149,7 +150,7 @@ onMounted(() => {
           class="border-b border-gray-200"
       >
         <button
-            class="w-full flex items-center py-4 hover:text-red-500 transition-colors"
+            class="w-full flex items-center py-4 hover:text-yellow-500 transition-colors"
             @click="toggleFaq(faq.fno)"
         >
           <div class="flex items-start gap-3 flex-1">  <!-- flex-1 추가 및 items-start로 변경 -->
