@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { useLocaleStore } from '../../stores/useLocaleStore'
 import { storeToRefs } from 'pinia'
 import { IUserAllergy } from "../../types/userRegisterTypes.ts"
-import { localeAllergy } from '../../locales/localeAllergy' // 추가
+import { localeAllergy } from '../../locales/localeAllergy'
 
 const { t } = useI18n()
 

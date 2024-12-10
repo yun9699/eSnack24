@@ -177,7 +177,11 @@
     "decrease_button": "Reduce",
     "increase_button": "Add",
     "load_more_button": "Load More",
-    "checkout_button": "Checkout"
+    "checkout_button": "Checkout",
+    "order_amount": "Order Amount",
+    "product_discount": "Product Discount",
+    "shipping_fee": "Shipping Fee",
+    "total_payment_amount": "Total Payment Amount"
   },
 
   "userprofile": {
@@ -192,6 +196,7 @@
   },
 
   "edit_user": {
+    "title": "Modify User Information",
     "name_label": "Name",
     "name_placeholder": "Enter your name",
     "gender_label": "Gender",
@@ -320,7 +325,7 @@
   },
 
   "user_reviewList": {
-    "userReviewListHeader": "User Review List",
+    "Header": "User Review List",
     "loadingUserReviews": "Loading...",
     "noUserReviewsMessage": "No reviews available.",
     "userReviewLabels": {

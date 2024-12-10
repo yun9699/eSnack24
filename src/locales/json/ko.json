@@ -161,7 +161,11 @@
     "decrease_button": "감소",
     "increase_button": "증가",
     "load_more_button": "더보기",
-    "checkout_button": "결제하기"
+    "checkout_button": "결제하기",
+    "order_amount": "주문금액",
+    "product_discount": "상품할인",
+    "shipping_fee": "배송비",
+    "total_payment_amount": "총 결제예정금액"
   },
   "userprofile": {
     "greeting": "안녕하세요, {email}님!",

@@ -7,9 +7,11 @@
   import {getAllergyListKo} from "../../api/AllergyAPI/allergyAPI.ts";
   import useUserStore from "../../stores/useUserStore.ts";
   import {editUserAllergies} from "../../api/UserAPI/userAllergyAPI.ts";
+  import { localeAllergy } from "../../locales/localeAllergy.ts";
   import {useI18n} from "vue-i18n";
 
   const { t } = useI18n();
+  const { localeAtitle } = localeAllergy()
 
   const init: IReadUser = {
     username: '',
@@ -170,7 +172,7 @@
           }"
               @click="toggleSelection(item.ano)"
           >
-            {{ item.atitle_ko }}
+            {{ localeAtitle(item) }}
           </button>
         </li>
       </ul>

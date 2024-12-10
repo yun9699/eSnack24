@@ -123,8 +123,7 @@ onMounted(() => {
         >
           {{ submitting
             ? t('productReportEdit.productReportEditButtons.edit.loading')
-            : t('productReportEdit.productReportEditButtons.edit.default')
-          }}
+}}
         </button>
 
         <div class="mt-4 text-right">

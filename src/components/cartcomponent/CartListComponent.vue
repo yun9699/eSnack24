@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
+import {onMounted, ref, computed} from 'vue';
 import {clearCart, decCartItem, deleteCartItem, getCartList, incCartItem} from "../../api/cartapi/cartapi.ts";
 import { ICartItem } from "../../types/cartTypes.ts";
 import {createOrder} from "../../api/orderapi/OrderAPI.ts";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n";
+import { Icon } from '@iconify/vue';
 
 const initCartItem: ICartItem = {
   cino: 0,
@@ -19,190 +20,230 @@ const initCartItem: ICartItem = {
 };
 
 const router = useRouter();
+const { t } = useI18n();
+const pageNum = ref(1);
+const endPageNum = ref(1);
+const totalItems = ref(0);
+const data = ref<ICartItem[]>([{...initCartItem}]);
+const checkedItems = ref<number[]>([]);
 
-const { t } = useI18n()
+// 체크박스 관련 함수
+const toggleCheck = (cino: number) => {
+  const index = checkedItems.value.indexOf(cino);
+  if (index > -1) {
+    checkedItems.value.splice(index, 1);
+  } else {
+    checkedItems.value.push(cino);
+  }
+};
 
-let pageNum: number = 1;
+const allChecked = computed(() => {
+  return data.value.length > 0 && checkedItems.value.length === data.value.length;
+});
 
-let endPageNum: number = 1;
+const toggleAllCheck = () => {
+  if (allChecked.value) {
+    checkedItems.value = [];
+  } else {
+    checkedItems.value = data.value.map(item => item.cino);
+  }
+};
 
-const totalItems = ref<number>(0);
+// 금액 계산
+const totalAmount = computed(() => {
+  return data.value
+      .filter(item => checkedItems.value.includes(item.cino))
+      .reduce((sum, item) => sum + (item.price * item.ciqty), 0);
+});
 
-const data = ref<ICartItem[]>([
-  {...initCartItem}
-])
+const discount = ref(5000);  // 할인 금액
+const shippingFee = ref(5000); // 배송비
+
+const finalAmount = computed(() => {
+  if (checkedItems.value.length === 0) return 0;
+  return totalAmount.value - discount.value + shippingFee.value;
+});
 
 const deleteItem = (cino: number) => {
-
-  const item = data.value.find((item) => item.cino === cino)
-
+  const item = data.value.find((item) => item.cino === cino);
   if (item) {
-
     deleteCartItem(cino).then(() => {
-
       data.value = data.value.filter((item) => item.cino !== cino);
-
+      checkedItems.value = checkedItems.value.filter(id => id !== cino);
       totalItems.value--;
-    })
+    });
   }
-}
+};
+
+const deleteCheckedItems = async () => {
+  for (const cino of checkedItems.value) {
+    await deleteCartItem(cino);
+  }
+  data.value = data.value.filter(item => !checkedItems.value.includes(item.cino));
+  totalItems.value = data.value.length;
+  checkedItems.value = [];
+};
 
 const increaseQty = (cino: number) => {
-
-  const item = data.value.find((item) => item.cino === cino)
-
+  const item = data.value.find((item) => item.cino === cino);
   if (item) {
-
-    incCartItem(cino).then(() => item.ciqty++)
+    incCartItem(cino).then(() => item.ciqty++);
   }
-}
+};
 
 const decreaseQty = (cino: number) => {
-
-  const item = data.value.find((item) => item.cino === cino)
-
+  const item = data.value.find((item) => item.cino === cino);
   if (item && item.ciqty > 1) {
-
-    decCartItem(cino).then(() => item.ciqty--)
+    decCartItem(cino).then(() => item.ciqty--);
   }
-}
-
-const moreInfo = () => {
-
-  pageNum++;
-
-  getCartList(pageNum).then((res) => {
-
-    data.value = [...data.value, ...res.list];
-  })
-}
+};
 
 const handleClickPay = () => {
+  if (checkedItems.value.length === 0) return;
 
   const pnos: number[] = [];
   const ciqtys: number[] = [];
 
-  data.value.forEach((item) => {
-
-    pnos.push(item.pno);
-    ciqtys.push(item.ciqty);
-  })
+  data.value
+      .filter(item => checkedItems.value.includes(item.cino))
+      .forEach((item) => {
+        pnos.push(item.pno);
+        ciqtys.push(item.ciqty);
+      });
 
   createOrder(pnos, ciqtys).then((ono) => {
-
-    console.log(ono);
-
     router.push(`/order/create/${ono}`);
-  })
-}
+  });
+};
 
 onMounted(() => {
-
-  getCartList(pageNum).then((res) => {
-
+  getCartList(pageNum.value).then((res) => {
     data.value = res.list;
-
-    endPageNum = res.endPage;
-
+    endPageNum.value = res.endPage;
     totalItems.value = res.total;
-  })
+
+    // 모든 상품의 cino를 체크된 상태로 초기화
+    if (res.list && res.list.length > 0) {
+      checkedItems.value = res.list.map(item => item.cino);
+    }
+  });
 });
 
 </script>
 
 <template>
-  <div class="container mx-auto p-6 bg-gray-50 min-h-screen">
-    <!-- 타이틀 및 장바구니 비우기 버튼 -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-extrabold text-gray-800">{{ t('cart.title') }}</h1>
+  <div class="container mx-auto p-4 bg-white min-h-screen">
+    <!-- 헤더 -->
+    <div class="flex items-center mb-4">
+      <h1 class="text-lg">{{ t('cart.title') }} ({{ totalItems }})</h1>
+      <div class="ml-auto flex gap-2">
+      </div>
+    </div>
+
+    <!-- 배송지 정보 -->
+    <div class="flex items-center p-4 bg-gray-50 rounded mb-4">
+      <span class="mr-2">📍</span>
+      <div class="text-sm">
+        [46643] 부산 해운대구 APEC로 17 리더스파크빌딩 4층
+      </div>
+    </div>
+
+    <!-- 전체 선택 및 선택 삭제 -->
+    <div v-if="totalItems > 0" class="flex justify-between items-center mb-4">
+      <div class="flex items-center gap-2">
+        <input
+            type="checkbox"
+            :checked="allChecked"
+            @change="toggleAllCheck"
+            class="w-5 h-5 accent-[#f9bb00]"
+        >
+        <span>전체 선택</span>
+      </div>
       <button
-          v-if="totalItems != 0"
-          @click="clearCart()"
-          class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-200"
+          @click="deleteCheckedItems"
+          class="text-red-500"
+          :disabled="checkedItems.length === 0"
       >
-        {{ t('cart.clear_button') }}
+        선택 삭제
       </button>
     </div>
 
     <!-- 장바구니 비었을 때 메시지 -->
-    <div v-if="totalItems === 0" class="text-center mt-10">
-      <p class="text-gray-600 text-xl font-semibold">{{ t('cart.empty_message') }}</p>
+    <div v-if="totalItems === 0" class="text-center py-20 text-gray-500">
+      {{ t('cart.empty_message') }}
     </div>
 
-    <!-- 장바구니 리스트 -->
-    <ul v-else class="bg-white rounded-xl shadow-md divide-y divide-gray-100">
-      <li
-          v-for="item in data"
-          :key="item.pno"
-          class="flex flex-col md:flex-row items-center justify-between p-4 hover:bg-gray-100"
-      >
-        <!-- 상품 이미지 -->
-        <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
-          <img
-              :src="`http://10.10.10.166/product/s_${item.pfilename}`"
-              :alt="item.ptitle_ko"
-              class="w-32 h-32 object-cover rounded-lg shadow-sm"
-          />
-        </RouterLink>
-
-        <!-- 상품 이름 -->
-        <span class="mt-2 md:mt-0 font-semibold text-gray-700 text-lg md:ml-4">
-          {{ item.ptitle_ko }}
-        </span>
-
-        <!-- 상품 수량 및 조정 -->
-        <div class="flex items-center space-x-4 mt-4 md:mt-0 md:ml-auto">
-          <!-- 감소 버튼 -->
-          <button
-              @click="decreaseQty(item.cino)"
-              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-full shadow-md transition duration-200"
-          >
-            {{ t('cart.decrease_button') }}
-          </button>
-
-          <!-- 상품 수량 -->
-          <span class="text-gray-800 font-semibold text-lg">{{ item.ciqty }}</span>
-
-          <!-- 증가 버튼 -->
-          <button
-              @click="increaseQty(item.cino)"
-              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-full shadow-md transition duration-200"
-          >
-            {{ t('cart.increase_button') }}
-          </button>
-
-          <!-- 삭제 버튼 -->
-          <button
-              @click="deleteItem(item.cino)"
-              class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-200"
-          >
-            {{ t('cart.delete_button') }}
-          </button>
-        </div>
-      </li>
-    </ul>
-
-    <!-- 더보기 버튼 -->
-    <div class="mt-10 text-center">
-      <button
-          @click="moreInfo()"
-          v-if="pageNum < endPageNum"
-          class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
-      >
-        {{ t('cart.load_more_button') }}
-      </button>
-    </div>
-
-    <!-- 결제하기 버튼 (맨 아래) -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white py-4 shadow-lg">
-      <div class="container mx-auto text-center">
-        <button
-            @click="handleClickPay"
-            class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300"
+    <!-- 장바구니 아이템 목록 -->
+    <div v-else class="space-y-4 mb-60">
+      <div v-for="item in data"
+           :key="item.pno"
+           class="flex gap-4 border-b pb-4">
+        <input
+            type="checkbox"
+            :checked="checkedItems.includes(item.cino)"
+            @change="toggleCheck(item.cino)"
+            class="w-5 h-5 mt-2 accent-[#f9bb00]"
         >
-          {{ t('cart.checkout_button') }}
-        </button>
+
+        <img :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
+             :alt="item.ptitle_ko"
+             class="w-20 h-20 object-cover rounded">
+
+        <div class="flex-1">
+          <div class="flex justify-between mb-2">
+            <div>
+              <p class="font-medium">{{ item.ptitle_ko }}</p>
+              <p class="text-sm text-gray-500">최고판매가 {{ item.price.toLocaleString() }} ₩</p>
+            </div>
+            <div class="flex gap-2">
+              <button @click="deleteItem(item.cino)" class="text-gray-500 hover:text-red-500 transition-colors">
+                <Icon icon="icon-park-outline:delete" width="24" height="24" />
+              </button>
+            </div>
+          </div>
+
+          <div class="text-lg font-bold mb-2">{{ item.price.toLocaleString() }} ₩</div>
+
+          <div class="flex items-center">
+            <button @click="decreaseQty(item.cino)"
+                    class="w-8 h-8 border rounded-full">-</button>
+            <span class="mx-4">{{ item.ciqty }}</span>
+            <button @click="increaseQty(item.cino)"
+                    class="w-8 h-8 border rounded-full">+</button>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- 결제 정보 -->
+    <div v-if="checkedItems.length > 0"
+         class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 transition-transform duration-300 z-[9999] shadow-lg"
+         :style="{ transform: isHidden ? 'translateY(100%)' : 'translateY(0)' }"
+    >
+      <!-- mb-16 클래스 추가 -->
+      <div class="space-y-2 mb-4">
+        <div class="flex justify-between">
+          <span>{{ t('cart.order_amount') }}</span>
+          <span>+{{ totalAmount.toLocaleString() }} ₩</span>
+        </div>
+        <div class="flex justify-between text-red-500">
+          <span>{{ t('cart.product_discount') }}</span>
+          <span>-{{ discount.toLocaleString() }} ₩</span>
+        </div>
+        <div class="flex justify-between">
+          <span>{{ t('cart.shipping_fee') }}</span>
+          <span>+{{ shippingFee.toLocaleString() }} ₩</span>
+        </div>
+        <div class="flex justify-between font-bold text-lg">
+          <span>{{ t('cart.total_payment_amount') }}</span>
+          <span>{{ finalAmount.toLocaleString() }} ₩</span>
+        </div>
+      </div>
+
+      <button @click="handleClickPay"
+              class="text-xl w-full py-3 bg-[#f9bb00] text-white rounded-full hover:bg-[#e0a800]">
+        {{ t('cart.checkout_button') }}
+      </button>
     </div>
   </div>
 </template>
