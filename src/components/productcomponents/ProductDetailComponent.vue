@@ -180,7 +180,7 @@ onMounted(() => {
       </div>
 
       <!-- 알러지 정보 -->
-      <div class="text-center mb-6">
+      <div class="text-center mb-6 mt-2"> <!-- mt-2 추가 -->
         <div class="flex items-center">
           <h2 class="text-lg font-bold text-gray-800 mb-0 mr-2">{{ t('pDetail.allergy_info') }} :</h2>
           <p class="text-base text-gray-700 mb-0">
@@ -207,7 +207,8 @@ onMounted(() => {
           </p>
         </div>
 
-        <!-- 사용자 알러지 경고 -->
+
+      <!-- 사용자 알러지 경고 -->
         <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
           <p class="text-red-600 font-medium text-center">
             ⚠️ {{ t('pDetail.warning') }}
