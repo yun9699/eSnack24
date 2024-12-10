@@ -54,7 +54,7 @@ const handleSubmit = async () => {
       return;  // 토큰이 없으면 종료
     }
 
-  router.push('/cs/qna');
+    router.push('/cs/qna');
 
   // FCM 메시지 전송
   const response = await axios.post(

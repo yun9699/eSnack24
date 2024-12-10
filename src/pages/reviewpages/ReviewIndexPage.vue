@@ -2,12 +2,14 @@
 
 
 import Basiclayout from "../../layouts/Basiclayout.vue";
+import Footer from "../../layouts/Footer.vue";
 import BottomNavBar from "../../layouts/BottomNavBar.vue";
 </script>
 
 <template>
   <Basiclayout/>
   <RouterView/>
+  <Footer/>
   <BottomNavBar/>
 </template>
 
