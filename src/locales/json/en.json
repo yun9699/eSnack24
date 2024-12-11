@@ -182,7 +182,9 @@
     "order_amount": "Order Amount",
     "product_discount": "Product Discount",
     "shipping_fee": "Shipping Fee",
-    "total_payment_amount": "Total Payment Amount"
+    "total_payment_amount": "Total Payment Amount",
+    "select_all": "Select All",
+    "delete_selected": "Delete Selected Items"
   },
 
   "userprofile": {

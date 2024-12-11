@@ -55,7 +55,7 @@ const goBack = () => {
       </div>
 
       <!-- 언어 선택 드롭다운 -->
-      <div class="relative">
+      <div class="relative z-[9999]">
         <button
             @click="isLangMenuOpen = !isLangMenuOpen"
             class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-black"

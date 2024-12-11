@@ -182,7 +182,9 @@
     "order_amount": "订单金额",
     "product_discount": "商品折扣",
     "shipping_fee": "运费",
-    "total_payment_amount": "总支付预计金额"
+    "total_payment_amount": "总支付预计金额",
+    "select_all": "全选",
+    "delete_selected": "删除选择的项目"
   },
 
   "userprofile": {
