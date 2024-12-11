@@ -33,6 +33,7 @@ const endPageNum = ref(1);
 const totalItems = ref(0);
 const data = ref<ICartItem[]>([{...initCartItem}]);
 const checkedItems = ref<number[]>([]);
+const isHidden = ref(false);
 
 // 체크박스 관련 함수
 const toggleCheck = (cino: number) => {

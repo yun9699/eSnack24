@@ -5,6 +5,8 @@ const host = `${import.meta.env.VITE_API_HOST}/cart`;
 
 const user = useUserStore();
 
+const uno = user.getUno;
+
 export const getCartList = async (page: number) => {
 
     const pageNum: number = page || 1;
@@ -12,7 +14,7 @@ export const getCartList = async (page: number) => {
     console.log("uno");
     console.log(user.getUno);
 
-    const res = await jwtAxios.get(`${host}/list/${user.getUno}?page=${pageNum}`)
+    const res = await jwtAxios.get(`${host}/list/${uno}?page=${pageNum}`)
 
     return res.data;
 }
@@ -21,7 +23,7 @@ export const addCartProduct = async (pno: number,ciqty: number) => {
 
     console.log(user.getUno);
 
-    const res = await jwtAxios.post(`${host}/add/${user.getUno}`,{pno,ciqty})
+    const res = await jwtAxios.post(`${host}/add/${uno}`,{pno,ciqty})
     console.log(res.data);
 
     return res.data
@@ -50,7 +52,7 @@ export const decCartItem = async (cino: number) => {
 
 export const clearCart = async () => {
 
-    const res = await jwtAxios.delete(`${host}/clearItem/${user.getUno}`);
+    const res = await jwtAxios.delete(`${host}/clearItem/${uno}`);
 
     return res.data
 }
