@@ -208,7 +208,9 @@
     "phone_placeholder": "010-1234-5678",
     "edit_allergy": "アレルギー情報の編集",
     "save_button": "保存",
-    "confirm_message": "登録"
+    "confirm_message": "登録",
+    "allergy_change": "アレルギーの変更",
+    "person_allergy_change": "ご自身のアレルギー情報を更新してください。"
   },
 
   "order_confirmation": {
