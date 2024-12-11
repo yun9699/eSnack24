@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
 import { onMounted, ref } from "vue";
 import { getFilterList, getList } from "../../api/productAPI/productAPI.ts";
 import { IProduct } from "../../types/productTypes.ts";
@@ -12,6 +14,12 @@ const { localePtitle } = localeProduct()
 const user = useUserStore();
 const uno: number = user.getUno;
 const userano: number = user.getPersonalAllergies;
+
+const slides = [
+  { text: "첫 번째 배너 텍스트입니다.", btnText: "앱 다운로드" },
+  { text: "두 번째 배너 텍스트입니다.", btnText: "지금 확인하기" },
+  { text: "세 번째 배너 텍스트입니다.", btnText: "혜택 보기" },
+];
 
 const serverData = ref<{ ProductList: IProduct[] }>({
   ProductList: [],
@@ -119,20 +127,39 @@ onMounted(() => {
 
 <template>
   <!-- Header Section -->
-  <header class="bg-yellow-500 p-4 flex justify-between items-center">
-    <div class="flex space-x-4">
-      <button class="px-4 py-2 bg-yellow-600 text-white rounded">{{ t('pList.event_product') }}</button>
-      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.differentiated_product') }}</button>
-      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.fresh_product') }}</button>
-    </div>
-  </header>
+<!--  <header class="bg-yellow-500 p-4 flex justify-between items-center">-->
+<!--    <div class="flex space-x-4">-->
+<!--      <button class="px-4 py-2 bg-yellow-600 text-white rounded">{{ t('pList.event_product') }}</button>-->
+<!--      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.differentiated_product') }}</button>-->
+<!--      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.fresh_product') }}</button>-->
+<!--    </div>-->
+<!--  </header>-->
 
   <!-- Banner Section -->
+<!--  <section class="p-4 bg-gray-100 text-center">-->
+<!--    <p class="text-gray-600">{{ t('pList.header') }}</p>-->
+<!--    <div class="bg-yellow-200 p-4 mt-2 rounded">-->
+<!--      <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">{{ t('pList.app_download') }}</button>-->
+<!--    </div>-->
+<!--  </section>-->
   <section class="p-4 bg-gray-100 text-center">
-    <p class="text-gray-600">{{ t('pList.header') }}</p>
-    <div class="bg-yellow-200 p-4 mt-2 rounded">
-      <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">{{ t('pList.app_download') }}</button>
-    </div>
+    <Swiper
+        spaceBetween="30"
+        :slidesPerView="1"
+        loop
+        :autoplay="{ delay: 3000, disableOnInteraction: false }"
+        effect="fade"
+        class="rounded-lg overflow-hidden"
+    >
+      <SwiperSlide v-for="slide in slides" :key="slide.text">
+      <div class="bg-yellow-200 p-4 mt-2 rounded">
+        <p class="text-gray-600">{{ slide.text }}</p>
+        <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">
+          {{ slide.btnText }}
+        </button>
+      </div>
+    </SwiperSlide>
+    </Swiper>
   </section>
 
   <!-- Allergy Exclusion Message -->
@@ -173,24 +200,40 @@ onMounted(() => {
   </section>
 
   <!-- Product List Section -->
-  <section class="p-4 grid grid-cols-2 gap-4">
-    <div v-for="item in serverData.ProductList" :key="item.pno">
-      <div class="border rounded p-4 text-center">
-        <div class="flex justify-between">
-          <span class="text-gray-500">NEW</span>
-          <span class="bg-yellow-500 text-white text-sm px-2 rounded">1+1</span>
-        </div>
+  <section class="p-4 grid grid-cols-2 gap-6">
+    <div
+        v-for="item in serverData.ProductList"
+        :key="item.pno"
+        class="border rounded-2xl p-4 text-center flex flex-col items-center"
+    >
+      <!-- NEW 및 1+1 표시 -->
+      <div class="flex justify-between items-center w-full mb-3">
+      <span class="text-gray-500 text-sm font-medium bg-gray-100 px-2 py-1 rounded-full">
+        NEW
+      </span>
+        <span class="bg-yellow-500 text-white text-sm px-2 py-1 rounded-full">
+        1+1
+      </span>
+      </div>
 
-        <RouterLink :to="`/product/list/${item.pno}`" class="btn btn-success">
+      <!-- 상품 이미지 -->
+      <RouterLink :to="`/product/list/${item.pno}`" class="block">
+        <div class="w-full h-40 flex items-center justify-center bg-white rounded-md">
           <img
               :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
               :alt="item.ptitle_ko"
-              class="w-full h-32 object-contain"
+              class="max-h-full max-w-full object-contain"
           />
-        </RouterLink>
-        <p class="mt-2 text-gray-700">{{ localePtitle(item) }}</p>
-        <p class="mt-2 text-orange-500 font-semibold">{{ item.price }}₩</p>
-      </div>
+        </div>
+      </RouterLink>
+
+      <!-- 상품 제목 -->
+      <p class="mt-4 text-gray-800 font-medium text-base h-10 flex items-center justify-center">
+        {{ localePtitle(item) }}
+      </p>
+
+      <!-- 상품 가격 -->
+      <p class="mt-2 text-orange-500 font-bold text-lg">{{ item.price }}₩</p>
     </div>
   </section>
 
