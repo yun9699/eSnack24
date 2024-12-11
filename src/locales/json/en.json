@@ -361,10 +361,10 @@
   },
 
   "allergyReportList": {
-    "allergyReportListHeader": "Allergy Report List",
+    "allergyReportListHeader": "Allergen Reporting Status",
     "buttons": {
       "reportProduct": "Report Product",
-      "registerAllergyRequest": "Register Allergy Request",
+      "registerAllergyRequest": "Allergen Reporting",
       "loadMoreAllergyReports": "Load More"
     },
     "loadingAllergyReports": "Loading...",
@@ -429,12 +429,12 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "Product Request List",
+    "productReportListHeader": "Product Request Status",
     "answered": "Replied",
     "pending_answer": "Waiting",
     "buttons": {
       "reportAllergy": "Report Allergy",
-      "registerProductRequest": "Register Product Request",
+      "registerProductRequest": "Product Request",
       "loadMoreProductReports": "Load More"
     },
     "loadingProductReports": "Loading...",

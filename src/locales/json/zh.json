@@ -356,10 +356,10 @@
   },
 
   "allergyReportList": {
-    "allergyReportListHeader": "过敏报告列表",
+    "allergyReportListHeader": "过敏原申报现状",
     "buttons": {
       "reportProduct": "举报商品",
-      "registerAllergyRequest": "注册过敏请求",
+      "registerAllergyRequest": "过敏原申报",
       "loadMoreAllergyReports": "加载更多"
     },
     "loadingAllergyReports": "加载中...",
@@ -424,12 +424,12 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "产品请求列表",
+    "productReportListHeader": "产品请求现状",
     "answered": "已回复",
     "pending_answer": "待回复",
     "buttons": {
       "reportAllergy": "报告过敏",
-      "registerProductRequest": "注册商品请求",
+      "registerProductRequest": "产品请求",
       "loadMoreProductReports": "加载更多"
     },
     "loadingProductReports": "加载中...",
