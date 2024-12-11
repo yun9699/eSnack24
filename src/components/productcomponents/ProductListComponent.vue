@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
 import { onMounted, ref } from "vue";
 import { getFilterList, getList } from "../../api/productAPI/productAPI.ts";
 import { IProduct } from "../../types/productTypes.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {useI18n} from "vue-i18n";
 import {localeProduct} from "../../locales/localeProduct.ts";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper-bundle.css';
+import {Autoplay, EffectFade, Pagination} from "swiper/modules";
 
 const { t } = useI18n()
 const { localePtitle } = localeProduct()
@@ -143,22 +144,28 @@ onMounted(() => {
 <!--    </div>-->
 <!--  </section>-->
   <section class="p-4 bg-gray-100 text-center">
+
     <Swiper
-        spaceBetween="30"
-        :slidesPerView="1"
-        loop
-        :autoplay="true"
-        :effect="'slide'"
+        :modules="[Autoplay, Pagination, EffectFade]"
+        :space-between="3"
+        :slides-per-view="1"
+        :centered-slides="false"
+        :loop="true"
+        :autoplay="{
+      delay: 1000,
+      disableOnInteraction: false
+    }"
+        effect="slide"
         class="rounded-lg overflow-hidden"
     >
-    <SwiperSlide v-for="(slide, index) in slides" :key="index">
-      <div class="bg-yellow-200 p-4 mt-2 rounded">
-        <p class="text-gray-600">{{ slide.text }}</p>
-        <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">
-          {{ slide.btnText }}
-        </button>
-      </div>
-    </SwiperSlide>
+      <SwiperSlide v-for="slide in slides" :key="slide.text">
+        <div class="bg-yellow-200 p-4 mt-2 rounded">
+          <p class="text-gray-600">{{ slide.text }}</p>
+          <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">
+            {{ slide.btnText }}
+          </button>
+        </div>
+      </SwiperSlide>
     </Swiper>
   </section>
 
