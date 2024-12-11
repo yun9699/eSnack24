@@ -85,18 +85,14 @@ onMounted(() => {
         <!-- 더보기 버튼 -->
         <div class="text-center mt-6">
           <router-link :to="`/order/detail/${order.ono}`">
-            <button v-if="order.orderItems.length <= 3" class="bg-[#F9BB00] text-white flex items-center justify-center w-full py-3 px-5 rounded-lg hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition duration-300 shadow-md">
+            <!-- 주문 상품 목록 버튼 -->
+            <button v-if="order.orderItems.length <= 3" class="w-full text-sm py-3 px-6 rounded-md border border-[#F9BB00]" :style="{ backgroundColor: 'white', color: '#F9BB00' }">
               {{ t('UserOrderList.view_product_details') }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
             </button>
 
-            <button v-else class="bg-[#F9BB00] text-white flex items-center justify-center w-full py-3 px-5 rounded-lg hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition duration-300 shadow-md">
+            <button v-else class="w-full text-sm py-3 px-6 rounded-md border border-[#F9BB00]" :style="{ backgroundColor: 'white', color: '#F9BB00' }">
               {{ t('UserOrderList.etc') }} {{ order.orderItems.length - 3 }}{{ t('UserOrderList.view_all_products') }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
+
             </button>
           </router-link>
         </div>
