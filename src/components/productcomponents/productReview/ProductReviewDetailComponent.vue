@@ -101,7 +101,7 @@ onMounted(() => {
         </div>
 
         <div>
-          <p class="text-gray-700">{{ t('reviewDetail.reviewDetailLabels.content') }} : {{ review.rcontent }}</p>
+          <p class="text-gray-700">{{ review.rcontent }}</p>
         </div>
 
         <div class="text-xs text-gray-500">

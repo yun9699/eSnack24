@@ -14,11 +14,35 @@ const size = ref(10);
 const loading = ref(false);
 const hasMore = ref(true);
 
+const averageRating = ref(0); // 평균 별점
+const starDistribution = ref([0, 0, 0, 0, 0]); // 별점 분포
+
 const router = useRouter();
 const route = useRoute();
 const pno = ref<number>(null);
 const userStore = useUserStore();
 const uno = userStore.getUno;
+
+const calculateStarStatistics = () => {
+  const totalReviews = reviews.value.length;
+
+  if (totalReviews === 0) {
+    averageRating.value = 0;
+    starDistribution.value = [0, 0, 0, 0, 0];
+    return;
+  }
+
+  let totalStars = 0;
+  const distribution = [0, 0, 0, 0, 0];
+
+  reviews.value.forEach((review) => {
+    totalStars += review.rstar;
+    distribution[review.rstar - 1]++;
+  });
+
+  averageRating.value = (totalStars / totalReviews).toFixed(1);
+  starDistribution.value = distribution.map((count) => ((count / totalReviews) * 100).toFixed(1));
+};
 
 const fetchReviews = async () => {
   if (!pno.value) {
@@ -35,6 +59,8 @@ const fetchReviews = async () => {
     if (data.list.length < size.value) {
       hasMore.value = false;
     }
+
+    calculateStarStatistics(); // 별점 통계 계산
   } catch (error) {
     console.error("리뷰를 가져오는 중 오류 발생:", error);
   } finally {
@@ -84,6 +110,26 @@ onMounted(() => {
     </h1>
     <div class="w-24 h-1 bg-yellow-500 mx-auto rounded mb-8"></div>
 
+    <!-- 별점 통계 -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+      <div class="flex justify-center items-center mb-4">
+        <p class="text-4xl font-extrabold text-yellow-500 mr-2">{{ averageRating }}</p>
+        <p class="text-gray-600 text-lg">/ 5</p>
+      </div>
+      <div class="space-y-2">
+        <div v-for="(percentage, index) in starDistribution" :key="index" class="flex items-center">
+          <p class="w-8 text-gray-700 text-sm">{{ index + 1 }} ★</p>
+          <div class="w-full h-2 bg-gray-200 rounded-lg relative">
+            <div
+                class="absolute top-0 left-0 h-2 bg-yellow-500 rounded-lg"
+                :style="{ width: `${percentage}%` }"
+            ></div>
+          </div>
+          <p class="w-12 text-sm text-gray-500 text-right ml-2">{{ percentage }}%</p>
+        </div>
+      </div>
+    </div>
+
     <!-- 버튼 -->
     <div class="flex justify-center space-x-4 mb-8">
       <button
@@ -93,15 +139,12 @@ onMounted(() => {
         {{ t('reviewList.buttons.registerReview') }}
       </button>
 
-      <!-- 상세로 돌아가기 버튼 -->
       <button
           @click="goToProductDetailPage"
           class="px-6 py-3 bg-white text-yellow-500 border border-yellow-500 font-semibold rounded-lg shadow-md hover:bg-yellow-500 hover:text-white hover:border-yellow-500 transition"
       >
         {{ t('reviewList.buttons.goToProductDetail') }}
       </button>
-
-
     </div>
 
     <!-- 로딩 상태 -->
@@ -145,7 +188,7 @@ onMounted(() => {
               </p>
             </div>
           </div>
-          <p class="text-gray-700 mt-4">{{ t('reviewList.reviewLabels.content') }} : {{ review.rcontent }}</p>
+          <p class="text-gray-700 mt-4">{{ review.rcontent }}</p>
           <p class="text-xs text-gray-500 mt-4">
             {{ t('reviewList.reviewLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}
           </p>

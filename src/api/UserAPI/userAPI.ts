@@ -68,6 +68,8 @@ export const readUser = async () => {
 
     const res = await jwtAxios.get(`${host}/login/read/${uno}`);
 
+    console.log(res);
+
     return res.data;
 }
 
