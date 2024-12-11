@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
-import { getmainList } from "../../api/productAPI/productAPI.ts"
+import { onMounted, ref } from 'vue'
+import {getmainList} from "../../api/productAPI/productAPI.ts"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n";
 import { IProduct, localeProduct } from "../../locales/localeProduct"
@@ -8,6 +8,8 @@ import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import 'swiper/swiper-bundle.css';
 import { getFAQList } from "../../api/csAPI/faqAPI.ts";
+import {ISwiper} from "../../types/commonTypes.ts";
+import {getMainPageSwiper} from "../../api/swiperAPI.ts";
 
 const { t } = useI18n()
 const { localePtitle } = localeProduct()
@@ -17,15 +19,9 @@ const router = useRouter()
 // 상품 리스트 및 페이지 인덱스 관리
 const ProductPopularList = ref<IProduct[]>([])
 
-const slides = [
-  { text: "1", imageURL: "/public/MainSWiper1.jpg" },
-  { text: "2", imageURL: "/public/MainSwiper2.png" },
-  { text: "3", imageURL: "/public/MainSwiper3.jpg" },
-  { text: "4", imageURL: "/public/MainSwiper7.png" },
-  { text: "5", imageURL: "/public/MainSwiper8.jpg" },
-];
-
 const faqList = ref([])
+
+const mainSwipers = ref<ISwiper[]>([]);
 
 // 상품 데이터를 불러오는 함수
 const loadProductList = async (page) => {
@@ -49,6 +45,13 @@ const handleClickDetail = (pno) => {
 onMounted(() => {
   loadProductList(1)
   loadFaqList(1, 3, "product")
+
+  getMainPageSwiper().then((res) => {
+
+    console.log(res);
+
+    mainSwipers.value = res
+  })
 })
 
 const handleClikeMove = () => {
@@ -67,9 +70,11 @@ const handleClikeMove = () => {
         effect="slide"
         class="rounded-lg overflow-hidden"
     >
-      <SwiperSlide v-for="slide in slides" :key="slide.text">
+      <SwiperSlide v-for="slide in mainSwipers" :key="slide.swno">
         <div class="relative">
-          <img :src="slide.imageURL" alt="배너 이미지" class="w-full h-auto object-cover rounded-lg" />
+          <img :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/swiper/${slide.swfilename}`"
+               alt="배너 이미지"
+               class="w-full h-auto object-cover rounded-lg" />
         </div>
       </SwiperSlide>
     </Swiper>

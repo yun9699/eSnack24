@@ -2,12 +2,14 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 import { onMounted, ref } from "vue";
-import { getFilterList, getList } from "../../api/productAPI/productAPI.ts";
+import {getFilterList, getList} from "../../api/productAPI/productAPI.ts";
 import { IProduct } from "../../types/productTypes.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {useI18n} from "vue-i18n";
 import {localeProduct} from "../../locales/localeProduct.ts";
 import {Autoplay, EffectFade, Pagination} from "swiper/modules";
+import {ISwiper} from "../../types/commonTypes.ts";
+import {getListPageSwiper} from "../../api/swiperAPI.ts";
 
 const { t } = useI18n()
 const { localePtitle } = localeProduct()
@@ -15,12 +17,6 @@ const { localePtitle } = localeProduct()
 const user = useUserStore();
 const uno: number = user.getUno;
 const userano: number = user.getPersonalAllergies;
-
-const slides = [
-  { text: "1", imageURL: "/public/listSwiper1.png" },
-  { text: "2", imageURL: "/public/listSwiper2.png" },
-  { text: "3", imageURL: "/public/listSwiper3.png" },
-];
 
 const serverData = ref<{ ProductList: IProduct[] }>({
   ProductList: [],
@@ -31,6 +27,8 @@ let endPageNum: number = 1;
 
 // 제외 상태 관리
 const isAllergyExcluded = ref(false);
+
+const listSwipers = ref<ISwiper[]>([]);
 
 // 알러지 제외 문구 관리
 const allergyMessage = ref("");
@@ -116,6 +114,14 @@ const handleAllergyReset = () => {
 
 // 컴포넌트 마운트 시 실행
 onMounted(() => {
+
+  getListPageSwiper().then((res) => {
+
+    console.log(res);
+
+    listSwipers.value = res;
+  })
+
   getList(pageNum).then((res) => {
     serverData.value.ProductList = res.list;
     endPageNum = res.endPage;
@@ -142,10 +148,12 @@ onMounted(() => {
         effect="slide"
         class="rounded-lg overflow-hidden"
     >
-      <SwiperSlide v-for="slide in slides" :key="slide.text">
+      <SwiperSlide v-for="slide in listSwipers" :key="slide.swno">
         <div class="relative">
           <!-- 이미지 표시 -->
-          <img :src="slide.imageURL" alt="배너 이미지" class="w-full h-auto object-cover rounded-lg" />
+          <img :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/swiper/${slide.swfilename}`"
+               alt="배너 이미지"
+               class="w-full h-auto object-cover rounded-lg" />
         </div>
       </SwiperSlide>
     </Swiper>

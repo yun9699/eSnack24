@@ -55,8 +55,3 @@ export const fetchProductTitleAPI = async (pno: number): Promise<IProduct> => {
         throw new Error("상품 정보를 불러오는 중 오류가 발생했습니다.");
     }
 };
-
-
-
-
-
