@@ -26,22 +26,24 @@ const moveToCart = () => {
 <template>
   <div v-if="props.isModalStatus" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
     <!-- 모달 컨텐츠 -->
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-auto relative">
+    <div class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm mx-auto relative">
       <!-- 닫기 버튼 -->
       <button
-          class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl"
+          class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl transition-transform transform hover:scale-110"
           @click="props.modalClose"
       >
-      ×
+        ×
       </button>
 
       <!-- 모달 내용 -->
-      <p class="text-center text-gray-800 text-lg font-semibold mb-4">장바구니에 담았습니다.</p>
+      <p class="text-center text-gray-900 text-xl font-semibold mb-6">
+        장바구니에 담았습니다.
+      </p>
 
       <!-- 장바구니로 이동 버튼 -->
-      <div class="flex justify-center mt-6">
+      <div class="flex justify-center">
         <button
-            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring focus:ring-blue-500"
+            class="px-6 py-3 bg-[#F9BB00] text-white text-base font-medium rounded-full hover:bg-[#D89C00] transition duration-200 shadow-md focus:outline-none focus:ring focus:ring-[#F9BB00]/50"
             @click="moveToCart"
         >
           장바구니로 이동
@@ -49,6 +51,7 @@ const moveToCart = () => {
       </div>
     </div>
   </div>
+
 </template>
 
 <style scoped>
