@@ -1,12 +1,14 @@
-
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import {useRoute, useRouter} from "vue-router";
-import {Review} from "../../../types/reviewTypes.ts";
-import {getUserReviewList} from "../../../api/reviewAPI/userReviewAPI.ts";
-import {useI18n} from "vue-i18n";
+import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { Review } from "../../../types/reviewTypes.ts";
+import { getUserReviewList } from "../../../api/reviewAPI/userReviewAPI.ts";
+import { fetchProductTitleAPI } from "../../../api/productAPI/productAPI.ts";
+import { localeProduct } from "../../../locales/localeProduct.ts";
+import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+const { localePtitle } = localeProduct();
 
 const reviews = ref<Review[]>([]);
 const page = ref(1);
@@ -14,14 +16,23 @@ const size = ref(10);
 const loading = ref(false);
 const hasMore = ref(true);
 
-const router = useRouter()
+const productDataMap = ref<Record<number, any>>({}); // pno와 상품 데이터 매핑
+const router = useRouter();
 const route = useRoute();
 const uno = ref<number>(null);
 
+// 상품명 번역된 값 가져오기
+const translatedProductTitles = computed(() => {
+  const titles: Record<number, string> = {};
+  Object.keys(productDataMap.value).forEach((pno) => {
+    const product = productDataMap.value[Number(pno)];
+    titles[Number(pno)] = localePtitle(product);
+  });
+  return titles;
+});
 
-
+// 리뷰 가져오기
 const fetchReviews = async () => {
-  console.log(uno.value)
   if (!uno.value) {
     console.error("uno 값이 없습니다.");
     return;
@@ -37,9 +48,16 @@ const fetchReviews = async () => {
       hasMore.value = false;
     }
 
-    console.log("현재 리뷰 개수:", reviews.value.length);
-    console.log("hasMore 상태:", hasMore.value);
-
+    // 리뷰 목록에서 상품명 가져오기
+    const uniquePnos = [...new Set(data.list.map((review) => review.pno))];
+    await Promise.all(
+        uniquePnos.map(async (pno) => {
+          if (!productDataMap.value[pno]) {
+            const product = await fetchProductTitleAPI(pno);
+            productDataMap.value[pno] = product; // 상품 데이터 저장
+          }
+        })
+    );
   } catch (error) {
     console.error("리뷰를 가져오는 중 오류 발생:", error);
   } finally {
@@ -67,7 +85,6 @@ onMounted(() => {
   uno.value = Number(route.params.uno);
   fetchReviews();
 });
-
 </script>
 
 <template>
@@ -109,14 +126,8 @@ onMounted(() => {
                 </span>
               </p>
               <h3 class="text-lg font-semibold text-gray-700">
-                {{ t('user_reviewList.userReviewLabels.productNumber') }} : {{ review.pno }}
+                {{ translatedProductTitles[review.pno] }}
               </h3>
-              <p class="text-sm text-gray-600">
-                {{ t('user_reviewList.userReviewLabels.reviewNumber') }} : {{ review.rno }}
-              </p>
-              <p class="text-sm text-gray-600">
-                {{ t('user_reviewList.userReviewLabels.userNumber') }} : {{ review.uno }}
-              </p>
             </div>
           </div>
           <p class="text-gray-700 mt-4">
@@ -142,5 +153,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-

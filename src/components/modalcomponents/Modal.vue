@@ -1,63 +1,36 @@
+<script setup lang="ts">
+import { ref, defineProps, defineEmits } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
+// Props 정의
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+// Emits 정의
+const emit = defineEmits(["update:visible"]);
+
+// 모달 닫기 함수
+const closeModal = () => {
+  emit("update:visible", false);
+};
+</script>
+
 <template>
-  <div v-if="visible" class="modal-overlay" @click="closeModal">
-    <div class="modal-content" @click.stop>
+  <div v-if="visible" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" @click="closeModal">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-3xl max-h-[80%] overflow-y-auto relative" @click.stop>
       <slot></slot>
-      <button class="modal-close" @click="closeModal">닫기</button>
+      <div class="flex justify-end mt-4">
+        <button class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-500 transition" @click="closeModal">
+          {{ t('modal.closeButton') }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  props: {
-    visible: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  methods: {
-    closeModal() {
-      this.$emit('update:visible', false);
-    },
-  },
-};
-</script>
-
-<style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 90%;
-  max-height: 80%;
-  overflow-y: auto;
-}
-
-.modal-close {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.modal-close:hover {
-  background-color: #0056b3;
-}
-</style>

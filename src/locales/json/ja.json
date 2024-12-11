@@ -247,10 +247,10 @@
   "photo": {
     "cameraHeader": "カメラ",
     "toggleButton": {
-      "on": "カメラを消す",
-      "off": "カメラをつける"
+      "on": "きどう",
+      "off": "ていし"
     },
-    "switchCameraButton": "カメラを切り替える",
+    "switchCameraButton": "きりかえ",
     "takePhotoButton": "写真を撮る",
     "modal": {
       "title": "類似商品検索結果",
@@ -491,5 +491,14 @@
       "editProductReportDetail": "編集",
       "goBackToProductReportList": "リストに戻る"
     }
+  },
+  "modal": {
+    "closeButton" : "閉じる"
+  },
+  "allergyWarning": {
+    "warningContent": "アレルギーが含まれています",
+    "okContent": "安全に食べられる商品",
+    "noneContent": "情報なし"
   }
+
 }

@@ -1,16 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import {ref, onMounted, watch} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ReviewRegister } from "../../../types/reviewTypes.ts";
-import {submitReviewAPI, uploadBase64ImageAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
-import {fetchProductTitleAPI} from "../../../api/productAPI/productAPI.ts";
-import {useI18n} from "vue-i18n";
+import { submitReviewAPI, uploadBase64ImageAPI } from "../../../api/reviewAPI/productReviewAPI.ts";
+import { fetchProductTitleAPI } from "../../../api/productAPI/productAPI.ts";
+import { localeProduct } from "../../../locales/localeProduct.ts";
+import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+
+const { t, locale } = useI18n();
+const { localePtitle } = localeProduct();
 
 const uno = ref<number | null>(null);
 const pno = ref<number | null>(null);
-const productTitle = ref("");
+const productData = ref(null); // 전체 상품 데이터 저장
+const productTitle = ref(""); // 번역된 상품명
 const rating = ref(0);
 const reviewText = ref("");
 const selectedImageFile = ref<File | null>(null);
@@ -23,9 +27,11 @@ const route = useRoute();
 const fetchProductTitle = async () => {
   if (!pno.value) return;
   try {
-    productTitle.value = await fetchProductTitleAPI(pno.value);
+    const product = await fetchProductTitleAPI(pno.value);
+    productData.value = product; // 상품 데이터 저장
+    productTitle.value = localePtitle(product); // 번역된 상품명 설정
   } catch (error) {
-    console.log(error.message);
+    console.error("Error fetching product title:", error.message);
   }
 };
 
@@ -50,7 +56,7 @@ const submitReview = async () => {
     try {
       imageUrl = await uploadBase64ImageAPI(selectedImageFile.value);
     } catch (error) {
-      console.log(error.message);
+      console.error("Error uploading image:", error.message);
       return;
     }
   }
@@ -75,12 +81,22 @@ const submitReview = async () => {
 
     await router.push(`/review/list/${pno.value}`);
   } catch (error) {
-    console.log(error.message);
+    console.error("Error submitting review:", error.message);
   } finally {
     submitting.value = false;
   }
 };
 
+const updateProductTitle = () => {
+  if (productData.value) {
+    productTitle.value = localePtitle(productData.value); // 현재 언어에 맞는 번역된 상품명 설정
+  }
+};
+
+// 언어 변경 감지 및 상품명 업데이트
+watch(locale, () => {
+  updateProductTitle(); // 언어 변경 시 번역된 상품명 업데이트
+});
 
 onMounted(() => {
   uno.value = Number(route.params.uno);
@@ -98,11 +114,11 @@ onMounted(() => {
       </h2>
     </div>
 
-    <!-- 상품 번호 -->
+    <!-- 상품 이름 -->
     <div class="mb-6">
-      <p class="text-gray-600 text-lg font-medium">
-        <strong>{{ t('reviewRegister.labels.reviewProductNumber') }}:</strong> {{ pno }}
-      </p>
+      <h2 class="text-gray-600 text-2xl font-bold">
+        {{ productTitle }}
+      </h2>
     </div>
 
     <!-- 이미지 업로드 -->

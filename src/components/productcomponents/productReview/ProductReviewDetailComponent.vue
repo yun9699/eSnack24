@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ReviewDetail } from "../../../types/reviewTypes";
 import { fetchReviewDetailAPI } from "../../../api/reviewAPI/productReviewAPI";
+import { fetchProductTitleAPI } from "../../../api/productAPI/productAPI.ts";
+import { localeProduct } from "../../../locales/localeProduct.ts";
 import useUserStore from "../../../stores/useUserStore.ts";
-import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+const { t, locale } = useI18n(); // locale 추가
+const { localePtitle } = localeProduct();
 
 const route = useRoute();
 const router = useRouter();
 const rno = ref<number | null>(null);
+const pno = ref<number | null>(null);
 const review = ref<ReviewDetail | null>(null);
+const product = ref(null); // 상품 데이터 저장
+const productTitle = ref<string>(""); // 번역된 상품명 저장
 const loading = ref(false);
 
 const userStore = useUserStore();
@@ -32,11 +38,26 @@ const fetchReviewDetail = async () => {
 
   loading.value = true;
   try {
-    review.value = await fetchReviewDetailAPI(rno.value);
+    const reviewData = await fetchReviewDetailAPI(rno.value);
+    review.value = reviewData;
+
+    // 리뷰 데이터에서 pno 추출 및 상품 정보 가져오기
+    if (reviewData.pno) {
+      pno.value = reviewData.pno; // pno 값 설정
+      product.value = await fetchProductTitleAPI(pno.value); // 상품 데이터 가져오기
+      updateProductTitle(); // 초기 번역된 상품명 설정
+    }
   } catch (error: any) {
-    console.log(error.message);
+    console.error("Error fetching review detail:", error.message);
   } finally {
     loading.value = false;
+  }
+};
+
+// 번역된 상품명 업데이트 함수
+const updateProductTitle = () => {
+  if (product.value) {
+    productTitle.value = localePtitle(product.value); // 번역된 상품명 설정
   }
 };
 
@@ -48,6 +69,7 @@ const goToEditPage = () => {
   }
 };
 
+// 리스트 페이지로 이동
 const goToListPage = () => {
   const unoParam = route.query.uno;
   if (unoParam) {
@@ -59,6 +81,10 @@ const goToListPage = () => {
   }
 };
 
+// 언어 변경 감지 및 상품명 업데이트
+watch(locale, () => {
+  updateProductTitle(); // 언어 변경 시 번역된 상품명 업데이트
+});
 
 onMounted(() => {
   rno.value = Number(route.params.rno);
@@ -66,22 +92,17 @@ onMounted(() => {
 });
 </script>
 
-
-
-
 <template>
   <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
-
-
-    <div v-if="loading" class="text-center text-gray-500">{{ t('reviewDetail.loadingReviewDetail') }}</div>
+    <div v-if="loading" class="text-center text-gray-500">
+      {{ t('reviewDetail.loadingReviewDetail') }}
+    </div>
     <div v-else>
       <div v-if="review" class="space-y-4">
+        <!-- 번역된 상품명 표시 -->
         <div>
-          <h2 class="text-lg font-semibold text-gray-700">{{ t('reviewDetail.reviewDetailLabels.productNumber') }} : {{ review.pno }}</h2>
-          <p class="text-sm text-gray-600">{{ t('reviewDetail.reviewDetailLabels.reviewNumber') }} : {{ review.rno }}</p>
-          <p class="text-sm text-gray-600">{{ t('reviewDetail.reviewDetailLabels.userNumber') }} : {{ review.uno }}</p>
+          <h2 class="text-xl font-bold text-gray-800">{{ productTitle }}</h2>
         </div>
-
         <div>
           <img
               v-if="review.rimage"
@@ -89,7 +110,9 @@ onMounted(() => {
               :alt="t('reviewDetail.reviewDetailLabels.image')"
               class="w-48 h-auto border rounded-lg"
           />
-          <p v-else class="text-sm text-gray-400">{{ t('reviewDetail.reviewDetailLabels.noImage') }}</p>
+          <p v-else class="text-sm text-gray-400">
+            {{ t('reviewDetail.reviewDetailLabels.noImage') }}
+          </p>
         </div>
 
         <div>
@@ -105,12 +128,20 @@ onMounted(() => {
         </div>
 
         <div class="text-xs text-gray-500">
-          <p>{{ t('reviewDetail.reviewDetailLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}</p>
-          <p>{{ t('reviewDetail.reviewDetailLabels.modificationDate') }} : {{ formatDate(review.rmodDate) }}</p>
+          <p>
+            {{ t('reviewDetail.reviewDetailLabels.registrationDate') }} :
+            {{ formatDate(review.rregDate) }}
+          </p>
+          <p>
+            {{ t('reviewDetail.reviewDetailLabels.modificationDate') }} :
+            {{ formatDate(review.rmodDate) }}
+          </p>
         </div>
       </div>
 
-      <div v-else class="text-center text-gray-400 py-6">{{ t('reviewDetail.reviewDetailLabels.noReviewDetails') }}</div>
+      <div v-else class="text-center text-gray-400 py-6">
+        {{ t('reviewDetail.reviewDetailLabels.noReviewDetails') }}
+      </div>
     </div>
 
     <div class="flex justify-center gap-4 mt-8">
@@ -131,8 +162,5 @@ onMounted(() => {
         {{ t('reviewDetail.buttons.goBackToReviewList') }}
       </button>
     </div>
-
-
   </div>
 </template>
-

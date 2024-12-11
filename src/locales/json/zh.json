@@ -246,10 +246,10 @@
   "photo": {
     "cameraHeader": "相机",
     "toggleButton": {
-      "on": "关闭相机",
-      "off": "打开相机"
+      "on": "打开",
+      "off": "关闭"
     },
-    "switchCameraButton": "切换相机",
+    "switchCameraButton": "切换",
     "takePhotoButton": "拍照",
     "modal": {
       "title": "相似商品搜索结果",
@@ -486,5 +486,14 @@
       "editProductReportDetail": "编辑",
       "goBackToProductReportList": "返回列表"
     }
+  },
+  "modal": {
+    "closeButton" : "关闭"
+  },
+  "allergyWarning": {
+    "warningContent": "含有过敏原",
+    "okContent": "可以安全食用",
+    "noneContent": "无信息"
   }
+
 }

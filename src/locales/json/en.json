@@ -247,10 +247,10 @@
   "photo": {
     "cameraHeader": "Camera",
     "toggleButton": {
-      "on": "Turn Off Camera",
-      "off": "Turn On Camera"
+      "on": "Turn Off",
+      "off": "Turn On"
     },
-    "switchCameraButton": "Switch Camera",
+    "switchCameraButton": "Switch",
     "takePhotoButton": "Take Photo",
     "modal": {
       "title": "Similar Product Search Results",
@@ -491,6 +491,15 @@
       "editProductReportDetail": "Edit",
       "goBackToProductReportList": "Back to List"
     }
+  },
+  "modal": {
+    "closeButton" : "close"
+  },
+  "allergyWarning": {
+    "warningContent": "Contains allergens",
+    "okContent": "Safe to consume",
+    "noneContent": "No information available"
   }
+
 
 }
