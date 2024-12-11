@@ -26,7 +26,17 @@ const handleMoveReview = (pno:number) => {
 
 onMounted(() => {
   detailOrder(Number(route.params.ono)).then((data) => {
-    orderItems.value = data;
+
+    // 주문 항목에 번역을 위한 필드 추가
+    const translatedData = data.map(item => ({
+      ...item,
+      ptitle_ko: item.ptitle_ko,
+      ptitle_en: item.ptitle_en,
+      ptitle_ja: item.ptitle_ja,
+      ptitle_zh: item.ptitle_zh
+    }));
+
+    orderItems.value = translatedData;
   })
 })
 </script>
@@ -67,8 +77,8 @@ onMounted(() => {
                 class="w-20 h-20 object-cover rounded"
             />
             <div class="flex-1">
-              <h3 class="text-sm mt-1">{{ item.ptitle_ko }}</h3>
-              <div class="mt-1 text-sm">{{ item.price }}{{ t('order_detail.currency') }} </div>
+              <h3 class="text-sm mt-1">{{ localePtitle(item) }}</h3>
+              <div class="mt-1 text-sm">{{ item.price }} ₩</div>
               <div class="mt-2 flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                   <span class="text-sm">{{ t('order_detail.quantity') }}: {{ item.oiqty }}{{ t('order_detail.unit') }} </span>
