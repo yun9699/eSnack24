@@ -229,10 +229,17 @@
     "help_center": "Customer Support"
   },
   "order_detail": {
-    "page_title": "Order Details",
+    "page_title": "Order Detail",
     "quantity": "Quantity",
     "total_amount": "Total Amount",
-    "go_home": "Return to Home"
+    "go_home": "Go Home",
+    "order_number": "Order Number",
+    "order_date": "Order Date",
+    "confirm_purchase": "Confirm Purchase",
+    "order_details": "View Order Details",
+    "currency": "KRW",
+    "unit": "Unit",
+    "write_review": "Write a Review"
   },
 
   "photo": {

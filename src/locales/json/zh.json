@@ -231,7 +231,14 @@
     "page_title": "订单详情",
     "quantity": "数量",
     "total_amount": "总金额",
-    "go_home": "返回首页"
+    "go_home": "返回首页",
+    "order_number": "订单号",
+    "order_date": "订单日期",
+    "confirm_purchase": "确认购买",
+    "order_details": "查看订单详情",
+    "currency": "元",
+    "unit": "个",
+    "write_review": "写评论"
   },
 
   "photo": {
