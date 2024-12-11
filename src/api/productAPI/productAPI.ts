@@ -1,6 +1,9 @@
 import axios from "axios";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const host = `${import.meta.env.VITE_API_HOST}/product`;
+
+const uno = useUserStore().getUno;
 
 
 export const getmainList = async ( page:number = 1, size:number = 10) => {
@@ -23,9 +26,11 @@ export const getList = async ( page:number = 1, size:number = 10) => {
 
 }
 
-export const getFilterList = async ( uno:number = 0, page:number = 1, size:number = 10) => {
+export const getFilterList = async (page: number) => {
 
-    const res = await axios.get(`${host}/list/filter?uno=${uno}&page=${page}&size=${size}`)
+    const pageValue = (Number)(page || 1)
+
+    const res = await axios.get(`${host}/list/filter?uno=${uno}&page=${pageValue}`)
 
     return res.data
 }
