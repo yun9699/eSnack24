@@ -120,7 +120,7 @@ onMounted(() => {
             </div>
           </div>
           <p class="text-gray-700 mt-4">
-            {{ t('user_reviewList.userReviewLabels.content') }} : {{ review.rcontent }}
+            {{ review.rcontent }}
           </p>
           <p class="text-xs text-gray-500 mt-4">
             {{ t('user_reviewList.userReviewLabels.registrationDate') }} : {{ formatDate(review.rregDate) }}

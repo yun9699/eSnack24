@@ -139,42 +139,48 @@ onMounted(() => {
 });
 </script>
 
-
 <template>
-  <div class="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
-    <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold text-gray-800">{{ t('reviewEdit.Header') }}</h1>
+  <div class="max-w-2xl mx-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg shadow-lg">
+    <!-- 헤더 -->
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-extrabold text-gray-700">{{ t('reviewEdit.Header') }}</h1>
     </div>
 
-    <div>
+    <!-- 이미지 업로드 섹션 -->
+    <div class="mb-6">
       <label class="block text-sm font-medium text-gray-700">{{ t('reviewEdit.labels.reviewImage') }}</label>
-      <div class="mt-2 space-y-2">
+      <div class="mt-4 flex flex-col items-center space-y-4">
         <img
             v-if="selectedImageBlob"
             :src="selectedImageBlob"
             alt="New Preview Image"
-            class="w-48 h-auto border rounded-lg"
+            class="w-48 h-auto border rounded-lg shadow-md"
         />
         <img
             v-else-if="currentImageUrl && !selectedImageBlob"
             :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/review/${currentImageUrl}`"
             alt="Current Image"
-            class="w-48 h-auto border rounded-lg"
+            class="w-48 h-auto border rounded-lg shadow-md"
         />
-        <p v-else class="text-sm text-gray-400">{{ t('reviewEdit.labels.noImage') }}</p>
-
+        <p v-else class="text-sm text-gray-500">{{ t('reviewEdit.labels.noImage') }}</p>
       </div>
-      <input type="file" @change="handleImageChange" class="mt-2 w-full p-2 border rounded-lg" />
+      <input
+          type="file"
+          @change="handleImageChange"
+          class="mt-4 w-full p-3 border rounded-lg shadow-md focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+      />
     </div>
 
-    <div v-if="review" class="space-y-4">
+    <!-- 리뷰 수정 폼 -->
+    <div v-if="review" class="space-y-6">
+      <!-- 별점 -->
       <div>
         <label class="block text-sm font-medium text-gray-700">{{ t('reviewEdit.labels.rating') }}</label>
-        <div class="flex space-x-1 mt-2">
+        <div class="flex space-x-1 mt-2 justify-center">
           <span
               v-for="star in 5"
               :key="star"
-              class="cursor-pointer text-3xl"
+              class="cursor-pointer text-4xl transition-colors duration-200"
               :class="{ 'text-yellow-500': star <= rstar, 'text-gray-300': star > rstar }"
               @click="setStar(star)"
           >
@@ -183,31 +189,38 @@ onMounted(() => {
         </div>
       </div>
 
+      <!-- 리뷰 내용 -->
       <div>
         <label class="block text-sm font-medium text-gray-700">{{ t('reviewEdit.labels.reviewContent') }}</label>
         <textarea
             v-model="rcontent"
-            rows="4"
-            class="w-full mt-1 p-2 border rounded-lg"
+            rows="5"
+            class="w-full mt-2 p-3 border rounded-lg shadow-md focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+            :placeholder="t('reviewEdit.labels.reviewContentPlaceholder')"
         ></textarea>
       </div>
 
-      <button
-          :disabled="submitting"
-          @click="editReview"
-          class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
-      >
-        {{ submitting ? t('reviewEdit.buttons.editReview.loading') : t('reviewEdit.buttons.editReview.default') }}
-      </button>
-      <button
-          @click="deleteReview"
-          class="px-4 py-2 text-sm text-red-600 bg-red-200 rounded-lg hover:bg-red-300 disabled:opacity-50"
-          :disabled="submitting"
-      >
-        {{ t('reviewEdit.buttons.deleteReview') }}
-      </button>
+      <!-- 버튼 섹션 -->
+      <div class="flex justify-end gap-4 mt-4">
+        <button
+            :disabled="submitting"
+            @click="editReview"
+            class="w-full py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition disabled:opacity-50"
+        >
+          {{ submitting ? t('reviewEdit.buttons.editReview.loading') : t('reviewEdit.buttons.editReview.default') }}
+        </button>
+        <button
+            @click="deleteReview"
+            :disabled="submitting"
+            class="w-full py-3 bg-red-500 text-white font-bold rounded-lg shadow-md hover:bg-red-600 transition disabled:opacity-50"
+        >
+          {{ t('reviewEdit.buttons.deleteReview') }}
+        </button>
+      </div>
     </div>
 
-    <div v-else class="text-center text-gray-400 py-6">{{ t('reviewEdit.labels.loadingReviewData') }}</div>
+    <div v-else class="text-center text-gray-500 py-6">
+      {{ t('reviewEdit.labels.loadingReviewData') }}
+    </div>
   </div>
 </template>
