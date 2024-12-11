@@ -180,35 +180,33 @@ onMounted(() => {
       </div>
 
       <!-- 알러지 정보 -->
-      <div class="text-center mb-6 mt-2"> <!-- mt-2 추가 -->
-        <div class="flex items-center whitespace-nowrap">
+      <div class="text-center mb-6 mt-2">
+        <div class="flex items-center flex-wrap"> <!-- flex-wrap 추가 -->
           <h2 class="text-lg font-bold text-gray-800 mb-0 mr-2">{{ t('pDetail.allergy_info') }} :</h2>
-          <p class="text-base text-gray-700 mb-0 flex flex-wrap">
+          <p class="text-base text-gray-700 mb-0">
             <span v-if="productRef.productDetail.atitle_ko.length === 0" class="text-gray-500">{{ t('pDetail.none') }}</span>
             <span v-else>
-            <span
-                v-for="(allergy, index) in productRef.productDetail.atitle_ko"
-                :key="index"
-                :class="{
-                'text-red-600 font-bold': mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]),
-                'text-gray-800': !mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index])
-              }"
-                class="inline-block"
-            >
-              {{ localeAtitle({
-              ano: productRef.productDetail.product.ano[index],
-              atitle_ko: allergy,
-              atitle_en: productRef.productDetail.atitle_en?.[index],
-              atitle_ja: productRef.productDetail.atitle_ja?.[index],
-              atitle_zh: productRef.productDetail.atitle_zh?.[index]
-            }) }}
-              <span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
-            </span>
-          </span>
+        <span
+            v-for="(allergy, index) in productRef.productDetail.atitle_ko"
+            :key="index"
+            :class="{
+            'text-red-600 font-bold': mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index]),
+            'text-gray-800': !mappedProducts.some((item) => item.ano === productRef.productDetail.product.ano[index])
+          }"
+            class="inline-block"
+        >
+          {{ localeAtitle({
+          ano: productRef.productDetail.product.ano[index],
+          atitle_ko: allergy,
+          atitle_en: productRef.productDetail.atitle_en?.[index],
+          atitle_ja: productRef.productDetail.atitle_ja?.[index],
+          atitle_zh: productRef.productDetail.atitle_zh?.[index]
+        }) }}
+          <span v-if="index < productRef.productDetail.atitle_ko.length - 1">, </span>
+        </span>
+      </span>
           </p>
         </div>
-
-
 
         <!-- 사용자 알러지 경고 -->
         <div v-if="hasAllergy" class="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
@@ -217,6 +215,7 @@ onMounted(() => {
           </p>
         </div>
       </div>
+
 
       <!-- 버튼 -->
       <div class="flex justify-center gap-4 mb-4">
@@ -236,6 +235,15 @@ onMounted(() => {
           {{ t('pDetail.buy') }}
         </button>
       </div>
+
+      <!-- 제품 컨텐츠 영역 스타일링 -->
+      <div class="w-full bg-white p-6 rounded-xl shadow-lg mt-6 border border-gray-100">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ t('pDetail.product_description') }}</h2>
+        <p class="text-lg text-gray-700 leading-relaxed break-words">
+          {{ localePcontent(productRef.productDetail.product) }}
+        </p>
+      </div>
+
     </div>
     <CommonCartAddModalComponent
         v-if="isModalStatus"
