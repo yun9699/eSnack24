@@ -4,12 +4,25 @@ import { onMounted, ref } from "vue";
 import { detailOrder } from "../../api/orderapi/OrderAPI.ts";
 import { IOrderItem } from "../../types/orderTypes.ts";
 import { useI18n } from "vue-i18n";
+import {localeProduct} from "../../locales/localeProduct.ts";
+import useUserStore from "../../stores/useUserStore.ts";
 
 const route = useRoute();
 const router = useRouter();
+const userStore = useUserStore();
 const { t } = useI18n();
+const { localePtitle } = localeProduct()
 
+const uno = userStore.getUno;
 const orderItems = ref<IOrderItem[]>([]);
+
+//http://localhost:5173/review/9/294
+const handleMoveReview = (pno:number) => {
+
+  console.log("uno:",uno);
+  console.log("pno:",pno)
+  router.push(`/review/${uno}/${pno}`);
+}
 
 onMounted(() => {
   detailOrder(Number(route.params.ono)).then((data) => {
@@ -22,11 +35,13 @@ onMounted(() => {
 
   <div class="bg-gray-50 min-h-screen">
     <!-- 주문 상세 헤더 -->
+    <div class="flex items-center p-4 bg-white border-b shadow-sm">
+      <div class="flex-1 text-center text-lg font-medium text-gray-800">{{ t('order_detail.page_title') }}</div>
+    </div>
     <div v-if="orderItems.length > 0" class="p-4 bg-white border-b">
-      <div class="text-lg">주문 상세</div>
       <div class="flex space-x-4 mt-2 text-sm justify-between">
-        <div class="text-gray-500">주문번호: {{ orderItems[0].ono }}번</div>
-        <div>주문날짜: {{ orderItems[0].oregdate.slice(0, 10) }}</div>
+        <div class="text-gray-500 text-lg font-bold">{{ t('order_detail.order_number') }} {{ orderItems[0].ono }}</div>
+        <div>{{ t('order_detail.order_date') }}  {{ orderItems[0].oregdate.slice(0, 10) }}</div>
       </div>
     </div>
 
@@ -38,9 +53,9 @@ onMounted(() => {
         <div class="bg-white p-4">
           <!-- 구매확정 상태 -->
           <div class="flex justify-between items-center mb-3">
-            <span class="text-sm text-blue-500">구매확정</span>
+            <span class="text-sm text-blue-500">{{ t('order_detail.confirm_purchase') }} </span>
             <div class="flex space-x-2">
-              <button class="text-sm text-gray-500">주문내역확인</button>
+              <button class="text-sm text-gray-500">{{ t('order_detail.order_details') }} </button>
             </div>
           </div>
 
@@ -53,10 +68,10 @@ onMounted(() => {
             />
             <div class="flex-1">
               <h3 class="text-sm mt-1">{{ item.ptitle_ko }}</h3>
-              <div class="mt-1 text-sm">{{ item.price }}원</div>
+              <div class="mt-1 text-sm">{{ item.price }}{{ t('order_detail.currency') }} </div>
               <div class="mt-2 flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                  <span class="text-sm">수량: {{ item.oiqty }}개</span>
+                  <span class="text-sm">{{ t('order_detail.quantity') }}: {{ item.oiqty }}{{ t('order_detail.unit') }} </span>
                 </div>
               </div>
             </div>
@@ -68,8 +83,9 @@ onMounted(() => {
           <button
               class="w-full text-sm py-3 px-6 rounded-md border border-[#F9BB00]"
               :style="{ backgroundColor: 'white', color: '#F9BB00' }"
+              @click="handleMoveReview(item.pno)"
           >
-            리뷰쓰기
+            {{ t('order_detail.write_review') }}
           </button>
         </div>
       </div>
