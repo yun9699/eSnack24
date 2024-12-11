@@ -267,7 +267,7 @@
     "labels": {
       "reviewProductNumber": "商品番号",
       "imageUpload": "画像アップロード（オプション）",
-      "productExperience": "この商品はいかがでしたか？（商品名",
+      "productExperience": "この商品はいかがでしたか？（商品名)",
       "positiveFeedback": "どんな点が良かったですか？",
       "reviewPlaceholder": "レビューを入力（必須）"
     },

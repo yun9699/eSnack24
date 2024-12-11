@@ -267,7 +267,7 @@
     "labels": {
       "reviewProductNumber": "Product Number",
       "imageUpload": "Image Upload (Optional)",
-      "productExperience": "How was this product? (Product Name",
+      "productExperience": "How was this product? (Product Name)",
       "positiveFeedback": "What did you like about it?",
       "reviewPlaceholder": "Enter review (Required)"
     },

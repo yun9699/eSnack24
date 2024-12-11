@@ -265,7 +265,7 @@
     "labels": {
       "reviewProductNumber": "商品编号",
       "imageUpload": "上传图片（可选）",
-      "productExperience": "这个商品怎么样？（商品名",
+      "productExperience": "这个商品怎么样？（商品名)",
       "positiveFeedback": "您喜欢哪些方面？",
       "reviewPlaceholder": "输入评价（必填）"
     },

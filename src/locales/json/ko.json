@@ -248,7 +248,7 @@
     "labels": {
       "reviewProductNumber": "상품 번호",
       "imageUpload": "이미지 업로드 (선택사항)",
-      "productExperience": "이 상품 어떠셨나요? (상품명",
+      "productExperience": "이 상품 어떠셨나요? (상품명)",
       "positiveFeedback": "어떤 점이 좋았나요?",
       "reviewPlaceholder": "후기 입력(필수)"
     },
