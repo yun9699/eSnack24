@@ -457,6 +457,16 @@
     "editProductReportDetail": "수정",
     "goBackToProductReportList": "리스트로 돌아가기"
     }
+  },
+
+  "modal": {
+    "closeButton" : "닫기"
+  },
+
+  "allergyWarning": {
+    "warningContent" : "알러지 포함 상품",
+    "okContent" : "먹을 수 있는 상품",
+    "noneContent" : "정보 없음"
   }
 
 }

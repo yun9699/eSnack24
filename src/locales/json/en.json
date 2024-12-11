@@ -479,6 +479,15 @@
       "editProductReportDetail": "Edit",
       "goBackToProductReportList": "Back to List"
     }
+  },
+  "modal": {
+    "closeButton" : "close"
+  },
+  "allergyWarning": {
+    "warningContent": "Contains allergens",
+    "okContent": "Safe to consume",
+    "noneContent": "No information available"
   }
+
 
 }

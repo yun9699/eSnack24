@@ -479,5 +479,14 @@
       "editProductReportDetail": "編集",
       "goBackToProductReportList": "リストに戻る"
     }
+  },
+  "modal": {
+    "closeButton" : "閉じる"
+  },
+  "allergyWarning": {
+    "warningContent": "アレルギーが含まれています",
+    "okContent": "安全に食べられる商品",
+    "noneContent": "情報なし"
   }
+
 }

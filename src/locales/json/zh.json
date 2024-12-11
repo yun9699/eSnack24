@@ -474,5 +474,14 @@
       "editProductReportDetail": "编辑",
       "goBackToProductReportList": "返回列表"
     }
+  },
+  "modal": {
+    "closeButton" : "关闭"
+  },
+  "allergyWarning": {
+    "warningContent": "含有过敏原",
+    "okContent": "可以安全食用",
+    "noneContent": "无信息"
   }
+
 }
