@@ -190,7 +190,10 @@
     "phone_placeholder": "010-1234-5678",
     "edit_allergy": "나의 알레르기 정보 수정",
     "save_button": "저장하기",
-    "confirm_message": "등록"
+    "confirm_message": "등록",
+    "allergy_change": "알레르기 변경",
+    "person_allergy_change": "본인의 알레르기 정보를 변경해주세요."
+
   },
   "order_confirmation": {
     "title": "주문 확인",
