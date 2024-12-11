@@ -101,9 +101,9 @@ onMounted(() => {
       </button>
       <button
           class="px-8 py-2 rounded-full text-lg font-medium border border-gray-300 text-gray-600"
-          @click="$router.push('/request/product/list')"
+          @click="$router.push('/request/allergy/list')"
       >
-        {{ t('FAQList.report') }}
+        {{ t('common.report') }}
       </button>
     </div>
 

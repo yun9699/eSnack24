@@ -4,7 +4,8 @@
     "prev": "前へ",
     "next": "次へ",
     "register": "登録",
-    "date_format": "年-月-日"
+    "date_format": "年-月-日",
+    "report": "届出"
   },
 
   "login": {
@@ -266,7 +267,7 @@
     "labels": {
       "reviewProductNumber": "商品番号",
       "imageUpload": "画像アップロード（オプション）",
-      "productExperience": "この商品はいかがでしたか？（商品名",
+      "productExperience": "この商品はいかがでしたか？（商品名)",
       "positiveFeedback": "どんな点が良かったですか？",
       "reviewPlaceholder": "レビューを入力（必須）"
     },
@@ -367,10 +368,10 @@
   },
 
   "allergyReportList": {
-    "allergyReportListHeader": "アレルギー報告リスト",
+    "allergyReportListHeader": "アレルギー申告状況",
     "buttons": {
       "reportProduct": "商品を報告",
-      "registerAllergyRequest": "アレルギー要求を登録",
+      "registerAllergyRequest": "アレルギー申告",
       "loadMoreAllergyReports": "さらに読み込む"
     },
     "loadingAllergyReports": "読み込み中...",
@@ -435,10 +436,12 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "商品報告リスト",
+    "productReportListHeader": "商品リクエスト状況",
+    "answered": "回答済み",
+    "pending_answer": "回答待ち",
     "buttons": {
       "reportAllergy": "アレルギーを報告",
-      "registerProductRequest": "商品要求を登録",
+      "registerProductRequest": "商品リクエスト",
       "loadMoreProductReports": "さらに読み込む"
     },
     "loadingProductReports": "読み込み中...",

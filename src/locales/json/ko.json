@@ -4,7 +4,8 @@
     "prev": "이전",
     "next": "다음",
     "register": "가입",
-    "date_format": "연도-월-일"
+    "date_format": "연도-월-일",
+    "report": "신고"
   },
   "login": {
     "register_title": "회원가입",
@@ -247,7 +248,7 @@
     "labels": {
       "reviewProductNumber": "상품 번호",
       "imageUpload": "이미지 업로드 (선택사항)",
-      "productExperience": "이 상품 어떠셨나요? (상품명",
+      "productExperience": "이 상품 어떠셨나요? (상품명)",
       "positiveFeedback": "어떤 점이 좋았나요?",
       "reviewPlaceholder": "후기 입력(필수)"
     },
@@ -345,10 +346,10 @@
   },
 
   "allergyReportList": {
-  "allergyReportListHeader": "알러지 신고 리스트",
+  "allergyReportListHeader": "알레르기 신고 현황",
   "buttons": {
     "reportProduct": "상품 신고",
-    "registerAllergyRequest": "알러지 요청 등록",
+    "registerAllergyRequest": "알레르기 신고",
     "loadMoreAllergyReports": "더 보기"
   },
   "loadingAllergyReports": "로딩 중...",
@@ -413,10 +414,12 @@
   },
 
   "productReportList": {
-  "productReportListHeader": "상품 신고 리스트",
+  "productReportListHeader": "상품 요청 현황",
+    "answered": "답변완료",
+    "pending_answer": "답변대기",
   "buttons": {
     "reportAllergy": "알러지 신고",
-    "registerProductRequest": "상품 요청 등록",
+    "registerProductRequest": "상품 요청",
     "loadMoreProductReports": "더 보기"
   },
   "loadingProductReports": "로딩 중...",
