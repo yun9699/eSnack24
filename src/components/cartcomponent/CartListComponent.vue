@@ -3,6 +3,7 @@ import {onMounted, ref, computed} from 'vue';
 import {clearCart, decCartItem, deleteCartItem, getCartList, incCartItem} from "../../api/cartapi/cartapi.ts";
 import { ICartItem } from "../../types/cartTypes.ts";
 import {createOrder} from "../../api/orderapi/OrderAPI.ts";
+import {getCartAddress} from "../../api/UserAPI/userAPI.ts";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n";
 import { Icon } from '@iconify/vue';
@@ -18,6 +19,12 @@ const initCartItem: ICartItem = {
   pfilename: '',
   ciqty: 0
 };
+
+const address = ref({
+  zipcode: '',
+  address_line1: '',
+  address_line2: ''
+});
 
 const router = useRouter();
 const { t } = useI18n();
@@ -116,17 +123,25 @@ const handleClickPay = () => {
   });
 };
 
-onMounted(() => {
-  getCartList(pageNum.value).then((res) => {
-    data.value = res.list;
-    endPageNum.value = res.endPage;
-    totalItems.value = res.total;
+onMounted(async () => {
+  try {
+    // 장바구니 데이터 로드
+    const cartRes = await getCartList(pageNum.value);
+    data.value = cartRes.list;
+    endPageNum.value = cartRes.endPage;
+    totalItems.value = cartRes.total;
 
     // 모든 상품의 cino를 체크된 상태로 초기화
-    if (res.list && res.list.length > 0) {
-      checkedItems.value = res.list.map(item => item.cino);
+    if (cartRes.list && cartRes.list.length > 0) {
+      checkedItems.value = cartRes.list.map(item => item.cino);
     }
-  });
+
+    // 배송지 정보 로드
+    const addressData = await getCartAddress();
+    address.value = addressData;
+  } catch (error) {
+    console.error('데이터 로딩 실패:', error);
+  }
 });
 
 </script>
@@ -142,9 +157,9 @@ onMounted(() => {
 
     <!-- 배송지 정보 -->
     <div class="flex items-center p-4 bg-gray-50 rounded mb-4">
-      <span class="mr-2">📍</span>
+      <span class="mr-2"><Icon icon="mingcute:location-3-line" width="24" height="24" /></span>
       <div class="text-sm">
-        [46643] 부산 해운대구 APEC로 17 리더스파크빌딩 4층
+        [{{ address.zipcode }}] {{ address.address_line1 }} {{ address.address_line2 }}
       </div>
     </div>
 

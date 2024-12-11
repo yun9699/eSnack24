@@ -24,8 +24,11 @@
   const isCheckModalOpen = ref<boolean>(false)
   const allergyList = ref<IUserAllergy[]>([]);
   const selectedAnos = ref<number[]>([]);
+  const isAllergyOpen = ref<boolean>(false);
 
   const userStore = useUserStore();
+
+
 
   // 알레르기 항목 선택/해제 토글 함수
   const toggleSelection = (ano: number) => {
@@ -46,6 +49,8 @@
   const handleClickEdit = () => {
 
     isCheckModalOpen.value = true
+    userStore.setUserName(user.value.username);
+
   }
 
   const editFn = () => {
@@ -59,6 +64,7 @@
     readUser().then((data) => {
 
       user.value = data;
+      console.log(user.value);
 
       const fullDate = user.value.ubirth;
       const formattedDate = ref(fullDate.split("T")[0]);
@@ -87,37 +93,36 @@
       @closeModal="isCheckModalOpen = false"
   />
 
-  <div class="flex flex-col items-center min-h-screen bg-gray-100 py-8 px-4">
-    <!-- 사용자 정보 수정 카드 -->
-    <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6 mb-6">
-      <!-- 타이틀 -->
-      <h1 class="text-3xl font-semibold text-gray-800 text-center mb-8">
-        {{ t('edit_user.title') }}
-      </h1>
+  <div class="w-full max-w-md mx-auto p-4">
+    <!-- Profile Image and Name -->
+    <div class="flex flex-col items-center mb-6">
+      <div class="w-24 h-24 bg-gray-200 rounded-full mb-2">
+        <div class="w-full h-full flex items-center justify-center text-gray-400">
+          <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+      <h2 class="text-xl font-medium text-gray-900">{{ user.username }}</h2>
+    </div>
 
-      <!-- 이름 입력 -->
-      <div class="mb-6">
-        <label for="name" class="block text-sm font-medium text-gray-600 mb-2">
-          {{ t('edit_user.name_label') }}
-        </label>
+    <!-- Personal Info Section -->
+    <div class="mb-6 space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('edit_user.name_label') }}</label>
         <input
-            id="name"
             v-model="user.username"
             type="text"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             :placeholder="t('edit_user.name_placeholder')"
-        />
+        >
       </div>
 
-      <!-- 성별 선택 -->
-      <div class="mb-6">
-        <label for="gender" class="block text-sm font-medium text-gray-600 mb-2">
-          {{ t('edit_user.gender_label') }}
-        </label>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('edit_user.gender_label') }}</label>
         <select
-            id="gender"
             v-model="user.ugender"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
         >
           <option value="male">{{ t('edit_user.male') }}</option>
           <option value="female">{{ t('edit_user.female') }}</option>
@@ -125,67 +130,82 @@
         </select>
       </div>
 
-      <!-- 생일 입력 -->
-      <div class="mb-6">
-        <label for="birthDate" class="block text-sm font-medium text-gray-600 mb-2">
-          {{ t('edit_user.birth_label') }}
-        </label>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('edit_user.birth_label') }}</label>
         <input
-            id="birthDate"
             v-model="user.ubirth"
             type="date"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-        />
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+        >
       </div>
 
-      <!-- 전화번호 입력 -->
-      <div class="mb-6">
-        <label for="phone" class="block text-sm font-medium text-gray-600 mb-2">
-          {{ t('edit_user.phone_label') }}
-        </label>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('edit_user.phone_label') }}</label>
         <input
-            id="phone"
             v-model="user.ucallnumber"
             type="tel"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             :placeholder="t('edit_user.phone_placeholder')"
-        />
+        >
       </div>
     </div>
 
-    <!-- 알레르기 정보 수정 카드 -->
-    <div class="w-full max-w-lg bg-white rounded-lg shadow-lg p-6 mb-6">
-      <!-- 타이틀 -->
-      <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
-        {{ t('edit_user.edit_allergy') }}
-      </h2>
-
-      <!-- 알레르기 목록 그리드 -->
-      <ul class="grid grid-cols-2 gap-4">
-        <li v-for="item in allergyList" :key="item.ano" class="flex justify-center">
-          <!-- 알레르기 선택 버튼 -->
-          <button
-              class="w-36 h-12 rounded-lg shadow-sm font-medium transition-colors duration-200"
-              :class="{
-            'bg-gradient-to-r from-red-400 to-pink-500 text-white': selectedAnos.includes(item.ano),
-            'bg-gray-200 text-gray-700': !selectedAnos.includes(item.ano)
-          }"
-              @click="toggleSelection(item.ano)"
+    <!-- Allergy Information Section -->
+    <div class="mb-6">
+      <div class="bg-white rounded-lg shadow-sm">
+        <button
+            class="w-full flex items-center p-4 hover:bg-gray-50"
+            @click="isAllergyOpen = !isAllergyOpen"
+        >
+          <div class="flex items-center flex-1 relative">
+            <div class="absolute left-0 w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full mr-3">
+              <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="pl-14">
+              <h3 class="text-base font-medium text-gray-900">{{ t('edit_user.allergy_change') }}</h3>
+              <p class="text-sm text-gray-500">{{ t('edit_user.person_allergy_change') }}</p>
+            </div>
+          </div>
+          <svg
+              class="w-5 h-5 text-gray-400 transform transition-transform duration-200"
+              :class="{ 'rotate-90': isAllergyOpen }"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
           >
-            {{ localeAtitle(item) }}
-          </button>
-        </li>
-      </ul>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <div v-if="isAllergyOpen" class="p-4 border-t">
+          <div class="grid grid-cols-2 gap-3">
+            <button
+                v-for="item in allergyList"
+                :key="item.ano"
+                @click="toggleSelection(item.ano)"
+                class="p-3 rounded-lg text-sm font-medium transition-colors duration-200"
+                :class="selectedAnos.includes(item.ano)
+                ? 'bg-gradient-to-r from-[#F9BB00] to-[#FFD666] text-white'
+                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'"
+            >
+              {{ localeAtitle(item) }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 저장 버튼 -->
+    <!-- Save Button -->
     <button
         @click="handleClickEdit"
-        class="w-full max-w-lg py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-200"
+        class="w-full py-3 bg-[#F9BB00] text-white font-medium rounded-lg hover:bg-[#E5AB00] transition-colors"
+
     >
       {{ t('edit_user.save_button') }}
     </button>
   </div>
-
-
 </template>
+
+

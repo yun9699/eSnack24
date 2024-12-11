@@ -208,7 +208,9 @@
     "phone_placeholder": "010-1234-5678",
     "edit_allergy": "Edit My Allergy Information",
     "save_button": "Save",
-    "confirm_message": "Register"
+    "confirm_message": "Register",
+    "allergy_change": "Allergy Change",
+    "person_allergy_change": "Please update your allergy information."
   },
 
   "order_confirmation": {

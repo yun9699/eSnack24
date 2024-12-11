@@ -42,6 +42,14 @@ export const registerAddress = async (address: IAddress) => {
     return res.data;
 }
 
+export const getCartAddress = async () => {
+
+    const res = await axios.get(`${host}/address/cart/${uno}`);
+
+    return res.data;
+}
+
+
 export const logoutUser = async () => {
 
     const res = await axios.post(`${host}/login/deleteToken`, userEmail);
@@ -59,6 +67,8 @@ export const getTossUser = async () => {
 export const readUser = async () => {
 
     const res = await jwtAxios.get(`${host}/login/read/${uno}`);
+
+    console.log(res);
 
     return res.data;
 }
