@@ -182,7 +182,9 @@
     "order_amount": "注文金額",
     "product_discount": "商品割引",
     "shipping_fee": "配送料",
-    "total_payment_amount": "総支払予定金額"
+    "total_payment_amount": "総支払予定金額",
+    "select_all": "全選択",
+    "delete_selected": "選択した項目を削除"
   },
 
   "userprofile": {

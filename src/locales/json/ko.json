@@ -166,7 +166,9 @@
     "order_amount": "주문금액",
     "product_discount": "상품할인",
     "shipping_fee": "배송비",
-    "total_payment_amount": "총 결제예정금액"
+    "total_payment_amount": "총 결제예정금액",
+    "select_all": "전체 선택",
+    "delete_selected": "선택 항목 삭제"
   },
   "userprofile": {
     "greeting": "안녕하세요, {email}님!",

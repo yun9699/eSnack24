@@ -7,6 +7,7 @@ import { IProduct } from "../../types/productTypes.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {useI18n} from "vue-i18n";
 import {localeProduct} from "../../locales/localeProduct.ts";
+import {Autoplay, EffectFade, Pagination} from "swiper/modules";
 
 const { t } = useI18n()
 const { localePtitle } = localeProduct()
@@ -16,9 +17,9 @@ const uno: number = user.getUno;
 const userano: number = user.getPersonalAllergies;
 
 const slides = [
-  { text: "첫 번째 배너 텍스트입니다.", btnText: "앱 다운로드" },
-  { text: "두 번째 배너 텍스트입니다.", btnText: "지금 확인하기" },
-  { text: "세 번째 배너 텍스트입니다.", btnText: "혜택 보기" },
+  { text: "1", imageURL: "/public/listSwiper1.png" },
+  { text: "2", imageURL: "/public/listSwiper2.png" },
+  { text: "3", imageURL: "/public/listSwiper3.png" },
 ];
 
 const serverData = ref<{ ProductList: IProduct[] }>({
@@ -126,39 +127,27 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Header Section -->
-<!--  <header class="bg-yellow-500 p-4 flex justify-between items-center">-->
-<!--    <div class="flex space-x-4">-->
-<!--      <button class="px-4 py-2 bg-yellow-600 text-white rounded">{{ t('pList.event_product') }}</button>-->
-<!--      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.differentiated_product') }}</button>-->
-<!--      <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded">{{ t('pList.fresh_product') }}</button>-->
-<!--    </div>-->
-<!--  </header>-->
 
-  <!-- Banner Section -->
-<!--  <section class="p-4 bg-gray-100 text-center">-->
-<!--    <p class="text-gray-600">{{ t('pList.header') }}</p>-->
-<!--    <div class="bg-yellow-200 p-4 mt-2 rounded">-->
-<!--      <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">{{ t('pList.app_download') }}</button>-->
-<!--    </div>-->
-<!--  </section>-->
-  <section class="p-4 bg-gray-100 text-center">
+  <section class="p-4 bg-white text-center">
     <Swiper
-        spaceBetween="30"
-        :slidesPerView="1"
-        loop
-        :autoplay="{ delay: 3000, disableOnInteraction: false }"
-        effect="fade"
+        :modules="[Autoplay, Pagination, EffectFade]"
+        :space-between="3"
+        :slides-per-view="1"
+        :centered-slides="false"
+        :loop="true"
+        :autoplay="{
+            delay: 3000,
+            disableOnInteraction: false
+          }"
+        effect="slide"
         class="rounded-lg overflow-hidden"
     >
       <SwiperSlide v-for="slide in slides" :key="slide.text">
-      <div class="bg-yellow-200 p-4 mt-2 rounded">
-        <p class="text-gray-600">{{ slide.text }}</p>
-        <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">
-          {{ slide.btnText }}
-        </button>
-      </div>
-    </SwiperSlide>
+        <div class="relative">
+          <!-- 이미지 표시 -->
+          <img :src="slide.imageURL" alt="배너 이미지" class="w-full h-auto object-cover rounded-lg" />
+        </div>
+      </SwiperSlide>
     </Swiper>
   </section>
 
