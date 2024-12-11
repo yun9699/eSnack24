@@ -19,3 +19,9 @@ export interface IPageRequest {
     arr: []
     skip: number
 }
+
+export interface ISwiper {
+
+    swno: number
+    swfilename: string
+}
