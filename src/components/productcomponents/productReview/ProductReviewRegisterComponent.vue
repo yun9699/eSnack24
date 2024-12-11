@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ReviewRegister } from "../../../types/reviewTypes.ts";
-import {uploadImageAPI, submitReviewAPI, uploadBase64ImageAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
+import {submitReviewAPI, uploadBase64ImageAPI} from "../../../api/reviewAPI/productReviewAPI.ts";
 import {fetchProductTitleAPI} from "../../../api/productAPI/productAPI.ts";
 import {useI18n} from "vue-i18n";
 
@@ -89,54 +89,73 @@ onMounted(() => {
 });
 </script>
 
-
 <template>
-  <div class="p-4 border rounded-lg">
-    <div class="flex items-center mb-4">
-      <h2 class="text-lg font-semibold">{{ t('reviewRegister.Header') }}</h2>
+  <div class="max-w-3xl mx-auto p-6 bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg shadow-lg">
+    <!-- 헤더 -->
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-3xl font-extrabold text-gray-700">
+        {{ t('reviewRegister.Header') }}
+      </h2>
     </div>
 
-    <div class="mb-4">
-<!--      <p><strong>uno:</strong> {{ uno }}</p>-->
-      <p><strong>{{ t('reviewRegister.labels.reviewProductNumber') }} :</strong> {{ pno }}</p>
+    <!-- 상품 번호 -->
+    <div class="mb-6">
+      <p class="text-gray-600 text-lg font-medium">
+        <strong>{{ t('reviewRegister.labels.reviewProductNumber') }}:</strong> {{ pno }}
+      </p>
     </div>
 
-    <div class="mb-4">
-      <p>{{ t('reviewRegister.labels.imageUpload') }}</p>
-      <input type="file" @change="handleImageChange" class="w-full p-2 border rounded-lg" />
-      <div v-if="selectedImageBlob" class="mt-2">
-        <img :src="selectedImageBlob" alt="Uploaded image" class="w-32 h-32 object-cover border rounded-lg" />
+    <!-- 이미지 업로드 -->
+    <div class="mb-6">
+      <p class="text-gray-700 font-semibold mb-2">{{ t('reviewRegister.labels.imageUpload') }}</p>
+      <input
+          type="file"
+          @change="handleImageChange"
+          class="block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+      <div v-if="selectedImageBlob" class="mt-4">
+        <img
+            :src="selectedImageBlob"
+            alt="Uploaded image"
+            class="w-32 h-32 object-cover border rounded-lg shadow-md"
+        />
       </div>
     </div>
 
-    <div class="mb-4">
-      <p>{{ t('reviewRegister.labels.productExperience') }} : {{ productTitle }})</p>
-      <div class="flex">
+    <!-- 별점 선택 -->
+    <div class="mb-6">
+      <p class="text-gray-700 font-semibold mb-2">
+        {{ t('reviewRegister.labels.productExperience') }}: <span class="text-yellow-700">{{ productTitle }}</span>
+      </p>
+      <div class="flex space-x-2">
         <span
             v-for="star in 5"
             :key="star"
             @click="rating = star"
-            class="text-yellow-500 cursor-pointer text-2xl"
+            class="text-4xl cursor-pointer transition-transform transform hover:scale-110"
+            :class="star <= rating ? 'text-yellow-500' : 'text-gray-300'"
         >
-          {{ star <= rating ? '★' : '☆' }}
+          ★
         </span>
       </div>
     </div>
 
-    <div class="mb-4">
-      <p>{{ t('reviewRegister.labels.positiveFeedback') }}</p>
+    <!-- 리뷰 텍스트 -->
+    <div class="mb-6">
+      <p class="text-gray-700 font-semibold mb-2">{{ t('reviewRegister.labels.positiveFeedback') }}</p>
       <textarea
           v-model="reviewText"
-          rows="4"
-          class="w-full p-2 border rounded-lg"
+          rows="5"
+          class="block w-full p-4 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
           :placeholder="t('reviewRegister.labels.reviewPlaceholder')"
       ></textarea>
     </div>
 
+    <!-- 제출 버튼 -->
     <button
         :disabled="submitting"
         @click="submitReview"
-        class="w-full py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 disabled:opacity-50"
+        class="w-full py-3 text-lg font-bold text-white bg-yellow-500 rounded-lg shadow hover:bg-yellow-600 transition disabled:opacity-50"
     >
       {{ submitting ? t('reviewRegister.button.reviewSubmitting') : t('reviewRegister.button.reviewSubmit') }}
     </button>
