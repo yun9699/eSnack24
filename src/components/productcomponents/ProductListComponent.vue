@@ -228,23 +228,32 @@ onMounted(() => {
 
   <div class="mt-10 m-10 text-center">
     <div v-if="isAllergyExcluded === false">
-    <button
-        @click="moreInfo()"
-        v-if="pageNum < endPageNum"
-        class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
-    >
-      {{ t('pList.more') }}
-
-    </button>
+      <button
+          @click="moreInfo()"
+          v-if="pageNum < endPageNum"
+          class="bg-[#F9BB00]
+           hover:bg-[#D99A00]
+           text-white font-medium py-3 px-8
+           rounded-lg
+           transition duration-200 ease-in-out
+           focus:outline-none focus:ring-2 focus:ring-yellow-300"
+      >
+        {{ t('pList.more') }}
+      </button>
     </div>
 
     <div v-if="isAllergyExcluded === true">
       <button
           @click="FilterInfo()"
           v-if="pageNum < endPageNum"
-          class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          class="bg-[#F9BB00]
+           hover:bg-[#D99A00]
+           text-white font-medium py-3 px-8
+           rounded-lg
+           transition duration-200 ease-in-out
+           focus:outline-none focus:ring-2 focus:ring-yellow-300"
       >
-        더보기 filter
+        {{ t('pList.more') }}
       </button>
     </div>
   </div>
