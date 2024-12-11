@@ -7,6 +7,7 @@ export interface IOrderItem {
     price: number
     oiqty: number
     total_amount: string
+    oregdate: string
 }
 
 export interface IOrder {
