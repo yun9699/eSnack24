@@ -104,7 +104,7 @@ onMounted(() => {
     <div class="flex gap-4 mt-4">
       <button
           @click="goToEditPage"
-          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          class="px-4 py-2 bg-red-400 text-white rounded-lg hover:bg-red-500"
       >
         {{ t('allergyReportDetail.allergyReportDetailButtons.editAllergyReport') }}
       </button>
