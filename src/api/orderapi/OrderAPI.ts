@@ -26,6 +26,8 @@ export const detailOrder = async (ono: number) => {
 
     const res = await axios.get(`${host}/detail/${ono}`);
 
+    console.log(res);
+
     return res.data;
 }
 
