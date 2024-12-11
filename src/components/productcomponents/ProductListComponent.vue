@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper-bundle.css';
 import { onMounted, ref } from "vue";
 import { getFilterList, getList } from "../../api/productAPI/productAPI.ts";
 import { IProduct } from "../../types/productTypes.ts";
 import useUserStore from "../../stores/useUserStore.ts";
 import {useI18n} from "vue-i18n";
 import {localeProduct} from "../../locales/localeProduct.ts";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
 
 const { t } = useI18n()
 const { localePtitle } = localeProduct()
@@ -147,11 +147,11 @@ onMounted(() => {
         spaceBetween="30"
         :slidesPerView="1"
         loop
-        :autoplay="{ delay: 3000, disableOnInteraction: false }"
-        effect="fade"
+        :autoplay="true"
+        :effect="'slide'"
         class="rounded-lg overflow-hidden"
     >
-      <SwiperSlide v-for="slide in slides" :key="slide.text">
+    <SwiperSlide v-for="(slide, index) in slides" :key="index">
       <div class="bg-yellow-200 p-4 mt-2 rounded">
         <p class="text-gray-600">{{ slide.text }}</p>
         <button class="mt-4 px-6 py-2 bg-yellow-500 text-white rounded">
