@@ -1,27 +1,48 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getReviewList } from "../../../api/reviewAPI/productReviewAPI.ts";
+import { fetchProductTitleAPI } from "../../../api/productAPI/productAPI.ts";
 import { Review } from "../../../types/reviewTypes.ts";
+import { IProduct } from "../../../types/productTypes.ts";
+import { localeProduct } from "../../../locales/localeProduct.ts";
 import useUserStore from "../../../stores/useUserStore.ts";
 import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+const { localePtitle } = localeProduct();
 
 const reviews = ref<Review[]>([]);
 const page = ref(1);
 const size = ref(10);
 const loading = ref(false);
 const hasMore = ref(true);
+const productData = ref<IProduct | null>(null);
 
 const averageRating = ref(0); // 평균 별점
 const starDistribution = ref([0, 0, 0, 0, 0]); // 별점 분포
 
 const router = useRouter();
 const route = useRoute();
-const pno = ref<number>(null);
+const pno = ref<number | null>(null);
 const userStore = useUserStore();
 const uno = userStore.getUno;
+
+// 상품명 가져오기
+const fetchProductTitle = async () => {
+  if (!pno.value) return;
+  try {
+    const product: IProduct = await fetchProductTitleAPI(pno.value);
+    productData.value = product; // 전체 상품 데이터를 저장
+  } catch (error) {
+    console.error("Error fetching product title:", error);
+  }
+};
+
+// `productTitle`을 번역된 값으로 동적으로 계산
+const productTitle = computed(() => {
+  return productData.value ? localePtitle(productData.value) : t("reviewList.noProductTitle");
+});
 
 const calculateStarStatistics = () => {
   const totalReviews = reviews.value.length;
@@ -98,6 +119,7 @@ const goToProductDetailPage = () => {
 
 onMounted(() => {
   pno.value = Number(route.params.pno);
+  fetchProductTitle();
   fetchReviews();
 });
 </script>
@@ -108,6 +130,9 @@ onMounted(() => {
     <h1 class="text-3xl font-extrabold text-gray-500 text-center mb-6">
       {{ t('reviewList.Header') }}
     </h1>
+    <div class="text-center text-xl font-bold text-yellow-600 mb-4">
+      {{ productTitle }}
+    </div>
     <div class="w-24 h-1 bg-yellow-500 mx-auto rounded mb-8"></div>
 
     <!-- 별점 통계 -->
@@ -178,14 +203,8 @@ onMounted(() => {
                 </span>
               </p>
               <h3 class="text-lg font-semibold text-gray-700">
-                {{ t('reviewList.reviewLabels.productNumber') }} : {{ review.pno }}
+                {{ productTitle }}
               </h3>
-              <p class="text-sm text-gray-600">
-                {{ t('reviewList.reviewLabels.reviewNumber') }} : {{ review.rno }}
-              </p>
-              <p class="text-sm text-gray-600">
-                {{ t('reviewList.reviewLabels.userNumber') }} : {{ review.uno }}
-              </p>
             </div>
           </div>
           <p class="text-gray-700 mt-4">{{ review.rcontent }}</p>

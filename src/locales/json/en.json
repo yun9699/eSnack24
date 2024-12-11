@@ -182,7 +182,9 @@
     "order_amount": "Order Amount",
     "product_discount": "Product Discount",
     "shipping_fee": "Shipping Fee",
-    "total_payment_amount": "Total Payment Amount"
+    "total_payment_amount": "Total Payment Amount",
+    "select_all": "Select All",
+    "delete_selected": "Delete Selected Items"
   },
 
   "userprofile": {
@@ -245,10 +247,10 @@
   "photo": {
     "cameraHeader": "Camera",
     "toggleButton": {
-      "on": "Turn Off Camera",
-      "off": "Turn On Camera"
+      "on": "Turn Off",
+      "off": "Turn On"
     },
-    "switchCameraButton": "Switch Camera",
+    "switchCameraButton": "Switch",
     "takePhotoButton": "Take Photo",
     "modal": {
       "title": "Similar Product Search Results",
@@ -489,6 +491,15 @@
       "editProductReportDetail": "Edit",
       "goBackToProductReportList": "Back to List"
     }
+  },
+  "modal": {
+    "closeButton" : "close"
+  },
+  "allergyWarning": {
+    "warningContent": "Contains allergens",
+    "okContent": "Safe to consume",
+    "noneContent": "No information available"
   }
+
 
 }

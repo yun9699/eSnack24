@@ -5,8 +5,10 @@ import { userOrder } from "../../api/orderapi/OrderAPI.ts";
 import dayjs from 'dayjs';
 import {useI18n} from "vue-i18n";
 import {IOrderDetail} from "../../types/userTypes.ts";
+import {localeProduct} from "../../locales/localeProduct.ts";
 
 const { t } = useI18n()
+const { localePtitle } = localeProduct()
 
 interface IOrderDetail {
   uno: number;
@@ -75,8 +77,8 @@ onMounted(() => {
           <div class="grid grid-cols-3 gap-4">
             <div v-for="(item) in order.orderItems.slice(0, 3)" :key="item.ptitle_ko" class="text-center">
               <img :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`" :alt="item.ptitle_ko" class="w-full h-auto rounded-lg mb-2 shadow-md" />
-              <div class="text-sm font-medium text-gray-800">{{ item.ptitle_ko }}</div>
-              <div class="text-lg font-bold text-gray-900">{{ item.price.toLocaleString() }}원</div>
+              <div class="text-sm font-medium text-gray-800">{{ localePtitle(item) }}</div>
+              <div class="text-lg font-bold text-gray-900">{{ item.price.toLocaleString() }} ₩</div>
               <div class="text-gray-600">{{ t('UserOrderList.quantity') }} {{ item.oiqty }}{{ t('UserOrderList.piece') }}</div>
             </div>
           </div>
