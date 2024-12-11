@@ -69,7 +69,7 @@ const submitRequestProduct = async () => {
     <button
         :disabled="submitting"
         @click="submitRequestProduct"
-        class="w-full py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 disabled:opacity-50"
+        class="w-full py-2 bg-gradient-to-r from-red-400 to-red-300 text-white rounded-lg hover:bg-gray-300 disabled:opacity-50"
     >
       {{ submitting
         ? t('productReport.buttons.submitProductReport.loading')
