@@ -93,27 +93,6 @@ onMounted(() => {
       </button>
     </div>
 
-    <!-- 신고 서브 탭 -->
-<!--    <div class="flex gap-4 mb-6">-->
-<!--      <button-->
-<!--          class="flex-1 py-3 rounded-full text-x font-medium border border-gray-300 text-gray-600"-->
-<!--          @click="$router.push('/request/product/list')"-->
-<!--      >-->
-<!--        {{ t('productReportList.productReportListHeader') }}-->
-<!--      </button>-->
-<!--      <button-->
-<!--          class="flex-1 py-3 rounded-full text-lg font-medium-->
-<!--                 bg-gradient-to-r from-red-400 to-red-300-->
-<!--                 text-white-->
-<!--                 hover:from-red-400 hover:to-red-300-->
-<!--                 transition-colors duration-300"-->
-<!--          :style="{ backgroundColor: '#F9BB00', color: 'white' }"-->
-<!--          @click="$router.push('/request/allergy/list')"-->
-<!--      >-->
-<!--        {{ t('allergyReportList.allergyReportListHeader') }}-->
-<!--      </button>-->
-<!--    </div>-->
-
     <div class="flex gap-4 mb-6">
       <button
           class="flex-1 py-3 rounded-full text-lg font-medium
@@ -178,12 +157,13 @@ onMounted(() => {
         <div
             v-for="allergy in requestAllergy"
             :key="allergy.cano"
-            class="border-b border-gray-200"
+            class="border-b border-gray-200 cursor-pointer"
+            @click="goToDetail(allergy.cano)"
         >
-          <button
-              class="w-full flex items-center py-4 hover:text-yellow-600 transition-colors"
-              @click="toggleAllergyDetail(allergy.cano)"
-          >
+        <button
+            class="w-full flex items-center py-4 hover:text-yellow-600 transition-colors"
+            @click.stop="toggleAllergyDetail(allergy.cano)"
+        >
             <div class="flex items-start gap-3 flex-1">
               <span
                   class="px-2 py-1 text-sm rounded-full"

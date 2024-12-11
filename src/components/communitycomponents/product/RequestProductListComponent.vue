@@ -92,26 +92,6 @@ onMounted(() => {
       </button>
     </div>
 
-    <!-- 신고 서브 탭 -->
-<!--    <div class="flex gap-4 mb-6">-->
-<!--      <button-->
-<!--          class="flex-1 py-3 rounded-full text-lg font-medium-->
-<!--                 bg-gradient-to-r from-red-400 to-red-300-->
-<!--                 text-white-->
-<!--                 hover:from-red-400 hover:to-red-300-->
-<!--                 transition-colors duration-300"-->
-<!--          @click="$router.push('/request/product/list')"-->
-<!--      >-->
-<!--        {{ t('productReportList.productReportListHeader') }}-->
-<!--      </button>-->
-<!--      <button-->
-<!--          class="flex-1 py-3 rounded-full text-lg font-medium border border-gray-300 text-gray-600"-->
-<!--          @click="$router.push('/request/allergy/list')"-->
-<!--      >-->
-<!--        {{ t('allergyReportList.allergyReportListHeader') }}-->
-<!--      </button>-->
-<!--    </div>-->
-
     <div class="flex gap-4 mb-6">
       <button
           class="flex-1 py-3 rounded-full text-lg font-medium border border-gray-300 text-gray-600"
@@ -175,19 +155,20 @@ onMounted(() => {
         <div
             v-for="product in requestProduct"
             :key="product.cpno"
-            class="border-b border-gray-200"
+            class="border-b border-gray-200 cursor-pointer"
+            @click="goToDetail(product.cpno)"
         >
           <button
               class="w-full flex items-center py-4 hover:text-yellow-600 transition-colors"
-              @click="toggleProductDetail(product.cpno)"
+              @click.stop="toggleProductDetail(product.cpno)"
           >
             <div class="flex items-start gap-3 flex-1">
-              <span
-                  class="px-2 py-1 text-sm rounded-full"
-                  :class="product.cpanswer ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'"
-              >
+            <span
+                class="px-2 py-1 text-sm rounded-full"
+                :class="product.cpanswer ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'"
+            >
                 {{ product.cpanswer ? t('productReportList.answered') : t('productReportList.pending_answer') }}
-              </span>
+            </span>
               <span class="text-left">{{ product.cptitle }}</span>
             </div>
             <Icon
