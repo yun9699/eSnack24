@@ -209,7 +209,6 @@ onMounted(async () => {
           <div class="flex justify-between mb-2">
             <div>
               <p class="font-medium">{{ item.ptitle_ko }}</p>
-              <p class="text-sm text-gray-500">최고판매가 {{ item.price.toLocaleString() }} ₩</p>
             </div>
             <div class="flex gap-2">
               <button @click="deleteItem(item.cino)" class="text-gray-500 hover:text-red-500 transition-colors">

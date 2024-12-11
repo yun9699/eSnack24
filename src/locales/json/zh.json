@@ -4,7 +4,8 @@
     "prev": "上一步",
     "next": "下一步",
     "register": "注册",
-    "date_format": "年-月-日"
+    "date_format": "年-月-日",
+    "report": "申报"
   },
 
   "login": {
@@ -423,7 +424,9 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "商品报告列表",
+    "productReportListHeader": "产品请求列表",
+    "answered": "已回复",
+    "pending_answer": "待回复",
     "buttons": {
       "reportAllergy": "报告过敏",
       "registerProductRequest": "注册商品请求",

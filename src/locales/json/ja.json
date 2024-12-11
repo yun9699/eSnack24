@@ -4,7 +4,8 @@
     "prev": "前へ",
     "next": "次へ",
     "register": "登録",
-    "date_format": "年-月-日"
+    "date_format": "年-月-日",
+    "report": "届出"
   },
 
   "login": {
@@ -428,7 +429,9 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "商品報告リスト",
+    "productReportListHeader": "商品リクエストリスト",
+    "answered": "回答済み",
+    "pending_answer": "回答待ち",
     "buttons": {
       "reportAllergy": "アレルギーを報告",
       "registerProductRequest": "商品要求を登録",

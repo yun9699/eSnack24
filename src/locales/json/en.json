@@ -4,7 +4,8 @@
     "prev": "Previous",
     "next": "Next",
     "register": "Register",
-    "date_format": "Year-Month-Day"
+    "date_format": "Year-Month-Day",
+    "report": "Report"
   },
 
   "login": {
@@ -428,7 +429,9 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "Product Report List",
+    "productReportListHeader": "Product Request List",
+    "answered": "Replied",
+    "pending_answer": "Waiting",
     "buttons": {
       "reportAllergy": "Report Allergy",
       "registerProductRequest": "Register Product Request",
