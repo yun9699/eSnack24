@@ -235,10 +235,10 @@
   "photo": {
     "cameraHeader": "Camera",
     "toggleButton": {
-      "on": "Turn Off Camera",
-      "off": "Turn On Camera"
+      "on": "Turn Off",
+      "off": "Turn On"
     },
-    "switchCameraButton": "Switch Camera",
+    "switchCameraButton": "Switch",
     "takePhotoButton": "Take Photo",
     "modal": {
       "title": "Similar Product Search Results",

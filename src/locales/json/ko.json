@@ -216,10 +216,10 @@
   "photo": {
     "cameraHeader": "카메라",
     "toggleButton": {
-      "on": "카메라 끄기",
-      "off": "카메라 켜기"
+      "on": "끄기",
+      "off": "켜기"
     },
-    "switchCameraButton": "카메라 전환",
+    "switchCameraButton": "전환",
     "takePhotoButton": "사진 찍기",
     "modal": {
       "title": "유사 상품 검색 결과",

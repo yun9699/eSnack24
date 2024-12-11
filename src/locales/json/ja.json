@@ -235,10 +235,10 @@
   "photo": {
     "cameraHeader": "カメラ",
     "toggleButton": {
-      "on": "カメラを消す",
-      "off": "カメラをつける"
+      "on": "きどう",
+      "off": "ていし"
     },
-    "switchCameraButton": "カメラを切り替える",
+    "switchCameraButton": "きりかえ",
     "takePhotoButton": "写真を撮る",
     "modal": {
       "title": "類似商品検索結果",
