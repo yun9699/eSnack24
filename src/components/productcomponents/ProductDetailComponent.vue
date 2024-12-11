@@ -20,7 +20,7 @@ const router = useRouter();
 const pno: number = Number(route.params.pno);
 const user = useUserStore();
 
-const uno = user.getUno;
+const uno: number = user.getUno;
 const userano = user.getPersonalAllergies;
 
 const isModalStatus = ref(false);  // 모달 상태 관리
@@ -90,14 +90,17 @@ const mappedProducts = computed(() => {
   }).filter(Boolean);
 });
 
-const handleClickAddCart = async () => {
+const handleClickAddCart = () => {
 
   console.log("addCart");
   console.log(pno)
 
-  const res = await addCartProduct(pno,1)
+  addCartProduct(pno,1).then((res) => {
 
-  modalOpen()
+    console.log(res);
+
+    modalOpen()
+  })
 }
 
 const orderClick = () => {

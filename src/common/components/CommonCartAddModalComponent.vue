@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import useUserStore from "../../stores/useUserStore.ts";
@@ -9,7 +8,8 @@ const props = defineProps({
   modalClose:Function,
 });
 
-const user = useUserStore
+const user = useUserStore()
+
 const uno = user.getUno;
 
 const router = useRouter();
