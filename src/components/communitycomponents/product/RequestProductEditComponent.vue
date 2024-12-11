@@ -122,7 +122,7 @@ onMounted(() => {
             class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
         >
           {{ submitting
-            ? t('productReportEdit.productReportEditButtons.edit.loading')
+            ? t('productReportEdit.productReportEditButtons.edit.loading') : t('productReportEdit.productReportEditButtons.edit.default')
 }}
         </button>
 

@@ -4,7 +4,8 @@
     "prev": "Previous",
     "next": "Next",
     "register": "Register",
-    "date_format": "Year-Month-Day"
+    "date_format": "Year-Month-Day",
+    "report": "Report"
   },
 
   "login": {
@@ -181,7 +182,9 @@
     "order_amount": "Order Amount",
     "product_discount": "Product Discount",
     "shipping_fee": "Shipping Fee",
-    "total_payment_amount": "Total Payment Amount"
+    "total_payment_amount": "Total Payment Amount",
+    "select_all": "Select All",
+    "delete_selected": "Delete Selected Items"
   },
 
   "userprofile": {
@@ -228,10 +231,17 @@
     "help_center": "Customer Support"
   },
   "order_detail": {
-    "page_title": "Order Details",
+    "page_title": "Order Detail",
     "quantity": "Quantity",
     "total_amount": "Total Amount",
-    "go_home": "Return to Home"
+    "go_home": "Go Home",
+    "order_number": "Order Number",
+    "order_date": "Order Date",
+    "confirm_purchase": "Confirm Purchase",
+    "order_details": "View Order Details",
+    "currency": "KRW",
+    "unit": "Unit",
+    "write_review": "Write a Review"
   },
 
   "photo": {
@@ -259,7 +269,7 @@
     "labels": {
       "reviewProductNumber": "Product Number",
       "imageUpload": "Image Upload (Optional)",
-      "productExperience": "How was this product? (Product Name",
+      "productExperience": "How was this product? (Product Name)",
       "positiveFeedback": "What did you like about it?",
       "reviewPlaceholder": "Enter review (Required)"
     },
@@ -360,10 +370,10 @@
   },
 
   "allergyReportList": {
-    "allergyReportListHeader": "Allergy Report List",
+    "allergyReportListHeader": "Allergen Reporting Status",
     "buttons": {
       "reportProduct": "Report Product",
-      "registerAllergyRequest": "Register Allergy Request",
+      "registerAllergyRequest": "Allergen Reporting",
       "loadMoreAllergyReports": "Load More"
     },
     "loadingAllergyReports": "Loading...",
@@ -428,10 +438,12 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "Product Report List",
+    "productReportListHeader": "Product Request Status",
+    "answered": "Replied",
+    "pending_answer": "Waiting",
     "buttons": {
       "reportAllergy": "Report Allergy",
-      "registerProductRequest": "Register Product Request",
+      "registerProductRequest": "Product Request",
       "loadMoreProductReports": "Load More"
     },
     "loadingProductReports": "Loading...",

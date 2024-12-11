@@ -4,7 +4,8 @@
     "prev": "前へ",
     "next": "次へ",
     "register": "登録",
-    "date_format": "年-月-日"
+    "date_format": "年-月-日",
+    "report": "届出"
   },
 
   "login": {
@@ -181,7 +182,9 @@
     "order_amount": "注文金額",
     "product_discount": "商品割引",
     "shipping_fee": "配送料",
-    "total_payment_amount": "総支払予定金額"
+    "total_payment_amount": "総支払予定金額",
+    "select_all": "全選択",
+    "delete_selected": "選択した項目を削除"
   },
 
   "userprofile": {
@@ -230,8 +233,15 @@
   "order_detail": {
     "page_title": "注文詳細",
     "quantity": "数量",
-    "total_amount": "総額",
-    "go_home": "ホームに戻る"
+    "total_amount": "合計金額",
+    "go_home": "ホームに戻る",
+    "order_number": "注文番号",
+    "order_date": "注文日",
+    "confirm_purchase": "購入確定",
+    "order_details": "注文詳細を確認",
+    "currency": "円",
+    "unit": "個",
+    "write_review": "レビューを書く"
   },
 
   "photo": {
@@ -259,7 +269,7 @@
     "labels": {
       "reviewProductNumber": "商品番号",
       "imageUpload": "画像アップロード（オプション）",
-      "productExperience": "この商品はいかがでしたか？（商品名",
+      "productExperience": "この商品はいかがでしたか？（商品名)",
       "positiveFeedback": "どんな点が良かったですか？",
       "reviewPlaceholder": "レビューを入力（必須）"
     },
@@ -360,10 +370,10 @@
   },
 
   "allergyReportList": {
-    "allergyReportListHeader": "アレルギー報告リスト",
+    "allergyReportListHeader": "アレルギー申告状況",
     "buttons": {
       "reportProduct": "商品を報告",
-      "registerAllergyRequest": "アレルギー要求を登録",
+      "registerAllergyRequest": "アレルギー申告",
       "loadMoreAllergyReports": "さらに読み込む"
     },
     "loadingAllergyReports": "読み込み中...",
@@ -428,10 +438,12 @@
   },
 
   "productReportList": {
-    "productReportListHeader": "商品報告リスト",
+    "productReportListHeader": "商品リクエスト状況",
+    "answered": "回答済み",
+    "pending_answer": "回答待ち",
     "buttons": {
       "reportAllergy": "アレルギーを報告",
-      "registerProductRequest": "商品要求を登録",
+      "registerProductRequest": "商品リクエスト",
       "loadMoreProductReports": "さらに読み込む"
     },
     "loadingProductReports": "読み込み中...",

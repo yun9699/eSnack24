@@ -5,8 +5,10 @@ import { userOrder } from "../../api/orderapi/OrderAPI.ts";
 import dayjs from 'dayjs';
 import {useI18n} from "vue-i18n";
 import {IOrderDetail} from "../../types/userTypes.ts";
+import {localeProduct} from "../../locales/localeProduct.ts";
 
 const { t } = useI18n()
+const { localePtitle } = localeProduct()
 
 interface IOrderDetail {
   uno: number;
@@ -75,8 +77,8 @@ onMounted(() => {
           <div class="grid grid-cols-3 gap-4">
             <div v-for="(item) in order.orderItems.slice(0, 3)" :key="item.ptitle_ko" class="text-center">
               <img :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`" :alt="item.ptitle_ko" class="w-full h-auto rounded-lg mb-2 shadow-md" />
-              <div class="text-sm font-medium text-gray-800">{{ item.ptitle_ko }}</div>
-              <div class="text-lg font-bold text-gray-900">{{ item.price.toLocaleString() }}원</div>
+              <div class="text-sm font-medium text-gray-800">{{ localePtitle(item) }}</div>
+              <div class="text-lg font-bold text-gray-900">{{ item.price.toLocaleString() }} ₩</div>
               <div class="text-gray-600">{{ t('UserOrderList.quantity') }} {{ item.oiqty }}{{ t('UserOrderList.piece') }}</div>
             </div>
           </div>
@@ -85,18 +87,14 @@ onMounted(() => {
         <!-- 더보기 버튼 -->
         <div class="text-center mt-6">
           <router-link :to="`/order/detail/${order.ono}`">
-            <button v-if="order.orderItems.length <= 3" class="bg-[#F9BB00] text-white flex items-center justify-center w-full py-3 px-5 rounded-lg hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition duration-300 shadow-md">
+            <!-- 주문 상품 목록 버튼 -->
+            <button v-if="order.orderItems.length <= 3" class="w-full text-sm py-3 px-6 rounded-md border border-[#F9BB00]" :style="{ backgroundColor: 'white', color: '#F9BB00' }">
               {{ t('UserOrderList.view_product_details') }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
             </button>
 
-            <button v-else class="bg-[#F9BB00] text-white flex items-center justify-center w-full py-3 px-5 rounded-lg hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition duration-300 shadow-md">
+            <button v-else class="w-full text-sm py-3 px-6 rounded-md border border-[#F9BB00]" :style="{ backgroundColor: 'white', color: '#F9BB00' }">
               {{ t('UserOrderList.etc') }} {{ order.orderItems.length - 3 }}{{ t('UserOrderList.view_all_products') }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
+
             </button>
           </router-link>
         </div>

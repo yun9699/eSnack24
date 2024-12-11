@@ -17,4 +17,11 @@ export default defineConfig({
       },
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "path/to/swiper/swiper-bundle.min.css";`,
+      },
+    },
+  },
 })

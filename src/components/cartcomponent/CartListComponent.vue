@@ -7,6 +7,7 @@ import {getCartAddress} from "../../api/UserAPI/userAPI.ts";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n";
 import { Icon } from '@iconify/vue';
+import {localeProduct} from "../../locales/localeProduct.ts";
 
 const initCartItem: ICartItem = {
   cino: 0,
@@ -34,6 +35,7 @@ const totalItems = ref(0);
 const data = ref<ICartItem[]>([{...initCartItem}]);
 const checkedItems = ref<number[]>([]);
 const isHidden = ref(false);
+const { localePtitle } = localeProduct()
 
 // 체크박스 관련 함수
 const toggleCheck = (cino: number) => {
@@ -173,14 +175,14 @@ onMounted(async () => {
             @change="toggleAllCheck"
             class="w-5 h-5 accent-[#f9bb00]"
         >
-        <span>전체 선택</span>
+        <span>{{ t('cart.select_all') }}</span>
       </div>
       <button
           @click="deleteCheckedItems"
           class="text-red-500"
           :disabled="checkedItems.length === 0"
       >
-        선택 삭제
+        {{ t('cart.delete_selected') }}
       </button>
     </div>
 
@@ -208,8 +210,7 @@ onMounted(async () => {
         <div class="flex-1">
           <div class="flex justify-between mb-2">
             <div>
-              <p class="font-medium">{{ item.ptitle_ko }}</p>
-              <p class="text-sm text-gray-500">최고판매가 {{ item.price.toLocaleString() }} ₩</p>
+              <p class="font-medium">{{ localePtitle(item) }}</p>
             </div>
             <div class="flex gap-2">
               <button @click="deleteItem(item.cino)" class="text-gray-500 hover:text-red-500 transition-colors">
