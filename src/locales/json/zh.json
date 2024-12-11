@@ -208,7 +208,9 @@
     "phone_placeholder": "010-1234-5678",
     "edit_allergy": "编辑我的过敏信息",
     "save_button": "保存",
-    "confirm_message": "注册"
+    "confirm_message": "注册",
+    "allergy_change": "过敏信息更改",
+    "person_allergy_change": "请更新您的过敏信息。"
   },
 
   "order_confirmation": {
