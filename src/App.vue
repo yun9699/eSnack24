@@ -28,6 +28,20 @@
   overflow-y: auto;
 }
 
+/* FHD 해상도 (1920x1080) */
+@media screen and (max-width: 1920px) {
+  .mobile-container {
+    max-width: 30rem;
+  }
+}
+
+/* QHD 해상도 (2560x1440) */
+@media screen and (min-width: 1921px) {
+  .mobile-container {
+    max-width: 40rem;
+  }
+}
+
 /* 태블릿 크기 이하에서는 최대 너비 제한을 해제하고 전체 화면을 사용 */
 @media screen and (max-width: 30rem) {
   .app-container {
