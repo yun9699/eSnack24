@@ -44,8 +44,8 @@ onUnmounted(() => {
 <template>
   <!-- 하단바 -->
   <nav
-      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg transition-transform duration-300 z-[9999]"
-      :style="{ transform: isHidden ? 'translateY(100%)' : 'translateY(0)' }"
+      class="fixed bottom-0 left-[50%] translate-x-[-50%] bg-white border-t border-gray-200 shadow-lg transition-transform duration-300 z-[9999] w-full max-w-[40rem]"
+      :class="{ 'translate-y-full': isHidden }"
   >
     <div class="flex justify-around items-center px-4 py-3">
       <!-- 검색 -->

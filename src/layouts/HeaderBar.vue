@@ -50,7 +50,10 @@ const goBack = () => {
       <!-- 로고 -->
       <div class="flex-1 text-center">
         <RouterLink to="/">
-          <img src="/eSnack24Logo2.png" class="w-40 sm:w-48 md:w-56 lg:w-72 xl:w-96 mx-auto" />
+          <img
+              src="/eSnack24Logo2.png"
+              class="w-40 mx-auto"
+          />
         </RouterLink>
       </div>
 
