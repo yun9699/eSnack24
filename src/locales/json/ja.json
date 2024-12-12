@@ -260,8 +260,11 @@
       "noAllergyInfo": "アレルギー情報なし"
     },
     "allergyModal": {
-      "title": "アレルギー詳細"
-    }
+      "title": "アレルギー詳細",
+      "Warning": "アレルギー物質を含みます",
+      "noWarning": "安心して食べられます"
+    },
+    "allergyNoContent": "アレルギー情報なし"
   },
 
   "reviewRegister": {
