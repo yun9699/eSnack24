@@ -259,8 +259,11 @@
       "noAllergyInfo": "无过敏信息"
     },
     "allergyModal": {
-      "title": "过敏详细信息"
-    }
+      "title": "过敏原详情",
+      "Warning": "含有过敏原",
+      "noWarning": "可安全食用"
+    },
+    "allergyNoContent": "无过敏信息"
   },
   "reviewRegister": {
     "Header": "撰写评价",
