@@ -260,8 +260,11 @@
       "noAllergyInfo": "No Allergy Information"
     },
     "allergyModal": {
-      "title": "Allergy Details"
-    }
+      "title": "Allergy Details",
+      "Warning": "Contains allergens",
+      "noWarning": "Safe for consumption"
+    },
+    "allergyNoContent": "No allergy information"
   },
 
   "reviewRegister": {

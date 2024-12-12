@@ -124,7 +124,7 @@ const handleImageClick = async (image: string) => {
               >
                 <!-- 이미지 -->
                 <img
-                    :src="`https://esnack24.store/fastapi/static/${image}`"
+                    :src="`http://127.0.0.1:9000/fastapi/static/${image}`"
                     :alt="image"
                     class="w-full h-40 object-cover rounded-t-lg"
                     @load="loadAllergyInfo(image)"
@@ -140,30 +140,31 @@ const handleImageClick = async (image: string) => {
                 <p
                     class="text-sm font-semibold"
                     :class="{
-                'text-red-600': imageWarnings[image], // 경고가 있을 때 빨간색
-                'text-green-500': !imageWarnings[image] && allergyInfo[image], // 알러지 정보가 있는 경우 초록색
-                'text-gray-500': !imageWarnings[image] && !allergyInfo[image] // 알러지 정보가 없는 경우 회색
-              }"
+        'text-red-600': Array.isArray(imageWarnings[image]) && imageWarnings[image].length > 0, // 경고가 있을 때 빨간색
+        'text-green-500': Array.isArray(imageWarnings[image]) && imageWarnings[image].length === 0 && allergyInfo[image], // 알러지 정보가 있는 경우 초록색
+        'text-gray-500': !allergyInfo[image] && (!Array.isArray(imageWarnings[image]) || imageWarnings[image].length === 0) // 알러지 정보가 없는 경우 회색
+    }"
                 >
                   {{
-                    imageWarnings[image]
+                    Array.isArray(imageWarnings[image]) && imageWarnings[image].length > 0
                         ? `⚠️ ${t('allergyWarning.warningContent')}`
                         : allergyInfo[image]
                             ? `✅ ${t('allergyWarning.okContent')}`
                             : `ℹ️ ${t('allergyWarning.noneContent')}`
                   }}
-
                 </p>
+
+
 
                 <!-- 알러지 정보 버튼 -->
                 <button
                     @click="showAllergyModal(image)"
                     class="mt-2 cursor-pointer text-sm font-bold px-6 py-3 bg-white rounded-lg shadow-md border-2 transition hover:shadow-lg"
                     :class="{
-                'border-red-600 text-red-600 hover:bg-red-100': imageWarnings[image], // 경고가 있을 때 빨간색
-                'border-green-500 text-green-500 hover:bg-green-100': !imageWarnings[image] && allergyInfo[image], // 알러지 정보가 있는 경우 초록색
-                'border-gray-500 text-gray-500 hover:bg-gray-100': !imageWarnings[image] && !allergyInfo[image] // 알러지 정보가 없는 경우 회색
-              }"
+        'border-red-600 text-red-600': Array.isArray(imageWarnings[image]) && imageWarnings[image].length > 0, // 경고가 있을 때 빨간색
+        'border-green-500 text-green-500': Array.isArray(imageWarnings[image]) && imageWarnings[image].length === 0 && allergyInfo[image], // 알러지 정보가 있는 경우 초록색
+        'border-gray-500 text-gray-500': !allergyInfo[image] && (!Array.isArray(imageWarnings[image]) || imageWarnings[image].length === 0) // 알러지 정보가 없는 경우 회색
+    }"
                 >
                   {{ allergyInfo[image] ? t('photo.modal.allergyInfo') : t('photo.modal.noAllergyInfo') }}
                 </button>
@@ -184,28 +185,46 @@ const handleImageClick = async (image: string) => {
       <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
         <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">{{ t('photo.allergyModal.title') }}</h2>
 
+        <!-- 알러지 정보 리스트 -->
         <div v-if="currentAllergyInfo" class="text-center text-gray-600 space-y-2">
-      <span
-          v-for="(info, index) in currentAllergyInfo.split(',')"
-          :key="index"
-          :class="{
-          'text-red-600 font-bold': currentWarning.includes(info.trim()),
-          'text-gray-800': !currentWarning.includes(info.trim()),
-        }"
-          class="block"
-      >
-        {{ info }}
-      </span>
+        <span
+            v-for="(info, index) in currentAllergyInfo.split(',')"
+            :key="index"
+            :class="{
+            'text-red-600 font-bold': currentWarning.includes(info.trim()),
+            'text-gray-800': !currentWarning.includes(info.trim()),
+          }"
+            class="block"
+        >
+          {{ info }}
+        </span>
         </div>
 
-        <div v-if="currentWarning" class="mt-4 p-4 bg-red-100 text-red-700 rounded-lg shadow text-center">
+        <!-- 경고 메시지 -->
+        <div v-if="currentWarning.length > 0" class="mt-4 p-4 bg-red-100 text-red-700 rounded-lg shadow text-center">
           <div class="flex items-center justify-center gap-2">
             <span class="text-xl">⚠️</span>
-            <span class="text-lg font-semibold">{{ currentWarning }}</span>
+            <span class="text-lg font-semibold">{{ currentWarning.join(', ') + " " + t('photo.allergyModal.Warning') }}</span>
           </div>
         </div>
 
+        <!-- 경고 없음 -->
+        <div v-else class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg shadow text-center">
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-xl">✅</span>
+            <span class="text-lg font-semibold">{{ t('photo.allergyModal.noWarning') }}</span>
+          </div>
+        </div>
+
+        <div v-else class="mt-4 p-4 bg-gray-100 text-gray-700 rounded-lg shadow text-center">
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-xl">ℹ️</span>
+            <span class="text-lg font-semibold">{{ t('photo.allergyNoContent') }}</span>
+          </div>
+        </div>
       </div>
+
+
     </modal>
 
   </div>

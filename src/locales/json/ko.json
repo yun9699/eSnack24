@@ -242,8 +242,11 @@
       "noAllergyInfo": "알러지 정보 없음"
     },
     "allergyModal": {
-      "title": "알러지 상세 정보"
-    }
+      "title": "알러지 상세 정보",
+      "Warning": "알러지가 포함 되어 있습니다.",
+      "noWarning": "먹을 수 있는 상품"
+    },
+    "allergyNoContent": "알러지 정보 없음"
   },
   "reviewRegister": {
     "Header": "후기 작성",
