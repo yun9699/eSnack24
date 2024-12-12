@@ -37,7 +37,7 @@ export default defineComponent({
 
       try {
         const response = await axios.post(
-            "http://localhost:8080/api/v1/toss/confirm",
+            import.meta.env.VITE_TOSS_API_HOST,
             requestData, // 요청 본문은 두 번째 매개변수로 전달
             {
               headers: {
