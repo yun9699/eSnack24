@@ -8,14 +8,14 @@ export default defineConfig({
   //envPrefix: "PAYPAL",
   server: {
     host: "0.0.0.0",
-    port: 5173,
-    proxy: {
-      "/api/v1/paypal": {
-        target: "http://localhost:8080",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    // port: 5173,
+    // proxy: {
+    //   "/api/v1/paypal": {
+    //     target: "http://localhost:8080",
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    // },
   },
   css: {
     preprocessorOptions: {

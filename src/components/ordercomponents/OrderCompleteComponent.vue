@@ -53,7 +53,7 @@ const handleClickHome = () => {
       <div class="flex flex-col space-y-4">
         <button
             @click="handleClickDetail"
-            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md"
+            class="w-full bg-[#F9BB00] hover:bg-[#D99A00] text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md transform hover:-translate-y-1 hover:scale-105"
         >
           {{ t('order_complete.view_order_details') }}
         </button>
