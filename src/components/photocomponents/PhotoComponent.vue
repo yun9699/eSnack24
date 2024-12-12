@@ -124,7 +124,7 @@ const handleImageClick = async (image: string) => {
               >
                 <!-- 이미지 -->
                 <img
-                    :src="`http://127.0.0.1:9000/fastapi/static/${image}`"
+                    :src="`https://esnack24.store/fastapi/static/${image}`"
                     :alt="image"
                     class="w-full h-40 object-cover rounded-t-lg"
                     @load="loadAllergyInfo(image)"
