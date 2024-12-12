@@ -38,7 +38,7 @@ const goBack = () => {
 
 <template>
   <header class="w-full bg-white">
-    <div class="max-w-screen-xl mx-auto flex justify-between items-center px-4 py-3">
+    <div class="max-w-[40rem] mx-auto flex justify-between items-center px-4 py-3">
       <!-- 뒤로가기 버튼 -->
       <button
           @click="goBack"

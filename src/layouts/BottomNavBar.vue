@@ -44,7 +44,7 @@ onUnmounted(() => {
 <template>
   <!-- 하단바 -->
   <nav
-      class="fixed bottom-0 left-[50%] translate-x-[-50%] bg-white border-t border-gray-200 shadow-lg transition-transform duration-300 z-[9999] w-full max-w-[40rem]"
+      class="fixed bottom-0 left-[50%] translate-x-[-50%] bg-white border-t border-gray-200 shadow-lg transition-transform duration-300 z-[9999] w-full max-w-[30rem]"
       :class="{ 'translate-y-full': isHidden }"
   >
     <div class="flex justify-around items-center px-4 py-3">
@@ -137,5 +137,25 @@ onUnmounted(() => {
 button {
   z-index: 1000;
 }
-</style>
 
+/* FHD 해상도 (1920x1080) */
+@media screen and (max-width: 1920px) {
+  nav {
+    max-width: 30rem;
+  }
+}
+
+/* QHD 해상도 (2560x1440) */
+@media screen and (min-width: 1921px) {
+  nav.fixed {
+    max-width: 40rem !important;
+  }
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 30rem) {
+  nav {
+    max-width: 100%;
+  }
+}
+</style>
