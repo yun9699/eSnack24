@@ -160,7 +160,7 @@ onMounted(async () => {
 
     <!-- 배송지 정보 -->
     <div class="flex items-center p-4 bg-gray-50 rounded mb-4">
-      <span class="mr-2"><Icon icon="mingcute:location-3-line" width="24" height="24" /></span>
+      <span class="mr-2"><Icon icon="mingcute:location-3-line" width="24" height="2g4" /></span>
       <div class="text-sm">
         [{{ address.zipcode }}] {{ address.address_line1 }} {{ address.address_line2 }}
       </div>
