@@ -3,16 +3,19 @@ import { onMounted, ref } from 'vue'
 import {getmainList} from "../../api/productAPI/productAPI.ts"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n";
-import { IProduct, localeProduct } from "../../locales/localeProduct"
+import { localeProduct } from "../../locales/localeProduct"
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import 'swiper/swiper-bundle.css';
 import { getFAQList } from "../../api/csAPI/faqAPI.ts";
+import {IProduct} from "../../types/productTypes.ts";
 import {ISwiper} from "../../types/commonTypes.ts";
 import {getMainPageSwiper} from "../../api/swiperAPI.ts";
+import {localeFAQ} from "../../locales/localeFAQ.ts";
 
 const { t } = useI18n()
 const { localePtitle } = localeProduct()
+const { localeFtitle } = localeFAQ()
 
 const router = useRouter()
 
@@ -118,7 +121,7 @@ const handleClikeMove = () => {
             </div>
             <div class="text-left mt-2">
               <h3 class="mt-4 text-gray-800 font-medium text-base h-10 flex items-center justify-center">{{ localePtitle(product) }}</h3>
-              <p class="mt-2 text-orange-500 font-bold text-lg justify-center flex items-center">{{ product.price }}₩</p>
+              <p class="mt-2 text-orange-500 font-bold text-lg justify-center flex items-center">{{ product.price }} ₩</p>
             </div>
           </div>
         </div>
@@ -127,14 +130,14 @@ const handleClikeMove = () => {
 
     <!-- FAQ 섹션 -->
     <div class="flex justify-between items-center mb-4 mt-8">
-      <h2 class="text-xl font-bold">FAQ</h2>
+      <h2 class="text-xl font-bold">{{ t('FAQList.faq') }}</h2>
     </div>
     <div class="bg-white rounded-lg">
       <div class="divide-y">
         <div v-for="faq in faqList" class="hover:bg-gray-50">
           <div class="flex justify-between items-center p-4">
             <router-link to="/cs/faq">
-              <span class="text-base">{{ faq.ftitle }}</span>
+              <span class="text-base">{{ localeFtitle(faq) }}</span>
             </router-link>
           </div>
         </div>
@@ -142,7 +145,6 @@ const handleClikeMove = () => {
     </div>
   </div>
 </template>
-
 
 <style scoped>
 /* 슬라이드 애니메이션 */
