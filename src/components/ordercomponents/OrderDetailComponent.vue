@@ -71,11 +71,13 @@ onMounted(() => {
 
           <!-- 상품 정보 -->
           <div class="flex space-x-4">
-            <img
-                :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
-                :alt="item.ptitle_ko"
-                class="w-20 h-20 object-cover rounded"
-            />
+            <RouterLink :to="`/product/list/${item.pno}`">
+              <img
+                  :src="`https://esnack24-product-bucket.s3.ap-northeast-2.amazonaws.com/product/s_${item.pfilename}`"
+                  :alt="item.ptitle_ko"
+                  class="w-20 h-20 object-cover rounded"
+              />
+            </RouterLink>
             <div class="flex-1">
               <h3 class="text-sm mt-1">{{ localePtitle(item) }}</h3>
               <div class="mt-1 text-sm">{{ item.price }} ₩</div>
