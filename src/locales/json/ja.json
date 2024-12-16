@@ -5,7 +5,14 @@
     "next": "次へ",
     "register": "登録",
     "date_format": "年-月-日",
-    "report": "届出"
+    "report": "届出",
+    "cart_add": "カートに追加しました",
+    "cart_move": "カートへ移動",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "completed": "完了しました",
+    "confirm_msg": "{msg}しますか?",
+    "register_msg": "登録"
   },
 
   "login": {

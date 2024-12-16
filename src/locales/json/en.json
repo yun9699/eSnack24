@@ -5,7 +5,14 @@
     "next": "Next",
     "register": "Register",
     "date_format": "Year-Month-Day",
-    "report": "Report"
+    "report": "Report",
+    "cart_add": "Added to cart",
+    "cart_move": "Go to cart",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "completed": "Completed",
+    "confirm_msg": "Are you sure you want to {msg}?",
+    "register_msg": "Register"
   },
 
   "login": {

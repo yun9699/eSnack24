@@ -5,7 +5,14 @@
     "next": "다음",
     "register": "가입",
     "date_format": "연도-월-일",
-    "report": "신고"
+    "report": "신고",
+    "cart_add": "장바구니에 담았습니다",
+    "cart_move" : "장바구니로 이동",
+    "cancel" : "취소",
+    "confirm" : "확인",
+    "completed" : "되었습니다",
+    "confirm_msg": "{msg}하시겠습니까?",
+    "register_msg": "등록"
   },
   "login": {
     "register_title": "회원가입",
