@@ -141,7 +141,7 @@ const handleImageClick = async (image: string) => {
                     class="text-sm font-semibold"
                     :class="{
         'text-red-600': Array.isArray(imageWarnings[image]) && imageWarnings[image].length > 0, // 경고가 있을 때 빨간색
-        'text-green-500': Array.isArray(imageWarnings[image]) && imageWarnings[image].length === 0 && allergyInfo[image], // 알러지 정보가 있는 경우 초록색
+        'text-green-500': Array.isArray(imageWarnings[image]) && allergyInfo[image], // 알러지 정보가 있는 경우 초록색
         'text-gray-500': !allergyInfo[image] && (!Array.isArray(imageWarnings[image]) || imageWarnings[image].length === 0) // 알러지 정보가 없는 경우 회색
     }"
                 >
@@ -187,17 +187,17 @@ const handleImageClick = async (image: string) => {
 
         <!-- 알러지 정보 리스트 -->
         <div v-if="currentAllergyInfo" class="text-center text-gray-600 space-y-2">
-        <span
-            v-for="(info, index) in currentAllergyInfo.split(',')"
-            :key="index"
-            :class="{
+      <span
+          v-for="(info, index) in currentAllergyInfo.split(',')"
+          :key="index"
+          :class="{
             'text-red-600 font-bold': currentWarning.includes(info.trim()),
             'text-gray-800': !currentWarning.includes(info.trim()),
           }"
-            class="block"
-        >
-          {{ info }}
-        </span>
+          class="block"
+      >
+        {{ info }}
+      </span>
         </div>
 
         <!-- 경고 메시지 -->
@@ -209,13 +209,14 @@ const handleImageClick = async (image: string) => {
         </div>
 
         <!-- 경고 없음 -->
-        <div v-else class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg shadow text-center">
+        <div v-else-if="currentAllergyInfo" class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg shadow text-center">
           <div class="flex items-center justify-center gap-2">
             <span class="text-xl">✅</span>
             <span class="text-lg font-semibold">{{ t('photo.allergyModal.noWarning') }}</span>
           </div>
         </div>
 
+        <!-- 알러지 정보 없음 -->
         <div v-else class="mt-4 p-4 bg-gray-100 text-gray-700 rounded-lg shadow text-center">
           <div class="flex items-center justify-center gap-2">
             <span class="text-xl">ℹ️</span>
@@ -223,9 +224,8 @@ const handleImageClick = async (image: string) => {
           </div>
         </div>
       </div>
-
-
     </modal>
+
 
   </div>
 </template>
