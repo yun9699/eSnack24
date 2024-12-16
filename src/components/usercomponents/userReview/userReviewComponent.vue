@@ -143,13 +143,15 @@ onMounted(() => {
       </ul>
 
       <!-- 더 보기 버튼 -->
-      <button
-          v-if="hasMore"
-          @click.prevent="loadMore"
-          class="w-full mt-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-lg font-bold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition"
-      >
-        {{ t('user_reviewList.userReviewLabels.loadMoreUserReviews') }}
-      </button>
+      <div class="flex justify-center">
+        <button
+            v-if="hasMore"
+            @click.prevent="loadMore"
+            class="w-1/2 mt-8 py-3 bg-yellow-500 text-white text-lg font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
+        >
+          {{ t('user_reviewList.buttons.loadMoreUserReviews') }}
+        </button>
+      </div>
     </div>
   </div>
 </template>

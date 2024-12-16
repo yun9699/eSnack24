@@ -112,20 +112,6 @@ onMounted(() => {
       </button>
     </div>
 
-
-    <!-- 검색창 -->
-    <div class="relative mb-8">
-      <input
-          type="text"
-          :placeholder="t('FAQList.search')"
-          class="w-full p-3 pl-12 border border-gray-300 rounded-full"
-      >
-      <Icon
-          icon="material-symbols:search"
-          class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"
-      />
-    </div>
-
     <!-- 헤더와 등록 버튼 -->
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-2xl font-bold">{{ t('allergyReportList.allergyReportListHeader') }}</h2>
