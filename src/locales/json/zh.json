@@ -5,7 +5,14 @@
     "next": "下一步",
     "register": "注册",
     "date_format": "年-月-日",
-    "report": "申报"
+    "report": "申报",
+    "cart_add": "已添加到购物车",
+    "cart_move": "前往购物车",
+    "cancel": "取消",
+    "confirm": "确认",
+    "completed": "已完成",
+    "confirm_msg": "您确定要{msg}吗?",
+    "register_msg": "注册"
   },
 
   "login": {

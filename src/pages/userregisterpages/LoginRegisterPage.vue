@@ -114,7 +114,7 @@ provide("isAgree", isAgree)
 <template>
   <CommonCheckModalComponent
       v-if="isCheckModalOpen"
-      msg="등록"
+      :msg="t('common.register_msg')"
       :is-open="isCheckModalOpen"
       :fn="registerFn"
       @closeModal="closeModal"
