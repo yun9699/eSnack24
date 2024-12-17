@@ -5,18 +5,19 @@ import { getFAQList, getFAQOne } from "../../api/csAPI/faqAPI.ts"
 import { useI18n } from 'vue-i18n'
 import {localeFAQ} from "../../locales/localeFAQ.ts";
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { localeFtitle, localeFcontent } = localeFAQ()
 
-// 카테고리 정의
-const categories = [
+// 카테고리 정의를 computed로 변경
+const categories = computed(() => [
   { label: t('FAQList.order'), value: 'ORDER' },
   { label: t('FAQList.payment'), value: 'PAYMENT' },
   { label: t('FAQList.product'), value: 'PRODUCT' },
   { label: t('FAQList.etc'), value: 'ETC' }
-]
+])
 
 // 상태 관리
+const key = ref(0)
 const selectedCategory = ref('ORDER')
 const openFaq = ref<number | null>(null)
 const faqs = ref<any[]>([])
@@ -72,7 +73,7 @@ const handleCategoryChange = (category: string) => {
 // 카테고리 값을 한글 라벨로 변환하는 함수
 const changeCategoryLabel = (category: string) => {
   const upperCategory = category.toUpperCase()  // 소문자를 대문자로 변환
-  const found = categories.find(c => c.value === upperCategory)
+  const found = categories.value.find(c => c.value === upperCategory)
   return found ? found.label : category
 }
 
@@ -82,9 +83,8 @@ onMounted(() => {
 })
 </script>
 
-
 <template>
-  <div class="max-w-4xl mx-auto p-4">
+  <div :key="key" class="max-w-4xl mx-auto p-4">
     <!-- FAQ/QNA 탭 -->
     <div class="flex gap-4 mb-6">
       <button
@@ -153,10 +153,10 @@ onMounted(() => {
             class="w-full flex items-center py-4 hover:text-yellow-500 transition-colors"
             @click="toggleFaq(faq.fno)"
         >
-          <div class="flex items-start gap-3 flex-1">  <!-- flex-1 추가 및 items-start로 변경 -->
+          <div class="flex items-start gap-3 flex-1">
             <span class="px-2 py-1 text-sm rounded-full bg-gray-100 text-gray-600 shrink-0">
-          {{ changeCategoryLabel(faq.fcategory) }}
-        </span>
+              {{ changeCategoryLabel(faq.fcategory) }}
+            </span>
             <span class="text-left">{{ localeFtitle(faq) }}</span>
           </div>
           <Icon
@@ -182,4 +182,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
